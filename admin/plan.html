@@ -1,236 +1,700 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="robots" content="noindex,nofollow" />
-<script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
-<script>
-  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/speed-insights/script.js"></script>
-
-<title>Admin · Blueprint Generator — Bit by Bit Pedagogy</title>
-<link rel="stylesheet" href="/styles/b3.css" />
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Student Intake — Bit by Bit Pedagogy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
-  .doc{background:#fdfcf8;color:#1a2433;border-radius:8px;padding:48px 56px;box-shadow:0 10px 40px rgba(0,0,0,0.4);font-family:"Source Serif 4",Georgia,serif;font-size:15px;line-height:1.65}
-  @media (max-width:720px){.doc{padding:28px 22px}}
-  .doc h1{font-family:"Source Serif 4",serif;font-size:40px;text-align:center;color:#1c3552;margin:8px 0 4px}
-  .doc h2{font-family:"Source Serif 4",serif;color:#1c3552;font-size:22px;margin:32px 0 12px;padding-bottom:6px;border-bottom:2px solid #1c3552}
-  .doc h3{color:#1f7a5a;font-size:17px;margin:22px 0 8px}
-  .doc h4{color:#c4881f;font-size:15px;margin:16px 0 6px}
-  .doc strong{color:#1c3552}
-  .doc em{color:#1f7a5a}
-  .doc hr{border:none;border-top:2px solid #c4881f;margin:24px 0}
-  .doc blockquote{border-left:3px solid #1f7a5a;padding:4px 14px;margin:14px 0;color:#1f7a5a;font-style:italic;background:#f1f7f4;border-radius:0 4px 4px 0}
-  .doc ul{padding-left:22px}
-  .doc li{margin-bottom:6px}
-  .doc a{color:#1f7a5a}
-  .gate{max-width:420px;margin:80px auto;padding:32px;background:var(--card);border:1px solid var(--line);border-radius:8px;text-align:center}
-  .resources{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;background:var(--bg-2);border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--ink);cursor:pointer;text-transform:none;letter-spacing:0;margin:0}
-  .chip input{width:auto;margin:0}
-  .grid-2{display:grid;gap:14px;grid-template-columns:1fr 1fr}
-  .grid-3{display:grid;gap:14px;grid-template-columns:1fr 1fr 1fr}
-  @media (max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
-  @media print{.site-header,.site-footer,#admin-form,#status,.doc-toolbar,h1.page-title,p.page-sub,.gate{display:none!important}.doc{box-shadow:none;padding:0}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0D1B2A;--gold:#C9A84C;--mid:#1A3A5C;
+  --bg:#f5f3ee;--card:#ffffff;--card2:#f9f8f5;
+  --ink:#1a2433;--mute:#6b7280;--line:#e2ddd4;
+  --green:#1f7a5a;--amber:#c4881f;--red:#b91c1c;
+  --blue:#1c3552;--radius:8px;
+}
+html{font-size:15px}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+
+/* HEADER */
+.site-header{background:var(--navy);padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{color:var(--gold);font-family:'Inter',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.06em;text-decoration:none}
+.logo span{color:rgba(201,168,76,0.55)}
+.site-header nav{display:flex;gap:20px}
+.site-header nav a{color:rgba(255,255,255,0.6);font-size:13px;text-decoration:none}
+.site-header nav a:hover{color:#fff}
+
+/* SHELL */
+.shell{max-width:780px;margin:0 auto;padding:48px 24px 80px}
+
+/* GATE */
+.gate{max-width:400px;margin:60px auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:36px;text-align:center}
+.gate h2{font-family:'Source Serif 4',serif;font-size:22px;color:var(--blue);margin-bottom:8px}
+.gate p{color:var(--mute);font-size:13px;margin-bottom:22px;line-height:1.5}
+.gate-logo{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;display:block}
+.gate-msg{margin-top:10px;color:var(--red);font-size:12px;min-height:16px}
+
+/* TYPOGRAPHY */
+.kicker{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:8px}
+h1.page-title{font-family:'Source Serif 4',serif;font-size:32px;color:var(--blue);margin-bottom:6px;line-height:1.2}
+.page-sub{color:var(--mute);font-size:14px;margin-bottom:32px}
+
+/* FORM CARD */
+.form-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:18px}
+.form-card-head{background:var(--navy);padding:14px 22px;display:flex;align-items:center;gap:10px}
+.form-card-head .sec-num{background:var(--gold);color:var(--navy);font-size:11px;font-weight:700;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.form-card-head h2{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#fff;letter-spacing:0.04em;text-transform:uppercase;margin:0;border:none}
+.form-card-body{padding:22px}
+
+/* FIELDS */
+.field{margin-bottom:16px}
+.field:last-child{margin-bottom:0}
+label{display:block;font-size:13px;font-weight:500;color:var(--ink);margin-bottom:5px}
+.hint{display:block;font-size:12px;color:var(--mute);margin-bottom:6px;line-height:1.4}
+input[type=text],input[type=number],input[type=password],select,textarea{
+  width:100%;font-size:13px;padding:9px 11px;
+  border:1px solid var(--line);border-radius:6px;
+  background:var(--card);color:var(--ink);
+  font-family:'Inter',sans-serif;outline:none;
+  transition:border-color .15s,box-shadow .15s;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.15)}
+input::placeholder,textarea::placeholder{color:#bbb}
+textarea{resize:vertical;min-height:72px;line-height:1.5}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:30px}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:600px){.g2,.g3{grid-template-columns:1fr}}
+
+/* RADIOS & CHECKS */
+.radio-row,.check-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.opt{display:flex;align-items:center;gap:7px;cursor:pointer;padding:6px 12px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--ink);user-select:none;transition:border-color .12s,background .12s}
+.opt:hover{border-color:var(--gold)}
+.opt input{accent-color:var(--gold);width:14px;height:14px;cursor:pointer;flex-shrink:0}
+
+/* CHIPS */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 13px;background:var(--card2);border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--ink);cursor:pointer;transition:border-color .12s,background .12s}
+.chip:hover{border-color:var(--gold);background:#fdf9ef}
+.chip input{accent-color:var(--gold);width:13px;height:13px;cursor:pointer;flex-shrink:0}
+
+/* SYSTEMS */
+.systems-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+@media(max-width:500px){.systems-grid{grid-template-columns:1fr}}
+.sys-row{display:flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card2)}
+.sys-row label{font-size:12px;flex:1;margin:0}
+.sys-row select{font-size:12px;padding:3px 24px 3px 7px;width:auto;flex-shrink:0}
+
+/* DIVIDER */
+hr.section-divider{border:none;border-top:1px solid var(--line);margin:16px 0}
+
+/* BUTTONS */
+button.primary{background:var(--navy);color:var(--gold);border:none;padding:13px 28px;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:0.02em;width:100%;transition:background .15s}
+button.primary:hover{background:var(--mid)}
+button.primary:disabled{opacity:0.5;cursor:not-allowed}
+button.ghost{background:transparent;border:1px solid var(--line);color:var(--ink);padding:8px 16px;border-radius:6px;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;transition:border-color .12s,background .12s}
+button.ghost:hover{border-color:var(--gold);background:#fdf9ef}
+
+/* REQUIRED */
+.req{color:var(--red);margin-left:2px}
+
+/* SUMMARY */
+.summary-wrap{margin-top:24px;display:none}
+.summary-head{background:var(--navy);padding:12px 18px;border-radius:var(--radius) var(--radius) 0 0;display:flex;justify-content:space-between;align-items:center}
+.summary-head span{font-size:13px;font-weight:600;color:var(--gold);letter-spacing:0.03em}
+.summary-head .copy-btn{background:var(--gold);color:var(--navy);border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+.summary-head .copy-btn:hover{opacity:.88}
+.summary-wrap textarea{width:100%;min-height:380px;font-size:12px;font-family:'Menlo','Consolas',monospace;padding:16px;border:1px solid var(--line);border-top:none;border-radius:0 0 var(--radius) var(--radius);background:#f9f8f5;color:var(--ink);resize:vertical;line-height:1.65}
+
+/* FOOTER */
+.site-footer{text-align:center;padding:24px;font-size:12px;color:var(--mute);border-top:1px solid var(--line);margin-top:40px}
+
+@media print{.site-header,.site-footer,#admin-form,.summary-wrap,.page-sub,h1.page-title,.kicker{display:none!important}}
 </style>
 </head>
 <body>
+
 <header class="site-header">
-  <a href="/" class="logo">B<span>3</span> &nbsp; BIT BY BIT <span>PEDAGOGY</span></a>
-  <nav><a href="/">Home</a><a href="/method/">Method</a><a href="/bits/">Bits</a></nav>
+  <a href="/" class="logo">B<span>3</span>&nbsp; BIT BY BIT <span>PEDAGOGY</span></a>
+  <nav><a href="/">Home</a><a href="/method/">Method</a></nav>
 </header>
 
 <main class="shell">
-  <div id="gate-wrap" class="gate" style="display:none">
-    <h2 style="border:none;margin-top:0">Admin only</h2>
-    <p style="color:var(--mute);font-size:13px;margin-bottom:18px">This is the full blueprint generator. Enter your admin token to continue.</p>
-    <input type="password" id="gate-input" placeholder="Admin token" />
-    <button class="primary" id="gate-btn" style="margin-top:12px;width:100%">Unlock</button>
-    <div id="gate-msg" style="margin-top:10px;color:var(--red);font-size:12px;min-height:14px"></div>
+
+  <!-- GATE -->
+  <div id="gate-wrap" class="gate">
+    <span class="gate-logo">Bit by Bit Pedagogy</span>
+    <h2>Tutor Access</h2>
+    <p>This intake tool is for Bit by Bit tutors only. Enter your access token to continue.</p>
+    <input type="password" id="gate-input" placeholder="Enter access token"/>
+    <button class="primary" id="gate-btn" style="margin-top:12px">Unlock →</button>
+    <div class="gate-msg" id="gate-msg"></div>
   </div>
 
+  <!-- APP -->
   <div id="app" style="display:none">
-    <div class="kicker">Admin · Coach tool</div>
-    <h1 class="page-title">Personalised Blueprint Generator</h1>
-    <p class="page-sub" style="color:var(--mute)">Full 9-section Bri-style blueprint. ~$0.11 per generation. <button class="ghost" id="logout-btn" style="margin-left:10px">Lock</button></p>
+    <div class="kicker">Tutor Tool · Intake</div>
+    <h1 class="page-title">Student Intake Form</h1>
+    <p class="page-sub">Fill this out during or immediately after the intake call. Every field you complete makes the generated blueprint more precise. &nbsp;<button class="ghost" id="logout-btn" style="font-size:12px;padding:5px 12px">Lock</button></p>
 
-    <form id="admin-form" style="display:grid;gap:18px">
-      <div class="grid-2">
-        <div><label>Student name</label><input name="name" required /></div>
-        <div><label>Tutor (you)</label><input name="tutor" placeholder="Your name" /></div>
-      </div>
+    <form id="admin-form" style="display:grid;gap:16px;margin-bottom:24px">
 
-      <div class="grid-3">
-        <div><label>Exam</label><select name="exam" required><option>USMLE Step 1</option><option>USMLE Step 2 CK</option><option>USMLE Step 3</option><option>COMLEX Level 1</option><option>COMLEX Level 2 CE</option><option>NBME Shelf</option></select></div>
-        <div><label>Stage</label><select name="stage"><option>M1</option><option>M2</option><option>M3</option><option>M4</option><option>Gap year</option><option>Post-graduate / IMG</option></select></div>
-        <div><label>School type</label><select name="schoolType"><option>US MD</option><option>US DO</option><option>US-IMG</option><option>FMG / IMG</option></select></div>
-      </div>
-
-      <div class="grid-3">
-        <div><label>Weeks of prep</label><input name="weeks" type="number" min="1" max="52" value="8" required /></div>
-        <div><label>Target score</label><input name="target" required /></div>
-        <div><label>Attempt</label><select name="attempt"><option>First attempt</option><option>Retake</option></select></div>
-      </div>
-
-      <div><label>Baseline (recent NBME, UWorld %, last SA)</label><input name="baseline" /></div>
-      <div><label>How they study (their own words)</label><textarea name="studyStyle"></textarea></div>
-
-      <div class="grid-2">
-        <div><label>Learning modality</label><select name="modality"><option>Active retrieval (questions first)</option><option>Visual (Sketchy, diagrams, videos)</option><option>Reading / text-heavy</option><option>Auditory / lecture-based</option><option>Mixed</option></select></div>
-        <div><label>Test-taking confidence</label><select name="confidence"><option>Strong — trusts first instinct</option><option>Inconsistent</option><option>Weak — second-guesses, runs out of time</option></select></div>
-      </div>
-
-      <div><label>Schedule reality (wake, caffeine, gym, distractions, downtime)</label><textarea name="schedule"></textarea></div>
-
-      <div>
-        <label>Resources they have</label>
-        <div class="resources">
-          <label class="chip"><input type="checkbox" name="resources" value="UWorld" checked> UWorld</label>
-          <label class="chip"><input type="checkbox" name="resources" value="NBME forms" checked> NBME forms</label>
-          <label class="chip"><input type="checkbox" name="resources" value="Pathoma"> Pathoma</label>
-          <label class="chip"><input type="checkbox" name="resources" value="Sketchy"> Sketchy</label>
-          <label class="chip"><input type="checkbox" name="resources" value="Mehlman PDFs"> Mehlman</label>
-          <label class="chip"><input type="checkbox" name="resources" value="OnlineMedEd"> OME</label>
-          <label class="chip"><input type="checkbox" name="resources" value="Dirty Medicine"> Dirty Medicine</label>
-          <label class="chip"><input type="checkbox" name="resources" value="AMBOSS"> AMBOSS</label>
-          <label class="chip"><input type="checkbox" name="resources" value="Anki"> Anki</label>
-          <label class="chip"><input type="checkbox" name="resources" value="First Aid"> First Aid</label>
-          <label class="chip"><input type="checkbox" name="resources" value="Boards & Beyond"> B&B</label>
-          <label class="chip"><input type="checkbox" name="resources" value="Divine Intervention"> Divine</label>
+      <!-- S1: Basic Info -->
+      <div class="form-card">
+        <div class="form-card-head"><div class="sec-num">1</div><h2>Basic Information</h2></div>
+        <div class="form-card-body">
+          <div class="g2">
+            <div class="field"><label>Student full name <span class="req">*</span></label><input name="fullName" placeholder="e.g. John Doe" required/></div>
+            <div class="field"><label>Preferred / nickname</label><input name="prefName" placeholder="e.g. John"/></div>
+          </div>
+          <div class="g2">
+            <div class="field">
+              <label>School type <span class="req">*</span></label>
+              <select name="schoolType">
+                <option value="">Select</option>
+                <option>US MD</option>
+                <option>US DO</option>
+                <option>Caribbean MD (LCME-accredited)</option>
+                <option>Caribbean MD (non-LCME)</option>
+                <option>US-IMG</option>
+                <option>International IMG</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field"><label>Current stage <span class="req">*</span></label>
+              <select name="stage">
+                <option value="">Select</option>
+                <option>M1</option>
+                <option>M2 — preclinical</option>
+                <option>M2 — last semester</option>
+                <option>M3 — clinical rotations</option>
+                <option>M4</option>
+                <option>Gap year</option>
+                <option>Post-graduate / IMG</option>
+              </select>
+            </div>
+          </div>
+          <div class="g3">
+            <div class="field"><label>Primary exam <span class="req">*</span></label>
+              <select name="exam">
+                <option value="">Select</option>
+                <option>USMLE Step 1</option>
+                <option>USMLE Step 2 CK</option>
+                <option>USMLE Step 3</option>
+                <option>COMLEX Level 1</option>
+                <option>COMLEX Level 2 CE</option>
+                <option>CBSSE</option>
+                <option>COMP (NBOME)</option>
+                <option>NBME Shelf</option>
+              </select>
+            </div>
+            <div class="field"><label>Target test date <span class="req">*</span></label><input name="testDate" placeholder="e.g. August 2026"/></div>
+            <div class="field"><label>Weeks until exam <span class="req">*</span></label><input name="weeks" type="number" min="1" max="60" placeholder="e.g. 13"/></div>
+          </div>
+          <div class="g2">
+            <div class="field"><label>Secondary exam (if any)</label><input name="exam2" placeholder="e.g. Step 2 CK planned after"/></div>
+            <div class="field"><label>Attempt</label>
+              <select name="attempt">
+                <option>First attempt</option>
+                <option>Repeat attempt</option>
+              </select>
+            </div>
+          </div>
+          <div class="field" id="prior-score-field" style="display:none">
+            <label>Prior score & what happened</label>
+            <textarea name="priorScore" placeholder="Score received, what they think went wrong, any disruptions during that prep period"></textarea>
+          </div>
+          <div class="field"><label>Tutor name</label><input name="tutor" placeholder="Your name"/></div>
         </div>
       </div>
 
-      <div class="grid-2">
-        <div><label>Weak systems</label><input name="weakSystems" /></div>
-        <div><label>Strong systems</label><input name="strongSystems" /></div>
+      <!-- S2: Scores -->
+      <div class="form-card">
+        <div class="form-card-head"><div class="sec-num">2</div><h2>Baseline Scores & Targets</h2></div>
+        <div class="form-card-body">
+          <div class="field">
+            <label>All practice form / NBME scores taken so far <span class="req">*</span></label>
+            <span class="hint">List form name, score, and date. Write "none" if no forms taken yet.</span>
+            <textarea name="practiceScores" placeholder="e.g.&#10;CBSSA Form 29 — 61% EPC — Dec 2025&#10;School diagnostic MD5 — 62% — May 2026&#10;No UWorld completed yet"></textarea>
+          </div>
+          <div class="g3">
+            <div class="field"><label>UWorld % (if applicable)</label><input name="uworldPct" placeholder="e.g. 58% or N/A"/></div>
+            <div class="field"><label>UWorld mode</label>
+              <select name="uworldMode">
+                <option value="">Not using</option>
+                <option>Tutor mode</option>
+                <option>Timed mode</option>
+                <option>Mixed</option>
+              </select>
+            </div>
+            <div class="field"><label>UWorld completion %</label><input name="uworldDone" placeholder="e.g. 40% done or N/A"/></div>
+          </div>
+          <div class="g2">
+            <div class="field"><label>Target score <span class="req">*</span></label><input name="target" placeholder="e.g. Pass, 230+, 245+"/></div>
+            <div class="field"><label>NBME benchmark goal by end of prep</label><input name="nbmeGoal" placeholder="e.g. 70% EPC or 240+"/></div>
+          </div>
+          <div class="field"><label>Additional score context</label><textarea name="scoreContext" placeholder="e.g. 3-month financial LOA between scores; school requires 65% EPC to sit Step 1; prior score was invalidated" style="min-height:55px"></textarea></div>
+        </div>
       </div>
 
-      <div><label>What is at stake</label><textarea name="stake"></textarea></div>
-
-      <div class="grid-2">
-        <div><label>Burnout level</label><select name="burnout"><option>Low — fresh</option><option>Moderate</option><option>High — running on fumes</option></select></div>
-        <div><label>Anything else</label><input name="notes" /></div>
+      <!-- S3: Resources -->
+      <div class="form-card">
+        <div class="form-card-head"><div class="sec-num">3</div><h2>Resources — What They Actually Have</h2></div>
+        <div class="form-card-body">
+          <span class="hint">Check only what they have access to right now. Do not include anything they plan to buy.</span>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="resources" value="First Aid"/> First Aid</label>
+            <label class="chip"><input type="checkbox" name="resources" value="Pathoma"/> Pathoma</label>
+            <label class="chip"><input type="checkbox" name="resources" value="Sketchy Micro"/> Sketchy Micro</label>
+            <label class="chip"><input type="checkbox" name="resources" value="Sketchy Pharm"/> Sketchy Pharm</label>
+            <label class="chip"><input type="checkbox" name="resources" value="Sketchy Path"/> Sketchy Path</label>
+            <label class="chip"><input type="checkbox" name="resources" value="UWorld" checked/> UWorld</label>
+            <label class="chip"><input type="checkbox" name="resources" value="AMBOSS"/> AMBOSS</label>
+            <label class="chip"><input type="checkbox" name="resources" value="NBME forms" checked/> NBME forms</label>
+            <label class="chip"><input type="checkbox" name="resources" value="Mehlman PDFs"/> Mehlman PDFs</label>
+            <label class="chip"><input type="checkbox" name="resources" value="Bootcamp"/> Bootcamp</label>
+            <label class="chip"><input type="checkbox" name="resources" value="Boards & Beyond"/> Boards & Beyond</label>
+            <label class="chip"><input type="checkbox" name="resources" value="OnlineMedEd"/> OnlineMedEd</label>
+            <label class="chip"><input type="checkbox" name="resources" value="Dirty Medicine"/> Dirty Medicine</label>
+            <label class="chip"><input type="checkbox" name="resources" value="Anki"/> Anki</label>
+            <label class="chip"><input type="checkbox" name="resources" value="Osmosis"/> Osmosis</label>
+            <label class="chip"><input type="checkbox" name="resources" value="Divine Intervention"/> Divine Intervention</label>
+            <label class="chip"><input type="checkbox" name="resources" value="Free 120"/> Free 120</label>
+            <label class="chip"><input type="checkbox" name="resources" value="Goljan Audio"/> Goljan Audio</label>
+          </div>
+          <div class="field" style="margin-top:14px"><label>Other resources / notes on access</label><input name="resourceNotes" placeholder="e.g. cannot afford UWorld; using Anki Zanki deck; only has school-provided resources"/></div>
+        </div>
       </div>
 
-      <button type="submit" class="primary" id="submit-btn">Generate blueprint →</button>
-      <div id="status" style="color:var(--mute);font-size:13px;min-height:18px"></div>
+      <!-- S4: Systems -->
+      <div class="form-card">
+        <div class="form-card-head"><div class="sec-num">4</div><h2>System Strengths & Weaknesses</h2></div>
+        <div class="form-card-body">
+          <span class="hint" style="margin-bottom:12px;display:block">S = Strong &nbsp; M = Medium &nbsp; W = Weak &nbsp; U = Untouched</span>
+          <div class="systems-grid">
+            <div class="sys-row"><label>Cardiology</label><select name="sys_cardio"><option value="">--</option><option>S</option><option>M</option><option>W</option><option>U</option></select></div>
+            <div class="sys-row"><label>Pulmonology</label><select name="sys_pulm"><option value="">--</option><option>S</option><option>M</option><option>W</option><option>U</option></select></div>
+            <div class="sys-row"><label>Nephrology / Renal</label><select name="sys_renal"><option value="">--</option><option>S</option><option>M</option><option>W</option><option>U</option></select></div>
+            <div class="sys-row"><label>Gastroenterology</label><select name="sys_gi"><option value="">--</option><option>S</option><option>M</option><option>W</option><option>U</option></select></div>
+            <div class="sys-row"><label>Endocrinology</label><select name="sys_endo"><option value="">--</option><option>S</option><option>M</option><option>W</option><option>U</option></select></div>
+            <div class="sys-row"><label>Hematology</label><select name="sys_heme"><option value="">--</option><option>S</option><option>M</option><option>W</option><option>U</option></select></div>
+            <div class="sys-row"><label>Neurology</label><select name="sys_neuro"><option value="">--</option><option>S</option><option>M</option><option>W</option><option>U</option></select></div>
+            <div class="sys-row"><label>Musculoskeletal</label><select name="sys_msk"><option value="">--</option><option>S</option><option>M</option><option>W</option><option>U</option></select></div>
+            <div class="sys-row"><label>Dermatology</label><select name="sys_derm"><option value="">--</option><option>S</option><option>M</option><option>W</option><option>U</option></select></div>
+            <div class="sys-row"><label>Immunology</label><select name="sys_immuno"><option value="">--</option><option>S</option><option>M</option><option>W</option><option>U</option></select></div>
+            <div class="sys-row"><label>Microbiology</label><select name="sys_micro"><option value="">--</option><option>S</option><option>M</option><option>W</option><option>U</option></select></div>
+            <div class="sys-row"><label>Pharmacology</label><select name="sys_pharm"><option value="">--</option><option>S</option><option>M</option><option>W</option><option>U</option></select></div>
+            <div class="sys-row"><label>Biochemistry</label><select name="sys_biochem"><option value="">--</option><option>S</option><option>M</option><option>W</option><option>U</option></select></div>
+            <div class="sys-row"><label>Reproductive / OB</label><select name="sys_repro"><option value="">--</option><option>S</option><option>M</option><option>W</option><option>U</option></select></div>
+            <div class="sys-row"><label>Psychiatry</label><select name="sys_psych"><option value="">--</option><option>S</option><option>M</option><option>W</option><option>U</option></select></div>
+            <div class="sys-row"><label>Biostatistics / Epi</label><select name="sys_stats"><option value="">--</option><option>S</option><option>M</option><option>W</option><option>U</option></select></div>
+            <div class="sys-row"><label>Ethics / Professionalism</label><select name="sys_ethics"><option value="">--</option><option>S</option><option>M</option><option>W</option><option>U</option></select></div>
+            <div class="sys-row"><label>General Pathology</label><select name="sys_genpath"><option value="">--</option><option>S</option><option>M</option><option>W</option><option>U</option></select></div>
+          </div>
+          <div class="field" style="margin-top:14px">
+            <label>Top 3 weakest specific concepts (be specific — name the concept, not just the system)</label>
+            <textarea name="weakConcepts" placeholder="e.g.&#10;1. Differentiating cardiac tamponade vs pericarditis on vignettes&#10;2. Renal tubular acidosis types I, II, IV&#10;3. Lysosomal storage disease enzyme deficiencies"></textarea>
+          </div>
+          <div class="field">
+            <label>Systems or concepts they feel strongest in</label>
+            <input name="strongSystems" placeholder="e.g. Behavioral Sciences, Cardiovascular, Microbiology"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- S5: Schedule -->
+      <div class="form-card">
+        <div class="form-card-head"><div class="sec-num">5</div><h2>Schedule & Lifestyle</h2></div>
+        <div class="form-card-body">
+          <div class="g3">
+            <div class="field"><label>Current wake time <span class="req">*</span></label><input name="wakeNow" placeholder="e.g. 11:00 AM, noon"/></div>
+            <div class="field"><label>Target wake time <span class="req">*</span></label><input name="wakeTarget" placeholder="e.g. 8:00 AM"/></div>
+            <div class="field"><label>Target bedtime</label><input name="bedtime" placeholder="e.g. midnight"/></div>
+          </div>
+          <div class="g2">
+            <div class="field"><label>Daily study hours committed <span class="req">*</span></label><input name="studyHrs" type="number" min="1" max="18" placeholder="e.g. 8"/></div>
+            <div class="field"><label>Study environment</label>
+              <select name="studyEnv">
+                <option value="">Select</option>
+                <option>Home — own space</option>
+                <option>Home — shared / noisy</option>
+                <option>Library</option>
+                <option>Coffee shop</option>
+                <option>Mixed</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Workout habits</label>
+            <div class="radio-row">
+              <label class="opt"><input type="radio" name="workoutTime" value="Morning gym/run"/> <span>Morning</span></label>
+              <label class="opt"><input type="radio" name="workoutTime" value="Afternoon gym/run"/> <span>Afternoon</span></label>
+              <label class="opt"><input type="radio" name="workoutTime" value="Evening gym/run"/> <span>Evening</span></label>
+              <label class="opt"><input type="radio" name="workoutTime" value="No regular workout"/> <span>No regular workout</span></label>
+            </div>
+          </div>
+          <div class="g2">
+            <div class="field"><label>Workout type & duration</label><input name="workoutType" placeholder="e.g. gym 1hr upper/lower, running 30min, no gym"/></div>
+            <div class="field"><label>Coffee / caffeine habits</label><input name="coffee" placeholder="e.g. 2 cups AM + 1 evening, or none"/></div>
+          </div>
+
+          <div class="field">
+            <label>Hard weekly commitments — non-negotiable <span class="req">*</span></label>
+            <textarea name="commitments" placeholder="e.g. Religious obligations (5 daily prayers, Friday Jumu'ah), family duties every Sunday, part-time job Saturdays, school-required classes Mon/Wed. Write 'none' if schedule is fully open." style="min-height:60px"></textarea>
+          </div>
+          <div class="field"><label>Biggest distraction right now</label><input name="distraction" placeholder="e.g. social media, financial stress, relationship issues, boredom in the evenings"/></div>
+          <div class="field"><label>Anything else about their lifestyle the plan needs to account for</label><input name="lifestyleOther" placeholder="e.g. cooking is main downtime, deleted Instagram, no study partner, lives alone"/></div>
+        </div>
+      </div>
+
+      <!-- S6: Study Habits -->
+      <div class="form-card">
+        <div class="form-card-head"><div class="sec-num">6</div><h2>How They Actually Study</h2></div>
+        <div class="form-card-body">
+          <div class="field">
+            <label>Walk me through exactly what they do when they get a question wrong — step by step <span class="req">*</span></label>
+            <span class="hint">This is the most important field. Record their exact words, not what they think they should say. Listen for: do they read and scroll, or do they interrogate?</span>
+            <textarea name="reviewHabit" placeholder="e.g. 'I read the explanation then move on.' OR 'I go back through every wrong choice and ask myself why each one is wrong before I look at the answer.'"></textarea>
+          </div>
+
+          <div class="field">
+            <label>Current question volume per day</label>
+            <select name="blocksPerDay">
+              <option value="">Select</option>
+              <option>0 — not doing questions yet</option>
+              <option>1 block (~40 Qs)</option>
+              <option>2 blocks (~80 Qs)</option>
+              <option>3 blocks (~120 Qs)</option>
+              <option>4+ blocks (~160+ Qs)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Do they keep an error log or concept notes?</label>
+            <div class="radio-row">
+              <label class="opt"><input type="radio" name="errorLog" value="Yes — consistently"/> <span>Yes, consistently</span></label>
+              <label class="opt"><input type="radio" name="errorLog" value="Sometimes"/> <span>Sometimes</span></label>
+              <label class="opt"><input type="radio" name="errorLog" value="No"/> <span>No</span></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Learning modality — based on intake conversation (not self-report)</label>
+            <select name="modality">
+              <option value="">Tutor assessment</option>
+              <option>Active retrieval — questions first, video after</option>
+              <option>Visual — Sketchy, diagrams, concept maps</option>
+              <option>Reading / text-heavy — notes and outlines</option>
+              <option>Auditory — lectures, talking through concepts</option>
+              <option>Kinesthetic — practice under timed conditions</option>
+              <option>Mixed — no dominant modality</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Test-taking confidence</label>
+            <select name="confidence">
+              <option value="">Select</option>
+              <option>Strong — trusts first instinct, moves efficiently</option>
+              <option>Inconsistent — good some days, not others</option>
+              <option>Weak — second-guesses, runs out of time, freezes on pressure questions</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Current review style — check all that apply</label>
+            <div class="chips" style="margin-top:6px">
+              <label class="chip"><input type="checkbox" name="reviewStyle" value="Reads explanation and scrolls (passive)"/> Reads and scrolls (passive)</label>
+              <label class="chip"><input type="checkbox" name="reviewStyle" value="Writes notes but doesn't revisit"/> Writes notes, doesn't revisit</label>
+              <label class="chip"><input type="checkbox" name="reviewStyle" value="Identifies mechanism before checking"/> Identifies mechanism first</label>
+              <label class="chip"><input type="checkbox" name="reviewStyle" value="Interrogates every wrong answer"/> Interrogates every wrong answer</label>
+              <label class="chip"><input type="checkbox" name="reviewStyle" value="Keeps an error log and reviews it"/> Keeps & reviews error log</label>
+              <label class="chip"><input type="checkbox" name="reviewStyle" value="Teaches concepts back to self out loud"/> Teaches concepts aloud</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>How they learned something really well recently (any subject)</label>
+            <span class="hint">Ask them: "When was the last time something actually stuck? What made it stick?" Their answer reveals their real modality.</span>
+            <textarea name="learnWell" placeholder="e.g. 'I watched a YouTube video and then tested myself on it the next day.' OR 'My friend quizzed me and I explained it back to him.'" style="min-height:60px"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- S7: Motivation -->
+      <div class="form-card">
+        <div class="form-card-head"><div class="sec-num">7</div><h2>Motivation & What's at Stake</h2></div>
+        <div class="form-card-body">
+          <div class="field">
+            <label>Score that would make this worth it — their exact words <span class="req">*</span></label>
+            <input name="worthIt" placeholder="e.g. 'Just passing.' OR 'I want 245. Anything less and I'm reapplying next cycle.'"/>
+          </div>
+          <div class="field">
+            <label>What happens if they don't hit that score <span class="req">*</span></label>
+            <span class="hint">Not just the logistical consequence — the personal one too. This shapes the motivational section of the blueprint.</span>
+            <textarea name="failConsequence" placeholder="e.g. School will not let me sit Step 1. Residency applications delayed by a year. I'll have to retake and tell programs."></textarea>
+          </div>
+          <div class="field">
+            <label>Why this score matters to them — in their words, not yours</label>
+            <textarea name="whyMatters" placeholder="e.g. 'I've been working toward this for 6 years. My family sacrificed a lot.' OR 'I want to match into surgery and I know I need this number.'" style="min-height:60px"></textarea>
+          </div>
+          <div class="field">
+            <label>Current burnout level</label>
+            <div class="radio-row">
+              <label class="opt"><input type="radio" name="burnout" value="Low — motivated and fresh"/> <span>Low — fresh</span></label>
+              <label class="opt"><input type="radio" name="burnout" value="Moderate — some days are hard"/> <span>Moderate</span></label>
+              <label class="opt"><input type="radio" name="burnout" value="High — dragging through it"/> <span>High</span></label>
+              <label class="opt"><input type="radio" name="burnout" value="Critical — close to stopping"/> <span>Critical</span></label>
+            </div>
+          </div>
+          <div class="g2">
+            <div class="field"><label>External pressures (family, finances, relationships, timeline)</label><textarea name="externalPressure" placeholder="Optional — record anything that will push back on study time or mental space" style="min-height:55px"></textarea></div>
+            <div class="field">
+              <div class="field"><label>Biggest fear about exam day</label><input name="examFear" placeholder="e.g. Blanking under pressure. Time running out. Score not matching effort."/></div>
+              <div class="field" style="margin-top:14px"><label>One thing the plan must protect</label><input name="protectOne" placeholder="e.g. Sleep. Prayer schedule. Time with family. Gym routine."/></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S8: Anything Else -->
+      <div class="form-card">
+        <div class="form-card-head"><div class="sec-num">8</div><h2>Anything Else</h2></div>
+        <div class="form-card-body">
+          <div class="field">
+            <label>Any context the blueprint needs that the form didn't cover</label>
+            <span class="hint">Medical conditions, learning differences, unusual circumstances, school-specific constraints, previous tutor experience, specific student requests.</span>
+            <textarea name="anythingElse" style="min-height:80px" placeholder="e.g. Student has ADHD diagnosis (no accommodations). School CBSSE is Aug 12; Step 1 a few weeks after passing. 3-month LOA earlier this cycle due to financial hardship. Wants plan to account for daily prayer schedule."></textarea>
+          </div>
+          <div class="field">
+            <label>Tutor's private assessment notes (not included in student-facing output)</label>
+            <span class="hint">Your honest read of this student — passive vs active reviewer, level of urgency, coachability, red flags. This stays in the summary for your reference only.</span>
+            <textarea name="tutorNotes" style="min-height:70px" placeholder="e.g. Passive reviewer — reads and scrolls. High urgency but low self-awareness. Will need weekly check-ins. GI score on CBSSA (43) may not reflect current ability — improved significantly on MD5."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="primary" id="submit-btn">Generate intake summary →</button>
+      <button type="button" class="ghost" id="clear-btn" style="width:100%;margin-top:10px">Clear form</button>
+      <div id="status" style="color:var(--mute);font-size:13px;min-height:18px;text-align:center;margin-top:8px"></div>
     </form>
 
-    <div id="doc-wrap" style="display:none;margin-top:32px">
-      <div class="doc-toolbar" style="display:flex;justify-content:flex-end;gap:10px;margin-bottom:12px">
-        <button class="ghost" id="btn-print">Print / PDF</button>
-        <button class="ghost" id="btn-copy">Copy markdown</button>
-        <button class="ghost" id="btn-new">Clear</button>
+    <!-- SUMMARY -->
+    <div class="summary-wrap" id="summary-wrap">
+      <div class="summary-head">
+        <span>Intake Summary — paste to Claude to generate the blueprint</span>
+        <button class="copy-btn" id="copy-btn">Copy all</button>
       </div>
-      <article class="doc" id="doc"></article>
+      <textarea id="summary-text" readonly></textarea>
     </div>
-  </div>
+
+  </div><!-- /app -->
 </main>
 
-<footer class="site-footer">Bit by Bit Pedagogy · Admin</footer>
+<footer class="site-footer">Bit by Bit Pedagogy &nbsp;·&nbsp; Tutor Tools &nbsp;·&nbsp; Private</footer>
 
 <script>
-const TOKEN_KEY = 'b3_admin_token';
+const TOKEN_KEY = 'b3_tutor_token';
 const gateWrap = document.getElementById('gate-wrap');
-const app = document.getElementById('app');
-const gateBtn = document.getElementById('gate-btn');
-const gateInput = document.getElementById('gate-input');
-const gateMsg = document.getElementById('gate-msg');
+const appEl    = document.getElementById('app');
+const gateBtn  = document.getElementById('gate-btn');
+const gateInput= document.getElementById('gate-input');
+const gateMsg  = document.getElementById('gate-msg');
 
-function showApp() { gateWrap.style.display='none'; app.style.display='block'; }
-function showGate() { gateWrap.style.display='block'; app.style.display='none'; gateInput.focus(); }
+function showApp()  { gateWrap.style.display='none'; appEl.style.display='block'; }
+function showGate() { appEl.style.display='none'; gateWrap.style.display='block'; gateInput.focus(); }
 
 if (localStorage.getItem(TOKEN_KEY)) showApp(); else showGate();
 
 gateBtn.addEventListener('click', () => {
   const v = gateInput.value.trim();
-  if (!v) { gateMsg.textContent = 'Enter the token.'; return; }
+  if (!v) { gateMsg.textContent = 'Enter a token to continue.'; return; }
   localStorage.setItem(TOKEN_KEY, v);
   gateMsg.textContent = '';
   showApp();
 });
-gateInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') gateBtn.click(); });
+gateInput.addEventListener('keydown', e => { if (e.key === 'Enter') gateBtn.click(); });
 document.getElementById('logout-btn').addEventListener('click', () => {
   localStorage.removeItem(TOKEN_KEY);
   showGate();
 });
 
-const form = document.getElementById('admin-form');
-const btn = document.getElementById('submit-btn');
-const statusEl = document.getElementById('status');
-const docWrap = document.getElementById('doc-wrap');
-const docEl = document.getElementById('doc');
-let lastMd = '';
+// Show/hide prior score field
+document.querySelector('[name=attempt]').addEventListener('change', function() {
+  document.getElementById('prior-score-field').style.display =
+    this.value === 'Repeat attempt' ? 'block' : 'none';
+});
 
-function collect() {
-  const fd = new FormData(form);
-  const obj = {};
-  for (const [k, v] of fd.entries()) {
-    if (k === 'resources') { obj.resources = obj.resources || []; obj.resources.push(v); }
-    else obj[k] = v;
-  }
-  return obj;
+// Collect helpers
+function val(name)    { const el = document.querySelector(`[name="${name}"]`); return el ? el.value.trim() : ''; }
+function radio(name)  { const el = document.querySelector(`[name="${name}"]:checked`); return el ? el.value : 'Not specified'; }
+function multi(name)  {
+  return [...document.querySelectorAll(`[name="${name}"]:checked`)]
+    .map(el => el.value).join(', ') || 'None selected';
+}
+function systemRatings() {
+  const systems = [
+    ['sys_cardio','Cardiology'],['sys_pulm','Pulmonology'],['sys_renal','Nephrology/Renal'],
+    ['sys_gi','Gastroenterology'],['sys_endo','Endocrinology'],['sys_heme','Hematology'],
+    ['sys_neuro','Neurology'],['sys_msk','Musculoskeletal'],['sys_derm','Dermatology'],
+    ['sys_immuno','Immunology'],['sys_micro','Microbiology'],['sys_pharm','Pharmacology'],
+    ['sys_biochem','Biochemistry'],['sys_repro','Reproductive/OB'],['sys_psych','Psychiatry'],
+    ['sys_stats','Biostatistics/Epi'],['sys_ethics','Ethics/Prof'],['sys_genpath','General Pathology']
+  ];
+  const rated = systems.map(([name, label]) => {
+    const el = document.querySelector(`[name="${name}"]`);
+    const v = el ? el.value : '';
+    return v ? `  ${label}: ${v}` : null;
+  }).filter(Boolean);
+  return rated.length ? rated.join('\n') : '  (none rated)';
+}
+function buildSummary() {
+  const d = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'long', year:'numeric' });
+  const lines = [
+`BIT BY BIT PEDAGOGY — STUDENT INTAKE SUMMARY
+Generated: ${d} | Tutor: ${val('tutor') || 'Not specified'}
+${'═'.repeat(56)}
+
+SECTION 1 — BASIC INFORMATION
+──────────────────────────────
+Full name:        ${val('fullName') || 'Not provided'}
+Preferred name:   ${val('prefName') || 'Not provided'}
+School type:      ${val('schoolType') || 'Not specified'}
+Current stage:    ${val('stage') || 'Not specified'}
+Primary exam:     ${val('exam') || 'Not specified'}
+Secondary exam:   ${val('exam2') || 'None'}
+Target test date: ${val('testDate') || 'Not specified'}
+Weeks until exam: ${val('weeks') || 'Not specified'}
+Attempt:          ${val('attempt') || 'Not specified'}${val('attempt') === 'Repeat attempt' && val('priorScore') ? '\nPrior score / history:\n  ' + val('priorScore') : ''}
+
+SECTION 2 — BASELINE SCORES & TARGETS
+──────────────────────────────────────
+Practice form scores:
+${val('practiceScores') ? val('practiceScores').split('\n').map(l => '  ' + l).join('\n') : '  None provided'}
+
+UWorld %:            ${val('uworldPct') || 'N/A'}
+UWorld mode:         ${val('uworldMode') || 'N/A'}
+UWorld completion:   ${val('uworldDone') || 'N/A'}
+Target score:        ${val('target') || 'Not specified'}
+NBME benchmark goal: ${val('nbmeGoal') || 'Not specified'}
+Score context:       ${val('scoreContext') || 'None'}
+
+SECTION 3 — RESOURCES (CONFIRMED ACCESS)
+─────────────────────────────────────────
+${multi('resources')}
+Notes: ${val('resourceNotes') || 'None'}
+
+SECTION 4 — SYSTEM RATINGS (S=Strong M=Medium W=Weak U=Untouched)
+──────────────────────────────────────────────────────────────────
+${systemRatings()}
+
+Weakest specific concepts:
+${val('weakConcepts') ? val('weakConcepts').split('\n').map(l=>'  '+l).join('\n') : '  Not specified'}
+
+Strongest areas: ${val('strongSystems') || 'Not specified'}
+
+SECTION 5 — SCHEDULE & LIFESTYLE
+─────────────────────────────────
+Current wake time:      ${val('wakeNow') || 'Not specified'}
+Target wake time:       ${val('wakeTarget') || 'Not specified'}
+Target bedtime:         ${val('bedtime') || 'Not specified'}
+Daily study hours:      ${val('studyHrs') || 'Not specified'}
+Study environment:      ${val('studyEnv') || 'Not specified'}
+Workout preference:     ${radio('workoutTime')}
+Workout type/duration:  ${val('workoutType') || 'N/A'}
+Coffee/caffeine:        ${val('coffee') || 'Not specified'}
+Biggest distraction:    ${val('distraction') || 'Not specified'}
+
+Hard weekly commitments:
+${val('commitments') ? val('commitments').split('\n').map(l=>'  '+l).join('\n') : '  None specified'}
+
+Other lifestyle notes: ${val('lifestyleOther') || 'None'}
+
+SECTION 6 — STUDY HABITS & REVIEW STYLE
+─────────────────────────────────────────
+When a question is wrong — what they actually do:
+${val('reviewHabit') ? val('reviewHabit').split('\n').map(l=>'  '+l).join('\n') : '  Not specified'}
+
+Blocks per day currently:  ${val('blocksPerDay') || 'Not specified'}
+Keeps error log:           ${radio('errorLog')}
+Learning modality:         ${val('modality') || 'Not assessed'}
+Test-taking confidence:    ${val('confidence') || 'Not specified'}
+Review styles observed:    ${multi('reviewStyle')}
+
+How they last learned something well:
+${val('learnWell') ? val('learnWell').split('\n').map(l=>'  '+l).join('\n') : '  Not specified'}
+
+SECTION 7 — MOTIVATION & STAKES
+─────────────────────────────────
+Score that would make it worth it: ${val('worthIt') || 'Not specified'}
+
+If they don't hit it:
+${val('failConsequence') ? val('failConsequence').split('\n').map(l=>'  '+l).join('\n') : '  Not specified'}
+
+Why this score matters to them:
+${val('whyMatters') ? val('whyMatters').split('\n').map(l=>'  '+l).join('\n') : '  Not specified'}
+
+Burnout level:   ${radio('burnout')}
+External pressures:
+${val('externalPressure') ? val('externalPressure').split('\n').map(l=>'  '+l).join('\n') : '  None noted'}
+Biggest exam fear:       ${val('examFear') || 'Not specified'}
+One thing plan must protect: ${val('protectOne') || 'Not specified'}
+
+SECTION 8 — ADDITIONAL CONTEXT
+────────────────────────────────
+${val('anythingElse') || 'Nothing additional.'}
+
+TUTOR PRIVATE NOTES (not for student)
+──────────────────────────────────────
+${val('tutorNotes') || 'None recorded.'}
+
+${'═'.repeat(56)}
+END OF INTAKE SUMMARY — BIT BY BIT PEDAGOGY`
+  ];
+  return lines.join('');
 }
 
-form.addEventListener('submit', async (e) => {
+// Submit
+document.getElementById('admin-form').addEventListener('submit', e => {
   e.preventDefault();
-  const token = localStorage.getItem(TOKEN_KEY) || '';
-  btn.disabled = true; lastMd = ''; docEl.innerHTML = '';
-  docWrap.style.display = 'block';
-  statusEl.textContent = 'Generating…';
-  docWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const text = buildSummary();
+  document.getElementById('summary-text').value = text;
+  const wrap = document.getElementById('summary-wrap');
+  wrap.style.display = 'block';
+  document.getElementById('status').textContent = 'Done. Copy the summary below and paste it to Claude.';
+  wrap.scrollIntoView({ behavior:'smooth', block:'start' });
+});
 
+// Clear form
+document.getElementById('clear-btn').addEventListener('click', () => {
+  if (!confirm('Clear all fields and start fresh?')) return;
+  document.getElementById('admin-form').reset();
+  document.getElementById('summary-wrap').style.display = 'none';
+  document.getElementById('summary-text').value = '';
+  document.getElementById('status').textContent = '';
+  document.getElementById('prior-score-field').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Copy
+document.getElementById('copy-btn').addEventListener('click', async () => {
+  const ta = document.getElementById('summary-text');
   try {
-    const r = await fetch('/api/plan', {
-      method: 'POST',
-      headers: { 'content-type':'application/json', 'x-admin-token': token },
-      body: JSON.stringify(collect()),
-    });
-    if (r.status === 401) {
-      localStorage.removeItem(TOKEN_KEY);
-      throw new Error('Bad token. Locked again.');
-    }
-    if (!r.ok) {
-      let msg = 'Generation failed';
-      try { const j = await r.json(); msg = j.error || msg; } catch {}
-      throw new Error(msg);
-    }
-    const reader = r.body.getReader();
-    const decoder = new TextDecoder();
-    let lastRender = 0;
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      lastMd += decoder.decode(value, { stream: true });
-      const now = Date.now();
-      if (now - lastRender > 120) {
-        docEl.innerHTML = marked.parse(lastMd);
-        statusEl.textContent = 'Writing…';
-        lastRender = now;
-      }
-    }
-    docEl.innerHTML = marked.parse(lastMd);
-    statusEl.textContent = 'Done.';
-  } catch (err) {
-    statusEl.textContent = 'Error: ' + err.message;
-    if (/Bad token/.test(err.message)) showGate();
-  } finally { btn.disabled = false; }
-});
-
-document.getElementById('btn-print').addEventListener('click', () => window.print());
-document.getElementById('btn-copy').addEventListener('click', async () => {
-  try { await navigator.clipboard.writeText(lastMd); statusEl.textContent='Copied.'; }
-  catch { statusEl.textContent='Copy failed.'; }
-});
-document.getElementById('btn-new').addEventListener('click', () => {
-  docWrap.style.display='none'; form.reset(); statusEl.textContent='';
-  window.scrollTo({ top:0, behavior:'smooth' });
+    await navigator.clipboard.writeText(ta.value);
+    document.getElementById('copy-btn').textContent = 'Copied!';
+    setTimeout(() => document.getElementById('copy-btn').textContent = 'Copy all', 2200);
+  } catch {
+    ta.select();
+    document.execCommand('copy');
+    document.getElementById('copy-btn').textContent = 'Copied!';
+    setTimeout(() => document.getElementById('copy-btn').textContent = 'Copy all', 2200);
+  }
 });
 </script>
 </body>
