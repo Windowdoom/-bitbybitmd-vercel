@@ -28,10 +28,19 @@ export default async function handler(req) {
     });
   }
 
+  // Admin-only — full blueprint generation is gated behind a shared token.
+  const adminToken = process.env.PLAN_ADMIN_TOKEN;
+  const provided = req.headers.get('x-admin-token') || '';
+  if (!adminToken || provided !== adminToken) {
+    return new Response(JSON.stringify({
+      error: 'Unauthorised. The full blueprint generator is for Bit by Bit coaches only. Take the public diagnostic at /plan.html instead.',
+    }), { status: 401, headers: { 'content-type': 'application/json' } });
+  }
+
   const ip = (req.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
   if (rateLimited(ip)) {
     return new Response(JSON.stringify({
-      error: 'You have reached the free limit of 3 blueprints per day. Email hello@bitbybitpedagogy.com to continue.',
+      error: 'Rate limit reached on this instance. Wait or retry.',
     }), { status: 429, headers: { 'content-type': 'application/json' } });
   }
 

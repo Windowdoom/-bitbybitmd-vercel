@@ -3,225 +3,216 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="robots" content="noindex,nofollow" />
-<title>Admin · Blueprint Generator — Bit by Bit Pedagogy</title>
+<title>Find My Gap — Bit by Bit Pedagogy</title>
+<meta name="description" content="A 10-question diagnostic that pinpoints where your USMLE or COMLEX prep is leaking points. Free. Two minutes." />
 <link rel="stylesheet" href="/styles/b3.css" />
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
-  .doc{background:#fdfcf8;color:#1a2433;border-radius:8px;padding:48px 56px;box-shadow:0 10px 40px rgba(0,0,0,0.4);font-family:"Source Serif 4",Georgia,serif;font-size:15px;line-height:1.65}
-  @media (max-width:720px){.doc{padding:28px 22px}}
-  .doc h1{font-family:"Source Serif 4",serif;font-size:40px;text-align:center;color:#1c3552;margin:8px 0 4px}
-  .doc h2{font-family:"Source Serif 4",serif;color:#1c3552;font-size:22px;margin:32px 0 12px;padding-bottom:6px;border-bottom:2px solid #1c3552}
-  .doc h3{color:#1f7a5a;font-size:17px;margin:22px 0 8px}
-  .doc h4{color:#c4881f;font-size:15px;margin:16px 0 6px}
-  .doc strong{color:#1c3552}
-  .doc em{color:#1f7a5a}
-  .doc hr{border:none;border-top:2px solid #c4881f;margin:24px 0}
-  .doc blockquote{border-left:3px solid #1f7a5a;padding:4px 14px;margin:14px 0;color:#1f7a5a;font-style:italic;background:#f1f7f4;border-radius:0 4px 4px 0}
-  .doc ul{padding-left:22px}
-  .doc li{margin-bottom:6px}
-  .doc a{color:#1f7a5a}
-  .gate{max-width:420px;margin:80px auto;padding:32px;background:var(--card);border:1px solid var(--line);border-radius:8px;text-align:center}
-  .resources{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;background:var(--bg-2);border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--ink);cursor:pointer;text-transform:none;letter-spacing:0;margin:0}
-  .chip input{width:auto;margin:0}
-  .grid-2{display:grid;gap:14px;grid-template-columns:1fr 1fr}
-  .grid-3{display:grid;gap:14px;grid-template-columns:1fr 1fr 1fr}
-  @media (max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
-  @media print{.site-header,.site-footer,#admin-form,#status,.doc-toolbar,h1.page-title,p.page-sub,.gate{display:none!important}.doc{box-shadow:none;padding:0}}
+  .q { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:18px 22px; margin-bottom:14px }
+  .q-no { font-size:11px; color:var(--gold); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:6px }
+  .q-text { font-weight:700; color:var(--ink); margin-bottom:10px; font-size:14px }
+  .cta { display:inline-block; padding:16px 28px; background:var(--gold); color:#3a2710; font-weight:700; border-radius:6px; text-decoration:none; font-size:14px; margin-top:14px }
+  .cta:hover { text-decoration:none; filter:brightness(1.1) }
+  .diagnosis { background:var(--card); border:1px solid var(--gold); border-left:4px solid var(--gold); border-radius:8px; padding:28px; margin-top:20px }
+  .diagnosis h2 { border:none; margin-top:0; color:var(--gold) }
 </style>
 </head>
 <body>
 <header class="site-header">
   <a href="/" class="logo">B<span>3</span> &nbsp; BIT BY BIT <span>PEDAGOGY</span></a>
-  <nav><a href="/">Home</a><a href="/method/">Method</a><a href="/bits/">Bits</a></nav>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/method/">Method</a>
+    <a href="/bits/">Bits</a>
+    <a href="/nbme-traps.html">NBME Traps</a>
+    <a href="/habit-reset.html">Habit Reset</a>
+  </nav>
 </header>
 
 <main class="shell">
-  <div id="gate-wrap" class="gate" style="display:none">
-    <h2 style="border:none;margin-top:0">Admin only</h2>
-    <p style="color:var(--mute);font-size:13px;margin-bottom:18px">This is the full blueprint generator. Enter your admin token to continue.</p>
-    <input type="password" id="gate-input" placeholder="Admin token" />
-    <button class="primary" id="gate-btn" style="margin-top:12px;width:100%">Unlock</button>
-    <div id="gate-msg" style="margin-top:10px;color:var(--red);font-size:12px;min-height:14px"></div>
-  </div>
+  <div class="kicker">Free diagnostic · 2 minutes</div>
+  <h1>Find My Gap</h1>
+  <p class="lede">Ten questions. A real diagnosis of where your prep is leaking points. No spam, no "10-step funnel" — just an honest read on what's actually slowing you down, and whether we're a fit to work together.</p>
 
-  <div id="app" style="display:none">
-    <div class="kicker">Admin · Coach tool</div>
-    <h1 class="page-title">Personalised Blueprint Generator</h1>
-    <p class="page-sub" style="color:var(--mute)">Full 9-section Bri-style blueprint. ~$0.11 per generation. <button class="ghost" id="logout-btn" style="margin-left:10px">Lock</button></p>
-
-    <form id="admin-form" style="display:grid;gap:18px">
-      <div class="grid-2">
-        <div><label>Student name</label><input name="name" required /></div>
-        <div><label>Tutor (you)</label><input name="tutor" placeholder="Your name" /></div>
-      </div>
-
-      <div class="grid-3">
-        <div><label>Exam</label><select name="exam" required><option>USMLE Step 1</option><option>USMLE Step 2 CK</option><option>USMLE Step 3</option><option>COMLEX Level 1</option><option>COMLEX Level 2 CE</option><option>NBME Shelf</option></select></div>
-        <div><label>Stage</label><select name="stage"><option>M1</option><option>M2</option><option>M3</option><option>M4</option><option>Gap year</option><option>Post-graduate / IMG</option></select></div>
-        <div><label>School type</label><select name="schoolType"><option>US MD</option><option>US DO</option><option>US-IMG</option><option>FMG / IMG</option></select></div>
-      </div>
-
-      <div class="grid-3">
-        <div><label>Weeks of prep</label><input name="weeks" type="number" min="1" max="52" value="8" required /></div>
-        <div><label>Target score</label><input name="target" required /></div>
-        <div><label>Attempt</label><select name="attempt"><option>First attempt</option><option>Retake</option></select></div>
-      </div>
-
-      <div><label>Baseline (recent NBME, UWorld %, last SA)</label><input name="baseline" /></div>
-      <div><label>How they study (their own words)</label><textarea name="studyStyle"></textarea></div>
-
-      <div class="grid-2">
-        <div><label>Learning modality</label><select name="modality"><option>Active retrieval (questions first)</option><option>Visual (Sketchy, diagrams, videos)</option><option>Reading / text-heavy</option><option>Auditory / lecture-based</option><option>Mixed</option></select></div>
-        <div><label>Test-taking confidence</label><select name="confidence"><option>Strong — trusts first instinct</option><option>Inconsistent</option><option>Weak — second-guesses, runs out of time</option></select></div>
-      </div>
-
-      <div><label>Schedule reality (wake, caffeine, gym, distractions, downtime)</label><textarea name="schedule"></textarea></div>
-
-      <div>
-        <label>Resources they have</label>
-        <div class="resources">
-          <label class="chip"><input type="checkbox" name="resources" value="UWorld" checked> UWorld</label>
-          <label class="chip"><input type="checkbox" name="resources" value="NBME forms" checked> NBME forms</label>
-          <label class="chip"><input type="checkbox" name="resources" value="Pathoma"> Pathoma</label>
-          <label class="chip"><input type="checkbox" name="resources" value="Sketchy"> Sketchy</label>
-          <label class="chip"><input type="checkbox" name="resources" value="Mehlman PDFs"> Mehlman</label>
-          <label class="chip"><input type="checkbox" name="resources" value="OnlineMedEd"> OME</label>
-          <label class="chip"><input type="checkbox" name="resources" value="Dirty Medicine"> Dirty Medicine</label>
-          <label class="chip"><input type="checkbox" name="resources" value="AMBOSS"> AMBOSS</label>
-          <label class="chip"><input type="checkbox" name="resources" value="Anki"> Anki</label>
-          <label class="chip"><input type="checkbox" name="resources" value="First Aid"> First Aid</label>
-          <label class="chip"><input type="checkbox" name="resources" value="Boards & Beyond"> B&B</label>
-          <label class="chip"><input type="checkbox" name="resources" value="Divine Intervention"> Divine</label>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <div><label>Weak systems</label><input name="weakSystems" /></div>
-        <div><label>Strong systems</label><input name="strongSystems" /></div>
-      </div>
-
-      <div><label>What is at stake</label><textarea name="stake"></textarea></div>
-
-      <div class="grid-2">
-        <div><label>Burnout level</label><select name="burnout"><option>Low — fresh</option><option>Moderate</option><option>High — running on fumes</option></select></div>
-        <div><label>Anything else</label><input name="notes" /></div>
-      </div>
-
-      <button type="submit" class="primary" id="submit-btn">Generate blueprint →</button>
-      <div id="status" style="color:var(--mute);font-size:13px;min-height:18px"></div>
-    </form>
-
-    <div id="doc-wrap" style="display:none;margin-top:32px">
-      <div class="doc-toolbar" style="display:flex;justify-content:flex-end;gap:10px;margin-bottom:12px">
-        <button class="ghost" id="btn-print">Print / PDF</button>
-        <button class="ghost" id="btn-copy">Copy markdown</button>
-        <button class="ghost" id="btn-new">Clear</button>
-      </div>
-      <article class="doc" id="doc"></article>
+  <form id="q-form">
+    <div class="q">
+      <div class="q-no">Q1</div>
+      <div class="q-text">Which exam are you preparing for?</div>
+      <select name="exam" required>
+        <option value="">Choose…</option>
+        <option>USMLE Step 1</option>
+        <option>USMLE Step 2 CK</option>
+        <option>USMLE Step 3</option>
+        <option>COMLEX Level 1</option>
+        <option>COMLEX Level 2 CE</option>
+        <option>NBME Shelf</option>
+      </select>
     </div>
+
+    <div class="q">
+      <div class="q-no">Q2</div>
+      <div class="q-text">How many weeks until your test date?</div>
+      <input name="weeks" type="number" min="1" max="52" required placeholder="e.g. 12" />
+    </div>
+
+    <div class="q">
+      <div class="q-no">Q3</div>
+      <div class="q-text">Your most recent NBME or self-assessment score (or "none yet"):</div>
+      <input name="nbme" required placeholder="e.g. NBME 28 ≈ 225, or 'none yet'" />
+    </div>
+
+    <div class="q">
+      <div class="q-no">Q4</div>
+      <div class="q-text">Your average UWorld % (mixed timed blocks):</div>
+      <input name="uworld" required placeholder="e.g. 58%" />
+    </div>
+
+    <div class="q">
+      <div class="q-no">Q5</div>
+      <div class="q-text">Average study hours per day, honestly:</div>
+      <select name="hours" required>
+        <option value="">Choose…</option>
+        <option>Less than 4</option>
+        <option>4–6</option>
+        <option>6–8</option>
+        <option>8–10</option>
+        <option>More than 10</option>
+      </select>
+    </div>
+
+    <div class="q">
+      <div class="q-no">Q6</div>
+      <div class="q-text">Average hours of sleep per night:</div>
+      <select name="sleep" required>
+        <option value="">Choose…</option>
+        <option>Less than 5</option>
+        <option>5–6</option>
+        <option>6–7</option>
+        <option>7–8</option>
+        <option>More than 8</option>
+      </select>
+    </div>
+
+    <div class="q">
+      <div class="q-no">Q7</div>
+      <div class="q-text">How consistent is your wake time across the week?</div>
+      <select name="wake" required>
+        <option value="">Choose…</option>
+        <option>Same time every day (within 30 min)</option>
+        <option>Mostly consistent (within an hour)</option>
+        <option>It varies a lot</option>
+        <option>I sleep when I sleep</option>
+      </select>
+    </div>
+
+    <div class="q">
+      <div class="q-no">Q8</div>
+      <div class="q-text">Your single biggest blocker right now:</div>
+      <select name="blocker" required>
+        <option value="">Choose…</option>
+        <option>Content gaps — there's still stuff I don't know</option>
+        <option>Test-taking — I know it but miss it on questions</option>
+        <option>Burnout — I'm cooked</option>
+        <option>Schedule — I can't get the day to work</option>
+        <option>Motivation — I keep stalling</option>
+        <option>Anxiety — I freeze on test day</option>
+      </select>
+    </div>
+
+    <div class="q">
+      <div class="q-no">Q9</div>
+      <div class="q-text">Your weakest system or subject:</div>
+      <input name="weakness" required placeholder="e.g. Cardio, Renal, Bio Stat" />
+    </div>
+
+    <div class="q">
+      <div class="q-no">Q10</div>
+      <div class="q-text">In one sentence — what's at stake for you?</div>
+      <input name="stake" required placeholder="e.g. 'I need to match into a competitive specialty.'" />
+    </div>
+
+    <button type="submit" class="primary" id="submit-btn" style="margin-top:8px">Get my diagnosis →</button>
+    <div id="status" style="margin-top:12px;color:var(--mute);font-size:13px;min-height:18px"></div>
+  </form>
+
+  <div id="result-wrap" style="display:none">
+    <article class="diagnosis" id="diagnosis"></article>
+
+    <div class="callout gold" style="margin-top:18px">
+      <div class="callout-label">What happens next</div>
+      The diagnosis above is the snapshot. The <strong>full personalised blueprint</strong> — week-by-week schedule, two daily systems, resource protocol, phased roadmap, and NBME form schedule, all built for you — is what we build together in a session.
+      <br><br>
+      <a href="mailto:hello@bitbybitpedagogy.com?subject=Find%20My%20Gap%20-%20Booking%20Request&body=Hi%20-%20I%20just%20completed%20Find%20My%20Gap%20and%20I'd%20like%20to%20book%20a%20session.%0A%0AMy%20exam%3A%20%0AMy%20test%20date%3A%20%0AMy%20availability%3A%20%0A%0AThanks." class="cta">Book a session →</a>
+    </div>
+
+    <p style="margin-top:18px;color:var(--mute);font-size:13px">Want to keep the diagnosis? <button class="ghost" id="btn-print" style="margin-left:8px">Print</button> <button class="ghost" id="btn-copy" style="margin-left:6px">Copy</button></p>
   </div>
 </main>
 
-<footer class="site-footer">Bit by Bit Pedagogy · Admin</footer>
+<footer class="site-footer">
+  Bit by Bit Pedagogy · Personalised Academic Coaching · <a href="mailto:hello@bitbybitpedagogy.com">hello@bitbybitpedagogy.com</a>
+</footer>
 
 <script>
-const TOKEN_KEY = 'b3_admin_token';
-const gateWrap = document.getElementById('gate-wrap');
-const app = document.getElementById('app');
-const gateBtn = document.getElementById('gate-btn');
-const gateInput = document.getElementById('gate-input');
-const gateMsg = document.getElementById('gate-msg');
-
-function showApp() { gateWrap.style.display='none'; app.style.display='block'; }
-function showGate() { gateWrap.style.display='block'; app.style.display='none'; gateInput.focus(); }
-
-if (localStorage.getItem(TOKEN_KEY)) showApp(); else showGate();
-
-gateBtn.addEventListener('click', () => {
-  const v = gateInput.value.trim();
-  if (!v) { gateMsg.textContent = 'Enter the token.'; return; }
-  localStorage.setItem(TOKEN_KEY, v);
-  gateMsg.textContent = '';
-  showApp();
-});
-gateInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') gateBtn.click(); });
-document.getElementById('logout-btn').addEventListener('click', () => {
-  localStorage.removeItem(TOKEN_KEY);
-  showGate();
-});
-
-const form = document.getElementById('admin-form');
+const form = document.getElementById('q-form');
 const btn = document.getElementById('submit-btn');
 const statusEl = document.getElementById('status');
-const docWrap = document.getElementById('doc-wrap');
-const docEl = document.getElementById('doc');
-let lastMd = '';
-
-function collect() {
-  const fd = new FormData(form);
-  const obj = {};
-  for (const [k, v] of fd.entries()) {
-    if (k === 'resources') { obj.resources = obj.resources || []; obj.resources.push(v); }
-    else obj[k] = v;
-  }
-  return obj;
-}
+const resultWrap = document.getElementById('result-wrap');
+const diagEl = document.getElementById('diagnosis');
+let lastText = '';
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const token = localStorage.getItem(TOKEN_KEY) || '';
-  btn.disabled = true; lastMd = ''; docEl.innerHTML = '';
-  docWrap.style.display = 'block';
-  statusEl.textContent = 'Generating…';
-  docWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  btn.disabled = true;
+  statusEl.textContent = 'Reading your answers…';
+  resultWrap.style.display = 'none';
+
+  const fd = new FormData(form);
+  const data = Object.fromEntries(fd.entries());
 
   try {
-    const r = await fetch('/api/plan', {
+    const r = await fetch('/api/diagnose', {
       method: 'POST',
-      headers: { 'content-type':'application/json', 'x-admin-token': token },
-      body: JSON.stringify(collect()),
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(data),
     });
-    if (r.status === 401) {
-      localStorage.removeItem(TOKEN_KEY);
-      throw new Error('Bad token. Locked again.');
-    }
     if (!r.ok) {
-      let msg = 'Generation failed';
+      let msg = 'Diagnosis failed';
       try { const j = await r.json(); msg = j.error || msg; } catch {}
       throw new Error(msg);
     }
+    if (!r.body) throw new Error('Streaming not supported in this browser');
+
     const reader = r.body.getReader();
     const decoder = new TextDecoder();
+    lastText = '';
+    resultWrap.style.display = 'block';
     let lastRender = 0;
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
-      lastMd += decoder.decode(value, { stream: true });
+      lastText += decoder.decode(value, { stream: true });
       const now = Date.now();
-      if (now - lastRender > 120) {
-        docEl.innerHTML = marked.parse(lastMd);
-        statusEl.textContent = 'Writing…';
+      if (now - lastRender > 100) {
+        diagEl.innerHTML = marked.parse(lastText);
+        statusEl.textContent = 'Writing your diagnosis…';
         lastRender = now;
       }
     }
-    docEl.innerHTML = marked.parse(lastMd);
-    statusEl.textContent = 'Done.';
+    diagEl.innerHTML = marked.parse(lastText);
+    statusEl.textContent = '';
+    resultWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
   } catch (err) {
     statusEl.textContent = 'Error: ' + err.message;
-    if (/Bad token/.test(err.message)) showGate();
-  } finally { btn.disabled = false; }
+  } finally {
+    btn.disabled = false;
+  }
 });
 
 document.getElementById('btn-print').addEventListener('click', () => window.print());
 document.getElementById('btn-copy').addEventListener('click', async () => {
-  try { await navigator.clipboard.writeText(lastMd); statusEl.textContent='Copied.'; }
-  catch { statusEl.textContent='Copy failed.'; }
-});
-document.getElementById('btn-new').addEventListener('click', () => {
-  docWrap.style.display='none'; form.reset(); statusEl.textContent='';
-  window.scrollTo({ top:0, behavior:'smooth' });
+  try { await navigator.clipboard.writeText(lastText); statusEl.textContent = 'Copied.'; }
+  catch { statusEl.textContent = 'Copy failed — select manually.'; }
 });
 </script>
 </body>
