@@ -23,7 +23,7 @@ export default async function handler(req) {
 
   const ip = (req.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
   if (rateLimited(ip)) {
-    return new Response(JSON.stringify({ error: 'You have reached the daily diagnostic limit (5/day). Email hello@bitbybitpedagogy.com to talk.' }), { status: 429, headers: { 'content-type': 'application/json' } });
+    return new Response(JSON.stringify({ error: 'You have reached the daily diagnostic limit (5/day). Email sifrandcompany@gmail.com to talk.' }), { status: 429, headers: { 'content-type': 'application/json' } });
   }
 
   let d = {};

@@ -24,7 +24,7 @@ export default async function handler(req) {
 
   const ip = (req.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
   if (rateLimited(ip)) {
-    return new Response(JSON.stringify({ error: 'Rate limit reached (30 entries / day). Email hello@bitbybitpedagogy.com to lift.' }), { status: 429, headers: { 'content-type': 'application/json' } });
+    return new Response(JSON.stringify({ error: 'Rate limit reached (30 entries / day). Email sifrandcompany@gmail.com to lift.' }), { status: 429, headers: { 'content-type': 'application/json' } });
   }
 
   let d = {};
