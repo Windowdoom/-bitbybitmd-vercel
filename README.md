@@ -1,55 +1,65 @@
-# Bit by Bit Pedagogy
+# Bit by Bit Pedagogy — Site Bundle (v4 · 65 Bits)
 
-USMLE Step 1, CBSE, COMLEX prep site for bitbybitmd.com. One unified single-page app with the marketing site, library, free Bit 20 sampler, full Bit 150 NBME-style exam, 400+ tidbit database, diagnostic intake quiz, and the Ask Bit AI tutor.
+## What's inside
 
-## Files
+```
+index.html                        ← your homepage (auto-patched with Free Resources section)
+plan.html                         ← PUBLIC 10-Q Find My Gap (diagnostic → book CTA)
+log.html                          ← Concept Correction Log generator
+differentiators.html              ← HY differentiator hub (65 entries)
+nbme-traps.html                   ← 10 NBME Trap Patterns
+habit-reset.html                  ← 50-Day Habit Reset
+llms.txt                          ← AI manifest
+robots.txt                        ← LLM-friendly crawl rules
+styles/b3.css                     ← shared stylesheet
 
-| File | Purpose |
+admin/
+  plan.html                       ← ★ PRIVATE — full blueprint generator (token-gated)
+
+api/
+  diagnose.js                     ← public: streaming diagnosis
+  plan.js                         ← PRIVATE: full blueprint (admin token required)
+  log.js                          ← public: streaming correction-log entry
+
+method/                           ← 9 method pages + hub
+bits/                             ← Bit Library hub + 65 Bits
+```
+
+## The 65 Bits by system
+
+- **Heme/Onc (8)** · **Renal (4)** · **Endo (7)** · **Cardio (5)** · **Neuro (6)**
+- **Rheum/Immuno (5)** · **Genetics (3)** · **Biochem (5)** · **Pathology (3)**
+- **Micro (9)** · **Pharm/Tox (5)** · **Behavioral (3)** · **GI (1)** · **OB/Gyn (1)**
+
+Full list at the bottom of `llms.txt` and on `/bits/`.
+
+## Verification sources
+
+- First Aid for the USMLE Step 1, 2024 (34th ed) — Le, Bhushan et al.
+- Robbins Basic Pathology, 10e — Kumar, Abbas, Aster
+- Guyton & Hall Textbook of Medical Physiology, 14e — Hall
+- Basic Immunology, Functions and Disorders, 6e — Abbas, Lichtman, Pillai
+- Brenner & Stevens Pharmacology
+- Lippincott Illustrated Q&A Review of Pharmacology — Zaslau
+
+All content paraphrased — no textbook prose reproduced verbatim. If you spot an error, email and we'll fix it.
+
+## Required Vercel env vars
+
+| Variable | Why |
 |---|---|
-| `index.html` | The whole site. Marketing sections plus a five-tab Toolkit (Find My Gap, Free Bit 20, Bit 150 Exam, Tidbits, Ask Bit). |
-| `netlify/functions/chat.js` | Serverless backend for Ask Bit. Streams Claude Haiku. |
-| `netlify.toml` | Build config and `/api/chat` redirect. |
-| `package.json` | Lists `@anthropic-ai/sdk`. |
-| `CONTENT_PLAYBOOK.md` | 30-day video calendar, hashtag sets, posting schedule, three content pillars, Reddit playbook. |
+| `ANTHROPIC_API_KEY` | All three API endpoints |
+| `PLAN_ADMIN_TOKEN`  | Gates `/api/plan` and `/admin/plan.html` |
 
-## Deploying to Netlify
+## Deploy
 
-1. Push this repo to GitHub.
-2. In Netlify: New site from Git, select the repo. `netlify.toml` does the rest.
-3. Site settings, Environment variables, add `ANTHROPIC_API_KEY` from console.anthropic.com.
-4. Site settings, Domain management, connect bitbybitmd.com.
-5. After first deploy, the `sampler-signup` and `contact` forms appear under Forms.
+1. Unzip into repo root (preserves folder structure).
+2. Set `PLAN_ADMIN_TOKEN` in Vercel env vars.
+3. Commit + push. Vercel redeploys in ~60s.
+4. Smoke-test: `/bits/itp-ttp-hus-dic.html` · `/log.html` · `/plan.html` · `/admin/plan.html`.
 
-## Local preview
+The homepage `index.html` has already been auto-patched with a "Free Resources" section that links to every new page. No manual edits required.
 
-Open `index.html` in a browser for marketing and toolkit UI. Ask Bit and form submissions only work when deployed.
+Do NOT link `/admin/plan.html` anywhere. Bookmark it.
 
-For full local testing with functions:
-```
-npm install
-npx netlify dev
-```
-
-## Before launch
-
-- Verify the 20 sampler questions and the 150 Bit 150 exam questions against your own sources.
-- Replace the placeholder testimonial in the proof strip with a real student quote.
-- Payhip link `https://payhip.com/b/pbKvH` is hardcoded in several spots. Update if your bundle URL changes.
-- Calendly URL `https://calendly.com/sifrandcompany` is hardcoded. Update if you change handles.
-- Set `ANTHROPIC_API_KEY` before going live or Ask Bit will return offline messages.
-
-## Costs
-
-- Netlify free tier covers everything here: 125k function invocations and 100 form submissions per month. Forms upgrade is $19/mo if you exceed 100.
-- Anthropic API is pay-per-use. Haiku 4.5 costs about $0.002 per chat exchange. 1000 conversations is around $2.
-- Domain is around $12/yr from your registrar.
-
-## Launch checklist
-
-- [ ] Verify clinical content in the Bit 20 and Bit 150 question arrays
-- [ ] Replace the placeholder testimonial
-- [ ] Set `ANTHROPIC_API_KEY` in Netlify
-- [ ] Connect the custom domain
-- [ ] Test Ask Bit end to end after deploy
-- [ ] Submit a test sampler form, confirm Netlify Forms inbox
-- [ ] Read CONTENT_PLAYBOOK.md, shoot the first 5 Master Pivot clips
+— Bit by Bit

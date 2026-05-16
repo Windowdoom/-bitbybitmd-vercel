@@ -1,0 +1,56 @@
+# Bit by Bit Pedagogy
+
+> Personalised academic coaching for medical students preparing for the USMLE (Step 1, Step 2 CK, Step 3) and COMLEX (Level 1, Level 2 CE). Methodology built around question-based learning, mechanism over memorisation, and behavioural consistency.
+
+## Core methodology
+
+- [The 4-Step Master Pivot](https://bitbybitpedagogy.com/method/master-pivot.html)
+- [C/G/W Triage](https://bitbybitpedagogy.com/method/cgw-triage.html)
+- [The Pivot Word / Differentiator Hunt](https://bitbybitpedagogy.com/method/pivot-word.html)
+- [The Concept Anchor](https://bitbybitpedagogy.com/method/concept-anchor.html)
+- [The 48-Hour Revisit](https://bitbybitpedagogy.com/method/48-hour-revisit.html)
+- [The Concept Correction Log](https://bitbybitpedagogy.com/method/concept-correction-log.html)
+- [Two Daily Systems](https://bitbybitpedagogy.com/method/two-daily-systems.html)
+- [The Phased Roadmap](https://bitbybitpedagogy.com/method/phased-roadmap.html)
+- [One Thing at a Time](https://bitbybitpedagogy.com/method/one-thing-at-a-time.html)
+
+## Tools
+
+- [Find My Gap (free 10-Q diagnostic)](https://bitbybitpedagogy.com/plan.html)
+- [Concept Correction Log Generator](https://bitbybitpedagogy.com/log.html)
+
+## Bit Library (65 reference pages)
+
+Hub: https://bitbybitpedagogy.com/bits/
+
+Each Bit covers one mechanism, one differentiator table, one NBME-style stem, one concept anchor.
+
+- **Heme/Onc (8):** ITP/TTP/HUS/DIC · Hemophilia A/B/vWD · Iron/ACD/Thal · AML/ALL/CML/CLL · Hodgkin/NHL · Anemia by MCV · Intrinsic hemolytic (HS/G6PD/PNH/SCD) · MPNs (PV/ET/PMF/CML)
+- **Renal (4):** Bartter/Gitelman/Liddle · Nephritic/Nephrotic · RTA 1/2/4 · AKI prerenal/intrinsic/postrenal
+- **Endo (7):** DKA/HHS · Conn/Cushing/Pheo · Sheehan/Simmonds/Empty Sella · Hashimoto/Graves/De Quervain · T1DM/T2DM · Hyper/Hypoparathyroidism · MEN 1/2A/2B
+- **Cardio (5):** AS vs HOCM · Restrictive vs Constrictive · HFrEF vs HFpEF · Cardiac murmurs · ACS (STEMI/NSTEMI/UA)
+- **Neuro (6):** UMN vs LMN · Wernicke vs Korsakoff · MS/NMO/ADEM · Stroke syndromes · Dementia types · Movement disorders (Parkinson/ET/HD/Wilson)
+- **Rheum/Immuno (5):** GPA/Goodpasture/EGPA · SLE/DIL/MCTD · Hypersensitivity I-IV · DiGeorge/Bruton/CVID/Hyper-IgM/SCID · CGD/Chédiak/Job/LAD
+- **Genetics (3):** Prader-Willi/Angelman · Trisomy 13/18/21 · NF1/NF2/TSC/VHL
+- **Biochem (5):** PKU/MSUD/Homocystinuria/Alkaptonuria · Marfan/Homocystinuria/EDS · Glycogen storage diseases · Lysosomal storage diseases · Vitamin deficiencies
+- **Pathology (3):** Necrosis types · Apoptosis vs Necrosis · Oncogenes vs Tumor Suppressors
+- **Micro (9):** Hepatitis A-E · Herpesviruses · Salmonella vs Shigella · Endotoxin vs Exotoxin · Exotoxin syndromes · HIV stages + OIs · TB stages · Dimorphic fungi · Plasmodium species
+- **Pharm/Tox (5):** MUDPILES · HARDUP · Antibiotic mechanisms · Antiarrhythmics (Vaughan-Williams) · Diuretics by site
+- **Behavioral (3):** Defense mechanisms · Personality disorders Clusters A/B/C · Mood disorders
+- **GI (1):** Crohn vs UC
+- **OB/Gyn (1):** OB bleeding emergencies (ectopic/molar/abruption/previa)
+
+## Other reference content
+
+- [High-Yield Differentiators hub](https://bitbybitpedagogy.com/differentiators.html)
+- [10 NBME Trap Patterns](https://bitbybitpedagogy.com/nbme-traps.html)
+- [50-Day Habit Reset](https://bitbybitpedagogy.com/habit-reset.html)
+
+## Verification sources
+
+Content paraphrased and verified against First Aid for the USMLE Step 1 2024 (34th ed), Robbins Basic Pathology 10e, Guyton & Hall Physiology 14e, Abbas Basic Immunology 6e, and Brenner & Stevens Pharmacology.
+
+## Contact
+
+- Email: hello@bitbybitpedagogy.com
+- Site: https://bitbybitpedagogy.com

@@ -3,367 +3,226 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Find My Gap — Bit by Bit Pedagogy</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<meta name="robots" content="noindex,nofollow" />
+<title>Admin · Blueprint Generator — Bit by Bit Pedagogy</title>
+<link rel="stylesheet" href="/styles/b3.css" />
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
-  :root {
-    --bg: #0b1220;
-    --bg-2: #0f1a2e;
-    --ink: #d8e3f0;
-    --mute: #8aa0bd;
-    --accent: #2dd49a;
-    --accent-2: #f6b552;
-    --line: #1d2a44;
-  }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: "JetBrains Mono", ui-monospace, monospace; }
-  a { color: var(--accent); }
-  header.site {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 28px; border-bottom: 1px solid var(--line);
-  }
-  header.site .logo { font-weight: 700; letter-spacing: 0.5px; }
-  header.site .logo span { color: var(--accent-2); }
-  header.site nav a { margin-left: 18px; text-decoration: none; color: var(--mute); font-size: 13px; }
-  header.site nav a:hover { color: var(--ink); }
-
-  main { max-width: 980px; margin: 0 auto; padding: 40px 24px 80px; }
-  h1.page-title { font-family: "JetBrains Mono", monospace; font-size: 28px; margin: 0 0 6px; }
-  p.page-sub { color: var(--mute); margin: 0 0 28px; }
-
-  form { display: grid; gap: 18px; }
-  .row { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
-  .row-3 { display: grid; gap: 14px; grid-template-columns: 1fr 1fr 1fr; }
-  @media (max-width: 720px) { .row, .row-3 { grid-template-columns: 1fr; } }
-
-  label { display: block; font-size: 12px; color: var(--mute); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.6px; }
-  input, select, textarea {
-    width: 100%; padding: 11px 13px; background: var(--bg-2); color: var(--ink);
-    border: 1px solid var(--line); border-radius: 6px; font: inherit; font-size: 14px;
-  }
-  textarea { min-height: 84px; resize: vertical; }
-  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); }
-
-  .resources { display: flex; flex-wrap: wrap; gap: 8px; }
-  .resources label.chip {
-    display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px;
-    background: var(--bg-2); border: 1px solid var(--line); border-radius: 999px;
-    font-size: 12px; color: var(--ink); cursor: pointer; text-transform: none; letter-spacing: 0; margin: 0;
-  }
-  .resources input { width: auto; margin: 0; }
-
-  button.primary {
-    margin-top: 8px; padding: 14px 18px; background: var(--accent); color: #06231a;
-    border: none; border-radius: 6px; font: inherit; font-weight: 700; cursor: pointer; font-size: 14px;
-  }
-  button.primary:disabled { opacity: 0.55; cursor: progress; }
-
-  .status { margin-top: 14px; color: var(--mute); font-size: 13px; min-height: 18px; }
-
-  /* Blueprint document panel — PDF-style */
-  .doc-wrap { margin-top: 40px; }
-  .doc {
-    background: #fdfcf8; color: #1a2433; border-radius: 8px;
-    padding: 56px 64px; box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-    font-family: "Source Serif 4", Georgia, serif; font-size: 15px; line-height: 1.65;
-  }
-  @media (max-width: 720px) { .doc { padding: 32px 24px; } }
-
-  .doc h1 { font-family: "Source Serif 4", serif; font-size: 44px; text-align: center; color: #1c3552; margin: 8px 0 4px; }
-  .doc h2 { font-family: "Source Serif 4", serif; color: #1c3552; font-size: 22px; margin: 36px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #1c3552; }
-  .doc h3 { color: #1f7a5a; font-size: 17px; margin: 24px 0 8px; }
-  .doc h4 { color: #c4881f; font-size: 15px; margin: 18px 0 6px; }
-  .doc strong { color: #1c3552; }
-  .doc em { color: #1f7a5a; }
-  .doc hr { border: none; border-top: 2px solid #c4881f; margin: 28px 0; }
-  .doc blockquote { border-left: 3px solid #1f7a5a; padding: 4px 16px; margin: 16px 0; color: #1f7a5a; font-style: italic; background: #f1f7f4; border-radius: 0 4px 4px 0; }
-  .doc ul { padding-left: 22px; }
-  .doc li { margin-bottom: 6px; }
-  .doc a { color: #1f7a5a; }
-
-  .doc-toolbar { display: flex; gap: 10px; justify-content: flex-end; margin-bottom: 12px; }
-  .doc-toolbar button {
-    padding: 8px 14px; background: var(--bg-2); color: var(--ink); border: 1px solid var(--line);
-    border-radius: 6px; font: inherit; font-size: 12px; cursor: pointer;
-  }
-  .doc-toolbar button:hover { border-color: var(--accent); }
-
-  @media print {
-    body { background: #fff; }
-    header.site, form, .status, .doc-toolbar, main > h1.page-title, main > p.page-sub { display: none !important; }
-    .doc { box-shadow: none; padding: 0; }
-  }
+  .doc{background:#fdfcf8;color:#1a2433;border-radius:8px;padding:48px 56px;box-shadow:0 10px 40px rgba(0,0,0,0.4);font-family:"Source Serif 4",Georgia,serif;font-size:15px;line-height:1.65}
+  @media (max-width:720px){.doc{padding:28px 22px}}
+  .doc h1{font-family:"Source Serif 4",serif;font-size:40px;text-align:center;color:#1c3552;margin:8px 0 4px}
+  .doc h2{font-family:"Source Serif 4",serif;color:#1c3552;font-size:22px;margin:32px 0 12px;padding-bottom:6px;border-bottom:2px solid #1c3552}
+  .doc h3{color:#1f7a5a;font-size:17px;margin:22px 0 8px}
+  .doc h4{color:#c4881f;font-size:15px;margin:16px 0 6px}
+  .doc strong{color:#1c3552}
+  .doc em{color:#1f7a5a}
+  .doc hr{border:none;border-top:2px solid #c4881f;margin:24px 0}
+  .doc blockquote{border-left:3px solid #1f7a5a;padding:4px 14px;margin:14px 0;color:#1f7a5a;font-style:italic;background:#f1f7f4;border-radius:0 4px 4px 0}
+  .doc ul{padding-left:22px}
+  .doc li{margin-bottom:6px}
+  .doc a{color:#1f7a5a}
+  .gate{max-width:420px;margin:80px auto;padding:32px;background:var(--card);border:1px solid var(--line);border-radius:8px;text-align:center}
+  .resources{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;background:var(--bg-2);border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--ink);cursor:pointer;text-transform:none;letter-spacing:0;margin:0}
+  .chip input{width:auto;margin:0}
+  .grid-2{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+  .grid-3{display:grid;gap:14px;grid-template-columns:1fr 1fr 1fr}
+  @media (max-width:720px){.grid-2,.grid-3{grid-template-columns:1fr}}
+  @media print{.site-header,.site-footer,#admin-form,#status,.doc-toolbar,h1.page-title,p.page-sub,.gate{display:none!important}.doc{box-shadow:none;padding:0}}
 </style>
 </head>
 <body>
-
-<header class="site">
+<header class="site-header">
   <a href="/" class="logo">B<span>3</span> &nbsp; BIT BY BIT <span>PEDAGOGY</span></a>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/#method">Method</a>
-    <a href="/#toolkit">Toolkit</a>
-    <a href="/plan.html">Find My Gap</a>
-  </nav>
+  <nav><a href="/">Home</a><a href="/method/">Method</a><a href="/bits/">Bits</a></nav>
 </header>
 
-<main>
-  <h1 class="page-title">Find My Gap — Generate Your Blueprint</h1>
-  <p class="page-sub">Answer honestly. The plan is only as good as what you tell us.</p>
+<main class="shell">
+  <div id="gate-wrap" class="gate" style="display:none">
+    <h2 style="border:none;margin-top:0">Admin only</h2>
+    <p style="color:var(--mute);font-size:13px;margin-bottom:18px">This is the full blueprint generator. Enter your admin token to continue.</p>
+    <input type="password" id="gate-input" placeholder="Admin token" />
+    <button class="primary" id="gate-btn" style="margin-top:12px;width:100%">Unlock</button>
+    <div id="gate-msg" style="margin-top:10px;color:var(--red);font-size:12px;min-height:14px"></div>
+  </div>
 
-  <form id="plan-form">
-    <div class="row">
-      <div>
-        <label>Your name</label>
-        <input name="name" required placeholder="First name" />
+  <div id="app" style="display:none">
+    <div class="kicker">Admin · Coach tool</div>
+    <h1 class="page-title">Personalised Blueprint Generator</h1>
+    <p class="page-sub" style="color:var(--mute)">Full 9-section Bri-style blueprint. ~$0.11 per generation. <button class="ghost" id="logout-btn" style="margin-left:10px">Lock</button></p>
+
+    <form id="admin-form" style="display:grid;gap:18px">
+      <div class="grid-2">
+        <div><label>Student name</label><input name="name" required /></div>
+        <div><label>Tutor (you)</label><input name="tutor" placeholder="Your name" /></div>
       </div>
-      <div>
-        <label>Tutor (optional)</label>
-        <input name="tutor" placeholder="Tutor's name if you have one" />
+
+      <div class="grid-3">
+        <div><label>Exam</label><select name="exam" required><option>USMLE Step 1</option><option>USMLE Step 2 CK</option><option>USMLE Step 3</option><option>COMLEX Level 1</option><option>COMLEX Level 2 CE</option><option>NBME Shelf</option></select></div>
+        <div><label>Stage</label><select name="stage"><option>M1</option><option>M2</option><option>M3</option><option>M4</option><option>Gap year</option><option>Post-graduate / IMG</option></select></div>
+        <div><label>School type</label><select name="schoolType"><option>US MD</option><option>US DO</option><option>US-IMG</option><option>FMG / IMG</option></select></div>
       </div>
+
+      <div class="grid-3">
+        <div><label>Weeks of prep</label><input name="weeks" type="number" min="1" max="52" value="8" required /></div>
+        <div><label>Target score</label><input name="target" required /></div>
+        <div><label>Attempt</label><select name="attempt"><option>First attempt</option><option>Retake</option></select></div>
+      </div>
+
+      <div><label>Baseline (recent NBME, UWorld %, last SA)</label><input name="baseline" /></div>
+      <div><label>How they study (their own words)</label><textarea name="studyStyle"></textarea></div>
+
+      <div class="grid-2">
+        <div><label>Learning modality</label><select name="modality"><option>Active retrieval (questions first)</option><option>Visual (Sketchy, diagrams, videos)</option><option>Reading / text-heavy</option><option>Auditory / lecture-based</option><option>Mixed</option></select></div>
+        <div><label>Test-taking confidence</label><select name="confidence"><option>Strong — trusts first instinct</option><option>Inconsistent</option><option>Weak — second-guesses, runs out of time</option></select></div>
+      </div>
+
+      <div><label>Schedule reality (wake, caffeine, gym, distractions, downtime)</label><textarea name="schedule"></textarea></div>
+
+      <div>
+        <label>Resources they have</label>
+        <div class="resources">
+          <label class="chip"><input type="checkbox" name="resources" value="UWorld" checked> UWorld</label>
+          <label class="chip"><input type="checkbox" name="resources" value="NBME forms" checked> NBME forms</label>
+          <label class="chip"><input type="checkbox" name="resources" value="Pathoma"> Pathoma</label>
+          <label class="chip"><input type="checkbox" name="resources" value="Sketchy"> Sketchy</label>
+          <label class="chip"><input type="checkbox" name="resources" value="Mehlman PDFs"> Mehlman</label>
+          <label class="chip"><input type="checkbox" name="resources" value="OnlineMedEd"> OME</label>
+          <label class="chip"><input type="checkbox" name="resources" value="Dirty Medicine"> Dirty Medicine</label>
+          <label class="chip"><input type="checkbox" name="resources" value="AMBOSS"> AMBOSS</label>
+          <label class="chip"><input type="checkbox" name="resources" value="Anki"> Anki</label>
+          <label class="chip"><input type="checkbox" name="resources" value="First Aid"> First Aid</label>
+          <label class="chip"><input type="checkbox" name="resources" value="Boards & Beyond"> B&B</label>
+          <label class="chip"><input type="checkbox" name="resources" value="Divine Intervention"> Divine</label>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div><label>Weak systems</label><input name="weakSystems" /></div>
+        <div><label>Strong systems</label><input name="strongSystems" /></div>
+      </div>
+
+      <div><label>What is at stake</label><textarea name="stake"></textarea></div>
+
+      <div class="grid-2">
+        <div><label>Burnout level</label><select name="burnout"><option>Low — fresh</option><option>Moderate</option><option>High — running on fumes</option></select></div>
+        <div><label>Anything else</label><input name="notes" /></div>
+      </div>
+
+      <button type="submit" class="primary" id="submit-btn">Generate blueprint →</button>
+      <div id="status" style="color:var(--mute);font-size:13px;min-height:18px"></div>
+    </form>
+
+    <div id="doc-wrap" style="display:none;margin-top:32px">
+      <div class="doc-toolbar" style="display:flex;justify-content:flex-end;gap:10px;margin-bottom:12px">
+        <button class="ghost" id="btn-print">Print / PDF</button>
+        <button class="ghost" id="btn-copy">Copy markdown</button>
+        <button class="ghost" id="btn-new">Clear</button>
+      </div>
+      <article class="doc" id="doc"></article>
     </div>
-
-    <div class="row-3">
-      <div>
-        <label>Exam</label>
-        <select name="exam" required>
-          <option>USMLE Step 1</option>
-          <option>USMLE Step 2 CK</option>
-          <option>USMLE Step 3</option>
-          <option>COMLEX Level 1</option>
-          <option>COMLEX Level 2 CE</option>
-          <option>NBME Shelf</option>
-        </select>
-      </div>
-      <div>
-        <label>Stage</label>
-        <select name="stage">
-          <option>M1</option><option>M2</option><option>M3</option><option>M4</option>
-          <option>Gap year</option><option>Post-graduate / IMG</option>
-        </select>
-      </div>
-      <div>
-        <label>School type</label>
-        <select name="schoolType">
-          <option>US MD</option><option>US DO</option><option>US-IMG</option><option>FMG / IMG</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="row-3">
-      <div>
-        <label>Weeks of prep</label>
-        <input name="weeks" type="number" min="1" max="52" value="8" required />
-      </div>
-      <div>
-        <label>Target score</label>
-        <input name="target" placeholder="e.g. 250" required />
-      </div>
-      <div>
-        <label>Attempt</label>
-        <select name="attempt">
-          <option>First attempt</option><option>Retake</option>
-        </select>
-      </div>
-    </div>
-
-    <div>
-      <label>Current baseline (UWorld %, recent NBME, last self-assessment, etc.)</label>
-      <input name="baseline" placeholder="e.g. UWorld 58% mixed, NBME 6 ≈ 230, scores feel inconsistent" />
-    </div>
-
-    <div>
-      <label>How you study (your actual process — be specific)</label>
-      <textarea name="studyStyle" placeholder="e.g. 'I do questions first, then look up the concept on YouTube. I go through every wrong answer and ask why each option is wrong.'"></textarea>
-    </div>
-
-    <div class="row">
-      <div>
-        <label>Learning modality</label>
-        <select name="modality">
-          <option>Active retrieval (questions first)</option>
-          <option>Visual (Sketchy, diagrams, videos)</option>
-          <option>Reading / text-heavy</option>
-          <option>Auditory / lecture-based</option>
-          <option>Mixed</option>
-        </select>
-      </div>
-      <div>
-        <label>Test-taking confidence</label>
-        <select name="confidence">
-          <option>Strong — I usually trust my first instinct</option>
-          <option>Inconsistent — sometimes great, sometimes off</option>
-          <option>Weak — I second-guess and run out of time</option>
-        </select>
-      </div>
-    </div>
-
-    <div>
-      <label>Your schedule reality (wake time, caffeine, gym, distractions, downtime)</label>
-      <textarea name="schedule" placeholder="e.g. 'Wake at noon. Best work at night. Need coffee to sustain focus, not to start. No gym. Cooking is my outlet. Deleted Instagram last week.'"></textarea>
-    </div>
-
-    <div>
-      <label>Resources you have access to (pick all that apply)</label>
-      <div class="resources">
-        <label class="chip"><input type="checkbox" name="resources" value="UWorld" checked> UWorld</label>
-        <label class="chip"><input type="checkbox" name="resources" value="NBME forms" checked> NBME forms</label>
-        <label class="chip"><input type="checkbox" name="resources" value="Pathoma"> Pathoma</label>
-        <label class="chip"><input type="checkbox" name="resources" value="Sketchy"> Sketchy</label>
-        <label class="chip"><input type="checkbox" name="resources" value="Mehlman PDFs"> Mehlman PDFs</label>
-        <label class="chip"><input type="checkbox" name="resources" value="OnlineMedEd"> OnlineMedEd</label>
-        <label class="chip"><input type="checkbox" name="resources" value="Dirty Medicine"> Dirty Medicine</label>
-        <label class="chip"><input type="checkbox" name="resources" value="AMBOSS"> AMBOSS</label>
-        <label class="chip"><input type="checkbox" name="resources" value="Anki"> Anki</label>
-        <label class="chip"><input type="checkbox" name="resources" value="First Aid"> First Aid</label>
-        <label class="chip"><input type="checkbox" name="resources" value="Boards & Beyond"> Boards & Beyond</label>
-        <label class="chip"><input type="checkbox" name="resources" value="Divine Intervention"> Divine Intervention</label>
-      </div>
-    </div>
-
-    <div class="row">
-      <div>
-        <label>Weak systems</label>
-        <input name="weakSystems" placeholder="e.g. Cardio, Renal, Pharm" />
-      </div>
-      <div>
-        <label>Strong systems</label>
-        <input name="strongSystems" placeholder="e.g. Repro, MSK" />
-      </div>
-    </div>
-
-    <div>
-      <label>What is at stake for you? Be honest.</label>
-      <textarea name="stake" placeholder="e.g. 'Want to match competitive specialty. Family is watching. Don't want to retake.'"></textarea>
-    </div>
-
-    <div class="row">
-      <div>
-        <label>Burnout level right now</label>
-        <select name="burnout">
-          <option>Low — fresh</option>
-          <option>Moderate — managing</option>
-          <option>High — running on fumes</option>
-        </select>
-      </div>
-      <div>
-        <label>Anything else we should know?</label>
-        <input name="notes" placeholder="Free text" />
-      </div>
-    </div>
-
-    <button type="submit" class="primary" id="submit-btn">Generate my blueprint →</button>
-    <div class="status" id="status"></div>
-  </form>
-
-  <div class="doc-wrap" id="doc-wrap" style="display:none;">
-    <div class="doc-toolbar">
-      <button type="button" id="btn-print">Print / Save as PDF</button>
-      <button type="button" id="btn-copy">Copy markdown</button>
-      <button type="button" id="btn-new">Start over</button>
-    </div>
-    <article class="doc" id="doc"></article>
   </div>
 </main>
 
+<footer class="site-footer">Bit by Bit Pedagogy · Admin</footer>
+
 <script>
-  const form = document.getElementById('plan-form');
-  const statusEl = document.getElementById('status');
-  const btn = document.getElementById('submit-btn');
-  const docWrap = document.getElementById('doc-wrap');
-  const docEl = document.getElementById('doc');
-  let lastMarkdown = '';
+const TOKEN_KEY = 'b3_admin_token';
+const gateWrap = document.getElementById('gate-wrap');
+const app = document.getElementById('app');
+const gateBtn = document.getElementById('gate-btn');
+const gateInput = document.getElementById('gate-input');
+const gateMsg = document.getElementById('gate-msg');
 
-  function collect() {
-    const fd = new FormData(form);
-    const obj = {};
-    for (const [k, v] of fd.entries()) {
-      if (k === 'resources') {
-        obj.resources = obj.resources || [];
-        obj.resources.push(v);
-      } else {
-        obj[k] = v;
-      }
-    }
-    return obj;
+function showApp() { gateWrap.style.display='none'; app.style.display='block'; }
+function showGate() { gateWrap.style.display='block'; app.style.display='none'; gateInput.focus(); }
+
+if (localStorage.getItem(TOKEN_KEY)) showApp(); else showGate();
+
+gateBtn.addEventListener('click', () => {
+  const v = gateInput.value.trim();
+  if (!v) { gateMsg.textContent = 'Enter the token.'; return; }
+  localStorage.setItem(TOKEN_KEY, v);
+  gateMsg.textContent = '';
+  showApp();
+});
+gateInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') gateBtn.click(); });
+document.getElementById('logout-btn').addEventListener('click', () => {
+  localStorage.removeItem(TOKEN_KEY);
+  showGate();
+});
+
+const form = document.getElementById('admin-form');
+const btn = document.getElementById('submit-btn');
+const statusEl = document.getElementById('status');
+const docWrap = document.getElementById('doc-wrap');
+const docEl = document.getElementById('doc');
+let lastMd = '';
+
+function collect() {
+  const fd = new FormData(form);
+  const obj = {};
+  for (const [k, v] of fd.entries()) {
+    if (k === 'resources') { obj.resources = obj.resources || []; obj.resources.push(v); }
+    else obj[k] = v;
   }
+  return obj;
+}
 
-  const STAGES = [
-    'Reading your profile…',
-    'Mapping your modality…',
-    'Drafting your daily systems…',
-    'Building your week-by-week roadmap…',
-    'Personalising your resources…',
-    'Finalising…',
-  ];
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const token = localStorage.getItem(TOKEN_KEY) || '';
+  btn.disabled = true; lastMd = ''; docEl.innerHTML = '';
+  docWrap.style.display = 'block';
+  statusEl.textContent = 'Generating…';
+  docWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    btn.disabled = true;
-    lastMarkdown = '';
-    docEl.innerHTML = '';
-    docWrap.style.display = 'block';
-    statusEl.textContent = STAGES[0];
-    docWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-    let stageIdx = 0;
-    const stageTimer = setInterval(() => {
-      stageIdx = Math.min(stageIdx + 1, STAGES.length - 1);
-      if (!lastMarkdown) statusEl.textContent = STAGES[stageIdx];
-    }, 6000);
-
-    try {
-      const r = await fetch('/api/plan', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(collect()),
-      });
-
-      if (!r.ok) {
-        let msg = 'Generation failed';
-        try { const j = await r.json(); msg = j.error || msg; } catch {}
-        throw new Error(msg);
-      }
-      if (!r.body) throw new Error('Streaming not supported in this browser');
-
-      const reader = r.body.getReader();
-      const decoder = new TextDecoder();
-      let lastRender = 0;
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        lastMarkdown += decoder.decode(value, { stream: true });
-        const now = Date.now();
-        if (now - lastRender > 120) {
-          docEl.innerHTML = marked.parse(lastMarkdown);
-          statusEl.textContent = 'Writing your blueprint…';
-          lastRender = now;
-        }
-      }
-      docEl.innerHTML = marked.parse(lastMarkdown);
-      statusEl.textContent = 'Done. Use Print to save as PDF.';
-    } catch (err) {
-      statusEl.textContent = 'Error: ' + err.message;
-    } finally {
-      clearInterval(stageTimer);
-      btn.disabled = false;
+  try {
+    const r = await fetch('/api/plan', {
+      method: 'POST',
+      headers: { 'content-type':'application/json', 'x-admin-token': token },
+      body: JSON.stringify(collect()),
+    });
+    if (r.status === 401) {
+      localStorage.removeItem(TOKEN_KEY);
+      throw new Error('Bad token. Locked again.');
     }
-  });
+    if (!r.ok) {
+      let msg = 'Generation failed';
+      try { const j = await r.json(); msg = j.error || msg; } catch {}
+      throw new Error(msg);
+    }
+    const reader = r.body.getReader();
+    const decoder = new TextDecoder();
+    let lastRender = 0;
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      lastMd += decoder.decode(value, { stream: true });
+      const now = Date.now();
+      if (now - lastRender > 120) {
+        docEl.innerHTML = marked.parse(lastMd);
+        statusEl.textContent = 'Writing…';
+        lastRender = now;
+      }
+    }
+    docEl.innerHTML = marked.parse(lastMd);
+    statusEl.textContent = 'Done.';
+  } catch (err) {
+    statusEl.textContent = 'Error: ' + err.message;
+    if (/Bad token/.test(err.message)) showGate();
+  } finally { btn.disabled = false; }
+});
 
-  document.getElementById('btn-print').addEventListener('click', () => window.print());
-  document.getElementById('btn-copy').addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText(lastMarkdown); statusEl.textContent = 'Markdown copied to clipboard.'; }
-    catch { statusEl.textContent = 'Could not copy — select the text manually.'; }
-  });
-  document.getElementById('btn-new').addEventListener('click', () => {
-    docWrap.style.display = 'none';
-    statusEl.textContent = '';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+document.getElementById('btn-print').addEventListener('click', () => window.print());
+document.getElementById('btn-copy').addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText(lastMd); statusEl.textContent='Copied.'; }
+  catch { statusEl.textContent='Copy failed.'; }
+});
+document.getElementById('btn-new').addEventListener('click', () => {
+  docWrap.style.display='none'; form.reset(); statusEl.textContent='';
+  window.scrollTo({ top:0, behavior:'smooth' });
+});
 </script>
-
 </body>
 </html>
