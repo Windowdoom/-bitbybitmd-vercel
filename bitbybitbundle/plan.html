@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Find My Gap — Bit by Bit Pedagogy</title>
+<meta name="description" content="A 10-question diagnostic that pinpoints where your USMLE or COMLEX prep is leaking points. Free. Two minutes." />
+<link rel="stylesheet" href="/styles/b3.css" />
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  .q { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:18px 22px; margin-bottom:14px }
+  .q-no { font-size:11px; color:var(--gold); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:6px }
+  .q-text { font-weight:700; color:var(--ink); margin-bottom:10px; font-size:14px }
+  .cta { display:inline-block; padding:16px 28px; background:var(--gold); color:#3a2710; font-weight:700; border-radius:6px; text-decoration:none; font-size:14px; margin-top:14px }
+  .cta:hover { text-decoration:none; filter:brightness(1.1) }
+  .diagnosis { background:var(--card); border:1px solid var(--gold); border-left:4px solid var(--gold); border-radius:8px; padding:28px; margin-top:20px }
+  .diagnosis h2 { border:none; margin-top:0; color:var(--gold) }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a href="/" class="logo">B<span>3</span> &nbsp; BIT BY BIT <span>PEDAGOGY</span></a>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/method/">Method</a>
+    <a href="/bits/">Bits</a>
+    <a href="/nbme-traps.html">NBME Traps</a>
+    <a href="/habit-reset.html">Habit Reset</a>
+  </nav>
+</header>
+
+<main class="shell">
+  <div class="kicker">Free diagnostic · 2 minutes</div>
+  <h1>Find My Gap</h1>
+  <p class="lede">Ten questions. A real diagnosis of where your prep is leaking points. No spam, no "10-step funnel" — just an honest read on what's actually slowing you down, and whether we're a fit to work together.</p>
+
+  <form id="q-form">
+    <div class="q">
+      <div class="q-no">Q1</div>
+      <div class="q-text">Which exam are you preparing for?</div>
+      <select name="exam" required>
+        <option value="">Choose…</option>
+        <option>USMLE Step 1</option>
+        <option>USMLE Step 2 CK</option>
+        <option>USMLE Step 3</option>
+        <option>COMLEX Level 1</option>
+        <option>COMLEX Level 2 CE</option>
+        <option>NBME Shelf</option>
+      </select>
+    </div>
+
+    <div class="q">
+      <div class="q-no">Q2</div>
+      <div class="q-text">How many weeks until your test date?</div>
+      <input name="weeks" type="number" min="1" max="52" required placeholder="e.g. 12" />
+    </div>
+
+    <div class="q">
+      <div class="q-no">Q3</div>
+      <div class="q-text">Your most recent NBME or self-assessment score (or "none yet"):</div>
+      <input name="nbme" required placeholder="e.g. NBME 28 ≈ 225, or 'none yet'" />
+    </div>
+
+    <div class="q">
+      <div class="q-no">Q4</div>
+      <div class="q-text">Your average UWorld % (mixed timed blocks):</div>
+      <input name="uworld" required placeholder="e.g. 58%" />
+    </div>
+
+    <div class="q">
+      <div class="q-no">Q5</div>
+      <div class="q-text">Average study hours per day, honestly:</div>
+      <select name="hours" required>
+        <option value="">Choose…</option>
+        <option>Less than 4</option>
+        <option>4–6</option>
+        <option>6–8</option>
+        <option>8–10</option>
+        <option>More than 10</option>
+      </select>
+    </div>
+
+    <div class="q">
+      <div class="q-no">Q6</div>
+      <div class="q-text">Average hours of sleep per night:</div>
+      <select name="sleep" required>
+        <option value="">Choose…</option>
+        <option>Less than 5</option>
+        <option>5–6</option>
+        <option>6–7</option>
+        <option>7–8</option>
+        <option>More than 8</option>
+      </select>
+    </div>
+
+    <div class="q">
+      <div class="q-no">Q7</div>
+      <div class="q-text">How consistent is your wake time across the week?</div>
+      <select name="wake" required>
+        <option value="">Choose…</option>
+        <option>Same time every day (within 30 min)</option>
+        <option>Mostly consistent (within an hour)</option>
+        <option>It varies a lot</option>
+        <option>I sleep when I sleep</option>
+      </select>
+    </div>
+
+    <div class="q">
+      <div class="q-no">Q8</div>
+      <div class="q-text">Your single biggest blocker right now:</div>
+      <select name="blocker" required>
+        <option value="">Choose…</option>
+        <option>Content gaps — there's still stuff I don't know</option>
+        <option>Test-taking — I know it but miss it on questions</option>
+        <option>Burnout — I'm cooked</option>
+        <option>Schedule — I can't get the day to work</option>
+        <option>Motivation — I keep stalling</option>
+        <option>Anxiety — I freeze on test day</option>
+      </select>
+    </div>
+
+    <div class="q">
+      <div class="q-no">Q9</div>
+      <div class="q-text">Your weakest system or subject:</div>
+      <input name="weakness" required placeholder="e.g. Cardio, Renal, Bio Stat" />
+    </div>
+
+    <div class="q">
+      <div class="q-no">Q10</div>
+      <div class="q-text">In one sentence — what's at stake for you?</div>
+      <input name="stake" required placeholder="e.g. 'I need to match into a competitive specialty.'" />
+    </div>
+
+    <button type="submit" class="primary" id="submit-btn" style="margin-top:8px">Get my diagnosis →</button>
+    <div id="status" style="margin-top:12px;color:var(--mute);font-size:13px;min-height:18px"></div>
+  </form>
+
+  <div id="result-wrap" style="display:none">
+    <article class="diagnosis" id="diagnosis"></article>
+
+    <div class="callout gold" style="margin-top:18px">
+      <div class="callout-label">What happens next</div>
+      The diagnosis above is the snapshot. The <strong>full personalised blueprint</strong> — week-by-week schedule, two daily systems, resource protocol, phased roadmap, and NBME form schedule, all built for you — is what we build together in a session.
+      <br><br>
+      <a href="mailto:hello@bitbybitpedagogy.com?subject=Find%20My%20Gap%20-%20Booking%20Request&body=Hi%20-%20I%20just%20completed%20Find%20My%20Gap%20and%20I'd%20like%20to%20book%20a%20session.%0A%0AMy%20exam%3A%20%0AMy%20test%20date%3A%20%0AMy%20availability%3A%20%0A%0AThanks." class="cta">Book a session →</a>
+    </div>
+
+    <p style="margin-top:18px;color:var(--mute);font-size:13px">Want to keep the diagnosis? <button class="ghost" id="btn-print" style="margin-left:8px">Print</button> <button class="ghost" id="btn-copy" style="margin-left:6px">Copy</button></p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  Bit by Bit Pedagogy · Personalised Academic Coaching · <a href="mailto:hello@bitbybitpedagogy.com">hello@bitbybitpedagogy.com</a>
+</footer>
+
+<script>
+const form = document.getElementById('q-form');
+const btn = document.getElementById('submit-btn');
+const statusEl = document.getElementById('status');
+const resultWrap = document.getElementById('result-wrap');
+const diagEl = document.getElementById('diagnosis');
+let lastText = '';
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  btn.disabled = true;
+  statusEl.textContent = 'Reading your answers…';
+  resultWrap.style.display = 'none';
+
+  const fd = new FormData(form);
+  const data = Object.fromEntries(fd.entries());
+
+  try {
+    const r = await fetch('/api/diagnose', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    if (!r.ok) {
+      let msg = 'Diagnosis failed';
+      try { const j = await r.json(); msg = j.error || msg; } catch {}
+      throw new Error(msg);
+    }
+    if (!r.body) throw new Error('Streaming not supported in this browser');
+
+    const reader = r.body.getReader();
+    const decoder = new TextDecoder();
+    lastText = '';
+    resultWrap.style.display = 'block';
+    let lastRender = 0;
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      lastText += decoder.decode(value, { stream: true });
+      const now = Date.now();
+      if (now - lastRender > 100) {
+        diagEl.innerHTML = marked.parse(lastText);
+        statusEl.textContent = 'Writing your diagnosis…';
+        lastRender = now;
+      }
+    }
+    diagEl.innerHTML = marked.parse(lastText);
+    statusEl.textContent = '';
+    resultWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch (err) {
+    statusEl.textContent = 'Error: ' + err.message;
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+document.getElementById('btn-print').addEventListener('click', () => window.print());
+document.getElementById('btn-copy').addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText(lastText); statusEl.textContent = 'Copied.'; }
+  catch { statusEl.textContent = 'Copy failed — select manually.'; }
+});
+</script>
+</body>
+</html>
