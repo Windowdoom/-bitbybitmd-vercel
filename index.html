@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bit by Bit Pedagogy. Step 1, CBSE, COMLEX mastery for the students competitors ignore.</title>
-<meta name="description" content="Mechanism-first USMLE Step 1 and CBSE prep built by a US-IMG. Master Pivots, trap-block logic, a 150-question NBME-style exam, 400+ rapid pearls, and an AI tutor. Tools the way med students actually study.">
+<meta name="description" content="Mechanism-first USMLE Step 1 and CBSE prep built by a US-IMG. Master Pivots, trap-block logic, a 150-question NBME-style exam, 280+ rapid pearls, and the full NBME Free 120 (2026) broken down question by question. Tools the way med students actually study.">
 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
@@ -310,26 +310,6 @@ nav{
 .tid-fact{font-size:13px;color:var(--text-muted);line-height:1.55;}
 .tid-fact b{color:var(--text);}
 
-/* ASK BIT */
-.chat-wrap{padding:1.5rem;display:flex;flex-direction:column;min-height:520px;}
-.chat-intro{text-align:center;padding:1.5rem 0;}
-.chat-intro p{color:var(--text-muted);font-size:14px;max-width:480px;margin:0 auto;}
-.chat-sugg{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:1rem 0;}
-.chat-sugg button{background:var(--bg);border:1px solid var(--border);border-radius:99px;padding:6px 12px;font-family:var(--mono);font-size:10.5px;color:var(--text-muted);}
-.chat-sugg button:hover{border-color:var(--teal);color:var(--teal);}
-.chat-msgs{flex:1;display:flex;flex-direction:column;gap:1rem;padding:1rem 0;min-height:240px;}
-.chat-msg{display:flex;gap:10px;}
-.chat-av{width:28px;height:28px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;font-weight:bold;}
-.chat-msg.user .chat-av{background:var(--border-bright);color:var(--text);}
-.chat-msg.bot .chat-av{background:rgba(0, 229, 160, .12);color:var(--teal);border:1px solid rgba(0, 229, 160, .3);}
-.chat-body{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:12px 16px;font-size:13.5px;line-height:1.7;color:var(--text);white-space:pre-wrap;flex:1;}
-.chat-msg.bot .chat-body{border-color:rgba(0, 229, 160, .15);}
-.chat-input{display:flex;gap:8px;background:var(--bg);border:1px solid var(--border-bright);border-radius:var(--r);padding:8px;margin-top:1rem;}
-.chat-input:focus-within{border-color:var(--teal);}
-.chat-input textarea{flex:1;background:transparent;border:none;outline:none;resize:none;color:var(--text);font-size:13.5px;padding:5px 8px;max-height:140px;min-height:22px;font-family:var(--sans);}
-.chat-input button{background:var(--teal);color:var(--bg);border:none;border-radius:6px;padding:0 16px;font-family:var(--mono);font-size:11px;font-weight:bold;}
-.chat-input button:disabled{background:var(--border-bright);color:var(--text-muted);}
-.chat-note{text-align:center;font-family:var(--mono);font-size:10px;color:var(--text-dim);margin-top:.6rem;}
 
 /* COACHING + PRICING */
 .coach-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(250px, 1fr));gap:18px;}
@@ -444,7 +424,9 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <div class="n-links" id="nlinks">
  <a href="#home" onclick="closeNav()">HOME</a>
  <a href="#method" onclick="closeNav()">METHOD</a>
+ <a href="#free" onclick="closeNav()" style="color:var(--gold);">FREE TOOLS</a>
  <a href="#library" onclick="closeNav()">LIBRARY</a>
+ <a href="/free-120/" onclick="closeNav()" style="color:var(--gold);">FREE 120</a>
  <a href="#toolkit" onclick="closeNav()">TOOLKIT</a>
  <a href="#coaching" onclick="closeNav()">COACHING</a>
  <a href="#about" onclick="closeNav()">ABOUT</a>
@@ -457,8 +439,8 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
 </nav>
 
 <div class="ticker">
- <span class="ticker-badge">FOUNDING</span>
- <span>First 50 students lock the $30 Blueprint rate. Free 20-question sampler available now in Toolkit.</span>
+ <span class="ticker-badge">NEW</span>
+ <span>NBME Free 120 (2026) complete master guide is live. 119 questions, full distractor autopsies, trap fingerprints. <a href="/free-120/" style="color:var(--teal);">Open it →</a></span>
 </div>
 
 <div id="home" class="hero rev">
@@ -466,9 +448,10 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <div class="h-badge">FOR US-IMG, FMG &amp; US MD STUDENTS</div>
  <h1 class="h-title">Stop memorizing.<br>Start <em>seeing the pattern.</em></h1>
  <p class="h-sub">Mechanism-first Step 1, CBSE, and COMLEX prep, built by a US-IMG who lived the gauntlet. Master Pivots over buzzwords. Discriminators over disconnected facts. <b>The framework UWorld does not teach you.</b></p>
+ <p class="h-sub" style="margin-top:-.6rem;color:var(--gold);font-family:var(--mono);font-size:13px;letter-spacing:.5px;">Everything below is free. No login, no email.</p>
  <div class="h-btns">
- <button class="btn-gold" onclick="goToolkit('intake')">FIND MY GAP IN 60 SEC →</button>
- <button class="btn-o" onclick="goToolkit('chat')">ASK BIT (AI TUTOR)</button>
+ <a href="#free" class="btn-gold" style="display:inline-block;text-decoration:none;">SEE EVERYTHING FREE ↓</a>
+ <a href="/free-120/" class="btn-o" style="display:inline-block;text-decoration:none;">OPEN THE FREE 120</a>
  </div>
  <div class="h-trust">
  <span>IMG built</span>
@@ -531,8 +514,7 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  </div>
  <div>
  <div class="proof-label">Why students switch</div>
- <p class="proof-quote">"I had four weeks left and was stuck at 50%. Bit by Bit showed me how to read what the NBME is actually asking. Master Pivots changed how I take questions."</p>
- <div class="proof-quote-attr">STARTER QUOTE. REPLACE WITH REAL TESTIMONIAL.</div>
+ <p class="proof-quote" style="font-style:normal;color:var(--text-muted);">Student feedback coming soon.</p>
  </div>
  <div>
  <div class="proof-label">Start free</div>
@@ -545,9 +527,109 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <div class="magnet-inner rev">
  <div>
  <h3>The Toolkit is open.</h3>
- <p>Diagnostic intake, free Bit 20 sampler, full Bit 160 exam, the tidbits database, and Ask Bit. <b>All free to try. No credit card.</b></p>
+ <p>Diagnostic intake, free Bit 20 sampler, full Bit 150 exam, and the tidbits database. <b>All free to try. No credit card.</b></p>
  </div>
  <button class="btn-p" onclick="goToolkit('intake')">OPEN TOOLKIT →</button>
+ </div>
+</div>
+
+<!-- FREE 120 FEATURE -->
+<div style="background:linear-gradient(135deg, rgba(245,166,35,.08), rgba(0,229,160,.05)); border-top:1px solid rgba(245,166,35,.25); border-bottom:1px solid rgba(245,166,35,.25); padding:3.5rem 2rem;">
+ <div style="max-width:1120px; margin:0 auto; display:grid; grid-template-columns:1.4fr 1fr; gap:3rem; align-items:center;" class="f120-grid rev">
+  <div>
+   <div style="display:inline-flex; align-items:center; gap:8px; background:var(--gold-soft); border:1px solid rgba(245,166,35,.35); color:var(--gold); font-family:var(--mono); font-size:11px; font-weight:bold; letter-spacing:1.4px; padding:6px 14px; border-radius:99px; margin-bottom:1.2rem;">★ NEW &nbsp;·&nbsp; FREE &nbsp;·&nbsp; NO LOGIN</div>
+   <h2 style="font-family:var(--mono); font-size:clamp(26px, 3.4vw, 38px); font-weight:bold; color:var(--text); line-height:1.18; margin-bottom:1rem;">The <em style="font-style:normal; color:var(--gold);">NBME Free 120</em> (2026), broken down the way the test actually thinks.</h2>
+   <p style="font-size:15.5px; color:var(--text-muted); line-height:1.75; margin-bottom:1.5rem; max-width:560px;">All <b style="color:var(--text);">119 questions</b>. Every distractor autopsied. Trap fingerprints labeled. Costume changes mapped to where the same concept reappears on the real exam. Built by a US-IMG, for the students UWorld explanations leave behind.</p>
+   <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:1.3rem;">
+    <a href="/free-120/" class="btn-gold" style="display:inline-block; text-decoration:none;">OPEN THE FREE 120 GUIDE →</a>
+    <a href="/free-120/#about" class="btn-o" style="display:inline-block; text-decoration:none;">HOW IT WORKS</a>
+   </div>
+   <div style="display:flex; gap:1.4rem; flex-wrap:wrap; font-family:var(--mono); font-size:11px; color:var(--text-dim);">
+    <span style="display:flex; align-items:center; gap:6px;"><span style="color:var(--teal);">✓</span> 119 questions</span>
+    <span style="display:flex; align-items:center; gap:6px;"><span style="color:var(--teal);">✓</span> 500+ distractor autopsies</span>
+    <span style="display:flex; align-items:center; gap:6px;"><span style="color:var(--teal);">✓</span> Trap fingerprints</span>
+    <span style="display:flex; align-items:center; gap:6px;"><span style="color:var(--teal);">✓</span> Costume changes</span>
+   </div>
+  </div>
+  <div style="background:var(--bg-card); border:1px solid var(--border-bright); border-radius:var(--r); padding:1.7rem; background-image:radial-gradient(circle at top right, rgba(245,166,35,0.06) 0%, transparent 45%);">
+   <div style="font-family:var(--mono); font-size:10.5px; color:var(--gold); letter-spacing:2px; margin-bottom:1rem; text-transform:uppercase;">What's inside each card</div>
+   <ul style="list-style:none; padding:0; margin:0;">
+    <li style="font-family:var(--mono); font-size:12.5px; color:var(--text-muted); padding:7px 0 7px 18px; position:relative; border-bottom:1px dashed rgba(42,85,112,.5);"><span style="position:absolute; left:0; top:7px; color:var(--teal);">›</span> Vignette summary</li>
+    <li style="font-family:var(--mono); font-size:12.5px; color:var(--text-muted); padding:7px 0 7px 18px; position:relative; border-bottom:1px dashed rgba(42,85,112,.5);"><span style="position:absolute; left:0; top:7px; color:var(--teal);">›</span> The Discriminator (Master Pivot)</li>
+    <li style="font-family:var(--mono); font-size:12.5px; color:var(--text-muted); padding:7px 0 7px 18px; position:relative; border-bottom:1px dashed rgba(42,85,112,.5);"><span style="position:absolute; left:0; top:7px; color:var(--teal);">›</span> Mechanism (why the answer is correct)</li>
+    <li style="font-family:var(--mono); font-size:12.5px; color:var(--text-muted); padding:7px 0 7px 18px; position:relative; border-bottom:1px dashed rgba(42,85,112,.5);"><span style="position:absolute; left:0; top:7px; color:var(--teal);">›</span> NBME Trap Fingerprint</li>
+    <li style="font-family:var(--mono); font-size:12.5px; color:var(--text-muted); padding:7px 0 7px 18px; position:relative; border-bottom:1px dashed rgba(42,85,112,.5);"><span style="position:absolute; left:0; top:7px; color:var(--teal);">›</span> Full distractor autopsy (every option)</li>
+    <li style="font-family:var(--mono); font-size:12.5px; color:var(--text-muted); padding:7px 0 7px 18px; position:relative; border-bottom:1px dashed rgba(42,85,112,.5);"><span style="position:absolute; left:0; top:7px; color:var(--teal);">›</span> Costume Change (where it reappears)</li>
+    <li style="font-family:var(--mono); font-size:12.5px; color:var(--text-muted); padding:7px 0 7px 18px; position:relative; border-bottom:1px dashed rgba(42,85,112,.5);"><span style="position:absolute; left:0; top:7px; color:var(--teal);">›</span> Variable Pivot (if the stem changed)</li>
+    <li style="font-family:var(--mono); font-size:12.5px; color:var(--text-muted); padding:7px 0 7px 18px; position:relative;"><span style="position:absolute; left:0; top:7px; color:var(--gold);">★</span> Tid Bit (one-line anchor)</li>
+   </ul>
+  </div>
+ </div>
+</div>
+<style>
+@media (max-width:780px) { .f120-grid { grid-template-columns:1fr !important; gap:2rem !important; } }
+</style>
+
+<!-- FREE HUB -->
+<div class="sec rev" id="free">
+ <div class="sec-hdr">
+  <div class="sec-tag">EVERYTHING FREE, IN ONE PLACE</div>
+  <h2 class="sec-title">Start with what costs nothing.</h2>
+  <p class="sec-sub">Eight free tools. No login, no email gate. Built so you can taste the method before you ever consider the bundle.</p>
+ </div>
+ <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));gap:14px;">
+
+  <a href="/free-120/" style="background:var(--bg-card);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:var(--r);padding:1.5rem;transition:all .25s;text-decoration:none;display:block;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform=''">
+   <div style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:1.5px;margin-bottom:8px;">★ FLAGSHIP</div>
+   <h4 style="font-family:var(--mono);font-size:15px;color:var(--text);margin-bottom:8px;">NBME Free 120 (2026)</h4>
+   <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">All 119 questions. Distractor autopsies, trap fingerprints, costume changes. The deepest free Free 120 breakdown online.</p>
+  </a>
+
+  <a href="/differentiators.html" style="background:var(--bg-card);border:1px solid var(--border);border-top:3px solid var(--teal);border-radius:var(--r);padding:1.5rem;transition:all .25s;text-decoration:none;display:block;" onmouseover="this.style.borderColor='var(--teal)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform=''">
+   <div style="font-family:var(--mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;margin-bottom:8px;">LIBRARY · 65 BITS</div>
+   <h4 style="font-family:var(--mono);font-size:15px;color:var(--text);margin-bottom:8px;">Differentiator Library</h4>
+   <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">ITP vs TTP. DKA vs HHS. Marfan vs Homocystinuria. Every confused pair on the NBME, with the pivot that decides it.</p>
+  </a>
+
+  <a href="/method/" style="background:var(--bg-card);border:1px solid var(--border);border-top:3px solid #A855F7;border-radius:var(--r);padding:1.5rem;transition:all .25s;text-decoration:none;display:block;" onmouseover="this.style.borderColor='#A855F7';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform=''">
+   <div style="font-family:var(--mono);font-size:10px;color:#A855F7;letter-spacing:1.5px;margin-bottom:8px;">FRAMEWORK</div>
+   <h4 style="font-family:var(--mono);font-size:15px;color:var(--text);margin-bottom:8px;">The Master Pivot Method</h4>
+   <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">C/G/W triage, pivot word, mechanism anchor, 48-hour revisit. The four habits that convert Guesses to Confident.</p>
+  </a>
+
+  <a href="/nbme-traps.html" style="background:var(--bg-card);border:1px solid var(--border);border-top:3px solid var(--red);border-radius:var(--r);padding:1.5rem;transition:all .25s;text-decoration:none;display:block;" onmouseover="this.style.borderColor='var(--red)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform=''">
+   <div style="font-family:var(--mono);font-size:10px;color:var(--red);letter-spacing:1.5px;margin-bottom:8px;">TRAPS · 10</div>
+   <h4 style="font-family:var(--mono);font-size:15px;color:var(--text);margin-bottom:8px;">NBME Trap Patterns</h4>
+   <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">The ten cognitive traps NBME writers use against you. Premature closure, prevalence swap, level confusion, and the rest.</p>
+  </a>
+
+  <a href="/habit-reset.html" style="background:var(--bg-card);border:1px solid var(--border);border-top:3px solid #4D9FFF;border-radius:var(--r);padding:1.5rem;transition:all .25s;text-decoration:none;display:block;" onmouseover="this.style.borderColor='#4D9FFF';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform=''">
+   <div style="font-family:var(--mono);font-size:10px;color:#4D9FFF;letter-spacing:1.5px;margin-bottom:8px;">PROTOCOL</div>
+   <h4 style="font-family:var(--mono);font-size:15px;color:var(--text);margin-bottom:8px;">Habit Reset</h4>
+   <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">For the burned-out, plateaued student. A 66-day reset protocol grounded in actual habit-formation research.</p>
+  </a>
+
+  <a href="#toolkit" onclick="goToolkit('intake')" style="background:var(--bg-card);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:var(--r);padding:1.5rem;transition:all .25s;text-decoration:none;display:block;cursor:pointer;" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform=''">
+   <div style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:1.5px;margin-bottom:8px;">DIAGNOSTIC · 60 SEC</div>
+   <h4 style="font-family:var(--mono);font-size:15px;color:var(--text);margin-bottom:8px;">Find My Gap</h4>
+   <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">A 10-question diagnostic that tells you where your prep is actually leaking. Foundation, application, retention, or anxiety.</p>
+  </a>
+
+  <a href="#toolkit" onclick="goToolkit('tidbits')" style="background:var(--bg-card);border:1px solid var(--border);border-top:3px solid #2ED573;border-radius:var(--r);padding:1.5rem;transition:all .25s;text-decoration:none;display:block;cursor:pointer;" onmouseover="this.style.borderColor='#2ED573';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform=''">
+   <div style="font-family:var(--mono);font-size:10px;color:#2ED573;letter-spacing:1.5px;margin-bottom:8px;">DATABASE · 280+</div>
+   <h4 style="font-family:var(--mono);font-size:15px;color:var(--text);margin-bottom:8px;">Tidbits Database</h4>
+   <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">280+ rapid-review pearls. Searchable. The high-yield one-liners you'd write on the back of your hand if NBME allowed it.</p>
+  </a>
+
+  <a href="mailto:dan@bitbybitmd.com?subject=Bit%2020" style="background:var(--bg-card);border:1px solid var(--border);border-top:3px solid var(--teal);border-radius:var(--r);padding:1.5rem;transition:all .25s;text-decoration:none;display:block;" onmouseover="this.style.borderColor='var(--teal)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform=''">
+   <div style="font-family:var(--mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;margin-bottom:8px;">SAMPLER · EMAIL</div>
+   <h4 style="font-family:var(--mono);font-size:15px;color:var(--text);margin-bottom:8px;">Bit 20 Sampler</h4>
+   <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">Twenty NBME-style questions, every explanation Master-Pivot-first. Email dan@bitbybitmd.com with subject "Bit 20".</p>
+  </a>
+
+ </div>
+ <div style="margin-top:2rem;padding:1.3rem 1.6rem;background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:var(--r);font-size:14px;color:var(--text-muted);line-height:1.7;">
+  <b style="color:var(--text);">Want the deeper version?</b> The free tools teach the framework. The <a href="https://payhip.com/b/pbKvH" target="_blank" rel="noopener" style="color:var(--gold);font-weight:bold;">14-PDF subject bundle</a> applies it system by system with practice questions, full mechanism trees, and the trap-block drills that come up on the real exam.
  </div>
 </div>
 
@@ -559,7 +641,7 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
 <div class="stats-row">
  <div class="stat rev"><div class="stat-n">14</div><div class="stat-l">Subject Guides</div></div>
  <div class="stat rev"><div class="stat-n">150</div><div class="stat-l">NBME-Style Questions</div></div>
- <div class="stat rev"><div class="stat-n">400+</div><div class="stat-l">Rapid-Review Pearls</div></div>
+ <div class="stat rev"><div class="stat-n">280+</div><div class="stat-l">Rapid-Review Pearls</div></div>
  <div class="stat rev"><div class="stat-n">$30</div><div class="stat-l">Founding Coaching Rate</div></div>
 </div>
 
@@ -576,7 +658,7 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <div class="pillar-icon">🧠</div>
  <h3>REASONING</h3>
  <p>Master Pivots. Trap-block logic. Vignette skeleton. The mechanism layer that sits on top of your Qbank so you finally see why the answer is right.</p>
- <span class="pillar-tag" style="background:var(--teal-soft);color:var(--teal);">12 PDFs + Bit 160 + Tidbits</span>
+ <span class="pillar-tag" style="background:var(--teal-soft);color:var(--teal);">14 PDFs + Bit 150 + Tidbits</span>
  </div>
  <div class="pillar">
  <div class="pillar-num">02</div>
@@ -592,23 +674,6 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <p>Sleep timing, movement, mid-block anxiety, dopamine-aware workflows for ADHD brains, re-taker recovery. The wellness side most prep companies pretend does not exist.</p>
  <span class="pillar-tag" style="background:rgba(168, 85, 247, .08);color:var(--purple);">Performance + ADHD support</span>
  </div>
- </div>
-</div>
-
-<!-- BUY BANNER -->
-<div style="background:linear-gradient(135deg, rgba(245, 166, 35, .12), rgba(245, 166, 35, .05));border-top:1px solid rgba(245, 166, 35, .25);border-bottom:1px solid rgba(245, 166, 35, .25);padding:2.5rem 2rem;">
- <div style="max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
- <div style="flex:1;min-width:280px;">
- <h3 style="font-family:var(--mono);font-size:20px;font-weight:bold;color:var(--gold);margin-bottom:6px;">The Complete 14-PDF Bundle</h3>
- <p style="font-size:14px;color:var(--text-muted);max-width:580px;line-height:1.7;">Every BBB guide. Every Master Pivot. Plus the Caribbean Field Guide for IMG students nobody else writes for. One instant download.</p>
- <div style="display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:.8rem;font-family:var(--mono);font-size:11px;color:var(--text-dim);">
- <span>✓ Secure Payhip checkout</span>
- <span>✓ Instant PDF download</span>
- <span>✓ No account</span>
- <span>✓ Yours forever</span>
- </div>
- </div>
- <button class="btn-buy-lg" onclick="window.open('https://payhip.com/b/pbKvH', '_blank')">BUY THE BUNDLE ↗</button>
  </div>
 </div>
 
@@ -682,6 +747,32 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  </div>
  </div>
  </div>
+ </div>
+</div>
+
+<!-- SOFT TRANSITION TO PAID -->
+<div style="max-width:1120px;margin:0 auto;padding:3rem 2rem 0;">
+ <div class="rev" style="text-align:center;max-width:680px;margin:0 auto;">
+  <div style="font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:2px;margin-bottom:14px;">↓ IF THE FREE TOOLS MOVED YOU ↓</div>
+  <h2 style="font-family:var(--mono);font-size:clamp(22px, 2.6vw, 30px);font-weight:bold;color:var(--text);line-height:1.25;margin-bottom:1rem;">Here is the deeper version.</h2>
+  <p style="font-size:15.5px;color:var(--text-muted);line-height:1.75;">The free tools teach the framework. The bundle below is what you load into a real prep week — system by system, mechanism trees, trap-block drills, and the high-yield questions for each subject. Optional. The free layer alone moves your score.</p>
+ </div>
+</div>
+
+<!-- BUY BANNER -->
+<div style="background:linear-gradient(135deg, rgba(245, 166, 35, .12), rgba(245, 166, 35, .05));border-top:1px solid rgba(245, 166, 35, .25);border-bottom:1px solid rgba(245, 166, 35, .25);padding:2.5rem 2rem;margin-top:2rem;">
+ <div style="max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+ <div style="flex:1;min-width:280px;">
+ <h3 style="font-family:var(--mono);font-size:20px;font-weight:bold;color:var(--gold);margin-bottom:6px;">The Complete 14-PDF Bundle</h3>
+ <p style="font-size:14px;color:var(--text-muted);max-width:580px;line-height:1.7;">Every BBB guide. Every Master Pivot. Plus the Caribbean Field Guide for IMG students nobody else writes for. One instant download.</p>
+ <div style="display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:.8rem;font-family:var(--mono);font-size:11px;color:var(--text-dim);">
+ <span>✓ Secure Payhip checkout</span>
+ <span>✓ Instant PDF download</span>
+ <span>✓ No account</span>
+ <span>✓ Yours forever</span>
+ </div>
+ </div>
+ <button class="btn-buy-lg" onclick="window.open('https://payhip.com/b/pbKvH', '_blank')">BUY THE BUNDLE ↗</button>
  </div>
 </div>
 
@@ -840,7 +931,7 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <div class="sec-hdr">
  <div class="sec-tag">THE FREE TOOLKIT</div>
  <h2 class="sec-title">Five tools. All free to try.</h2>
- <p class="sec-sub">Find your gap. Take a sampler. Run a full 150-question NBME-style exam. Search 400 rapid pearls. Ask the AI tutor anything.</p>
+ <p class="sec-sub">Find your gap. Take a sampler. Run a full 150-question NBME-style exam. Search 280 rapid pearls.</p>
  </div>
 
  <div class="toolkit">
@@ -849,7 +940,6 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <button class="tk-tab" data-pane="sampler" onclick="setTab('sampler')">🧪 FREE BIT 20</button>
  <button class="tk-tab" data-pane="exam" onclick="setTab('exam')">📝 BIT 150 EXAM</button>
  <button class="tk-tab" data-pane="tidbits" onclick="setTab('tidbits')">⚡ TIDBITS DATABASE</button>
- <button class="tk-tab" data-pane="chat" onclick="setTab('chat')">🤖 ASK BIT</button>
  </div>
 
  <!-- INTAKE PANE -->
@@ -878,15 +968,8 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <h3>The <em>Bit 20</em> Sampler.</h3>
  <p>Twenty NBME-style questions. Every explanation leads with the Master Pivot. A taste of the full Bit 150.</p>
  <div class="samp-form">
- <label for="sampEmail">Drop your email to start</label>
- <form name="sampler-signup" method="POST" data-netlify="true" onsubmit="startSampler(event)">
- <input type="hidden" name="form-name" value="sampler-signup">
- <input id="sampEmail" name="email" type="email" placeholder="you@med.edu" required>
- <button type="submit">START THE BIT 20 →</button>
- </form>
- <div style="display:flex;gap:1.2rem;margin-top:1rem;font-family:var(--mono);font-size:10.5px;color:var(--text-dim);">
- <span>✓ No spam</span><span>✓ One email per week max</span><span>✓ Unsubscribe anytime</span>
- </div>
+ <p style="font-size:15px;color:var(--text-muted);line-height:1.7;margin-bottom:1.2rem;">To get the Bit 20 sampler, email <a href="mailto:dan@bitbybitmd.com?subject=Bit%2020" style="color:var(--teal);font-weight:bold;">dan@bitbybitmd.com</a> with the subject line <b style="color:var(--text);">"Bit 20"</b> and I'll send it directly.</p>
+ <a href="mailto:dan@bitbybitmd.com?subject=Bit%2020" class="btn-gold" style="display:inline-block;text-decoration:none;">EMAIL DAN FOR BIT 20 →</a>
  </div>
  </div>
  <div class="samp-quiz" id="sampQuiz">
@@ -908,7 +991,6 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <p style="color:var(--text-muted);max-width:480px;margin:0 auto 1.5rem;font-size:14px;">If a 20-question sampler taught you something new, imagine what 150 questions across 16 systems does.</p>
  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
  <button class="btn-gold" onclick="window.open('https://payhip.com/b/pbKvH', '_blank')">GET THE BUNDLE ↗</button>
- <button class="btn-o" onclick="setTab('chat')">ASK BIT INSTEAD</button>
  </div>
  </div>
  </div>
@@ -918,7 +1000,7 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <div class="exam-intro" id="examIntro">
  <div style="font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:1.5px;margin-bottom:1rem;">◈ INTERNAL PROVING GROUND</div>
  <h3><span class="tc">BIT</span> 150</h3>
- <p>The full mechanism-first practice exam. 150 NBME-style questions across 8 blocks. Real explanations, real Master Pivots, no buzzword tests.</p>
+ <p>The full mechanism-first practice exam. 150 NBME-style questions across 8 blocks. Organized into 8 thematic blocks by system — not structured as timed NBME-style blocks. Real explanations, real Master Pivots, no buzzword tests.</p>
  <div class="exam-meta">
  <div><div class="em-n">150</div><div class="em-l">Questions</div></div>
  <div><div class="em-n">8</div><div class="em-l">Blocks</div></div>
@@ -981,29 +1063,6 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <span class="tid-count" id="tidCount"></span>
  </div>
  <div class="tid-grid" id="tidGrid"></div>
- </div>
- </div>
-
- <!-- CHAT PANE -->
- <div class="tk-pane" id="pane-chat">
- <div class="chat-wrap">
- <div class="chat-intro" id="chatIntro">
- <div style="font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:1.5px;margin-bottom:.4rem;">● ASK BIT. AI TUTOR.</div>
- <h3 style="font-family:var(--mono);font-size:22px;color:var(--text);">Paste a vignette. Name a pair. Ask anything.</h3>
- <p>Bit answers mechanism-first and calls out trap blocks before you fall for them. Educational use only.</p>
- <div class="chat-sugg" id="chatSugg">
- <button onclick="chatSeed('What is the Master Pivot between asthma and COPD?')">Asthma vs COPD</button>
- <button onclick="chatSeed('How do I tell SIADH from diabetes insipidus?')">SIADH vs DI</button>
- <button onclick="chatSeed('What is the discriminator between Crohn and ulcerative colitis?')">Crohn vs UC</button>
- <button onclick="chatSeed('I keep missing renal questions. Where do I start?')">Stuck on renal</button>
- </div>
- </div>
- <div class="chat-msgs" id="chatMsgs"></div>
- <div class="chat-input">
- <textarea id="chatInput" rows="1" placeholder="Ask about a disease pair, paste a vignette, or describe what is hard..."></textarea>
- <button id="chatSend" onclick="chatSend()">SEND</button>
- </div>
- <div class="chat-note">Educational only. Verify with your primary resources. Bit can be wrong.</div>
  </div>
  </div>
 
@@ -1217,7 +1276,6 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
 </footer>
 
 <!-- Hidden Netlify Forms detection -->
-<form name="sampler-signup" netlify hidden><input type="email" name="email"></form>
 <form name="contact" netlify hidden><input type="text" name="first"><input type="text" name="last"><input type="email" name="email"><select name="topic"></select><textarea name="message"></textarea></form>
 
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
@@ -1342,17 +1400,6 @@ const SAMPLER = [
  {q:"Progressive descending weakness, recent canned food, dilated unreactive pupils. Diagnosis?", c:["Guillain-Barré", "Botulism", "Myasthenia gravis", "Lambert-Eaton"], a:1, p:"Direction of weakness and pupils split botulism from GBS.", b:"GBS: ascending, pupils spared. Botulism: descending, pupils dilated. Food history (home-canned, honey) is the historical clue."}
 ];
 let sampIdx=0, sampCorrect=0;
-function startSampler(e){
- e.preventDefault();
- const email = document.getElementById('sampEmail').value.trim();
- if(!email)return;
- const data=new FormData();data.append('form-name', 'sampler-signup');data.append('email', email);
- fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:new URLSearchParams(data).toString()}).catch(()=>{});
- document.getElementById('sampGate').style.display='none';
- document.getElementById('sampQuiz').classList.add('on');
- sampIdx=0;sampCorrect=0;
- sampRender();
-}
 function sampRender(){
  const q = SAMPLER[sampIdx];
  document.getElementById('sampCount').textContent = `QUESTION ${sampIdx+1} OF ${SAMPLER.length}`;
@@ -1393,36 +1440,6 @@ function sampNext(){
  }
  sampRender();
 }
-
-/* ========== ASK BIT CHAT ========== */
-const chatHistory = [];
-function chatSeed(text){document.getElementById('chatInput').value=text;chatSend();}
-function chatSend(){
- const ti = document.getElementById('chatInput');
- const text = ti.value.trim();if(!text)return;
- document.getElementById('chatIntro').style.display='none';
- chatHistory.push({role:'user', content:text});
- chatAddMsg('user', text);
- ti.value='';
- const sb = document.getElementById('chatSend');sb.disabled=true;
- const botBody = chatAddMsg('bot', '...');
- fetch('/api/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({messages:chatHistory})}).then(async res=>{
- if(!res.ok||!res.body){throw new Error('offline');}
- const reader=res.body.getReader();const dec=new TextDecoder();let acc='';
- botBody.textContent='';
- while(true){const {value, done}=await reader.read();if(done)break;acc+=dec.decode(value, {stream:true});botBody.textContent=acc;}
- chatHistory.push({role:'assistant', content:acc});
- }).catch(()=>{botBody.textContent='Bit is offline. Try again in a moment, or use the contact form.';}).finally(()=>{sb.disabled=false;});
-}
-function chatAddMsg(role, text){
- const wrap=document.createElement('div');wrap.className='chat-msg '+role;
- const av=document.createElement('div');av.className='chat-av';av.textContent=role==='user'?'YOU':'BIT';
- const body=document.createElement('div');body.className='chat-body';body.textContent=text;
- wrap.appendChild(av);wrap.appendChild(body);
- document.getElementById('chatMsgs').appendChild(wrap);
- return body;
-}
-document.getElementById('chatInput').addEventListener('keydown', e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();chatSend();}});
 
 /* ========== BIT 150 EXAM ========== */
 const qData = [
