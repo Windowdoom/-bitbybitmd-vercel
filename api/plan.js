@@ -1,23 +1,48 @@
-// Vercel serverless function: generates a Bit by Bit personalised study blueprint.
-// POST /api/plan with JSON body containing the form fields. Returns { blueprint: "<markdown>" }.
+// Vercel Edge function — streams the Bit by Bit blueprint as plain-text chunks.
+// POST /api/plan with JSON body. Response is a text stream (not JSON).
+// Includes a simple per-IP rate limit (3 blueprints / 24h / instance).
 
-export default async function handler(req, res) {
+export const config = { runtime: 'edge' };
+
+const ipHits = new Map();
+const LIMIT = 3;
+const WINDOW_MS = 24 * 60 * 60 * 1000;
+
+function rateLimited(ip) {
+  const now = Date.now();
+  const hits = (ipHits.get(ip) || []).filter((t) => now - t < WINDOW_MS);
+  if (hits.length >= LIMIT) { ipHits.set(ip, hits); return true; }
+  hits.push(now);
+  ipHits.set(ip, hits);
+  return false;
+}
+
+export default async function handler(req) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    return new Response('Method not allowed', { status: 405 });
   }
-
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: 'Server missing ANTHROPIC_API_KEY' });
+    return new Response(JSON.stringify({ error: 'Server missing ANTHROPIC_API_KEY' }), {
+      status: 500, headers: { 'content-type': 'application/json' },
+    });
   }
 
-  const d = req.body || {};
+  const ip = (req.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
+  if (rateLimited(ip)) {
+    return new Response(JSON.stringify({
+      error: 'You have reached the free limit of 3 blueprints per day. Email hello@bitbybitpedagogy.com to continue.',
+    }), { status: 429, headers: { 'content-type': 'application/json' } });
+  }
+
+  let d = {};
+  try { d = await req.json(); } catch {}
 
   const systemPrompt = `You are a senior academic coach at Bit by Bit Pedagogy. You write personalised USMLE/COMLEX study blueprints for medical students.
 
 Your output is a single long-form markdown document. NEVER wrap your output in code fences (no \`\`\` of any kind). NEVER output raw HTML tags. Just clean markdown.
 
-Voice: direct, warm, observant. Second person. Address the student by name throughout. Quote their own words back to them where it lands naturally. Validate their instincts when they're right; gently redirect when they're not. No corporate filler. No hedge phrases like "as an AI". No emoji. British or American spelling is fine — pick one and stay consistent.
+Voice: direct, warm, observant. Second person. Address the student by name throughout. Quote their own words back to them where it lands naturally. Validate their instincts when they're right; gently redirect when they're not. No corporate filler. No hedge phrases like "as an AI". No emoji.
 
 Format the document in this exact 9-section structure. Use the exact section header text. Fill in the bracketed parts with the student's real data.
 
@@ -41,127 +66,81 @@ Format the document in this exact 9-section structure. Use the exact section hea
 ---
 
 ## Section 1 — Your Profile at a Glance
-
-Short intro paragraph explaining the section.
-
+Short intro paragraph.
 ### Who You Are
-Bullet-style facts (name, school, stage, exam, prep window, target, what is at stake).
-
+Bullet-style facts.
 ### How You Study
-Two short paragraphs synthesising their actual study style. Validate the instincts that are working.
-
+Two short paragraphs synthesising their actual study style.
 ### Your Honest Baseline
-Four to six bullets. Foundations, scores, test-taking, current approach.
-
+Four to six bullets.
 ### Your Schedule Reality
-Four to six bullets about their actual day (wake, caffeine, gym, downtime, distractions).
-
+Four to six bullets.
 ### One Thing We Are Changing — Gradually
-Identify the single biggest behavioural shift and how the plan builds it in week by week.
+The single biggest behavioural shift and how the plan builds it in.
 
 ---
 
 ## Section 2 — Your Learning Modality and Protocol
-
-### How You Learn Best: [Name the modality based on what they said]
-Two short paragraphs naming their modality and what it means in practice.
-
+### How You Learn Best: [Modality]
+Two short paragraphs.
 ### Protocol Tips Built for Your Modality
-Five to seven bold-led bullets. Each is a specific, actionable rule for THIS student.
-
+Five to seven bold-led bullets.
 ### On [Their Biggest Challenge]
-Diagnose the issue. Name 2–3 root causes. Show how the plan addresses each.
+Diagnose. Name 2–3 root causes. Show how the plan addresses each.
 
 ---
 
 ## Section 3 — The Bit by Bit NBME Review Protocol
-
 ### The 4-Step Master Pivot, Built for [Name]
 One-paragraph framing.
 
 **Step 1 — The Initial Triage (Do not skip this step)**
-Explain C / G / W categories. Tie it to this student's specific pattern.
+Explain C / G / W categories.
 
 **Step 2 — The Differentiator Hunt**
-The pivot word, the differentiator, why-each-wrong-answer-is-wrong. Include one concrete worked example from a system relevant to this student's exam.
+Pivot word, differentiator, why each wrong answer is wrong. One concrete worked example.
 
 **Step 3 — The Concept Anchor (Mechanism, not just fact)**
-Mechanism over memorisation. Include one concrete worked example.
+Mechanism over memorisation. One worked example.
 
 **Step 4 — The 48-Hour Revisit**
-Spaced repetition without flashcards. Why 48 hours.
+Spaced repetition without flashcards.
 
 ---
 
 ## Section 4 — Your Two Daily Systems
-
-Brief framing paragraph.
-
+Brief framing.
 ### System A — Full Study Day
-Note on wake times scaling across the prep window.
-
-**Morning Block — Warm Up and First Performance Window**
-Time-stamped bullets (e.g. "10:00 AM — First UWorld block, 40 questions, timed.").
-
-**Afternoon Block — Reinforcement and Content**
-Same.
-
-**Evening Block — Deep Work and Consolidation**
-Same.
-
+**Morning Block** / **Afternoon Block** / **Evening Block** — time-stamped bullets.
 ### System B — Lighter Day
-Frame why recovery is non-negotiable.
-
-**Option 1: Tutor Recommended (Gradual Morning Shift)**
-Time-stamped bullets.
-
-**Option 2: [Student's current rhythm]**
-Honest acknowledgement of where they are right now, with time-stamped bullets.
+**Option 1: Tutor Recommended** / **Option 2: [Student's current rhythm]** — time-stamped bullets.
 
 ---
 
 ## Section 5 — [N]-Week Roadmap
-
-One framing sentence. Then break the prep into roughly 2-week phases (so a 12-week plan = 6 phases, an 8-week plan = 4 phases). For each phase:
-
+Break into ~2-week phases. For each:
 ### Weeks X and Y — [Phase Name]
 **Wake Time Target:** [time]
-
 One-paragraph intro.
-
-- **System Focus:** ...
-- **UWorld:** ...
-- **Resource Milestone:** ...
-- **NBME:** ...
-- **Habit Goal:** ...
-- **Do not do / Check-in goal:** ...
+- **System Focus / UWorld / Resource Milestone / NBME / Habit Goal / Do not do** bullets.
 
 ---
 
 ## Section 6 — NBME Form Schedule
-
-One framing paragraph. Then a bulleted list of every NBME form with the week it is taken and the target.
-
-Closing line about why review matters more than the score number.
+Framing paragraph + bulleted list of forms with week + target.
 
 ---
 
 ## Section 7 — Your Personalised Resource Protocol
-
-For each resource the student actually has access to, write a labelled subsection:
-
-### [Resource Name] — [Its Role]
-- How to use it (3–5 bullets)
-- Time cap or volume guidance
-- What to avoid
-
-Cover at minimum: their primary question bank, NBME forms, and their two or three preferred content resources. End with the Concept Correction Log as the most underrated tool.
+For each resource they listed:
+### [Resource] — [Its Role]
+- How to use (3–5 bullets) / Time cap / What to avoid
+End with the Concept Correction Log.
 
 ---
 
 ## Section 8 — What Is at Stake for You, [Name]
-
-Direct, honest, paragraph form. No bullets. Hold them to the score they named. Acknowledge what they did right (deleted social media, has a tutor, whatever they shared). Talk about the hard days that are coming. Close with a one-line italic promise about what consistent preparation does.
+Direct, paragraph form. Hold them to their target. Acknowledge what they did right. Talk about the hard days coming. Close with a one-line italic promise.
 
 ---
 
@@ -171,7 +150,7 @@ Direct, honest, paragraph form. No bullets. Hold them to the score they named. A
 **One review.**
 **One concept at a time.**
 
-Two or three closing paragraphs. Reference their specific situation, not generic motivation. End with the line: "Now you have the plan."
+Two or three closing paragraphs referencing their specific situation. End with: "Now you have the plan."
 
 ---
 
@@ -181,65 +160,95 @@ Built for [Name]. [Month Year].
 
 ---
 
-CRITICAL RULES:
-- No code fences. No \`\`\`html or \`\`\`markdown ever.
-- No raw HTML tags except the &nbsp; entity in the header.
-- Use markdown only.
-- If a field is empty, make a reasonable inference, but don't fabricate specifics the student didn't share.
-- The full document should be substantive — aim for roughly 2,500–4,000 words.`;
+RULES:
+- No code fences. No HTML tags except &nbsp;.
+- Markdown only.
+- 2,500–4,000 words total.`;
 
   const userMessage = `Build the blueprint. Here is what the student told us:
 
 Name: ${d.name || 'Student'}
 School type: ${d.schoolType || 'unspecified'}
-Current stage: ${d.stage || 'unspecified'}
+Stage: ${d.stage || 'unspecified'}
 Exam: ${d.exam || 'USMLE Step 1'}
-First attempt or retake: ${d.attempt || 'first attempt'}
-Prep window: ${d.weeks || '8'} weeks (dedicated)
+Attempt: ${d.attempt || 'first attempt'}
+Prep window: ${d.weeks || '8'} weeks
 Target score: ${d.target || 'not specified'}
-Current baseline / recent scores: ${d.baseline || 'not specified'}
+Baseline / recent scores: ${d.baseline || 'not specified'}
 
-How they describe their study style: ${d.studyStyle || 'not specified'}
-Their stated learning modality: ${d.modality || 'not specified'}
-Their schedule reality (wake time, caffeine, gym, hobbies, distractions): ${d.schedule || 'not specified'}
-Resources they have access to: ${Array.isArray(d.resources) ? d.resources.join(', ') : (d.resources || 'standard set')}
+Study style: ${d.studyStyle || 'not specified'}
+Learning modality: ${d.modality || 'not specified'}
+Schedule reality: ${d.schedule || 'not specified'}
+Resources: ${Array.isArray(d.resources) ? d.resources.join(', ') : (d.resources || 'standard set')}
 Weak systems: ${d.weakSystems || 'not specified'}
 Strong systems: ${d.strongSystems || 'not specified'}
 Test-taking confidence: ${d.confidence || 'not specified'}
-What is at stake for them: ${d.stake || 'not specified'}
-Current burnout level: ${d.burnout || 'low'}
+What is at stake: ${d.stake || 'not specified'}
+Burnout level: ${d.burnout || 'low'}
 Tutor: ${d.tutor || 'none assigned'}
-Anything else they shared: ${d.notes || 'none'}
+Notes: ${d.notes || 'none'}
 
-Generate the full 9-section blueprint now. Remember: pure markdown, no code fences, addressed to ${d.name || 'the student'} by name throughout.`;
+Generate the full 9-section blueprint now. Pure markdown. Address ${d.name || 'the student'} by name throughout.`;
 
-  try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 8000,
-        system: systemPrompt,
-        messages: [{ role: 'user', content: userMessage }],
-      }),
+  const upstream = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 8000,
+      stream: true,
+      system: systemPrompt,
+      messages: [{ role: 'user', content: userMessage }],
+    }),
+  });
+
+  if (!upstream.ok || !upstream.body) {
+    const errText = await upstream.text();
+    return new Response(JSON.stringify({ error: 'Upstream error', detail: errText }), {
+      status: 502, headers: { 'content-type': 'application/json' },
     });
-
-    const json = await resp.json();
-    if (!resp.ok) {
-      return res.status(resp.status).json({ error: resp.status, detail: json });
-    }
-
-    let text = (json.content && json.content[0] && json.content[0].text) || '';
-    // Strip any accidental code-fence wrapping just in case
-    text = text.replace(/^```[a-z]*\s*\n?/i, '').replace(/\n?```\s*$/i, '').trim();
-
-    return res.status(200).json({ blueprint: text });
-  } catch (e) {
-    return res.status(500).json({ error: e.message });
   }
+
+  const stream = new ReadableStream({
+    async start(controller) {
+      const reader = upstream.body.getReader();
+      const decoder = new TextDecoder();
+      const encoder = new TextEncoder();
+      let buffer = '';
+      try {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
+          buffer = lines.pop() || '';
+          for (const line of lines) {
+            if (!line.startsWith('data: ')) continue;
+            const data = line.slice(6).trim();
+            if (!data || data === '[DONE]') continue;
+            try {
+              const j = JSON.parse(data);
+              if (j.type === 'content_block_delta' && j.delta && j.delta.text) {
+                controller.enqueue(encoder.encode(j.delta.text));
+              }
+            } catch {}
+          }
+        }
+      } finally {
+        controller.close();
+      }
+    },
+  });
+
+  return new Response(stream, {
+    headers: {
+      'content-type': 'text/plain; charset=utf-8',
+      'cache-control': 'no-cache, no-transform',
+      'x-accel-buffering': 'no',
+    },
+  });
 }
