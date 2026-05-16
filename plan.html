@@ -291,11 +291,29 @@
     return obj;
   }
 
+  const STAGES = [
+    'Reading your profile…',
+    'Mapping your modality…',
+    'Drafting your daily systems…',
+    'Building your week-by-week roadmap…',
+    'Personalising your resources…',
+    'Finalising…',
+  ];
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     btn.disabled = true;
-    statusEl.textContent = 'Generating your blueprint… this takes 30–60 seconds.';
-    docWrap.style.display = 'none';
+    lastMarkdown = '';
+    docEl.innerHTML = '';
+    docWrap.style.display = 'block';
+    statusEl.textContent = STAGES[0];
+    docWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    let stageIdx = 0;
+    const stageTimer = setInterval(() => {
+      stageIdx = Math.min(stageIdx + 1, STAGES.length - 1);
+      if (!lastMarkdown) statusEl.textContent = STAGES[stageIdx];
+    }, 6000);
 
     try {
       const r = await fetch('/api/plan', {
@@ -303,17 +321,34 @@
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(collect()),
       });
-      const j = await r.json();
-      if (!r.ok) throw new Error(j.error ? (j.detail?.error?.message || JSON.stringify(j.detail || j.error)) : 'Generation failed');
 
-      lastMarkdown = j.blueprint || '';
+      if (!r.ok) {
+        let msg = 'Generation failed';
+        try { const j = await r.json(); msg = j.error || msg; } catch {}
+        throw new Error(msg);
+      }
+      if (!r.body) throw new Error('Streaming not supported in this browser');
+
+      const reader = r.body.getReader();
+      const decoder = new TextDecoder();
+      let lastRender = 0;
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        lastMarkdown += decoder.decode(value, { stream: true });
+        const now = Date.now();
+        if (now - lastRender > 120) {
+          docEl.innerHTML = marked.parse(lastMarkdown);
+          statusEl.textContent = 'Writing your blueprint…';
+          lastRender = now;
+        }
+      }
       docEl.innerHTML = marked.parse(lastMarkdown);
-      docWrap.style.display = 'block';
-      statusEl.textContent = '';
-      docWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      statusEl.textContent = 'Done. Use Print to save as PDF.';
     } catch (err) {
       statusEl.textContent = 'Error: ' + err.message;
     } finally {
+      clearInterval(stageTimer);
       btn.disabled = false;
     }
   });
