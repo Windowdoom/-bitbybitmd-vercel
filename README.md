@@ -1,4 +1,4 @@
-# Bit by Bit Pedagogy — Site Bundle (v4 · 65 Bits)
+# Bit by Bit Pedagogy, Site Bundle (v4 · 65 Bits)
 
 ## What's inside
 
@@ -14,7 +14,7 @@ robots.txt                        ← LLM-friendly crawl rules
 styles/b3.css                     ← shared stylesheet
 
 admin/
-  plan.html                       ← ★ PRIVATE — full blueprint generator (token-gated)
+  plan.html                       ← ★ PRIVATE, full blueprint generator (token-gated)
 
 api/
   diagnose.js                     ← public: streaming diagnosis
@@ -35,14 +35,14 @@ Full list at the bottom of `llms.txt` and on `/bits/`.
 
 ## Verification sources
 
-- First Aid for the USMLE Step 1, 2024 (34th ed) — Le, Bhushan et al.
-- Robbins Basic Pathology, 10e — Kumar, Abbas, Aster
-- Guyton & Hall Textbook of Medical Physiology, 14e — Hall
-- Basic Immunology, Functions and Disorders, 6e — Abbas, Lichtman, Pillai
+- First Aid for the USMLE Step 1, 2024 (34th ed), Le, Bhushan et al.
+- Robbins Basic Pathology, 10e, Kumar, Abbas, Aster
+- Guyton & Hall Textbook of Medical Physiology, 14e, Hall
+- Basic Immunology, Functions and Disorders, 6e, Abbas, Lichtman, Pillai
 - Brenner & Stevens Pharmacology
-- Lippincott Illustrated Q&A Review of Pharmacology — Zaslau
+- Lippincott Illustrated Q&A Review of Pharmacology, Zaslau
 
-All content paraphrased — no textbook prose reproduced verbatim. If you spot an error, email and we'll fix it.
+All content paraphrased, no textbook prose reproduced verbatim. If you spot an error, email and we'll fix it.
 
 ## Required Vercel env vars
 
@@ -60,6 +60,4 @@ All content paraphrased — no textbook prose reproduced verbatim. If you spot a
 
 The homepage `index.html` has already been auto-patched with a "Free Resources" section that links to every new page. No manual edits required.
 
-Do NOT link `/admin/plan.html` anywhere. Bookmark it.
-
-— Bit by Bit
+Do NOT link `/admin/plan.html` anywhere. Bookmark it., Bit by Bit

@@ -1,4 +1,4 @@
-// Vercel Edge function — streams a Concept Correction Log entry.
+// Vercel Edge function, streams a Concept Correction Log entry.
 // POST /api/log with JSON { stem, choices, picked, correct, system, ref }.
 // Response is a text stream of markdown.
 
@@ -36,32 +36,32 @@ export default async function handler(req) {
 
   const systemPrompt = `You are an academic coach at Bit by Bit Pedagogy. You write Concept Correction Log entries in our exact Master Pivot format.
 
-OUTPUT MARKDOWN ONLY. No code fences. No HTML tags. Be tight — this is a log, not an essay.
+OUTPUT MARKDOWN ONLY. No code fences. No HTML tags. Be tight, this is a log, not an essay. Never use em dashes or en dashes; use commas, colons, or periods instead.
 
 Use exactly this structure:
 
-## [Topic / system tag] — [one-line diagnosis label]
-**Reference:** [ref or "—"]
-**You picked:** [letter — diagnosis name] &nbsp;·&nbsp; **Correct:** [letter — diagnosis name]
+## [Topic / system tag]: [one-line diagnosis label]
+**Reference:** [ref or "-"]
+**You picked:** [letter: diagnosis name] &nbsp;·&nbsp; **Correct:** [letter: diagnosis name]
 
 ### Pivot Word
 > [The single phrase from the stem that decides the answer, quoted directly.]
 
-One sentence explaining why this phrase is the pivot — what it rules in and what it rules out.
+One sentence explaining why this phrase is the pivot, what it rules in and what it rules out.
 
 ### Why Each Wrong Answer Was Wrong
-- **A. [name]** — [one sentence: the specific reason, not a generic "wrong because it's a different disease".]
-- **B. [name]** — [same]
-- **C. [name]** — [same]
-- **D. [name]** — [same]
-- **E. [name]** — [same]
+- **A. [name]**: [one sentence: the specific reason, not a generic "wrong because it's a different disease".]
+- **B. [name]**: [same]
+- **C. [name]**: [same]
+- **D. [name]**: [same]
+- **E. [name]**: [same]
 (Skip the correct answer here.)
 
 ### Concept Anchor
-One sentence of mechanism. Not the fact restated — the physiological *reason* the fact is true. Specific to the pivot.
+One sentence of mechanism. Not the fact restated, the physiological *reason* the fact is true. Specific to the pivot.
 
 ### Revisit
-**${revisitStr}** — re-attempt without reading this entry first. If the anchor holds, mark done. If not, rewrite the anchor.
+**${revisitStr}**: re-attempt without reading this entry first. If the anchor holds, mark done. If not, rewrite the anchor.
 
 ---
 
@@ -73,7 +73,7 @@ RULES:
 
   const userMessage = `Build the log entry.
 
-QUESTION REFERENCE: ${d.ref || '—'}
+QUESTION REFERENCE: ${d.ref || '-'}
 SYSTEM / TOPIC: ${d.system || '(infer from stem)'}
 
 STEM:

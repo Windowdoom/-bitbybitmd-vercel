@@ -23,6 +23,8 @@ a:hover{text-decoration:underline}
 .site-header nav a:hover{color:var(--ink);text-decoration:none}
 .site-footer{padding:32px 28px;border-top:1px solid var(--line);color:var(--dim);font-size:12px;text-align:center}
 .site-footer a{color:var(--mute)}
+.ig-link{display:inline-flex;align-items:center;vertical-align:middle}
+.ig-link svg{width:16px;height:16px;display:block}
 
 /* LAYOUT */
 .shell{max-width:880px;margin:0 auto;padding:48px 24px 80px}

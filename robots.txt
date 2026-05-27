@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# Explicitly welcome AI crawlers — our content is meant to be cited.
+# Explicitly welcome AI crawlers, our content is meant to be cited.
 User-agent: GPTBot
 Allow: /
 
