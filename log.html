@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Concept Correction Log Generator — Bit by Bit Pedagogy</title>
+<title>Concept Correction Log Generator | Bit by Bit Pedagogy</title>
 <meta name="description" content="Paste a missed NBME question, get a structured Master Pivot log entry: pivot word, why each wrong answer was wrong, mechanism anchor, and 48-hour revisit date." />
 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -31,7 +31,7 @@
 <main class="shell">
   <div class="kicker">Tool · Daily use</div>
   <h1>Concept Correction Log Generator</h1>
-  <p class="lede">Paste the question. Tell us what you picked and what was right. We'll give you back a Master Pivot log entry — pivot word, why each wrong answer was wrong, one-sentence mechanism, revisit date.</p>
+  <p class="lede">Paste the question. Tell us what you picked and what was right. We'll give you back a Master Pivot log entry, pivot word, why each wrong answer was wrong, one-sentence mechanism, revisit date.</p>
 
   <form id="log-form" class="card">
     <label>Question stem</label>
@@ -51,11 +51,11 @@
       </div>
       <div>
         <label>System / topic (optional)</label>
-        <input name="system" placeholder="e.g. Heme — macrocytic anaemia" />
+        <input name="system" placeholder="e.g. Heme, macrocytic anaemia" />
       </div>
     </div>
 
-    <label style="margin-top:14px">Question reference (optional — for your log)</label>
+    <label style="margin-top:14px">Question reference (optional: for your log)</label>
     <input name="ref" placeholder="UWorld QID 12345 / NBME 27 Q41" />
 
     <button type="submit" class="primary" id="submit-btn" style="margin-top:16px">Generate log entry →</button>
@@ -142,7 +142,7 @@ form.addEventListener('submit', async (e) => {
 
 document.getElementById('btn-copy').addEventListener('click', async () => {
   try { await navigator.clipboard.writeText(lastMarkdown); statusEl.textContent = 'Copied to clipboard.'; }
-  catch { statusEl.textContent = 'Copy failed — select the text manually.'; }
+  catch { statusEl.textContent = 'Copy failed, select the text manually.'; }
 });
 document.getElementById('btn-print').addEventListener('click', () => window.print());
 document.getElementById('btn-new').addEventListener('click', () => {
