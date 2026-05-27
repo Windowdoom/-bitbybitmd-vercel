@@ -1120,7 +1120,7 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <li>Error log management</li>
  <li>No minimum commitment</li>
  </ul>
- <button class="pcta" onclick="openCal()">BOOK SESSION</button>
+ <button class="pcta" onclick="window.open('https://buy.stripe.com/7sY6oHdjBa3X4zoaSE2Nq03', '_blank')">BOOK SESSION</button>
  </div>
  <div class="pcard" style="border-color:var(--teal);background:linear-gradient(150deg, var(--bg-card), rgba(0, 229, 160, .03));">
  <span class="ptag gold">Most Popular</span>
@@ -1132,19 +1132,19 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <li>Milestone &amp; score tracking</li>
  <li>Performance &amp; wellness integration</li>
  </ul>
- <button class="pcta primary" onclick="openCal()">GET BLUEPRINT</button>
+ <button class="pcta primary" onclick="window.open('https://buy.stripe.com/6oUaEX1AT3Fz2rg8Kw2Nq02', '_blank')">GET BLUEPRINT</button>
  </div>
  <div class="pcard">
  <span class="ptag purple">Specialized</span>
  <h4>Re-Taker Diagnostic</h4>
  <p>Specialized debrief for failed COMP or Step 1 re-takers. Identify root causes, unlearn passive habits, rebuild the foundation.</p>
- <div class="pamt" style="font-size:24px;">Contact</div>
+ <div class="pamt">$80<span style="font-size:14px;color:var(--text-muted);font-weight:normal;"> flat</span></div>
  <ul class="pfeats">
  <li>Root-cause debrief session</li>
  <li>One-week diagnostic NBME phase</li>
  <li>Master Pivot retraining</li>
  </ul>
- <button class="pcta" onclick="openCal()">BOOK DIAGNOSTIC</button>
+ <button class="pcta" onclick="window.open('https://buy.stripe.com/aFaeVdenF0tn5Ds8Kw2Nq01', '_blank')">BOOK DIAGNOSTIC</button>
  </div>
  </div>
  </div>
@@ -1352,10 +1352,10 @@ function finishIntake(){
  const top = buckets[0][0];
  const RECS = {
  F:{label:"FOUNDATION GAP", tag:"You need reasoning, not more questions.", body:"Your wrong answers come from not seeing the mechanism. The BBB Library gives you the discriminators and the trap-block logic. Start with the NBME Critical Thinking guide, then go subject by subject.", cta:["Get the 14-PDF Bundle", "https://payhip.com/b/pbKvH"]},
- P:{label:"PACING GAP", tag:"You know more than your schedule lets you show.", body:"You are losing points to time management, not knowledge. The System Stabilization Blueprint builds a 12-week calendar around your exam, your hours, and your weak systems.", cta:["Book a Blueprint Call", "cal"]},
+ P:{label:"PACING GAP", tag:"You know more than your schedule lets you show.", body:"You are losing points to time management, not knowledge. The System Stabilization Blueprint builds a 12-week calendar around your exam, your hours, and your weak systems.", cta:["Get the Blueprint", "https://buy.stripe.com/6oUaEX1AT3Fz2rg8Kw2Nq02"]},
  A:{label:"ANXIETY / NERVOUS SYSTEM", tag:"You cannot out-study a fried nervous system.", body:"Working memory collapses under cortisol. Performance and anxiety protocols (sleep timing, pre-block routines, mid-block reset) are part of every coaching plan. Start with a free consult.", cta:["Book a Free Consult", "cal"]},
  D:{label:"ATTENTION / EXECUTIVE FUNCTION", tag:"Your brain works differently. Your plan should too.", body:"Shorter Q-blocks, body doubling, dopamine-aware sequencing. Most prep companies pretend ADHD students do not exist. We build around you.", cta:["Book ADHD-Aware Consult", "cal"]},
- R:{label:"RE-TAKER. RESET.", tag:"You are not starting from zero. You are starting from data.", body:"Failed exams are the cleanest diagnostic you will ever get. The Re-Taker Diagnostic is a structured debrief, unlearning passive review, and Master Pivot retraining for round two.", cta:["Book Re-Taker Diagnostic", "cal"]}
+ R:{label:"RE-TAKER. RESET.", tag:"You are not starting from zero. You are starting from data.", body:"Failed exams are the cleanest diagnostic you will ever get. The Re-Taker Diagnostic is a structured debrief, unlearning passive review, and Master Pivot retraining for round two.", cta:["Book Re-Taker Diagnostic", "https://buy.stripe.com/aFaeVdenF0tn5Ds8Kw2Nq01"]}
  };
  const r = RECS[top];
  const ctaBtn = r.cta[1]==='cal'
