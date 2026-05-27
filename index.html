@@ -13,7 +13,6 @@
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
-<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <style>
 *, *::before, *::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
@@ -344,10 +343,6 @@ nav{
 .sbtn:hover{background:var(--teal);color:var(--bg);}
 .form-ok{display:none;text-align:center;padding:2rem 1rem;background:rgba(46, 213, 115, .05);border:1px solid rgba(46, 213, 115, .2);border-radius:var(--r);color:var(--green);font-family:var(--mono);}
 
-.cal-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
-.cal-head{padding:1.5rem 2rem;border-bottom:1px solid var(--border);background:linear-gradient(135deg, var(--bg-card), rgba(0, 229, 160, .02));}
-.cal-head h4{font-family:var(--mono);font-size:15px;color:var(--text);margin-bottom:4px;}
-.cal-head p{font-size:12.5px;color:var(--text-muted);}
 
 .disclaimer{background:#060C16;border-top:1px solid var(--border);padding:2.5rem 2rem;}
 .disclaimer-inner{max-width:1120px;margin:0 auto;font-size:11px;color:var(--text-dim);line-height:1.95;}
@@ -1023,22 +1018,22 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <p class="sec-sub">We do not just teach the mechanism. We build the system around it. Resource sequencing, cognitive performance, reasoning repair, all tailored to how you actually learn.</p>
  </div>
  <div class="coach-grid">
- <div class="coach-card" style="--ca:#F5A623;" onclick="openCal()">
+ <div class="coach-card" style="--ca:#F5A623;" onclick="window.open('https://buy.stripe.com/6oUaEX1AT3Fz2rg8Kw2Nq02', '_blank')">
  <div class="coach-icon" style="background:rgba(245, 166, 35, .1);">🗺️</div>
  <h4>System Stabilization Blueprint</h4>
  <p>A fully customized 12-week roadmap built around your modality, baseline, and lifestyle.</p>
  </div>
- <div class="coach-card" style="--ca:#00E5A0;" onclick="openCal()">
+ <div class="coach-card" style="--ca:#00E5A0;" onclick="window.location.href='mailto:sifrandcompany@gmail.com?subject=Free%20Consult%20-%20Anxiety'">
  <div class="coach-icon" style="background:rgba(0, 229, 160, .1);">⚖️</div>
  <h4>Performance &amp; Anxiety Protocols</h4>
  <p>Movement, sleep timing, mid-block anxiety techniques you can actually use on test day.</p>
  </div>
- <div class="coach-card" style="--ca:#A855F7;" onclick="openCal()">
+ <div class="coach-card" style="--ca:#A855F7;" onclick="window.location.href='mailto:sifrandcompany@gmail.com?subject=Free%20Consult%20-%20ADHD'">
  <div class="coach-icon" style="background:rgba(168, 85, 247, .1);">🎯</div>
  <h4>ADHD &amp; Neurodivergent Support</h4>
  <p>Specialized workflows. Shorter Q-blocks, body doubling, pacing adjustments. The plan most prep companies refuse to write.</p>
  </div>
- <div class="coach-card" style="--ca:#FF4757;" onclick="openCal()">
+ <div class="coach-card" style="--ca:#FF4757;" onclick="window.open('https://buy.stripe.com/aFaeVdenF0tn5Ds8Kw2Nq01', '_blank')">
  <div class="coach-icon" style="background:rgba(255, 71, 87, .1);">🔄</div>
  <h4>Re-Taker Diagnostics</h4>
  <p>Diagnostic post-mortem, unlearning passive review, deploying Master Pivots for round two.</p>
@@ -1128,19 +1123,15 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  </div>
 </div>
 
-<!-- SCHEDULE -->
+<!-- FREE CONSULT (email) -->
 <div class="sec rev" id="schedule">
  <div class="sec-hdr">
- <div class="sec-tag">BOOK A SESSION</div>
- <h2 class="sec-title">Schedule your free consult.</h2>
- <p class="sec-sub">Pick a time. The first session is always a free intake consult. No pressure, just a baseline check.</p>
+ <div class="sec-tag">FREE CONSULT</div>
+ <h2 class="sec-title">Anxiety or ADHD? Let's talk first.</h2>
+ <p class="sec-sub">If anxiety or ADHD is part of your prep, the first conversation is on me. No booking, no pressure. Email me with where you are and we will set up a short intake call.</p>
  </div>
- <div class="cal-wrap">
- <div class="cal-head">
- <h4>Bit by Bit Pedagogy</h4>
- <p>Free 20-min consult. Online. No commitment.</p>
- </div>
- <div class="calendly-inline-widget" data-url="https://calendly.com/sifrandcompany" style="min-width:320px;height:680px;"></div>
+ <div style="text-align:center;margin-top:1.5rem;">
+ <a href="mailto:sifrandcompany@gmail.com?subject=Free%20Consult%20-%20Anxiety%2FADHD" class="btn-buy-lg" style="display:inline-block;text-decoration:none;">EMAIL FOR A FREE CONSULT →</a>
  </div>
 </div>
 
@@ -1227,12 +1218,10 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
 <!-- Hidden Netlify Forms detection -->
 <form name="contact" netlify hidden><input type="text" name="first"><input type="text" name="last"><input type="email" name="email"><select name="topic"></select><textarea name="message"></textarea></form>
 
-<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 <script>
 /* ========== NAV ========== */
 function toggleNav(){const l=document.getElementById('nlinks');const b=document.getElementById('hamBtn');l.classList.toggle('open');b.textContent=l.classList.contains('open')?'✕':'☰';}
 function closeNav(){const l=document.getElementById('nlinks');const b=document.getElementById('hamBtn');l.classList.remove('open');b.textContent='☰';}
-function openCal(){if(window.Calendly){Calendly.initPopupWidget({url:'https://calendly.com/sifrandcompany'});}else{window.open('https://calendly.com/sifrandcompany', '_blank');}}
 function sendMsg(e){e.preventDefault();const f=document.getElementById('cform');const d=new FormData(f);fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:new URLSearchParams(d).toString()}).catch(()=>{});f.style.display='none';document.getElementById('formOk').style.display='block';}
 
 /* ========== REVEAL ========== */
@@ -1302,13 +1291,13 @@ function finishIntake(){
  const RECS = {
  F:{label:"FOUNDATION GAP", tag:"You need reasoning, not more questions.", body:"Your wrong answers come from not seeing the mechanism. The BBB Library gives you the discriminators and the trap-block logic. Start with the NBME Critical Thinking guide, then go subject by subject.", cta:["Get the 14-PDF Bundle", "https://payhip.com/b/pbKvH"]},
  P:{label:"PACING GAP", tag:"You know more than your schedule lets you show.", body:"You are losing points to time management, not knowledge. The System Stabilization Blueprint builds a 12-week calendar around your exam, your hours, and your weak systems.", cta:["Get the Blueprint", "https://buy.stripe.com/6oUaEX1AT3Fz2rg8Kw2Nq02"]},
- A:{label:"ANXIETY / NERVOUS SYSTEM", tag:"You cannot out-study a fried nervous system.", body:"Working memory collapses under cortisol. Performance and anxiety protocols (sleep timing, pre-block routines, mid-block reset) are part of every coaching plan. Start with a free consult.", cta:["Book a Free Consult", "cal"]},
- D:{label:"ATTENTION / EXECUTIVE FUNCTION", tag:"Your brain works differently. Your plan should too.", body:"Shorter Q-blocks, body doubling, dopamine-aware sequencing. Most prep companies pretend ADHD students do not exist. We build around you.", cta:["Book ADHD-Aware Consult", "cal"]},
+ A:{label:"ANXIETY / NERVOUS SYSTEM", tag:"You cannot out-study a fried nervous system.", body:"Working memory collapses under cortisol. Performance and anxiety protocols (sleep timing, pre-block routines, mid-block reset) are part of every coaching plan. Email me for a free consult.", cta:["Email for a Free Consult", "mailto:sifrandcompany@gmail.com?subject=Free%20Consult%20-%20Anxiety"]},
+ D:{label:"ATTENTION / EXECUTIVE FUNCTION", tag:"Your brain works differently. Your plan should too.", body:"Shorter Q-blocks, body doubling, dopamine-aware sequencing. Most prep companies pretend ADHD students do not exist. We build around you.", cta:["Email for a Free Consult", "mailto:sifrandcompany@gmail.com?subject=Free%20Consult%20-%20ADHD"]},
  R:{label:"RE-TAKER. RESET.", tag:"You are not starting from zero. You are starting from data.", body:"Failed exams are the cleanest diagnostic you will ever get. The Re-Taker Diagnostic is a structured debrief, unlearning passive review, and Master Pivot retraining for round two.", cta:["Book Re-Taker Diagnostic", "https://buy.stripe.com/aFaeVdenF0tn5Ds8Kw2Nq01"]}
  };
  const r = RECS[top];
- const ctaBtn = r.cta[1]==='cal'
- ? `<button class="btn-p" onclick="openCal()">${r.cta[0]} →</button>`
+ const ctaBtn = r.cta[1].startsWith('mailto:')
+ ? `<button class="btn-p" onclick="window.location.href='${r.cta[1]}'">${r.cta[0]} →</button>`
  : `<button class="btn-gold" onclick="window.open('${r.cta[1]}', '_blank')">${r.cta[0]} ↗</button>`;
  document.getElementById('intakeResult').style.display='block';
  document.getElementById('intakeResult').innerHTML = `
