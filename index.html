@@ -211,27 +211,6 @@ nav{
 .intake-rec h4{font-family:var(--mono);font-size:13px;color:var(--teal);margin-bottom:8px;letter-spacing:.5px;}
 .intake-rec p{font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:1rem;}
 
-/* SAMPLER */
-.samp-gate{padding:2.5rem 2rem;max-width:680px;margin:0 auto;text-align:left;}
-.samp-gate h3{font-family:var(--mono);font-size:22px;color:var(--text);margin-bottom:.7rem;}
-.samp-gate h3 em{font-style:normal;color:var(--teal);}
-.samp-gate p{color:var(--text-muted);font-size:14.5px;margin-bottom:1.5rem;}
-.samp-form{background:var(--bg);border:1px solid var(--border-bright);border-radius:var(--r);padding:1.5rem;}
-.samp-form label{display:block;font-family:var(--mono);font-size:11px;color:var(--text-muted);letter-spacing:1px;margin-bottom:6px;text-transform:uppercase;}
-.samp-form input{width:100%;padding:13px 16px;border-radius:var(--r);border:1px solid var(--border);background:var(--bg-mid);color:var(--text);font-size:14px;}
-.samp-form input:focus{outline:none;border-color:var(--teal);}
-.samp-form button{margin-top:1rem;width:100%;background:var(--gold);color:var(--bg);border:none;padding:14px;border-radius:var(--r);font-family:var(--mono);font-size:13px;font-weight:bold;letter-spacing:1px;}
-.samp-quiz{padding:2rem;display:none;}
-.samp-quiz.on{display:block;}
-.samp-results{padding:2.5rem 2rem;text-align:center;display:none;}
-.samp-results.on{display:block;}
-.samp-score{font-family:var(--mono);font-size:56px;font-weight:bold;color:var(--teal);line-height:1;}
-.samp-explain{background:var(--bg);border:1px solid rgba(0, 229, 160, .22);border-radius:var(--r);padding:1.4rem;margin-top:1.2rem;display:none;}
-.samp-explain.on{display:block;}
-.samp-explain h5{font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:1.5px;margin-bottom:6px;}
-.samp-explain h6{font-family:var(--mono);font-size:13px;color:var(--gold);margin-bottom:6px;}
-.samp-explain p{font-size:13.5px;color:var(--text-muted);line-height:1.7;}
-
 /* BIT 160 EXAM */
 .exam-intro{padding:3rem 2rem;text-align:center;}
 .exam-intro h3{font-family:var(--mono);font-size:36px;color:var(--text);margin-bottom:.5rem;}
@@ -518,7 +497,7 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  </div>
  <div>
  <div class="proof-label">Start free</div>
- <p class="proof-quote" style="font-style:normal;">A 60-second diagnostic that tells you where you are actually stuck, plus a free 20-question NBME-style sampler. <a href="#toolkit" onclick="goToolkit('intake')" style="color:var(--teal);">Open the Toolkit →</a></p>
+ <p class="proof-quote" style="font-style:normal;">A 60-second diagnostic that tells you where you are actually stuck, plus the full 150-question NBME-style exam. <a href="#toolkit" onclick="goToolkit('intake')" style="color:var(--teal);">Open the Toolkit →</a></p>
  </div>
  </div>
 </div>
@@ -527,7 +506,7 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <div class="magnet-inner rev">
  <div>
  <h3>The Toolkit is open.</h3>
- <p>Diagnostic intake, free Bit 20 sampler, full Bit 150 exam, and the tidbits database. <b>All free to try. No credit card.</b></p>
+ <p>Diagnostic intake, the full Bit 150 exam, and the tidbits database. <b>All free to try. No credit card.</b></p>
  </div>
  <button class="btn-p" onclick="goToolkit('intake')">OPEN TOOLKIT →</button>
  </div>
@@ -621,11 +600,6 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
    <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">280+ rapid-review pearls. Searchable. The high-yield one-liners you'd write on the back of your hand if NBME allowed it.</p>
   </a>
 
-  <a href="mailto:sifrandcompany@gmail.com?subject=Bit%2020" style="background:var(--bg-card);border:1px solid var(--border);border-top:3px solid var(--teal);border-radius:var(--r);padding:1.5rem;transition:all .25s;text-decoration:none;display:block;" onmouseover="this.style.borderColor='var(--teal)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform=''">
-   <div style="font-family:var(--mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;margin-bottom:8px;">SAMPLER · EMAIL</div>
-   <h4 style="font-family:var(--mono);font-size:15px;color:var(--text);margin-bottom:8px;">Bit 20 Sampler</h4>
-   <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">Twenty NBME-style questions, every explanation Master-Pivot-first. Email sifrandcompany@gmail.com with subject "Bit 20".</p>
-  </a>
 
  </div>
  <div style="margin-top:2rem;padding:1.3rem 1.6rem;background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:var(--r);font-size:14px;color:var(--text-muted);line-height:1.7;">
@@ -930,14 +904,13 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <div class="sec rev">
  <div class="sec-hdr">
  <div class="sec-tag">THE FREE TOOLKIT</div>
- <h2 class="sec-title">Four tools. All free to try.</h2>
- <p class="sec-sub">Find your gap. Take a sampler. Run a full 150-question NBME-style exam. Search 280 rapid pearls.</p>
+ <h2 class="sec-title">Three tools. All free to try.</h2>
+ <p class="sec-sub">Find your gap. Run a full 150-question NBME-style exam. Search 280 rapid pearls.</p>
  </div>
 
  <div class="toolkit">
  <div class="tk-tabs">
  <button class="tk-tab on" data-pane="intake" onclick="setTab('intake')">🎯 FIND MY GAP</button>
- <button class="tk-tab" data-pane="sampler" onclick="setTab('sampler')">🧪 FREE BIT 20</button>
  <button class="tk-tab" data-pane="exam" onclick="setTab('exam')">📝 BIT 150 EXAM</button>
  <button class="tk-tab" data-pane="tidbits" onclick="setTab('tidbits')">⚡ TIDBITS DATABASE</button>
  </div>
@@ -961,40 +934,6 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  </div>
  </div>
 
- <!-- SAMPLER PANE -->
- <div class="tk-pane" id="pane-sampler">
- <div id="sampGate" class="samp-gate">
- <div style="font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:1.5px;margin-bottom:.6rem;">● FREE. INSTANT ACCESS.</div>
- <h3>The <em>Bit 20</em> Sampler.</h3>
- <p>Twenty NBME-style questions. Every explanation leads with the Master Pivot. A taste of the full Bit 150.</p>
- <div class="samp-form">
- <p style="font-size:15px;color:var(--text-muted);line-height:1.7;margin-bottom:1.2rem;">To get the Bit 20 sampler, email <a href="mailto:sifrandcompany@gmail.com?subject=Bit%2020" style="color:var(--teal);font-weight:bold;">sifrandcompany@gmail.com</a> with the subject line <b style="color:var(--text);">"Bit 20"</b> and I'll send it directly.</p>
- <a href="mailto:sifrandcompany@gmail.com?subject=Bit%2020" class="btn-gold" style="display:inline-block;text-decoration:none;">EMAIL FOR THE BIT 20 →</a>
- </div>
- </div>
- <div class="samp-quiz" id="sampQuiz">
- <div class="intake-qcount" id="sampCount"></div>
- <div class="intake-bar"><div class="intake-fill" id="sampFill"></div></div>
- <div class="intake-stem" id="sampStem"></div>
- <div class="intake-choices" id="sampChoices"></div>
- <div class="samp-explain" id="sampExplain">
- <h5>◈ MASTER PIVOT</h5>
- <h6 id="sampPivot"></h6>
- <p id="sampBody"></p>
- <button class="btn-p" style="margin-top:1rem;" onclick="sampNext()">NEXT →</button>
- </div>
- </div>
- <div class="samp-results" id="sampResults">
- <div style="font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:1.5px;margin-bottom:.7rem;">● BIT 20 COMPLETE</div>
- <div class="samp-score" id="sampScoreN">--</div>
- <div style="font-size:13.5px;color:var(--text-muted);margin-bottom:1.5rem;" id="sampScoreL"></div>
- <p style="color:var(--text-muted);max-width:480px;margin:0 auto 1.5rem;font-size:14px;">If a 20-question sampler taught you something new, imagine what 150 questions across 16 systems does.</p>
- <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
- <button class="btn-gold" onclick="window.open('https://payhip.com/b/pbKvH', '_blank')">GET THE BUNDLE ↗</button>
- </div>
- </div>
- </div>
-
  <!-- EXAM PANE -->
  <div class="tk-pane" id="pane-exam">
  <div class="exam-intro" id="examIntro">
@@ -1007,7 +946,6 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <div><div class="em-n">30m</div><div class="em-l">Per Block</div></div>
  </div>
  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:1rem;">
- <button class="btn-o" onclick="setTab('sampler')">TRY THE FREE BIT 20 FIRST</button>
  <button class="btn-p" onclick="startExam()">LAUNCH BLOCK 1 →</button>
  </div>
  </div>
@@ -1162,7 +1100,7 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <details class="faq"><summary>Does this work for COMLEX as well as USMLE?</summary><div class="faq-body">The mechanism-first method maps directly to both. COMLEX Level 1 tests the same physiology and pharmacology. Only OMM is unique, and BBB does not cover that yet.</div></details>
  <details class="faq"><summary>How is this different from First Aid or Pathoma?</summary><div class="faq-body">First Aid is a <b>reference</b>. Pathoma is a <b>lecture series</b>. BBB is a <b>reasoning protocol</b>. We do not compete with them. We teach you how to use them under exam pressure.</div></details>
  <details class="faq"><summary>Why so cheap? What is the catch?</summary><div class="faq-body">No catch. Founding-student pricing for the first 50. The founder is solo, just out of his own gauntlet, and wants the framework in students' hands before the next NBME cycle. Prices rise after slot 50.</div></details>
- <details class="faq"><summary>Can I see the PDFs before buying?</summary><div class="faq-body">Yes. The <a href="#toolkit" onclick="goToolkit('sampler')">free Bit 20 sampler</a> shows you exactly how a BBB explanation reads. If the Master Pivots in those 20 questions teach you something new, the full bundle will too.</div></details>
+ <details class="faq"><summary>Can I see the PDFs before buying?</summary><div class="faq-body">Yes. The <a href="#toolkit" onclick="goToolkit('exam')">free Bit 150 practice exam</a> shows you exactly how a BBB explanation reads. If the Master Pivots in those questions teach you something new, the full bundle will too.</div></details>
  <details class="faq"><summary>I have ADHD or I am neurodivergent. Will this work?</summary><div class="faq-body">Yes, and it is explicitly designed with you in mind. The coaching tier includes neurodivergent-specific workflows. Shorter Q-blocks, body doubling, dopamine-aware pacing. Most prep companies pretend you do not exist. We built around you.</div></details>
  <details class="faq"><summary>What if it does not work for me?</summary><div class="faq-body">Email within 7 days of bundle purchase and you get a full refund. No questions, no forms. The founder would rather have your honest review than your unhappy $50.</div></details>
  </div>
@@ -1374,71 +1312,6 @@ function finishIntake(){
  </div>
  <button class="btn-o" onclick="startIntake()">RETAKE THE DIAGNOSTIC</button>
  </div>`;
-}
-
-/* ========== SAMPLER ========== */
-const SAMPLER = [
- {q:"A 32-year-old with chronic wheezing and reduced FEV1/FVC undergoes PFTs. Which finding distinguishes asthma from COPD?", c:["Bronchodilator reversibility", "Decreased DLCO", "Normal or increased DLCO", "Hyperinflation on CXR"], a:2, p:"DLCO splits asthma from emphysematous COPD.", b:"Both obstruct airflow and wheeze. The discriminator is the alveolar membrane. Intact in asthma so DLCO is normal or increased. Destroyed in emphysema so DLCO drops. Reversibility is supportive but less specific."},
- {q:"Hyponatremia with urine osm 600 and serum osm 260. Diagnosis?", c:["Diabetes insipidus", "SIADH", "Psychogenic polydipsia", "Cerebral salt wasting"], a:1, p:"Concentrated urine plus dilute serum equals SIADH.", b:"ADH is inappropriately high. Urine stays concentrated while serum dilutes. DI is the mirror image."},
- {q:"24-year-old. Skip lesions, transmural inflammation, granulomas on colonoscopy. Diagnosis?", c:["Ulcerative colitis", "Crohn disease", "Microscopic colitis", "C. difficile"], a:1, p:"Transmural plus skip lesions equals Crohn.", b:"UC is continuous, mucosal, rectal. Crohn skips, full thickness, can affect mouth to anus. Granulomas seal the diagnosis."},
- {q:"Ascending paralysis 2 weeks after Campylobacter. CSF: high protein, normal cell count. Diagnosis?", c:["Multiple sclerosis", "Guillain-Barré", "Myasthenia gravis", "Botulism"], a:1, p:"Albuminocytologic dissociation equals GBS.", b:"GBS hits the PNS. MS hits the CNS and shows oligoclonal bands. The CSF pattern with high protein and no cells is classic for GBS."},
- {q:"55-year-old. Chest pain. Troponin 0.8. ST depressions on ECG. Diagnosis?", c:["Stable angina", "Unstable angina", "NSTEMI", "STEMI"], a:2, p:"Troponin separates unstable angina from NSTEMI.", b:"Unstable angina and NSTEMI present identically. Troponin is the splitter. Positive equals NSTEMI. STEMI requires ST elevation."},
- {q:"HTN with low renin and high aldosterone. Diagnosis?", c:["Primary hyperaldosteronism (Conn)", "Renal artery stenosis", "Cushing", "Pheochromocytoma"], a:0, p:"Aldosterone over renin ratio splits primary from secondary.", b:"Conn is autonomous, so renin is suppressed. Renal artery stenosis is secondary so renin is high. Check the ratio."},
- {q:"Neonate. Bilious vomiting day 1. Double bubble sign. Diagnosis?", c:["Pyloric stenosis", "Duodenal atresia", "Malrotation with volvulus", "Necrotizing enterocolitis"], a:1, p:"Bilious vomiting day 1 plus double bubble equals duodenal atresia.", b:"Pyloric stenosis is non-bilious and presents at 3-6 weeks. Duodenal atresia is associated with Down syndrome."},
- {q:"Microcytic anemia. Low serum iron, low TIBC, high ferritin. Diagnosis?", c:["Iron deficiency", "Anemia of chronic disease", "Thalassemia", "Sideroblastic"], a:1, p:"TIBC direction is the pivot.", b:"Iron deficiency: low iron, HIGH TIBC, low ferritin. Chronic disease: low iron, LOW TIBC, high ferritin. Same iron, opposite TIBC."},
- {q:"Fever, stiff neck. LP: low glucose, high protein, neutrophils. Diagnosis?", c:["Viral meningitis", "Bacterial meningitis", "Fungal meningitis", "TB meningitis"], a:1, p:"Glucose plus cell type splits meningitides.", b:"Bacterial: low glucose, neutrophils. Viral: normal glucose, lymphocytes. Fungal and TB: low glucose, lymphocytes."},
- {q:"Hyperthyroidism with diffuse goiter, exophthalmos, increased RAIU throughout. Diagnosis?", c:["Toxic adenoma", "Graves", "Subacute thyroiditis", "Hashimoto"], a:1, p:"RAIU pattern splits hyperthyroid causes.", b:"Graves: diffuse increased uptake. Toxic adenoma: focal hot spot. Thyroiditis: decreased uptake. Exophthalmos is unique to Graves."},
- {q:"6-year-old. Gross hematuria 10 days after sore throat. ASO high. C3 low. Diagnosis?", c:["IgA nephropathy", "Post-streptococcal GN", "Alport", "Minimal change"], a:1, p:"Timing post-infection splits PSGN from IgA.", b:"IgA: hematuria during or 1-2 days after URI. PSGN: 1-3 weeks after, with low C3."},
- {q:"Anti-dsDNA positive and low complement. Diagnosis?", c:["RA", "Sjögren", "SLE", "Scleroderma"], a:2, p:"Anti-dsDNA and anti-Smith are SLE-specific.", b:"ANA is sensitive but not specific. Anti-dsDNA and anti-Smith are highly specific. Anti-dsDNA correlates with lupus nephritis activity."},
- {q:"Patient on long-term lithium. Polyuria. Urine osm stays low after desmopressin. Diagnosis?", c:["Central DI", "Nephrogenic DI", "Primary polydipsia", "Osmotic diuresis"], a:1, p:"Response to desmopressin splits central from nephrogenic DI.", b:"Central DI responds to desmopressin. Nephrogenic does not. Lithium is a classic cause of nephrogenic DI."},
- {q:"Episodic palpitations and headache. Plasma metanephrines elevated. Diagnosis?", c:["Carcinoid", "Pheochromocytoma", "Hyperthyroidism", "Panic disorder"], a:1, p:"Plasma or urine metanephrines screen for pheo.", b:"Pheo gives episodic HTN, headache, palpitations, diaphoresis. Metanephrines are more reliable than catecholamines."},
- {q:"70-year-old man. Back pain, hypercalcemia, renal failure. SPEP shows M-spike. Diagnosis?", c:["MGUS", "Multiple myeloma", "Waldenström", "CLL"], a:1, p:"CRAB criteria distinguish myeloma from MGUS.", b:"Both show an M-spike. Myeloma requires end-organ damage: hyperCalcemia, Renal failure, Anemia, Bone lesions."},
- {q:"Toddler. Bilateral conjunctivitis, strawberry tongue, fever 6 days, cervical lymphadenopathy. Best treatment?", c:["Acetaminophen alone", "Oral antibiotics", "IVIG plus high-dose aspirin", "Antivirals"], a:2, p:"Coronary aneurysm prevention drives treatment in Kawasaki.", b:"One of the few situations where aspirin is given to a child. IVIG within 10 days reduces coronary aneurysm risk."},
- {q:"60-year-old diabetic. Painless monocular vision loss. Cherry-red spot at macula. Diagnosis?", c:["CRVO", "CRAO", "Vitreous hemorrhage", "Retinal detachment"], a:1, p:"Cherry-red spot at macula equals CRAO. Blood and thunder equals CRVO.", b:"CRAO: pale retina from ischemia, fovea preserved due to underlying choroid supply. CRVO: diffuse hemorrhages."},
- {q:"Acute joint pain. Aspiration shows negatively birefringent needle-shaped crystals. Diagnosis?", c:["Gout", "Pseudogout", "Septic arthritis", "RA"], a:0, p:"Crystal shape and birefringence split gout from pseudogout.", b:"Gout: needle, negative birefringence, urate. Pseudogout: rhomboid, positive, CPPD. Memorize the pairs together."},
- {q:"Neonate day 3. Bilious vomiting, bloody stools. Pneumatosis intestinalis on X-ray. Diagnosis?", c:["Hirschsprung", "Necrotizing enterocolitis", "Meconium ileus", "Intussusception"], a:1, p:"Pneumatosis intestinalis equals NEC.", b:"Premature, formula-fed infants at highest risk. Gas in the bowel wall is pathognomonic."},
- {q:"Progressive descending weakness, recent canned food, dilated unreactive pupils. Diagnosis?", c:["Guillain-Barré", "Botulism", "Myasthenia gravis", "Lambert-Eaton"], a:1, p:"Direction of weakness and pupils split botulism from GBS.", b:"GBS: ascending, pupils spared. Botulism: descending, pupils dilated. Food history (home-canned, honey) is the historical clue."}
-];
-let sampIdx=0, sampCorrect=0;
-function sampRender(){
- const q = SAMPLER[sampIdx];
- document.getElementById('sampCount').textContent = `QUESTION ${sampIdx+1} OF ${SAMPLER.length}`;
- document.getElementById('sampFill').style.width = (sampIdx/SAMPLER.length*100)+'%';
- document.getElementById('sampStem').textContent = q.q;
- const wrap = document.getElementById('sampChoices');
- wrap.innerHTML='';
- q.c.forEach((text, i)=>{
- const b=document.createElement('button');
- b.className='intake-choice';
- b.innerHTML = `<span style="font-family:var(--mono);color:var(--teal);margin-right:10px;">${String.fromCharCode(65+i)}.</span>${text}`;
- b.onclick=()=>sampPick(i, b);
- wrap.appendChild(b);
- });
- document.getElementById('sampExplain').classList.remove('on');
-}
-function sampPick(i, btn){
- const q = SAMPLER[sampIdx];
- document.querySelectorAll('#sampChoices .intake-choice').forEach((b, j)=>{
- b.disabled=true;
- if(j===q.a)b.style.borderColor='var(--green)', b.style.background='rgba(46, 213, 115, .06)';
- else if(j===i)b.style.borderColor='var(--red)', b.style.background='rgba(255, 71, 87, .06)';
- });
- if(i===q.a)sampCorrect++;
- document.getElementById('sampPivot').textContent = q.p;
- document.getElementById('sampBody').textContent = q.b;
- document.getElementById('sampExplain').classList.add('on');
-}
-function sampNext(){
- sampIdx++;
- if(sampIdx>=SAMPLER.length){
- document.getElementById('sampQuiz').classList.remove('on');
- document.getElementById('sampResults').classList.add('on');
- const pct = Math.round(sampCorrect/SAMPLER.length*100);
- document.getElementById('sampScoreN').textContent = `${sampCorrect} / ${SAMPLER.length}`;
- document.getElementById('sampScoreL').textContent = `${pct}%. ${pct>=75?'Strong reasoning.':pct>=50?'Pivot work needed.':'Foundation gaps. Start with Critical Thinking.'}`;
- return;
- }
- sampRender();
 }
 
 /* ========== BIT 150 EXAM ========== */
