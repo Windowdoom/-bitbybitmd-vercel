@@ -1189,9 +1189,14 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <button type="submit" class="sbtn">SEND MESSAGE →</button>
  </form>
  <div class="form-ok" id="formOk">
- <div style="font-size:36px;margin-bottom:10px;">✓</div>
- <h4 style="font-size:14px;margin-bottom:6px;">Opening your email app…</h4>
- <p style="font-size:12px;color:var(--text-muted);">If nothing opened, email <a href="mailto:sifrandcompany@gmail.com" style="color:var(--teal);">sifrandcompany@gmail.com</a> directly. Reply within 24 hours.</p>
+ <h4 style="font-size:15px;margin-bottom:6px;">Almost there — pick your email</h4>
+ <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px;">Your message is pre-filled. Choose where to send it from:</p>
+ <div style="display:flex;flex-direction:column;gap:8px;max-width:320px;margin:0 auto;">
+ <a id="mcGmail" target="_blank" rel="noopener" style="background:#EA4335;color:#fff;font-family:var(--mono);font-size:12px;font-weight:bold;padding:11px;border-radius:8px;text-decoration:none;">Gmail</a>
+ <a id="mcOutlook" target="_blank" rel="noopener" style="background:#0F6CBD;color:#fff;font-family:var(--mono);font-size:12px;font-weight:bold;padding:11px;border-radius:8px;text-decoration:none;">Outlook</a>
+ <a id="mcDefault" style="background:transparent;border:1px solid var(--border-bright);color:var(--text-muted);font-family:var(--mono);font-size:12px;font-weight:bold;padding:11px;border-radius:8px;text-decoration:none;">Default mail app</a>
+ <button type="button" onclick="copyEmail()" style="background:transparent;border:1px dashed var(--border-bright);color:var(--text-dim);font-family:var(--mono);font-size:11px;padding:9px;border-radius:8px;cursor:pointer;"><span id="copyLbl">Copy address (sifrandcompany@gmail.com)</span></button>
+ </div>
  </div>
  </div>
  </div>
@@ -1228,7 +1233,9 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
 /* ========== NAV ========== */
 function toggleNav(){const l=document.getElementById('nlinks');const b=document.getElementById('hamBtn');l.classList.toggle('open');b.textContent=l.classList.contains('open')?'✕':'☰';}
 function closeNav(){const l=document.getElementById('nlinks');const b=document.getElementById('hamBtn');l.classList.remove('open');b.textContent='☰';}
-function sendMsg(e){e.preventDefault();const f=document.getElementById('cform');const g=n=>{const el=f.querySelector('[name="'+n+'"]');return el?el.value.trim():'';};const name=(g('first')+' '+g('last')).trim();const topic=g('topic')||'General question';const email=g('email');const msg=g('message');const subject='[BBB] '+topic+(name?' — '+name:'');const body='Name: '+name+'\nEmail: '+email+'\nTopic: '+topic+'\n\n'+msg;window.location.href='mailto:sifrandcompany@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);f.style.display='none';document.getElementById('formOk').style.display='block';}
+const BBB_EMAIL='sifrandcompany@gmail.com';
+function sendMsg(e){e.preventDefault();const f=document.getElementById('cform');const g=n=>{const el=f.querySelector('[name="'+n+'"]');return el?el.value.trim():'';};const name=(g('first')+' '+g('last')).trim();const topic=g('topic')||'General question';const email=g('email');const msg=g('message');const subject='[BBB] '+topic+(name?' — '+name:'');const body='Name: '+name+'\nEmail: '+email+'\nTopic: '+topic+'\n\n'+msg;const eS=encodeURIComponent(subject),eB=encodeURIComponent(body),to=encodeURIComponent(BBB_EMAIL);document.getElementById('mcGmail').href='https://mail.google.com/mail/?view=cm&fs=1&to='+to+'&su='+eS+'&body='+eB;document.getElementById('mcOutlook').href='https://outlook.live.com/mail/0/deeplink/compose?to='+to+'&subject='+eS+'&body='+eB;document.getElementById('mcDefault').href='mailto:'+BBB_EMAIL+'?subject='+eS+'&body='+eB;f.style.display='none';document.getElementById('formOk').style.display='block';document.getElementById('formOk').scrollIntoView({behavior:'smooth',block:'center'});}
+function copyEmail(){const done=()=>{const l=document.getElementById('copyLbl');const t=l.textContent;l.textContent='Copied ✓';setTimeout(()=>l.textContent=t,1800);};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(BBB_EMAIL).then(done).catch(done);}else{done();}}
 
 /* ========== REVEAL ========== */
 const revEls=document.querySelectorAll('.rev');
