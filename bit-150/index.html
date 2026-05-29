@@ -118,6 +118,10 @@ button{font-family:inherit;cursor:pointer;color:inherit;}
 .scorebox{text-align:center;padding:2.5rem 0 1.5rem;}
 .scorebox .pct{font-size:3.2rem;font-weight:bold;color:var(--teal);line-height:1;}
 .scorebox .frac{font-family:var(--mono);color:var(--text-muted);margin-top:.4rem;}
+.epc{margin-top:1.1rem;display:inline-block;background:var(--gold-soft);border:1px solid rgba(245,166,35,.3);border-radius:var(--r);padding:.7rem 1.4rem;}
+.epc-val{font-family:var(--mono);font-size:1.7rem;font-weight:bold;color:var(--gold);line-height:1;}
+.epc-lbl{font-family:var(--mono);font-size:9.5px;color:var(--text-muted);letter-spacing:.4px;margin-top:.3rem;}
+.epc-lbl span{color:var(--text-dim);}
 .scorebox h2{margin-top:1rem;font-size:1.3rem;}
 .rev-item{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);margin-bottom:.8rem;overflow:hidden;}
 .rev-head{display:flex;align-items:center;gap:.7rem;padding:.9rem 1.1rem;cursor:pointer;}
@@ -208,6 +212,10 @@ button{font-family:inherit;cursor:pointer;color:inherit;}
   <div class="scorebox">
    <div class="pct" id="scorePct">0%</div>
    <div class="frac" id="scoreFrac">0 / 0 correct</div>
+   <div class="epc" id="epcBox" style="display:none;">
+    <div class="epc-val" id="epcVal">—</div>
+    <div class="epc-lbl">DIFFICULTY-WEIGHTED SCORE <span>· estimate · not an official NBME / 3-digit score</span></div>
+   </div>
    <h2 id="scoreBlk">Block 1 Review</h2>
   </div>
   <div id="reviewList"></div>
@@ -380,12 +388,25 @@ function endBlock(timeUp){
 /* ---------- review ---------- */
 function showReview(){
  const qs=blockQs();
- let correct=0;
- qs.forEach((_,i)=>{ const a=S.answers[aKey(i)]; if(a&&a.correct) correct++; });
+ let correct=0, wTot=0, wCor=0;
+ qs.forEach((q,i)=>{
+  const a=S.answers[aKey(i)];
+  const d=q.d||3;
+  wTot+=d;
+  if(a&&a.correct){ correct++; wCor+=d; }
+ });
  const pct=Math.round(correct/qs.length*100);
  document.getElementById('scorePct').textContent=pct+'%';
  document.getElementById('scoreFrac').textContent=`${correct} / ${qs.length} correct`;
  document.getElementById('scoreBlk').textContent=`Block ${S.block+1} Review`;
+ const epcBox=document.getElementById('epcBox');
+ if(S.mode==='timed'){
+  const wPct = wTot ? Math.round(wCor/wTot*100) : 0;
+  document.getElementById('epcVal').textContent=wPct+'%';
+  epcBox.style.display='inline-block';
+ } else {
+  epcBox.style.display='none';
+ }
 
  const list=document.getElementById('reviewList');
  list.innerHTML='';
