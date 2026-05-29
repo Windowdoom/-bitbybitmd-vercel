@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Pivot Sheet — Bit by Bit Pedagogy</title>
+<meta name="description" content="A printable, one-page systematic breakdown of a missed question: the concept, how your mind veered, the single fault in your understanding, and the pivot you'll never miss again.">
+<style>
+:root{--navy:#0D1B2E;--teal:#0E9E78;--tealbr:#00B488;--gold:#B9771A;--ink:#1A2B3C;--muted:#51647A;--line:#E2E8F0;--soft:#F4FAF8;--mono:'Courier New',monospace;--sans:-apple-system,'Segoe UI',system-ui,sans-serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+body{background:#0a1422;font-family:var(--sans);color:var(--ink);line-height:1.5;padding:1.4rem;}
+.bar{max-width:760px;margin:0 auto 1rem;display:flex;gap:10px;align-items:center;}
+.bar a.home{font-family:var(--mono);font-size:12px;color:#8AAFC0;margin-right:auto;text-decoration:none;}
+.bar a.home:hover{color:#00E5A0;}
+.bar button{background:var(--tealbr);color:#fff;border:none;font-family:var(--mono);font-size:12px;font-weight:bold;padding:10px 18px;border-radius:8px;letter-spacing:.4px;cursor:pointer;}
+.bar button.alt{background:transparent;border:1px solid #2A5570;color:#8AAFC0;}
+.sheet{max-width:760px;margin:0 auto;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.4);}
+.sheet .top{background:var(--navy);color:#E8F4F0;padding:18px 26px;display:flex;justify-content:space-between;align-items:center;}
+.sheet .top .ttl{font-family:var(--mono);font-size:20px;font-weight:bold;letter-spacing:.5px;}
+.sheet .top .ttl b{color:#00E5A0;}
+.sheet .top .sub{font-family:var(--mono);font-size:10px;color:#8AAFC0;letter-spacing:1px;}
+.sheet .top .logo{font-family:var(--mono);font-size:11px;color:#8AAFC0;letter-spacing:1px;}
+.sheet .top .logo b{color:#F5A623;}
+.body{padding:22px 26px 28px;}
+.grid{display:grid;gap:14px;margin-bottom:16px;}
+.g3{grid-template-columns:2fr 1.4fr 1fr;}
+.g2{grid-template-columns:1fr 1fr;}
+@media(max-width:620px){.g3,.g2{grid-template-columns:1fr;}}
+.field label{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.8px;color:var(--gold);text-transform:uppercase;margin-bottom:4px;}
+.field input{width:100%;border:none;border-bottom:1.5px solid var(--line);font-family:var(--sans);font-size:14px;color:var(--ink);padding:4px 2px;background:transparent;}
+.field input:focus{outline:none;border-color:var(--tealbr);}
+.field input::placeholder{color:#B6C2CF;}
+.counter{display:flex;align-items:center;gap:8px;}
+.counter button{width:26px;height:26px;border:1px solid var(--line);background:#fff;border-radius:6px;font-size:15px;color:var(--muted);line-height:1;cursor:pointer;}
+.counter .n{font-family:var(--mono);font-size:18px;font-weight:bold;color:var(--ink);min-width:22px;text-align:center;}
+.section{border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-bottom:14px;}
+.section.veer{border-left:3px solid var(--tealbr);background:var(--soft);}
+.section.fault{border-left:3px solid #C0392B;}
+.section.pivot{border-left:3px solid var(--gold);background:#FBF6EC;}
+.section h3{font-family:var(--mono);font-size:11px;letter-spacing:.6px;text-transform:uppercase;margin-bottom:8px;}
+.section.veer h3{color:var(--tealbr);}
+.section.fault h3{color:#C0392B;}
+.section.pivot h3{color:var(--gold);}
+.section .hint{font-size:11.5px;color:var(--muted);margin-bottom:8px;font-style:italic;}
+.veer-opts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0 4px;}
+@media(max-width:620px){.veer-opts{grid-template-columns:1fr;}}
+.opt{display:flex;gap:8px;align-items:flex-start;border:1px solid var(--line);border-radius:7px;padding:8px 10px;cursor:pointer;font-size:12.5px;color:var(--ink);}
+.opt.sel{border-color:var(--tealbr);background:#E9F8F2;}
+.opt .box{width:15px;height:15px;border:1.5px solid var(--muted);border-radius:4px;flex-shrink:0;margin-top:1px;}
+.opt.sel .box{background:var(--tealbr);border-color:var(--tealbr);}
+.opt b{display:block;font-size:12.5px;}
+.opt span{color:var(--muted);font-size:11px;}
+.bigtext{width:100%;border:1px dashed var(--line);border-radius:6px;padding:8px 10px;font-family:var(--sans);font-size:14px;color:var(--ink);min-height:54px;resize:vertical;background:#fff;}
+.bigtext:focus{outline:none;border-color:var(--tealbr);}
+.bigtext::placeholder{color:#B6C2CF;}
+.foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:12px;margin-top:4px;font-family:var(--mono);font-size:10px;color:var(--muted);}
+.revisit{font-family:var(--mono);font-size:12px;color:var(--ink);}
+.revisit b{color:var(--tealbr);}
+@media print{body{background:#fff;padding:0;}.bar{display:none;}.sheet{box-shadow:none;max-width:100%;border-radius:0;}@page{margin:0.5in;}}
+</style>
+</head>
+<body>
+<div class="bar">
+ <a class="home" href="/">← Bit by Bit</a>
+ <button onclick="window.print()">🖨  PRINT / SAVE AS PDF</button>
+ <button class="alt" onclick="location.reload()">↻ Blank sheet</button>
+</div>
+
+<div class="sheet">
+ <div class="top">
+  <div><div class="ttl">The <b>Pivot</b> Sheet</div><div class="sub">SYSTEMATIC BREAKDOWN OF ONE INCORRECT</div></div>
+  <div class="logo">B<b>3</b> · BIT BY <b>BIT</b></div>
+ </div>
+ <div class="body">
+  <div class="grid g3">
+   <div class="field"><label>Concept I missed</label><input placeholder="e.g. Macrocytic anemia — B12 vs folate"></div>
+   <div class="field"><label>Subject / system</label><input placeholder="e.g. Heme — anemias"></div>
+   <div class="field"><label>Date</label><input id="today"></div>
+  </div>
+  <div class="grid g3">
+   <div class="field"><label>Question reference</label><input placeholder="UWorld QID / NBME form + Q#"></div>
+   <div class="field"><label>Times I've SEEN this concept</label><div class="counter"><button onclick="bump('seen',-1)">–</button><span class="n" id="seen">0</span><button onclick="bump('seen',1)">+</button></div></div>
+   <div class="field"><label>Times I've MISSED it</label><div class="counter"><button onclick="bump('miss',-1)">–</button><span class="n" id="miss">0</span><button onclick="bump('miss',1)">+</button></div></div>
+  </div>
+  <div class="grid g2">
+   <div class="field"><label>What I picked</label><input placeholder="e.g. C — folate deficiency"></div>
+   <div class="field"><label>Correct answer</label><input placeholder="e.g. B — B12 deficiency"></div>
+  </div>
+
+  <div class="section veer">
+   <h3>① Where my mind veered</h3>
+   <div class="hint">When you read the stem, which way did your reasoning go — and why? This tells you whether you're fragmented in your FACTS or your UNDERSTANDING.</div>
+   <textarea class="bigtext" placeholder="When I saw ___, my mind jumped to ___ because ___. The clue I skipped was ___."></textarea>
+   <div class="veer-opts">
+    <div class="opt" data-k="content"><div class="box"></div><div><b>Content gap</b><span>I never truly learned this</span></div></div>
+    <div class="opt" data-k="disc"><div class="box"></div><div><b>Missed the discriminator</b><span>Knew the facts, didn't spot the pivot</span></div></div>
+    <div class="opt" data-k="trap"><div class="box"></div><div><b>Fell for the distractor</b><span>Tempting wrong answer pulled me</span></div></div>
+    <div class="opt" data-k="process"><div class="box"></div><div><b>Misread / process</b><span>Rushed, careless, time</span></div></div>
+    <div class="opt" data-k="anxiety"><div class="box"></div><div><b>Knew it, second-guessed</b><span>Talked myself out of it</span></div></div>
+    <div class="opt" data-k="recall"><div class="box"></div><div><b>Blanked</b><span>Couldn't retrieve under pressure</span></div></div>
+   </div>
+  </div>
+
+  <div class="section fault">
+   <h3>② The ONE fault</h3>
+   <div class="hint">Reduce it to a single sentence — the one error in your understanding.</div>
+   <textarea class="bigtext" placeholder="The single thing I got wrong about how this works is ___"></textarea>
+  </div>
+
+  <div class="section pivot">
+   <h3>③ The pivot — never again</h3>
+   <div class="hint">The single discriminator + the mechanism that locks it. This is what you carry into the next question.</div>
+   <textarea class="bigtext" placeholder="PIVOT: ___ = ___ (not ___). WHY (mechanism): ___. Lab/clue lock: ___."></textarea>
+  </div>
+
+  <div class="foot">
+   <div class="revisit">Revisit: <b id="r48">—</b> (48h) · then <b id="r7">—</b> (1 wk)</div>
+   <div>bitbybitpedagogy.com · The Pivot Sheet</div>
+  </div>
+ </div>
+</div>
+
+<script>
+function bump(id,d){const el=document.getElementById(id);el.textContent=Math.max(0,parseInt(el.textContent)+d);}
+document.querySelectorAll('.opt').forEach(o=>o.onclick=()=>o.classList.toggle('sel'));
+const fmt=d=>d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+const iso=d=>d.toISOString().slice(0,10);
+const now=new Date();
+document.getElementById('today').value=iso(now);
+document.getElementById('r48').textContent=fmt(new Date(now.getTime()+2*864e5));
+document.getElementById('r7').textContent=fmt(new Date(now.getTime()+7*864e5));
+</script>
+</body>
+</html>
