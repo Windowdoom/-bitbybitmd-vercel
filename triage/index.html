@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Triage — Bit by Bit Pedagogy</title>
+<meta name="description" content="Struggling right now? Start where it hurts. Bit by Bit's study triage routes your specific symptom — stuck in the 40s, running out of time, forgetting everything — to the exact Master Pivot or system fix you need.">
+<style>
+:root{
+ --bg:#0D1B2E; --bg-card:#0A1520; --bg-mid:#0F2030;
+ --border:#1E3A50; --border-bright:#2A5570;
+ --teal:#00E5A0; --teal-dim:#1A8A6A; --teal-soft:rgba(0, 229, 160, .08);
+ --gold:#F5A623; --gold-soft:rgba(245, 166, 35, .08);
+ --red:#FF4757; --green:#2ED573; --blue:#4D9FFF; --purple:#A855F7;
+ --text:#E8F4F0; --text-muted:#8AAFC0; --text-dim:#3A5570;
+ --mono:'Courier New', Courier, monospace;
+ --sans:-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+ --r:8px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;color:inherit;}
+.wrap{max-width:1040px;margin:0 auto;padding:0 1.2rem;}
+
+.brand{display:flex;align-items:center;justify-content:space-between;padding:12px 1.2rem;border-bottom:1px solid var(--border);background:var(--bg-mid);}
+.brand .logo{font-family:var(--mono);font-weight:bold;letter-spacing:.5px;font-size:14px;}
+.brand .logo b{color:var(--gold);}
+.brand a.back{font-family:var(--mono);font-size:11px;color:var(--text-muted);border:1px solid var(--border-bright);padding:6px 12px;border-radius:var(--r);}
+.brand a.back:hover{color:var(--teal);border-color:var(--teal);}
+
+.hero{text-align:center;padding:3rem 0 1rem;}
+.ptag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:1px;padding:3px 10px;border-radius:99px;background:var(--teal-soft);color:var(--teal);border:1px solid rgba(0,229,160,.2);margin-bottom:1rem;}
+.hero h1{font-size:2.3rem;line-height:1.12;margin-bottom:.6rem;}
+.hero h1 .tc{color:var(--teal);}
+.hero p{color:var(--text-muted);max-width:580px;margin:0 auto;font-size:15px;}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:2.2rem 0 3rem;}
+@media(max-width:760px){.grid{grid-template-columns:1fr;}.hero h1{font-size:1.8rem;}}
+.tile{position:relative;text-align:left;background:var(--bg-card);border:1px solid var(--border);border-left:4px solid var(--ac,var(--teal));border-radius:var(--r);padding:1.3rem 1.4rem;transition:transform .14s, border-color .14s;}
+.tile:hover{transform:translateY(-2px);border-color:var(--border-bright);border-left-color:var(--ac,var(--teal));}
+.tile .symptom{font-size:1.15rem;font-weight:bold;color:var(--text);margin-bottom:.5rem;line-height:1.3;}
+.tile .symptom::before{content:'\201C';color:var(--ac,var(--teal));}
+.tile .symptom::after{content:'\201D';color:var(--ac,var(--teal));}
+.tile .label{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.6px;color:var(--ac,var(--teal));text-transform:uppercase;margin-bottom:.5rem;}
+.tile .obj{font-size:13px;color:var(--text-muted);line-height:1.6;}
+.tile .cta{margin-top:.9rem;font-family:var(--mono);font-size:11px;color:var(--ac,var(--teal));font-weight:bold;letter-spacing:.4px;}
+
+/* modal */
+.overlay{display:none;position:fixed;inset:0;background:rgba(5,10,18,.78);z-index:50;align-items:center;justify-content:center;padding:1.2rem;}
+.overlay.on{display:flex;}
+.modal{background:var(--bg-mid);border:1px solid var(--border-bright);border-top:4px solid var(--ac,var(--teal));border-radius:var(--r);max-width:560px;width:100%;max-height:88vh;overflow:auto;padding:1.6rem 1.6rem 1.8rem;}
+.modal .mlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.7px;color:var(--ac,var(--teal));text-transform:uppercase;margin-bottom:.4rem;}
+.modal h2{font-size:1.4rem;line-height:1.25;margin-bottom:.7rem;}
+.modal .mobj{color:var(--text-muted);font-size:14px;line-height:1.7;margin-bottom:1.2rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border);}
+.msec-h{font-family:var(--mono);font-size:11px;letter-spacing:.6px;color:var(--gold);margin-bottom:.6rem;text-transform:uppercase;}
+.fixlist{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.3rem;}
+.fix{display:flex;align-items:center;gap:.7rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:.8rem 1rem;font-size:13.5px;color:var(--text);transition:border-color .14s;}
+.fix:hover{border-color:var(--teal);}
+.fix .arr{margin-left:auto;color:var(--teal);font-family:var(--mono);font-size:13px;}
+.deepdive{display:inline-block;background:var(--gold);color:#fff;font-family:var(--mono);font-size:12px;font-weight:bold;letter-spacing:.5px;padding:11px 22px;border-radius:var(--r);}
+.deepdive:hover{filter:brightness(1.08);}
+.mclose{float:right;background:transparent;border:1px solid var(--border-bright);color:var(--text-muted);width:32px;height:32px;border-radius:50%;font-size:16px;line-height:1;}
+.mclose:hover{color:var(--red);border-color:var(--red);}
+.footnote{text-align:center;color:var(--text-dim);font-size:12px;margin-bottom:3rem;}
+.footnote a{color:var(--text-muted);text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<div class="brand">
+ <a href="/" class="logo">B<span style="color:var(--gold);font-size:.7em;">3</span> BIT BY <b>BIT</b></a>
+ <a href="/" class="back">← Home</a>
+</div>
+
+<div class="wrap">
+ <div class="hero">
+  <span class="ptag">STUDY TRIAGE</span>
+  <h1>Struggling right now? <span class="tc">Start where it hurts.</span></h1>
+  <p>Don't browse a library when you're panicking. Pick the symptom that sounds like your week, and we'll route you straight to the Master Pivot or system fix that addresses it.</p>
+ </div>
+
+ <div class="grid" id="grid"></div>
+
+ <p class="footnote">Not sure which one? Start with the <a href="/plan.html">Find My Gap</a> diagnostic, or <a href="/#coaching">book a coaching session</a>.</p>
+</div>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+ <div class="modal" id="modal" style="--ac:var(--teal);">
+  <button class="mclose" onclick="closeModal()">&times;</button>
+  <div class="mlabel" id="mLabel"></div>
+  <h2 id="mTitle"></h2>
+  <div class="mobj" id="mObj"></div>
+  <div class="msec-h">⚡ Quick Fix — start here</div>
+  <div class="fixlist" id="mFixes"></div>
+  <div class="msec-h">↗ Deep Dive</div>
+  <a class="deepdive" id="mDeep" href="#">Go deeper</a>
+ </div>
+</div>
+
+<script>
+const TRIAGE = [
+ { ac:'var(--red)',
+   symptom:"I'm stuck in the 40s/50s",
+   label:"The Reconstruction Zone",
+   obj:"First we figure out whether your problem is foundational (missing content) or tactical (you know it but fall for distractors) — because the fix for each is completely different.",
+   fixes:[
+     {t:"Find My Gap — 10-question diagnostic", h:"/plan.html"},
+     {t:"C / G / W Triage — sort every miss", h:"/method/cgw-triage.html"}
+   ],
+   deep:{t:"Book a diagnostic coaching session →", h:"/#coaching"} },
+
+ { ac:'var(--teal)',
+   symptom:"I run out of time on blocks",
+   label:"Pacing & Pivot Training",
+   obj:"Most timing problems are decision problems. Learn the Master Pivot so you stop re-reading distractors and commit faster with less second-guessing.",
+   fixes:[
+     {t:"The 4-Step Master Pivot", h:"/method/master-pivot.html"},
+     {t:"The Differentiator Hunt", h:"/method/pivot-word.html"},
+     {t:"Drill it in Bit 150 — Timed mode", h:"/bit-150/"}
+   ],
+   deep:{t:"Get the 14-PDF bundle →", h:"https://payhip.com/b/pbKvH"} },
+
+ { ac:'var(--gold)',
+   symptom:"I know the theory but miss the question",
+   label:"Trap-Detection Lab",
+   obj:"Deconstruct how NBME item-writers build a question so you can spot the trap before you pick — the gap between knowing the content and getting the point.",
+   fixes:[
+     {t:"10 NBME Trap Patterns", h:"/nbme-traps.html"},
+     {t:"The Differentiator Hunt", h:"/method/pivot-word.html"},
+     {t:"Bit 150 — Tutor mode (distractor autopsies)", h:"/bit-150/"}
+   ],
+   deep:{t:"Get the 14-PDF bundle →", h:"https://payhip.com/b/pbKvH"} },
+
+ { ac:'var(--blue)',
+   symptom:"I forget everything I study",
+   label:"Retention & Recall Optimization",
+   obj:"Swap passive re-reading for active-recall workflows and timed revisits so what you learn actually sticks past the next block.",
+   fixes:[
+     {t:"The 48-Hour Revisit", h:"/method/48-hour-revisit.html"},
+     {t:"The Concept Anchor", h:"/method/concept-anchor.html"},
+     {t:"Concept Correction Log generator", h:"/log.html"}
+   ],
+   deep:{t:"Book a coaching session →", h:"/#coaching"} },
+
+ { ac:'var(--purple)',
+   symptom:"I'm overwhelmed by the volume",
+   label:"System Stabilization Blueprint",
+   obj:"Shrink the impossible-looking curriculum into bite-sized, non-negotiable daily goals you can actually finish.",
+   fixes:[
+     {t:"The Phased Roadmap", h:"/method/phased-roadmap.html"},
+     {t:"Two Daily Systems", h:"/method/two-daily-systems.html"}
+   ],
+   deep:{t:"Book a coaching session →", h:"/#coaching"} },
+
+ { ac:'var(--green)',
+   symptom:"I'm burned out / can't start",
+   label:"Dopamine-Aware Workflow",
+   obj:"Stop brute-forcing it. Shift to energy-based, manageable daily cycles that get you moving again without the crash.",
+   fixes:[
+     {t:"The 50-Day Habit Reset", h:"/habit-reset.html"},
+     {t:"Two Daily Systems", h:"/method/two-daily-systems.html"}
+   ],
+   deep:{t:"Email for a free consult →", h:"mailto:sifrandcompany@gmail.com?subject=Free%20Consult%20-%20Burnout%2FMotivation"} },
+
+ { ac:'var(--teal)',
+   symptom:"I keep changing my resources",
+   label:"The Core-Stack Protocol",
+   obj:"End the resource-hopping. Narrow down to your essential stack so you stop the decision paralysis that's eating your study time.",
+   fixes:[
+     {t:"One Thing at a Time", h:"/method/one-thing-at-a-time.html"}
+   ],
+   deep:{t:"Book a coaching session →", h:"/#coaching"} },
+
+ { ac:'var(--gold)',
+   symptom:"I'm panicked about the test date",
+   label:"Timeline Triage",
+   obj:"Backward-map from your exam date to build a realistic, non-negotiable schedule — so the calendar stops being the thing you're afraid of.",
+   fixes:[
+     {t:"The Phased Roadmap", h:"/method/phased-roadmap.html"}
+   ],
+   deep:{t:"Email a schedule consult (include your date) →", h:"mailto:sifrandcompany@gmail.com?subject=Timeline%20Triage%20-%20Exam%20Date"} }
+];
+
+const grid = document.getElementById('grid');
+TRIAGE.forEach((t,i)=>{
+ const b=document.createElement('button');
+ b.className='tile';
+ b.style.setProperty('--ac', t.ac);
+ b.innerHTML = `
+   <div class="label">${t.label}</div>
+   <div class="symptom">${t.symptom}</div>
+   <div class="obj">${t.obj}</div>
+   <div class="cta">I have this → see the fix</div>`;
+ b.onclick=()=>openModal(i);
+ grid.appendChild(b);
+});
+
+function openModal(i){
+ const t=TRIAGE[i];
+ const m=document.getElementById('modal');
+ m.style.setProperty('--ac', t.ac);
+ document.getElementById('mLabel').textContent=t.label;
+ document.getElementById('mTitle').textContent=t.symptom;
+ document.getElementById('mObj').textContent=t.obj;
+ const fl=document.getElementById('mFixes');
+ fl.innerHTML='';
+ t.fixes.forEach(f=>{
+  const a=document.createElement('a');
+  a.className='fix'; a.href=f.h;
+  if(/^https?:|^mailto:/.test(f.h)){ a.target='_blank'; a.rel='noopener'; }
+  a.innerHTML=`<span>${f.t}</span><span class="arr">→</span>`;
+  fl.appendChild(a);
+ });
+ const d=document.getElementById('mDeep');
+ d.textContent=t.deep.t; d.href=t.deep.h;
+ if(/^https?:|^mailto:/.test(t.deep.h)){ d.target='_blank'; d.rel='noopener'; } else { d.removeAttribute('target'); }
+ document.getElementById('overlay').classList.add('on');
+ document.body.style.overflow='hidden';
+}
+function closeModal(){
+ document.getElementById('overlay').classList.remove('on');
+ document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+
+function openFromHash(){
+ const m=(location.hash||'').match(/^#t(\d+)$/);
+ if(m){ const i=+m[1]; if(i>=0 && i<TRIAGE.length) openModal(i); }
+}
+openFromHash();
+window.addEventListener('hashchange',openFromHash);
+</script>
+</body>
+</html>
