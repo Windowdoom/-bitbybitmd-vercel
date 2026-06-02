@@ -35,6 +35,28 @@
 .cnav-foot{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;border-top:1px solid var(--border);padding-top:1.6rem;flex-wrap:wrap;}
 .markbtn{background:var(--teal);color:var(--bg);border:none;padding:11px 20px;border-radius:var(--r);font-family:var(--mono);font-size:11px;font-weight:bold;letter-spacing:.6px;}
 .markbtn.is-done{background:transparent;color:var(--green);border:1px solid var(--green);}
+/* practice */
+.passage{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.6rem 1.8rem;margin:1rem 0 2.2rem;}
+.passage p{font-size:14.5px;color:var(--text);line-height:1.85;margin-bottom:1rem;}
+.passage p:last-child{margin-bottom:0;}
+.pmark{font-family:var(--mono);font-size:11px;color:var(--teal);margin-right:4px;}
+.qcard{border:1px solid var(--border);border-radius:var(--r);padding:1.4rem 1.5rem;margin-bottom:1.2rem;background:var(--bg-card);}
+.qmeta{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--text-dim);margin-bottom:8px;text-transform:uppercase;}
+.qstem{font-size:14.5px;color:var(--text);font-weight:600;line-height:1.6;margin-bottom:1rem;}
+.qchoices{display:flex;flex-direction:column;gap:8px;}
+.qchoice{display:flex;gap:11px;align-items:flex-start;padding:11px 13px;border:1px solid var(--border);border-radius:7px;cursor:pointer;transition:border-color .15s,background .15s;}
+.qchoice:hover{border-color:var(--border-bright);}
+.qchoice input{margin-top:3px;accent-color:var(--teal);flex-shrink:0;}
+.qletter{font-family:var(--mono);font-size:12px;font-weight:bold;color:var(--text-muted);flex-shrink:0;width:16px;}
+.qletter.sm{color:var(--text-dim);}
+.qtext{font-size:13.5px;color:var(--text-muted);line-height:1.55;}
+.qchoice.is-correct{border-color:var(--green);background:rgba(46,213,115,.08);}
+.qchoice.is-correct .qtext,.qchoice.is-correct .qletter{color:var(--green);}
+.qchoice.is-wrong{border-color:var(--red);background:rgba(255,71,87,.07);}
+.qchoice.is-wrong .qtext,.qchoice.is-wrong .qletter{color:var(--red);}
+.qexp{display:none;margin-top:1rem;border-top:1px solid var(--border);padding-top:1rem;}
+.exprow{display:flex;gap:10px;align-items:flex-start;margin-bottom:9px;}
+.exprow div{font-size:12.5px;color:var(--text-muted);line-height:1.55;}
 .cmob-bar{display:none;}
 @media(max-width:900px){
  .course{grid-template-columns:1fr;}
@@ -78,6 +100,8 @@
   </div>
   <h4>THE REASONING ENGINE · CARS</h4>
   <div id="cnav"></div>
+  <h4>PRACTICE PASSAGES</h4>
+  <div id="pnav"></div>
   <h4>RESOURCES</h4>
   <div class="cnav-item" onclick="window.open('/cfactor/Bit_by_Bit_MD_C-Factor_Book8_CARS_The_Reasoning_Engine.pdf','_blank')"><span class="cn">PDF</span><span>Download the full book</span></div>
   <div class="cnav-item" onclick="location.href='/cfactor/#books'"><span class="cn">$65</span><span>The science set on Payhip</span></div>
@@ -99,6 +123,7 @@
 <div class="disclaimer">Bit by Bit Pedagogy is an independent educational platform. The C-Factor Series is a pre-med and MCAT review resource built on mechanism-first pedagogy. Not affiliated with, endorsed by, or connected to the AAMC, NBME, USMLE, or any exam body. Materials are for educational use only and do not guarantee score outcomes. © 2026 Bit by Bit Pedagogy.</div>
 
 <script defer src="/cfactor/cars/cars-course.js"></script>
+<script defer src="/cfactor/cars/cars-practice.js"></script>
 <script>
 document.querySelectorAll('.n-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nlinks').classList.remove('open')));
 var esc=function(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');};
@@ -132,7 +157,16 @@ function buildNav(){
  document.getElementById('cnav').innerHTML=C.map(function(c){
   return '<div class="cnav-item'+(done[c.n]?' done':'')+'" id="nav-'+c.n+'" onclick="go('+c.n+')"><span class="cn">'+chapLabel(c.n)+'</span><span>'+esc(c.title.length>52?c.title.slice(0,50)+'…':c.title)+'</span><span class="ck">✓</span></div>';
  }).join('');
+ buildPnav();
  updateProg();
+}
+function buildPnav(){
+ var P=window.CARS_PRACTICE||[];
+ var el=document.getElementById('pnav');
+ if(!P.length){el.innerHTML='<div class="cnav-item" style="cursor:default;color:var(--text-dim)"><span class="cn">—</span><span>Coming soon</span></div>';return;}
+ el.innerHTML=P.map(function(p,i){
+  return '<div class="cnav-item" id="pnavi-'+p.id+'" onclick="location.hash=\'practice-'+p.id+'\'"><span class="cn">P'+(i+1)+'</span><span>'+esc(p.title)+'</span></div>';
+ }).join('');
 }
 function updateProg(){
  var C=window.CARS_COURSE, done=getDone();
@@ -172,15 +206,71 @@ function toggleDone(n){
  var b=document.getElementById('markBtn'); if(b){var on=!!d[n]; b.classList.toggle('is-done',on); b.textContent=on?'✓ COMPLETED':'MARK COMPLETE';}
  updateProg();
 }
+function renderPractice(id){
+ var P=window.CARS_PRACTICE||[]; var p=null;
+ for(var i=0;i<P.length;i++){if(P[i].id===id)p=P[i];}
+ if(!p){render(0);return;}
+ document.querySelectorAll('.cnav-item').forEach(function(e){e.classList.remove('active');});
+ var nv=document.getElementById('pnavi-'+id); if(nv)nv.classList.add('active');
+ document.getElementById('cmob-title').textContent='Practice · '+p.title;
+ var h='';
+ h+='<div class="crumb"><a href="/cfactor/">C-Factor</a> <span>/</span> <a href="/cfactor/cars/">CARS Course</a> <span>/</span> Practice</div>';
+ h+='<div class="cmeta">Practice passage · '+esc(p.genre)+'</div>';
+ h+='<h1 class="ph-title">'+esc(p.title)+'</h1>';
+ h+='<p class="note" style="margin-bottom:1.4rem">'+esc(p.origin)+' · Run the four-move method first, then answer. The passage is the only authority.</p>';
+ h+='<div class="passage">'+p.paras.map(function(par,ix){return '<p><span class="pmark">['+(ix+1)+']</span> '+esc(par)+'</p>';}).join('')+'</div>';
+ h+='<div id="qwrap">';
+ p.questions.forEach(function(q,qi){
+  h+='<div class="qcard" id="q-'+qi+'"><div class="qmeta">Question '+(qi+1)+' · '+esc(q.skill)+' · '+esc(q.type)+'</div>';
+  h+='<div class="qstem">'+esc(q.stem)+'</div><div class="qchoices">';
+  q.choices.forEach(function(c,ci){
+   h+='<label class="qchoice" id="c-'+qi+'-'+ci+'"><input type="radio" name="q'+qi+'" value="'+ci+'" onchange="pick('+qi+','+ci+')"><span class="qletter">'+String.fromCharCode(65+ci)+'</span><span class="qtext">'+esc(c)+'</span></label>';
+  });
+  h+='</div><div class="qexp" id="exp-'+qi+'"></div></div>';
+ });
+ h+='</div>';
+ h+='<div class="cnav-foot"><button class="markbtn" id="checkBtn" onclick="checkPractice(\''+p.id+'\')">CHECK ANSWERS</button><span id="scoreBox" class="note"></span><a class="btn-o" href="#ch4">Review question types ›</a></div>';
+ var m=document.getElementById('cmain'); m.innerHTML=h; window.scrollTo(0,0);
+ document.getElementById('cside').classList.remove('open');
+ window._picks={};
+}
+function pick(qi,ci){window._picks=window._picks||{};window._picks[qi]=ci;}
+function checkPractice(id){
+ var P=window.CARS_PRACTICE||[]; var p=null;
+ for(var i=0;i<P.length;i++){if(P[i].id===id)p=P[i];}
+ if(!p)return; var picks=window._picks||{}; var correct=0;
+ p.questions.forEach(function(q,qi){
+  var chosen=picks.hasOwnProperty(qi)?picks[qi]:-1;
+  for(var ci=0;ci<q.choices.length;ci++){
+   var el=document.getElementById('c-'+qi+'-'+ci);
+   el.classList.remove('is-correct','is-wrong');
+   if(ci===q.answer) el.classList.add('is-correct');
+   else if(ci===chosen) el.classList.add('is-wrong');
+  }
+  if(chosen===q.answer) correct++;
+  var exp=document.getElementById('exp-'+qi);
+  var rows=q.choices.map(function(c,ci){
+   var tag=ci===q.answer?'<b style="color:var(--green)">✓ Correct</b>':'<b style="color:var(--red)">✗</b>';
+   return '<div class="exprow"><span class="qletter sm">'+String.fromCharCode(65+ci)+'</span><div>'+tag+' — '+esc(q.why[ci])+'</div></div>';
+  }).join('');
+  exp.innerHTML=rows; exp.style.display='block';
+ });
+ var pct=Math.round(correct/p.questions.length*100);
+ document.getElementById('scoreBox').innerHTML='Score: <b style="color:var(--teal)">'+correct+'/'+p.questions.length+'</b> ('+pct+'%)';
+ try{var d=JSON.parse(localStorage.getItem('cars_practice_v1'))||{};d[id]=pct;localStorage.setItem('cars_practice_v1',JSON.stringify(d));}catch(e){}
+ document.getElementById('q-0').scrollIntoView({behavior:'smooth',block:'start'});
+}
 function route(){
+ if(!window.CARS_COURSE) return;
+ var hp=(location.hash||'').match(/practice-([\w-]+)/);
+ if(hp){renderPractice(hp[1]);return;}
  var m=(location.hash||'').match(/ch(\d+)/);
  var n=m?parseInt(m[1]):0;
- if(!window.CARS_COURSE) return;
  if(n<0||n>=window.CARS_COURSE.length)n=0;
  render(n);
 }
 function init(){
- if(!window.CARS_COURSE){setTimeout(init,40);return;}
+ if(!window.CARS_COURSE||!window.CARS_PRACTICE){setTimeout(init,40);return;}
  buildNav(); route();
 }
 window.addEventListener('hashchange',route);
