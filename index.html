@@ -418,7 +418,13 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  </svg>
  B<sup style="color:var(--gold);font-size:.7em;">3</sup>&nbsp;BIT BY BIT<span class="gold">&nbsp;PEDAGOGY</span>
  </div>
- <div class="n-links" id="nlinks">
+ <div class="nav-right">
+ <a href="https://www.instagram.com/bitbybitmd/" target="_blank" rel="noopener" class="n-ig" aria-label="Bit by Bit on Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+ <button class="n-ham" id="hamBtn" onclick="toggleNav()">☰</button>
+ </div>
+</nav>
+<div class="nav-backdrop" id="navBackdrop" onclick="closeNav()"></div>
+<div class="n-links" id="nlinks">
  <div class="drawer-head"><span class="dh-t">MENU</span><button class="drawer-x" onclick="closeNav()" aria-label="Close menu">✕</button></div>
  <a href="#method" onclick="closeNav()">METHOD</a>
  <a href="#free" onclick="closeNav()">FREE TOOLS</a>
@@ -428,13 +434,7 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <a href="#coaching" onclick="closeNav()">COACHING</a>
  <a href="#about" onclick="closeNav()">ABOUT</a>
  <div class="drawer-foot"><a class="df-ig" href="https://www.instagram.com/bitbybitmd/" target="_blank" rel="noopener">↗ @bitbybitmd on Instagram</a></div>
- </div>
- <div class="nav-right">
- <a href="https://www.instagram.com/bitbybitmd/" target="_blank" rel="noopener" class="n-ig" aria-label="Bit by Bit on Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
- <button class="n-ham" id="hamBtn" onclick="toggleNav()">☰</button>
- </div>
-</nav>
-<div class="nav-backdrop" id="navBackdrop" onclick="closeNav()"></div>
+</div>
 
 <div class="ticker">
  <span class="ticker-badge">NEW</span>
