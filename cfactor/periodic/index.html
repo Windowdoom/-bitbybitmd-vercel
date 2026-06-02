@@ -115,7 +115,7 @@ function bohr(Z,size,col){var f=fill(Z),sh=f.shells,c=size/2,maxR=size/2-14,s=['
  s.push('</svg>');return s.join('');}
 function bySym(sym){for(var i=0;i<PT.length;i++)if(PT[i].s===sym)return PT[i];}
 // build grid
-(function(){var g=document.getElementById('pt');var h='';
+function buildGrid(){var g=document.getElementById('pt');var h='';
  PT.forEach(function(el){var c=COL[el.c];
   h+='<button class="cell" style="--cc:'+c+';grid-column:'+el.col+';grid-row:'+el.row+'" data-sym="'+el.s+'" data-col="'+el.col+'" data-row="'+el.row+'"><span class="z">'+el.n+'</span><span class="sym">'+el.s+'</span><span class="nm">'+el.e+'</span></button>';});
  g.innerHTML=h;
@@ -128,7 +128,7 @@ function bySym(sym){for(var i=0;i<PT.length;i++)if(PT[i].s===sym)return PT[i];}
  // legend
  var seen={},lg='';PT.forEach(function(el){if(!seen[el.c]){seen[el.c]=1;lg+='<span style="--cc:'+COL[el.c]+'"><i></i>'+CATNAME[el.c]+'</span>';}});
  document.getElementById('legend').innerHTML=lg;
-})();
+}
 function showPanel(sym){var el=bySym(sym);if(!el)return;var d=(window.PT_DEEP||{})[sym]||{};var c=COL[el.c];var f=fill(el.n);
  document.getElementById('panel').innerHTML=
   '<div class="ptile" style="--cc:'+c+'"><span class="s" style="color:'+c+'">'+el.s+'</span><span class="z">'+el.n+'</span></div>'+
@@ -161,7 +161,8 @@ function openDeep(sym){var el=bySym(sym);if(!el)return;var c=COL[el.c];var d=(wi
 }
 function ddClose(){document.getElementById('dd').classList.remove('open');document.body.style.overflow='';if(location.hash.indexOf('#el-')===0)history.replaceState(null,'',location.pathname);}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')ddClose();});
-window.addEventListener('DOMContentLoaded',function(){var m=(location.hash||'').match(/#el-([A-Za-z]+)/);if(m&&bySym(m[1]))setTimeout(function(){openDeep(m[1]);},60);});
+function ptInit(){if(!window.PT){setTimeout(ptInit,40);return;}buildGrid();var m=(location.hash||'').match(/#el-([A-Za-z]+)/);if(m&&bySym(m[1]))setTimeout(function(){openDeep(m[1]);},60);}
+document.addEventListener('DOMContentLoaded',ptInit);ptInit();
 </script>
 </body>
 </html>
