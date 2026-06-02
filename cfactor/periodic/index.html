@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Living Periodic Table — every element, across all of STEM | The C-Factor Series</title>
+<meta name="description" content="An interactive periodic table: hover to see each element's story and watch its group and period light up; click for a deep dive into its role in medicine, chemistry, physics, engineering, and nature.">
+<script defer src="/_vercel/insights/script.js"></script>
+<link rel="stylesheet" href="/cfactor/cfactor.css">
+<style>
+.pt-head{max-width:1280px;margin:0 auto;padding:2.4rem 1.6rem .6rem;}
+.pt-wrap{max-width:1320px;margin:0 auto;padding:0 1rem 4rem;display:grid;grid-template-columns:1fr 320px;gap:1.4rem;align-items:start;}
+.pt-scroll{overflow-x:auto;padding-bottom:10px;}
+.pt{display:grid;grid-template-columns:repeat(18,minmax(40px,1fr));grid-auto-rows:1fr;gap:4px;min-width:760px;}
+.pt::before{content:"";grid-column:1/19;grid-row:8;height:10px;}
+.cell{position:relative;aspect-ratio:1/1;border:1px solid var(--cc);background:color-mix(in srgb,var(--cc) 14%,var(--bg));border-radius:5px;cursor:pointer;display:flex;flex-direction:column;justify-content:center;align-items:center;transition:transform .12s,box-shadow .12s,background .12s,opacity .12s;color:var(--text);overflow:hidden;}
+.cell .z{position:absolute;top:2px;left:4px;font-family:var(--mono);font-size:8px;color:var(--text-dim);}
+.cell .sym{font-family:var(--mono);font-weight:bold;font-size:15px;line-height:1;}
+.cell .nm{font-size:6.5px;color:var(--text-muted);margin-top:2px;text-align:center;line-height:1;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.cell:hover{transform:translateY(-3px) scale(1.08);z-index:5;box-shadow:0 8px 22px rgba(0,0,0,.5);background:color-mix(in srgb,var(--cc) 32%,var(--bg));}
+.cell.hl{background:color-mix(in srgb,var(--cc) 26%,var(--bg));border-color:var(--cc);}
+.pt.hovering .cell:not(.hl):not(:hover){opacity:.32;}
+/* panel */
+.panel{position:sticky;top:80px;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.4rem;min-height:420px;}
+.panel .ptile{width:88px;height:88px;border-radius:10px;display:flex;flex-direction:column;justify-content:center;align-items:center;border:2px solid var(--cc);background:color-mix(in srgb,var(--cc) 18%,var(--bg));margin-bottom:1rem;}
+.panel .ptile .s{font-family:var(--mono);font-weight:bold;font-size:34px;}
+.panel .ptile .z{font-family:var(--mono);font-size:11px;color:var(--text-muted);}
+.panel h3{font-family:var(--mono);font-size:20px;margin-bottom:2px;}
+.panel .cat{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-bottom:1rem;}
+.panel .rowf{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;padding:5px 0;border-bottom:1px solid var(--border);}
+.panel .rowf span{color:var(--text-dim);}.panel .rowf b{color:var(--text);font-weight:500;text-align:right;}
+.panel .bohr{display:block;margin:1rem auto .4rem;}
+.panel .cta{margin-top:1rem;width:100%;text-align:center;display:block;}
+.panel .ph{color:var(--text-dim);font-size:13px;line-height:1.6;}
+/* legend */
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;max-width:1280px;margin:0 auto;padding:.4rem 1.6rem 1.4rem;}
+.legend span{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10.5px;color:var(--text-muted);}
+.legend i{width:11px;height:11px;border-radius:3px;background:var(--cc);border:1px solid var(--cc);}
+/* deep dive */
+.dd{position:fixed;inset:0;z-index:300;background:rgba(5,12,22,.75);backdrop-filter:blur(4px);overflow-y:auto;display:none;}
+.dd.open{display:block;}
+.dd-inner{max-width:880px;margin:5vh auto;background:var(--bg);border:1px solid var(--border-bright);border-radius:16px;overflow:hidden;}
+.dd-hero{position:relative;padding:2.2rem 2.4rem;background:radial-gradient(120% 140% at 100% 0,color-mix(in srgb,var(--cc) 22%,transparent),transparent 60%);border-bottom:1px solid var(--border);display:flex;gap:1.8rem;align-items:center;flex-wrap:wrap;}
+.dd-tile{width:120px;height:120px;border-radius:14px;border:2px solid var(--cc);background:color-mix(in srgb,var(--cc) 16%,var(--bg));display:flex;flex-direction:column;justify-content:center;align-items:center;flex-shrink:0;}
+.dd-tile .s{font-family:var(--mono);font-weight:bold;font-size:52px;line-height:1;}
+.dd-tile .z{font-family:var(--mono);font-size:13px;color:var(--text-muted);}
+.dd-h h2{font-family:var(--mono);font-size:32px;margin-bottom:4px;}
+.dd-h .cat{font-family:var(--mono);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;}
+.dd-h .meta{font-family:var(--mono);font-size:12px;color:var(--text-muted);margin-top:8px;line-height:1.7;}
+.dd-x{position:absolute;top:14px;right:18px;background:none;border:none;color:var(--text-muted);font-size:28px;cursor:pointer;}
+.dd-x:hover{color:var(--teal);}
+.dd-body{padding:1.8rem 2.4rem 2.4rem;}
+.dd-atom{display:block;margin:0 auto 1.4rem;}
+.dd-sec{margin-bottom:1.5rem;}
+.dd-sec h4{font-family:var(--mono);font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-bottom:7px;display:flex;align-items:center;gap:8px;}
+.dd-sec p{font-size:14.5px;color:var(--text-muted);line-height:1.8;}
+.dd-sec .ic{font-size:15px;}
+@media(max-width:1080px){.pt-wrap{grid-template-columns:1fr;}.panel{position:relative;top:0;}}
+</style>
+</head>
+<body>
+<nav>
+ <a href="/cfactor/" class="n-logo"><svg width="26" height="30" viewBox="0 0 30 36" style="image-rendering:pixelated"><rect x="2" y="6" width="26" height="12" fill="#00E5A0"/><rect x="6" y="7" width="8" height="7" fill="#0D1B2E"/><rect x="16" y="7" width="8" height="7" fill="#0D1B2E"/><rect x="8" y="9" width="4" height="4" fill="#F5A623"/><rect x="18" y="9" width="4" height="4" fill="#F5A623"/><rect x="3" y="23" width="24" height="12" fill="#00E5A0"/></svg> B<sup style="color:var(--gold);font-size:.7em;">3</sup>&nbsp;BIT BY BIT<span class="gold">&nbsp;PEDAGOGY</span></a>
+ <div class="n-links" id="nlinks">
+  <a href="/cfactor/">C-FACTOR HOME</a>
+  <a href="/cfactor/cars/" style="color:var(--teal)">CARS (FREE)</a>
+  <a href="/cfactor/final-review/">FREE BOOK 7</a>
+  <a href="/cfactor/#anki">FREE ANKI</a>
+ </div>
+ <div class="nav-right">
+  <button class="n-buy" onclick="window.open('https://payhip.com/b/dAnUk','_blank')">GET THE SET · $65 ↗</button>
+  <button class="n-ham" id="hamBtn" onclick="document.getElementById('nlinks').classList.toggle('open')">☰</button>
+ </div>
+</nav>
+
+<div class="pt-head">
+ <span class="badge badge-free">★ FREE · INTERACTIVE</span>
+ <h1 class="ph-title">The <em>living</em> periodic table</h1>
+ <p class="ph-sub"><b>Hover</b> an element to see its story — and watch its group and period light up so you start <i>seeing the pattern</i>. <b>Click</b> any element for a deep dive into its role across medicine, chemistry, physics, engineering, and nature.</p>
+</div>
+
+<div class="pt-wrap">
+ <div class="pt-scroll"><div class="pt" id="pt"></div></div>
+ <aside class="panel" id="panel"><p class="ph">Hover any element to begin. Click for the full deep dive.</p></aside>
+</div>
+<div class="legend" id="legend"></div>
+
+<div class="dd" id="dd" onclick="if(event.target===this)ddClose()"><div class="dd-inner" id="ddInner"></div></div>
+
+<footer>
+ <div class="f-logo">B<sup style="color:var(--gold);">3</sup> Bit by Bit Pedagogy · The C-Factor Series</div>
+ <div class="f-links"><a href="/cfactor/">C-Factor Home</a><a href="/cfactor/cars/">Free CARS Course</a><a href="https://payhip.com/b/dAnUk" target="_blank" rel="noopener">Get the Set ($65)</a><a href="https://www.instagram.com/bitbybitmd/" target="_blank" rel="noopener">Instagram</a></div>
+</footer>
+<div class="disclaimer">Bit by Bit Pedagogy is an independent educational platform. Not affiliated with the AAMC, NBME, or USMLE. Educational use only. © 2026 Bit by Bit Pedagogy.</div>
+
+<script defer src="/cfactor/periodic/elements.js"></script>
+<script defer src="/cfactor/periodic/elements-deep.js"></script>
+<script>
+document.querySelectorAll('.n-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nlinks').classList.remove('open')));
+var COL={alkali:"#FF7A6B",alkaline:"#F5A623",transition:"#4D9FFF",postt:"#7FA8BD",metalloid:"#2ED573",nonmetal:"#00E5A0",halogen:"#00C2D1",noble:"#A855F7",lan:"#C77DFF",act:"#FF8FB0",unknown:"#6F8CA0"};
+var CATNAME={alkali:"Alkali metal",alkaline:"Alkaline earth metal",transition:"Transition metal",postt:"Post-transition metal",metalloid:"Metalloid",nonmetal:"Reactive nonmetal",halogen:"Halogen",noble:"Noble gas",lan:"Lanthanide",act:"Actinide",unknown:"Unknown / predicted"};
+var CATBLURB={alkali:"Soft, highly reactive metals with a single valence electron they readily give up.",alkaline:"Reactive metals with two valence electrons; important in structure and signaling.",transition:"d-block metals with variable oxidation states, color, and catalytic power.",postt:"Softer metals to the right of the transition block, often low-melting.",metalloid:"In-between elements with properties of both metals and nonmetals — the semiconductors.",nonmetal:"Electron-hungry elements that build the molecules of life and air.",halogen:"Highly reactive nonmetals one electron short of a full shell.",noble:"Full-shell gases that almost never react.",lan:"The rare-earth f-block; near-identical chemistry, used in magnets and phosphors.",act:"Radioactive f-block metals, including the nuclear fuels.",unknown:"Synthetic superheavy elements; properties largely predicted, not measured."};
+var esc=function(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');};
+var SUP={"0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+function sup(n){return (''+n).split('').map(function(d){return SUP[d];}).join('');}
+// electron shells + config via Madelung fill
+var ORDER=[[1,0],[2,0],[2,1],[3,0],[3,1],[4,0],[3,2],[4,1],[5,0],[4,2],[5,1],[6,0],[4,3],[5,2],[6,1],[7,0],[5,3],[6,2],[7,1]];
+var LNAME=["s","p","d","f"],CAP=[2,6,10,14];
+function fill(Z){var left=Z,shells={},cfg=[];for(var i=0;i<ORDER.length&&left>0;i++){var n=ORDER[i][0],l=ORDER[i][1],e=Math.min(CAP[l],left);left-=e;shells[n]=(shells[n]||0)+e;cfg.push(n+LNAME[l]+sup(e));}var arr=[];for(var n=1;n<=7;n++)if(shells[n])arr.push(shells[n]);return {shells:arr,cfg:cfg.join(' ')};}
+function bohr(Z,size,col){var f=fill(Z),sh=f.shells,c=size/2,maxR=size/2-14,s=['<svg class="bohr" width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'">'];
+ s.push('<circle cx="'+c+'" cy="'+c+'" r="'+(size*0.13)+'" fill="'+col+'" fill-opacity=".9"/>');
+ s.push('<text x="'+c+'" y="'+(c+4)+'" text-anchor="middle" font-family="monospace" font-size="'+(size*0.12)+'" font-weight="bold" fill="#0D1B2E">'+Z+'</text>');
+ for(var i=0;i<sh.length;i++){var r=size*0.20+(i+1)/sh.length*maxR;s.push('<circle cx="'+c+'" cy="'+c+'" r="'+r.toFixed(1)+'" fill="none" stroke="'+col+'" stroke-opacity=".35"/>');
+  var n=sh[i];for(var k=0;k<n;k++){var a=(-90+k*360/n)*Math.PI/180;s.push('<circle cx="'+(c+r*Math.cos(a)).toFixed(1)+'" cy="'+(c+r*Math.sin(a)).toFixed(1)+'" r="3" fill="'+col+'"/>');}}
+ s.push('</svg>');return s.join('');}
+function bySym(sym){for(var i=0;i<PT.length;i++)if(PT[i].s===sym)return PT[i];}
+// build grid
+(function(){var g=document.getElementById('pt');var h='';
+ PT.forEach(function(el){var c=COL[el.c];
+  h+='<button class="cell" style="--cc:'+c+';grid-column:'+el.col+';grid-row:'+el.row+'" data-sym="'+el.s+'" data-col="'+el.col+'" data-row="'+el.row+'"><span class="z">'+el.n+'</span><span class="sym">'+el.s+'</span><span class="nm">'+el.e+'</span></button>';});
+ g.innerHTML=h;
+ var cells=g.querySelectorAll('.cell');
+ cells.forEach(function(cell){
+  cell.addEventListener('mouseenter',function(){g.classList.add('hovering');var col=cell.dataset.col,row=cell.dataset.row;cells.forEach(function(o){o.classList.toggle('hl',o.dataset.col===col||o.dataset.row===row);});showPanel(cell.dataset.sym);});
+  cell.addEventListener('click',function(){openDeep(cell.dataset.sym);});
+ });
+ g.addEventListener('mouseleave',function(){g.classList.remove('hovering');cells.forEach(function(o){o.classList.remove('hl');});});
+ // legend
+ var seen={},lg='';PT.forEach(function(el){if(!seen[el.c]){seen[el.c]=1;lg+='<span style="--cc:'+COL[el.c]+'"><i></i>'+CATNAME[el.c]+'</span>';}});
+ document.getElementById('legend').innerHTML=lg;
+})();
+function showPanel(sym){var el=bySym(sym);if(!el)return;var d=(window.PT_DEEP||{})[sym]||{};var c=COL[el.c];var f=fill(el.n);
+ document.getElementById('panel').innerHTML=
+  '<div class="ptile" style="--cc:'+c+'"><span class="s" style="color:'+c+'">'+el.s+'</span><span class="z">'+el.n+'</span></div>'+
+  '<h3>'+esc(el.e)+'</h3><div class="cat" style="color:'+c+'">'+CATNAME[el.c]+'</div>'+
+  bohr(el.n,150,c)+
+  '<div class="rowf"><span>Atomic mass</span><b>'+el.m+'</b></div>'+
+  '<div class="rowf"><span>Shells</span><b>'+f.shells.join(', ')+'</b></div>'+
+  '<div class="rowf"><span>Discovered</span><b>'+esc(el.d)+'</b></div>'+
+  '<div class="rowf"><span>Name origin</span><b style="font-weight:400;color:var(--text-muted)">'+esc(el.o)+'</b></div>'+
+  (d.nat?'<div class="rowf"><span>In nature</span><b style="font-weight:400;color:var(--text-muted)">'+esc(d.nat)+'</b></div>':'')+
+  (d.use?'<div class="rowf"><span>Key uses</span><b style="font-weight:400;color:var(--text-muted)">'+esc(d.use)+'</b></div>':'')+
+  '<a class="btn-p cta" href="#el-'+el.s+'" onclick="openDeep(\''+el.s+'\');return false;">OPEN DEEP DIVE →</a>';
+}
+function openDeep(sym){var el=bySym(sym);if(!el)return;var c=COL[el.c];var d=(window.PT_DEEP||{})[sym];var f=fill(el.n);
+ var secs=d?[['🩺','In the body & clinic',d.bio],['⚗️','In chemistry & physics',d.sci],['⚙️','In engineering & technology',d.eng],['✦','In nature & the cosmos',d.cos]]:[];
+ var ov=d?d.ov:CATBLURB[el.c];
+ var body='<div class="dd-hero" style="--cc:'+c+'"><button class="dd-x" onclick="ddClose()">✕</button>'+
+  '<div class="dd-tile" style="--cc:'+c+'"><span class="s" style="color:'+c+'">'+el.s+'</span><span class="z">'+el.n+'</span></div>'+
+  '<div class="dd-h"><h2>'+esc(el.e)+'</h2><div class="cat" style="color:'+c+'">'+CATNAME[el.c]+'</div>'+
+  '<div class="meta">Atomic mass '+el.m+'  ·  '+f.shells.join(', ')+' electrons per shell<br>'+esc(el.d)+'  ·  '+esc(el.o)+'</div></div></div>'+
+  '<div class="dd-body">'+bohr(el.n,220,c).replace('class="bohr"','class="bohr dd-atom"')+
+  '<div class="dd-sec"><h4><span class="ic">◆</span> Configuration</h4><p style="font-family:var(--mono)">'+f.cfg+'</p></div>'+
+  '<div class="dd-sec"><h4 style="color:'+c+'"><span class="ic">★</span> Overview</h4><p>'+esc(ov)+'</p></div>';
+ secs.forEach(function(s){body+='<div class="dd-sec"><h4 style="color:'+c+'"><span class="ic">'+s[0]+'</span> '+s[1]+'</h4><p>'+esc(s[2])+'</p></div>';});
+ if(!d)body+='<div class="dd-sec"><p class="ph" style="color:var(--text-dim)">A full cross-disciplinary deep dive for '+esc(el.e)+' is being written. The atom, configuration, and core data above are live now.</p></div>';
+ body+='<a class="btn-o" href="/cfactor/#books" style="margin-top:.5rem">Go deeper with the C-Factor books →</a></div>';
+ document.getElementById('ddInner').innerHTML=body;
+ document.getElementById('dd').classList.add('open');document.body.style.overflow='hidden';
+ if(location.hash!=='#el-'+sym)history.replaceState(null,'','#el-'+sym);
+}
+function ddClose(){document.getElementById('dd').classList.remove('open');document.body.style.overflow='';if(location.hash.indexOf('#el-')===0)history.replaceState(null,'',location.pathname);}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')ddClose();});
+window.addEventListener('DOMContentLoaded',function(){var m=(location.hash||'').match(/#el-([A-Za-z]+)/);if(m&&bySym(m[1]))setTimeout(function(){openDeep(m[1]);},60);});
+</script>
+</body>
+</html>
