@@ -29,9 +29,18 @@ export default async function handler(req) {
   }
 
   // Admin-only - full blueprint generation is gated behind a shared token.
-  const adminToken = process.env.PLAN_ADMIN_TOKEN;
-  const provided = req.headers.get('x-admin-token') || '';
-  if (!adminToken || provided !== adminToken) {
+  // Trim both sides so a stray space/newline in the Vercel env var or the
+  // pasted token doesn't cause a confusing mismatch.
+  const adminToken = (process.env.PLAN_ADMIN_TOKEN || '').trim();
+  const provided = (req.headers.get('x-admin-token') || '').trim();
+  if (!adminToken) {
+    // The server itself has no token configured - this is a setup problem,
+    // not a wrong password. Say so plainly so it's obvious where to fix it.
+    return new Response(JSON.stringify({
+      error: 'Server is missing PLAN_ADMIN_TOKEN. Set it in Vercel > Project > Settings > Environment Variables for this environment, then redeploy.',
+    }), { status: 503, headers: { 'content-type': 'application/json' } });
+  }
+  if (provided !== adminToken) {
     return new Response(JSON.stringify({
       error: 'Unauthorised. The full blueprint generator is for Bit by Bit coaches only. Take the public diagnostic at /plan.html instead.',
     }), { status: 401, headers: { 'content-type': 'application/json' } });
