@@ -55,20 +55,38 @@ nav{
 }
 .n-logo{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;font-weight:bold;color:var(--text);letter-spacing:.5px;}
 .n-logo .gold{color:var(--gold);}
-.n-links{display:flex;gap:1.7rem;align-items:center;}
-.n-links a{font-family:var(--mono);font-size:11.5px;color:var(--text-muted);letter-spacing:.7px;transition:color .2s;}
-.n-links a:hover, .n-links a.active{color:var(--teal);}
+.n-links{position:fixed;top:0;right:0;height:100%;width:308px;max-width:85vw;background:var(--bg-card);border-left:1px solid var(--border);display:flex;flex-direction:column;align-items:stretch;gap:0;padding:4.6rem 0 1.5rem;transform:translateX(105%);transition:transform .3s cubic-bezier(.4,0,.2,1);z-index:210;box-shadow:-14px 0 44px rgba(0,0,0,.45);overflow-y:auto;}
+.n-links.open{transform:none;}
+.n-links a{font-family:var(--mono);font-size:12.5px;color:var(--text-muted);letter-spacing:1px;transition:color .15s,background .15s;padding:1rem 1.7rem;width:100%;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.n-links a::after{content:'›';color:var(--text-dim);font-size:15px;}
+.n-links a:hover,.n-links a.active{color:var(--teal);background:var(--bg-mid);}
+.n-links a:hover::after{color:var(--teal);}
+.drawer-head{position:absolute;top:0;left:0;right:0;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 1.2rem 0 1.7rem;border-bottom:1px solid var(--border);}
+.drawer-head .dh-t{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--text-dim);}
+.drawer-x{background:none;border:none;color:var(--text-muted);font-size:22px;line-height:1;cursor:pointer;padding:4px 8px;}
+.drawer-x:hover{color:var(--teal);}
+.drawer-foot{margin-top:auto;padding:1.2rem 1.7rem .2rem;}
+.drawer-foot .df-ig{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--text-dim);}
+.nav-backdrop{position:fixed;inset:0;background:rgba(5,12,22,.62);opacity:0;pointer-events:none;transition:opacity .3s;z-index:205;backdrop-filter:blur(2px);}
+.nav-backdrop.open{opacity:1;pointer-events:auto;}
+body.nav-lock{overflow:hidden;}
 .nav-right{display:flex;gap:10px;align-items:center;}
 .n-cta{background:transparent;color:var(--teal);border:1px solid var(--teal);padding:8px 14px;border-radius:var(--r);font-family:var(--mono);font-size:11px;font-weight:bold;letter-spacing:.7px;transition:all .2s;}
 .n-cta:hover{background:var(--teal-soft);}
 .n-buy{background:var(--gold);color:var(--bg);border:none;padding:8px 14px;border-radius:var(--r);font-family:var(--mono);font-size:11px;font-weight:bold;letter-spacing:.7px;transition:all .2s;}
 .n-buy:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 4px 15px rgba(245, 166, 35, .3);}
-.n-ig{display:inline-flex;align-items:center;color:var(--text-muted);transition:color .2s;}
-.n-ig:hover{color:var(--teal);}
+.n-ig{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:9px;color:var(--text-muted);transition:color .2s,background .2s;}
+.n-ig:hover{color:var(--teal);background:rgba(0,229,160,.08);}
 .n-ig svg{width:18px;height:18px;display:block;}
-.n-ham{display:none;background:none;border:none;color:var(--text-muted);font-size:22px;line-height:1;}
+.n-ham{position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;background:none;border:none;color:var(--text-muted);font-size:22px;line-height:1;border-radius:9px;margin-left:8px;transition:color .2s,background .2s;}
+.n-ham:hover{color:var(--teal);background:rgba(0,229,160,.08);}
+.n-ham::before{content:'';position:absolute;left:-9px;top:50%;transform:translateY(-50%);height:20px;width:1px;background:var(--border);}
+.n-ham:hover{color:var(--teal);}
 
 .ticker{background:var(--bg-card);border-bottom:1px solid var(--border);padding:8px 2rem;display:flex;gap:10px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--text-muted);overflow:hidden;white-space:nowrap;}
+.exam-switch{display:block;text-align:center;font-family:var(--mono);font-size:11.5px;letter-spacing:.4px;padding:9px 1rem;background:rgba(245,166,35,.07);border-bottom:1px solid var(--border);color:var(--text-muted);transition:background .2s,color .2s;}
+.exam-switch b{color:var(--gold);}
+.exam-switch:hover{background:rgba(245,166,35,.14);color:var(--text);}
 .ticker-badge{background:var(--teal);color:var(--bg);font-size:9px;padding:3px 8px;border-radius:99px;font-weight:bold;letter-spacing:.5px;flex-shrink:0;}
 
 /* HERO */
@@ -376,10 +394,6 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  .stats-row{grid-template-columns:repeat(2, 1fr);}
  .contact-grid{grid-template-columns:1fr;}
  footer{flex-direction:column;text-align:center;}
- .n-links{display:none;position:absolute;top:64px;left:0;right:0;background:var(--bg-card);border-bottom:1px solid var(--border);flex-direction:column;padding:1rem 0;}
- .n-links a{padding:.9rem 2rem;width:100%;border-bottom:1px solid var(--border);}
- .n-links.open{display:flex;}
- .n-ham{display:block;}
  .n-buy{display:none;}
  .bundle-card{flex-direction:column;align-items:flex-start;gap:1.5rem;}
 }
@@ -409,26 +423,29 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  </svg>
  B<sup style="color:var(--gold);font-size:.7em;">3</sup>&nbsp;BIT BY BIT<span class="gold">&nbsp;PEDAGOGY</span>
  </div>
- <div class="n-links" id="nlinks">
- <a href="#home" onclick="closeNav()">HOME</a>
- <a href="#method" onclick="closeNav()">METHOD</a>
- <a href="#free" onclick="closeNav()" style="color:var(--gold);">FREE TOOLS</a>
- <a href="#library" onclick="closeNav()">LIBRARY</a>
- <a href="/free-120/" onclick="closeNav()" style="color:var(--gold);">FREE 120</a>
- <a href="#toolkit" onclick="closeNav()">TOOLKIT</a>
- <a href="#coaching" onclick="closeNav()">COACHING</a>
- <a href="#about" onclick="closeNav()">ABOUT</a>
- </div>
  <div class="nav-right">
  <a href="https://www.instagram.com/bitbybitmd/" target="_blank" rel="noopener" class="n-ig" aria-label="Bit by Bit on Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
- <button class="n-ham" id="hamBtn" onclick="toggleNav()">☰</button>
+ <button class="n-ham" id="hamBtn" onclick="toggleNav()" aria-label="Menu">☰</button>
  </div>
 </nav>
+<div class="nav-backdrop" id="navBackdrop" onclick="closeNav()"></div>
+<div class="n-links" id="nlinks">
+ <div class="drawer-head"><span class="dh-t">MENU</span><button class="drawer-x" onclick="closeNav()" aria-label="Close menu">✕</button></div>
+ <a href="#method" onclick="closeNav()">METHOD</a>
+ <a href="#free" onclick="closeNav()">FREE TOOLS</a>
+ <a href="#library" onclick="closeNav()">LIBRARY</a>
+ <a href="/free-120/" onclick="closeNav()">FREE 120</a>
+ <a href="/cfactor/" onclick="closeNav()" style="color:var(--gold);">C-FACTOR</a>
+ <a href="#coaching" onclick="closeNav()">COACHING</a>
+ <a href="#about" onclick="closeNav()">ABOUT</a>
+ <div class="drawer-foot"><a class="df-ig" href="https://www.instagram.com/bitbybitmd/" target="_blank" rel="noopener">↗ @bitbybitmd on Instagram</a></div>
+</div>
 
 <div class="ticker">
  <span class="ticker-badge">NEW</span>
  <span>NBME Free 120 (2026) complete master guide is live. 119 questions, full distractor autopsies, trap fingerprints. <a href="/free-120/" style="color:var(--teal);">Open it →</a></span>
 </div>
+<a href="/cfactor/" class="exam-switch">Studying for the <b>MCAT</b> instead? Explore the C-Factor Series →</a>
 
 <div id="home" class="hero rev">
  <div>
@@ -1235,8 +1252,10 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
 <!-- Hidden Netlify Forms detection -->
 <script>
 /* ========== NAV ========== */
-function toggleNav(){const l=document.getElementById('nlinks');const b=document.getElementById('hamBtn');l.classList.toggle('open');b.textContent=l.classList.contains('open')?'✕':'☰';}
-function closeNav(){const l=document.getElementById('nlinks');const b=document.getElementById('hamBtn');l.classList.remove('open');b.textContent='☰';}
+function toggleNav(){const l=document.getElementById('nlinks');setNav(!l.classList.contains('open'));}
+function closeNav(){setNav(false);}
+function setNav(open){const l=document.getElementById('nlinks');const bd=document.getElementById('navBackdrop');l.classList.toggle('open',open);if(bd)bd.classList.toggle('open',open);document.body.classList.toggle('nav-lock',open);const b=document.getElementById('hamBtn');if(b){b.textContent=open?'✕':'☰';}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeNav();});
 const BBB_EMAIL='sifrandcompany@gmail.com';
 function sendMsg(e){e.preventDefault();const f=document.getElementById('cform');const g=n=>{const el=f.querySelector('[name="'+n+'"]');return el?el.value.trim():'';};const name=(g('first')+' '+g('last')).trim();const topic=g('topic')||'General question';const email=g('email');const msg=g('message');const subject='[BBB] '+topic+(name?' — '+name:'');const body='Name: '+name+'\nEmail: '+email+'\nTopic: '+topic+'\n\n'+msg;const eS=encodeURIComponent(subject),eB=encodeURIComponent(body),to=encodeURIComponent(BBB_EMAIL);document.getElementById('mcGmail').href='https://mail.google.com/mail/?view=cm&fs=1&to='+to+'&su='+eS+'&body='+eB;document.getElementById('mcOutlook').href='https://outlook.live.com/mail/0/deeplink/compose?to='+to+'&subject='+eS+'&body='+eB;document.getElementById('mcDefault').href='mailto:'+BBB_EMAIL+'?subject='+eS+'&body='+eB;f.style.display='none';document.getElementById('formOk').style.display='block';document.getElementById('formOk').scrollIntoView({behavior:'smooth',block:'center'});}
 function copyEmail(){const done=()=>{const l=document.getElementById('copyLbl');const t=l.textContent;l.textContent='Copied ✓';setTimeout(()=>l.textContent=t,1800);};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(BBB_EMAIL).then(done).catch(done);}else{done();}}

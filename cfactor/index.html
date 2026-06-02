@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The C-Factor Series — MCAT Prep | Bit by Bit Pedagogy</title>
+<meta name="description" content="Mechanism-first MCAT prep. A complete CARS course free, the full Book 7 review book free in your browser, and a free 5,717-card AAMC-tagged Anki deck - no login. The six-book mechanism-first science set is $65 on Payhip.">
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/cfactor/facts.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+ --bg:#0D1B2E;--bg-card:#0A1520;--bg-mid:#0F2030;
+ --border:#1E3A50;--border-bright:#2A5570;
+ --teal:#00E5A0;--teal-dim:#1A8A6A;--teal-soft:rgba(0,229,160,.08);
+ --gold:#F5A623;--gold-soft:rgba(245,166,35,.08);
+ --red:#FF4757;--green:#2ED573;--blue:#4D9FFF;--purple:#A855F7;
+ --text:#E8F4F0;--text-muted:#8AAFC0;--text-dim:#6F8CA0;
+ --mono:'Courier New',Courier,monospace;
+ --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+ --r:8px;
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;}}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.7;background-image:radial-gradient(circle,rgba(26,56,80,.55) 1px,transparent 1px);background-size:24px 24px;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;font-family:inherit;}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border-bright);border-radius:3px;}
+
+.rev{opacity:0;transform:translateY(20px);transition:opacity .55s ease-out,transform .55s ease-out;}
+.rev.on{opacity:1;transform:none;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(13,27,46,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+.n-logo{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;font-weight:bold;color:var(--text);letter-spacing:.5px;}
+.n-logo .gold{color:var(--gold);}
+.n-links{display:flex;gap:1.7rem;align-items:center;}
+.n-links a{font-family:var(--mono);font-size:11.5px;color:var(--text-muted);letter-spacing:.7px;transition:color .2s;}
+.n-links a:hover,.n-links a.active{color:var(--teal);}
+.nav-right{display:flex;gap:10px;align-items:center;}
+.n-cta{background:transparent;color:var(--teal);border:1px solid var(--teal);padding:8px 14px;border-radius:var(--r);font-family:var(--mono);font-size:11px;font-weight:bold;letter-spacing:.7px;transition:all .2s;cursor:pointer;}
+.n-cta:hover{background:var(--teal-soft);}
+.n-buy{background:var(--gold);color:var(--bg);border:none;padding:8px 14px;border-radius:var(--r);font-family:var(--mono);font-size:11px;font-weight:bold;letter-spacing:.7px;transition:all .2s;cursor:pointer;}
+.n-buy:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 4px 15px rgba(245,166,35,.3);}
+.n-ham{display:none;position:relative;align-items:center;justify-content:center;width:40px;height:40px;background:none;border:none;color:var(--text-muted);font-size:22px;line-height:1;border-radius:9px;margin-left:8px;cursor:pointer;transition:color .2s,background .2s;}
+.n-ham:hover{color:var(--teal);background:var(--teal-soft);}
+.n-ham::before{content:'';position:absolute;left:-9px;top:50%;transform:translateY(-50%);height:20px;width:1px;background:var(--border);}
+
+/* TICKER */
+.ticker{background:var(--bg-card);border-bottom:1px solid var(--border);padding:8px 2rem;display:flex;gap:10px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--text-muted);overflow:hidden;white-space:nowrap;}
+.exam-switch{display:block;text-align:center;font-family:var(--mono);font-size:11.5px;letter-spacing:.4px;padding:9px 1rem;background:rgba(245,166,35,.07);border-bottom:1px solid var(--border);color:var(--text-muted);transition:background .2s,color .2s;}
+.exam-switch b{color:var(--gold);}
+.exam-switch:hover{background:rgba(245,166,35,.14);color:var(--text);}
+.ticker-badge{background:var(--teal);color:var(--bg);font-size:9px;padding:3px 8px;border-radius:99px;font-weight:bold;letter-spacing:.5px;flex-shrink:0;}
+
+/* HERO */
+.hero{max-width:1120px;margin:0 auto;padding:5rem 2rem 3rem;display:grid;grid-template-columns:1fr auto;gap:3.5rem;align-items:center;}
+.h-badge{display:inline-flex;align-items:center;gap:8px;background:var(--teal-soft);border:1px solid rgba(0,229,160,.3);color:var(--teal);font-family:var(--mono);font-size:12px;font-weight:bold;letter-spacing:1.4px;padding:7px 16px;border-radius:99px;margin-bottom:1.5rem;}
+.h-badge::before{content:'●';font-size:9px;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.h-title{font-family:var(--mono);font-size:clamp(30px,4.2vw,52px);font-weight:bold;line-height:1.12;margin-bottom:1.25rem;}
+.h-title em{font-style:normal;color:var(--teal);}
+.h-sub{font-size:16.5px;color:var(--text-muted);max-width:540px;margin-bottom:1.8rem;line-height:1.75;}
+.h-sub b{color:var(--text);font-weight:600;}
+.h-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:1.4rem;}
+.btn-p{background:var(--teal);color:var(--bg);border:none;padding:14px 26px;border-radius:var(--r);font-family:var(--mono);font-size:12px;font-weight:bold;letter-spacing:1px;transition:all .2s;display:inline-block;text-align:center;}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,229,160,.28);}
+.btn-o{background:transparent;color:var(--text-muted);border:1px solid var(--border-bright);padding:14px 26px;border-radius:var(--r);font-family:var(--mono);font-size:12px;font-weight:bold;letter-spacing:1px;transition:all .2s;display:inline-block;text-align:center;}
+.btn-o:hover{color:var(--teal);border-color:var(--teal);background:var(--teal-soft);}
+.btn-gold{background:var(--gold);color:var(--bg);border:none;padding:14px 26px;border-radius:var(--r);font-family:var(--mono);font-size:12px;font-weight:bold;letter-spacing:1px;transition:all .2s;display:inline-block;text-align:center;cursor:pointer;}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(245,166,35,.3);}
+.btn-buy-lg{background:var(--gold);color:var(--bg);border:none;padding:16px 36px;border-radius:var(--r);font-family:var(--mono);font-size:13px;font-weight:bold;letter-spacing:1px;transition:all .2s;white-space:nowrap;cursor:pointer;}
+.btn-buy-lg:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(245,166,35,.3);}
+.h-trust{display:flex;gap:1.2rem;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--text-dim);margin-top:.5rem;}
+.h-trust span{display:flex;align-items:center;gap:6px;}
+.h-trust span::before{content:'✓';color:var(--teal);}
+.mascot-wrap{position:relative;width:175px;flex-shrink:0;text-align:center;}
+.mascot-svg{position:relative;z-index:1;height:215px;margin:0 auto;}
+.mascot-glow{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,160,.15) 0%,transparent 70%);animation:gpulse 4s infinite ease-in-out;}
+@keyframes gpulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.5}50%{transform:translate(-50%,-50%) scale(1.1);opacity:1}}
+.mascot-lore{font-family:var(--mono);font-size:10px;color:var(--teal);letter-spacing:1px;margin-top:1rem;opacity:.85;border-top:1px solid rgba(0,229,160,.2);padding-top:8px;}
+.mascot-lore strong{color:var(--text);display:block;font-size:11px;margin-bottom:2px;}
+
+/* STATS */
+.stats-row{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-card);display:grid;grid-template-columns:repeat(5,1fr);}
+.stat{padding:1.5rem 1rem;text-align:center;border-right:1px solid var(--border);}
+.stat:last-child{border-right:none;}
+.stat-n{font-family:var(--mono);font-size:28px;font-weight:bold;color:var(--teal);}
+.stat-l{font-size:11px;color:var(--text-muted);margin-top:4px;letter-spacing:.3px;}
+
+/* SECTION */
+.sec{max-width:1120px;margin:0 auto;padding:5rem 2rem;}
+.sec-hdr{margin-bottom:3rem;max-width:720px;}
+.sec-tag{font-family:var(--mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+.sec-title{font-family:var(--mono);font-size:clamp(24px,3vw,36px);font-weight:bold;color:var(--text);line-height:1.2;margin-bottom:1rem;}
+.sec-sub{font-size:15.5px;color:var(--text-muted);line-height:1.7;max-width:52ch;}
+
+/* LIBRARY GRID */
+.lib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;}
+.lib-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.6rem;transition:all .25s;display:flex;flex-direction:column;position:relative;overflow:hidden;}
+.lib-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--ca,var(--teal));opacity:.7;}
+.lib-card:hover{transform:translateY(-3px);border-color:var(--ca,var(--border-bright));}
+.lib-icon{width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:1rem;border:1px solid rgba(255,255,255,.05);}
+.lib-name{font-family:var(--mono);font-size:14px;font-weight:bold;color:var(--text);margin-bottom:8px;}
+.lib-desc{font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:1rem;flex-grow:1;}
+.lib-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:.85rem;}
+.lib-avail{font-size:11px;color:var(--text-dim);font-family:var(--mono);}
+
+/* METHOD GRID */
+.method-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;}
+.method-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.6rem;transition:all .25s;position:relative;overflow:hidden;}
+.method-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--ca,var(--teal));opacity:.7;}
+.method-card:hover{transform:translateY(-3px);border-color:var(--ca,var(--border-bright));}
+.method-icon{width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:1rem;border:1px solid rgba(255,255,255,.05);}
+.method-card h4{font-family:var(--mono);font-size:14px;color:var(--text);margin-bottom:8px;line-height:1.3;}
+.method-card p{font-size:13px;color:var(--text-muted);line-height:1.7;}
+
+/* PILLARS */
+.pillars{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;}
+.pillar{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.8rem;transition:all .25s;}
+.pillar:hover{transform:translateY(-3px);border-color:var(--border-bright);}
+.pillar-num{font-family:var(--mono);font-size:11px;color:var(--text-dim);letter-spacing:2px;margin-bottom:8px;}
+.pillar-icon{font-size:28px;margin-bottom:1rem;}
+.pillar h3{font-family:var(--mono);font-size:16px;color:var(--text);margin-bottom:10px;letter-spacing:.5px;}
+.pillar p{font-size:13.5px;color:var(--text-muted);line-height:1.7;}
+
+/* TAG PILLS */
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+.tag-pill{font-size:10px;font-weight:700;padding:3px 9px;border-radius:3px;letter-spacing:.04em;white-space:nowrap;font-family:var(--mono);}
+.tag-mcat{background:rgba(0,229,160,.12);color:var(--teal);}
+.tag-aamc{background:rgba(77,159,255,.12);color:var(--blue);}
+.tag-course{background:rgba(245,166,35,.12);color:var(--gold);}
+.tag-type{background:rgba(168,85,247,.12);color:var(--purple);}
+.tag-phase{background:rgba(46,213,115,.12);color:var(--green);}
+
+/* FOOTER */
+footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;}
+.f-logo{font-family:var(--mono);font-size:13px;font-weight:bold;color:var(--text-muted);}
+.f-links{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.f-links a{font-family:var(--mono);font-size:11px;color:var(--text-dim);transition:color .2s;}
+.f-links a:hover{color:var(--teal);}
+.disclaimer{background:var(--bg-mid);border-top:1px solid var(--border);padding:1.2rem 2rem;font-size:11px;color:var(--text-dim);line-height:1.6;text-align:center;}
+
+/* BUNDLE */
+.bundle-card{background:linear-gradient(135deg,rgba(245,166,35,.07),rgba(0,229,160,.04));border:1px solid rgba(245,166,35,.25);border-radius:var(--r);padding:2.5rem;display:flex;gap:3rem;align-items:center;flex-wrap:wrap;}
+.bundle-text{flex:1;min-width:260px;}
+.bundle-text h3{font-family:var(--mono);font-size:22px;font-weight:bold;color:var(--gold);margin-bottom:12px;}
+.bundle-text p{font-size:14.5px;color:var(--text-muted);line-height:1.8;margin-bottom:1.4rem;}
+.bundle-cta{display:flex;flex-direction:column;align-items:center;gap:10px;flex-shrink:0;}
+
+/* PAUSE */
+.pause{text-align:center;padding:4.5rem 2rem;max-width:820px;margin:0 auto;}
+.pause h2{font-family:var(--sans);font-size:clamp(22px,3vw,32px);font-weight:600;color:var(--text);margin-bottom:.7rem;line-height:1.3;}
+.pause p{font-family:var(--mono);font-size:clamp(13px,1.5vw,16px);color:var(--teal);letter-spacing:.4px;}
+
+/* MOBILE */
+@media(max-width:768px){
+ .hero{grid-template-columns:1fr;gap:2rem;padding:3rem 1.5rem 2rem;}
+ .mascot-wrap{display:none;}
+ .stats-row{grid-template-columns:repeat(2,1fr);}
+ .stat:nth-child(2){border-right:none;}
+ .stat:nth-child(4){border-right:none;}
+ .n-links{display:none;position:absolute;top:64px;left:0;right:0;background:var(--bg-card);border-bottom:1px solid var(--border);flex-direction:column;padding:1rem 0;}
+ .n-links a{padding:.9rem 2rem;width:100%;border-bottom:1px solid var(--border);}
+ .n-links.open{display:flex;}
+ .n-ham{display:flex;}
+ .n-buy{display:none;}
+ .h-btns{flex-direction:column;}
+ .btn-p,.btn-o,.btn-gold{width:100%;text-align:center;}
+ footer{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+ <a href="/" class="n-logo">
+  <svg width="26" height="30" viewBox="0 0 30 36" style="image-rendering:pixelated">
+   <rect x="2" y="6" width="26" height="12" fill="#00E5A0"/>
+   <rect x="6" y="7" width="8" height="7" fill="#0D1B2E"/>
+   <rect x="16" y="7" width="8" height="7" fill="#0D1B2E"/>
+   <rect x="8" y="9" width="4" height="4" fill="#F5A623"/>
+   <rect x="18" y="9" width="4" height="4" fill="#F5A623"/>
+   <rect x="9" y="17" width="12" height="2" fill="#0D1B2E"/>
+   <rect x="3" y="23" width="24" height="12" fill="#00E5A0"/>
+  </svg>
+  B<sup style="color:var(--gold);font-size:.7em;">3</sup>&nbsp;BIT BY BIT<span class="gold">&nbsp;PEDAGOGY</span>
+ </a>
+ <div class="n-links" id="nlinks">
+  <a href="/">STEP 1</a>
+  <a href="/cfactor/cars/" style="color:var(--teal);">CARS (FREE)</a>
+  <a href="/cfactor/periodic/" style="color:var(--teal);">PERIODIC TABLE</a>
+  <a href="#books">BOOKS</a>
+  <a href="#method">METHOD</a>
+  <a href="#anki">ANKI</a>
+  <a href="#why">WHY THIS</a>
+ </div>
+ <div class="nav-right">
+  <button class="n-cta" onclick="location.href='/cfactor/final-review/'">FREE BOOK 7 →</button>
+  <button class="n-buy" onclick="window.open('https://payhip.com/b/dAnUk','_blank')">GET THE SET · $65 ↗</button>
+  <button class="n-ham" id="hamBtn" onclick="toggleNav()">☰</button>
+ </div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker">
+ <span class="ticker-badge">FREE</span>
+ <span>Free full MCAT review book (Book 7) — every section, mechanism-first. Read it in your browser, no login.&nbsp;<a href="/cfactor/final-review/" style="color:var(--teal);">Open it →</a></span>
+</div>
+<a href="/" class="exam-switch">Studying for <b>USMLE Step 1</b> instead? Go to Bit by Bit MD →</a>
+
+<!-- HERO -->
+<div id="home" class="hero rev">
+ <div>
+  <div class="h-badge">THE C-FACTOR SERIES &middot; 8 BOOKS &middot; CARS FREE</div>
+  <h1 class="h-title">Mechanism-first.<br><em>MCAT</em> ready.</h1>
+  <p class="h-sub">Every MCAT subject. Every mechanism. One cohesive series built on the principle that understanding the <b>why</b> is the only thing that survives exam pressure.</p>
+  <div class="h-btns">
+   <a href="/cfactor/final-review/" class="btn-p">READ THE FREE BOOK →</a>
+   <a href="#books" class="btn-o">SEE ALL 8 BOOKS ↓</a>
+  </div>
+  <div class="h-trust">
+   <span>No tricks. No shortcuts.</span>
+   <span>Mechanism over memorization</span>
+   <span>AAMC-aligned Anki deck</span>
+   <span>Free sample, always</span>
+  </div>
+ </div>
+ <div class="mascot-wrap">
+  <div class="mascot-glow"></div>
+  <img class="mascot-svg" src="/bit-mascot.png" alt="Bit — your reasoning engine" style="filter:drop-shadow(0 8px 18px rgba(0,0,0,.45));" />
+  <div class="mascot-lore"><strong>BIT</strong>Your reasoning engine</div>
+ </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-row">
+ <div class="stat rev"><div class="stat-n">7</div><div class="stat-l">Subject books</div></div>
+ <div class="stat rev"><div class="stat-n">~2,270</div><div class="stat-l">Pages of content</div></div>
+ <div class="stat rev"><div class="stat-n">5,717</div><div class="stat-l">Free Anki cards</div></div>
+ <div class="stat rev"><div class="stat-n">92</div><div class="stat-l">Chapter lectures (video soon)</div></div>
+ <div class="stat rev"><div class="stat-n">0</div><div class="stat-l">Memorize-and-forget facts</div></div>
+</div>
+
+<!-- CARS FLAGSHIP BAND -->
+<div style="background:linear-gradient(135deg,rgba(0,229,160,.1) 0%,rgba(245,166,35,.07) 100%);border-top:1px solid rgba(0,229,160,.25);border-bottom:1px solid rgba(0,229,160,.25);padding:3.5rem 2rem;">
+ <div style="max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2.5rem;flex-wrap:wrap;">
+  <div style="flex:1;min-width:280px;">
+   <div style="display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:bold;letter-spacing:1.2px;color:var(--teal);background:var(--teal-soft);border:1px solid rgba(0,229,160,.3);padding:6px 14px;border-radius:99px;margin-bottom:1rem;">★ ENTIRE COURSE · FREE · NO LOGIN</div>
+   <h2 style="font-family:var(--mono);font-size:clamp(22px,2.8vw,32px);font-weight:bold;color:var(--text);margin-bottom:12px;line-height:1.18;">The full MCAT <span style="color:var(--teal);">CARS</span> course — free</h2>
+   <p style="font-size:15px;color:var(--text-muted);line-height:1.75;max-width:560px;">The one section you can't memorize. A complete course: the four-move passage method, all 11 question types, the wrong-answer archetypes, an elimination protocol, a six-week program, and worked AAMC-style passages. <b style="color:var(--text);">This is the C-Factor method applied to reasoning — read it and see how we teach.</b></p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px;min-width:230px;">
+   <a href="/cfactor/cars/" class="btn-p" style="text-align:center;">START THE CARS COURSE →</a>
+   <a href="/cfactor/Bit_by_Bit_MD_C-Factor_Book8_CARS_The_Reasoning_Engine.pdf" download class="btn-o" style="text-align:center;">DOWNLOAD PDF ↓</a>
+  </div>
+ </div>
+</div>
+
+<!-- PERIODIC TABLE BAND -->
+<div style="background:linear-gradient(135deg,rgba(168,85,247,.09),rgba(0,229,160,.05));border-top:1px solid rgba(168,85,247,.22);border-bottom:1px solid rgba(168,85,247,.22);padding:3rem 2rem;">
+ <div style="max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2.5rem;flex-wrap:wrap;">
+  <div style="flex:1;min-width:260px;">
+   <div style="font-family:var(--mono);font-size:10px;color:var(--purple);letter-spacing:2px;margin-bottom:10px;">NEW · INTERACTIVE · FREE</div>
+   <h2 style="font-family:var(--mono);font-size:clamp(20px,2.5vw,28px);font-weight:bold;color:var(--text);margin-bottom:12px;line-height:1.2;">The Living Periodic Table</h2>
+   <p style="font-size:14.5px;color:var(--text-muted);line-height:1.75;max-width:520px;">Hover any element to see its story and watch its group and period light up — then click for a deep dive into its role across medicine, chemistry, physics, engineering, and nature. All 118, in your browser.</p>
+  </div>
+  <div style="min-width:220px;"><a href="/cfactor/periodic/" class="btn-p" style="text-align:center;display:block;">EXPLORE THE TABLE →</a></div>
+ </div>
+</div>
+
+<!-- FREE SAMPLE BAND -->
+<div style="background:linear-gradient(135deg,rgba(0,229,160,.07) 0%,rgba(77,159,255,.07) 100%);border-top:1px solid rgba(0,229,160,.2);border-bottom:1px solid rgba(0,229,160,.2);padding:3rem 2rem;">
+ <div style="max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2.5rem;flex-wrap:wrap;">
+  <div style="flex:1;min-width:260px;">
+   <div style="font-family:var(--mono);font-size:10px;color:var(--teal);letter-spacing:2px;margin-bottom:10px;">FREE REVIEW BOOK &middot; NO LOGIN &middot; NO PAYWALL</div>
+   <h2 style="font-family:var(--mono);font-size:clamp(20px,2.5vw,28px);font-weight:bold;color:var(--text);margin-bottom:12px;line-height:1.2;">The Bit by Bit MD MCAT Review Book</h2>
+   <p style="font-size:14.5px;color:var(--text-muted);line-height:1.75;max-width:520px;">A full MCAT review book - free, in your browser, no email required. Discriminators, clinical bridges, and mechanism-first explanations across every section. Read it before you decide if the C-Factor Series is right for you.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px;min-width:220px;">
+   <a href="/cfactor/final-review/" class="btn-p" style="text-align:center;">READ FREE IN BROWSER →</a>
+   <a href="/cfactor/schedule/" class="btn-o" style="text-align:center;">GET STUDY SCHEDULE ↓</a>
+  </div>
+ </div>
+</div>
+
+<!-- FACT OF THE DAY -->
+<div class="sec rev" id="fact" style="padding-bottom:0;">
+ <div class="sec-hdr" style="margin-bottom:1.6rem;">
+  <div class="sec-tag">FROM THE BOOKS &middot; ROTATES DAILY</div>
+  <h2 class="sec-title">C-Factor fact of the day</h2>
+  <p class="sec-sub">A real discriminator pulled from across the seven books — a new one every day. This is the kind of look-alike the MCAT loves to test.</p>
+ </div>
+ <div style="background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:var(--r);padding:1.8rem 2rem;max-width:760px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:12px;">
+   <span id="fd-subj" style="font-family:var(--mono);font-size:10px;font-weight:bold;letter-spacing:1px;padding:4px 11px;border-radius:99px;background:var(--gold-soft);color:var(--gold);">—</span>
+   <span style="font-family:var(--mono);font-size:10px;color:var(--text-dim);letter-spacing:1.5px;">⚡ DISCRIMINATOR</span>
+  </div>
+  <div id="fd-title" style="font-family:var(--mono);font-size:17px;font-weight:bold;color:var(--text);margin-bottom:10px;line-height:1.3;">Loading…</div>
+  <p id="fd-body" style="font-size:14.5px;color:var(--text-muted);line-height:1.8;margin:0;"></p>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:1.4rem;border-top:1px solid var(--border);padding-top:1rem;flex-wrap:wrap;">
+   <span id="fd-count" style="font-family:var(--mono);font-size:10px;color:var(--text-dim);"></span>
+   <div style="display:flex;gap:8px;">
+    <button class="btn-o" style="padding:8px 16px;font-size:11px;" onclick="fdStep(-1)">‹ PREV</button>
+    <button class="btn-o" style="padding:8px 16px;font-size:11px;" onclick="fdStep(1)">NEXT ›</button>
+   </div>
+  </div>
+ </div>
+</div>
+
+<!-- THE 7 BOOKS -->
+<div class="sec rev" id="books">
+ <div class="sec-hdr">
+  <div class="sec-tag">THE SERIES</div>
+  <h2 class="sec-title">Eight books. Every MCAT section.</h2>
+  <p class="sec-sub">Six subject books plus the Final Review cover every science domain end-to-end — discriminators, why-boxes, clinical bridges, and MCAT-format passages. Book 8 is the full CARS course, free.</p>
+ </div>
+ <div class="lib-grid">
+
+  <a href="/cfactor/books/book1/" class="lib-card rev" style="--ca:var(--teal);">
+   <div class="lib-icon" style="background:rgba(0,229,160,.08);">🧬</div>
+   <div class="lib-name">Book 1 &middot; Biology</div>
+   <div class="lib-desc">Amino acids and proteins, enzymes, cell biology, genetics, gene expression, microbiology, immunology, and evolution. The foundation everything else builds on.</div>
+   <div class="lib-foot"><span class="lib-avail" style="color:var(--teal);">B/B &middot; C/P</span><span style="font-family:var(--mono);font-size:10px;color:var(--teal);">374 pp · Preview →</span></div>
+  </a>
+
+  <a href="/cfactor/books/book2/" class="lib-card rev" style="--ca:var(--blue);">
+   <div class="lib-icon" style="background:rgba(77,159,255,.08);">⚗️</div>
+   <div class="lib-name">Book 2 &middot; General Chemistry</div>
+   <div class="lib-desc">Atomic structure, bonding, stoichiometry, thermodynamics, kinetics, equilibrium, acid-base, and electrochemistry. Every formula derived from first principles.</div>
+   <div class="lib-foot"><span class="lib-avail" style="color:var(--blue);">C/P</span><span style="font-family:var(--mono);font-size:10px;color:var(--teal);">354 pp · Preview →</span></div>
+  </a>
+
+  <a href="/cfactor/books/book3/" class="lib-card rev" style="--ca:var(--gold);">
+   <div class="lib-icon" style="background:rgba(245,166,35,.08);">🔬</div>
+   <div class="lib-name">Book 3 &middot; Organic Chemistry</div>
+   <div class="lib-desc">Nomenclature, stereochemistry, substitution and elimination, alkene reactions, carbonyl chemistry, biological molecules, spectroscopy, and separation methods.</div>
+   <div class="lib-foot"><span class="lib-avail" style="color:var(--gold);">C/P</span><span style="font-family:var(--mono);font-size:10px;color:var(--teal);">371 pp · Preview →</span></div>
+  </a>
+
+  <a href="/cfactor/books/book4/" class="lib-card rev" style="--ca:var(--red);">
+   <div class="lib-icon" style="background:rgba(255,71,87,.08);">⚡</div>
+   <div class="lib-name">Book 4 &middot; Physics</div>
+   <div class="lib-desc">Kinematics, forces, work and energy, fluid dynamics, waves and sound, electrostatics, circuits, light and optics, and nuclear physics. Physiology examples throughout.</div>
+   <div class="lib-foot"><span class="lib-avail" style="color:var(--red);">C/P</span><span style="font-family:var(--mono);font-size:10px;color:var(--teal);">358 pp · Preview →</span></div>
+  </a>
+
+  <a href="/cfactor/books/book5/" class="lib-card rev" style="--ca:var(--purple);">
+   <div class="lib-icon" style="background:rgba(168,85,247,.08);">🧠</div>
+   <div class="lib-name">Book 5 &middot; Psychology &amp; Sociology</div>
+   <div class="lib-desc">Biological foundations of behavior, sensation and perception, learning and memory, cognition, social psychology, health disparities, and social inequality.</div>
+   <div class="lib-foot"><span class="lib-avail" style="color:var(--purple);">P/S</span><span style="font-family:var(--mono);font-size:10px;color:var(--teal);">355 pp · Preview →</span></div>
+  </a>
+
+  <a href="/cfactor/books/book6/" class="lib-card rev" style="--ca:var(--teal);">
+   <div class="lib-icon" style="background:rgba(0,229,160,.08);">🔭</div>
+   <div class="lib-name">Book 6 &middot; Biochemistry</div>
+   <div class="lib-desc">Amino acids, protein structure, enzyme kinetics, carbohydrate and lipid metabolism, nucleic acids, vitamins, DNA replication, transcription, and translation. Highest-yield MCAT book.</div>
+   <div class="lib-foot"><span class="lib-avail" style="color:var(--teal);">B/B &middot; C/P</span><span style="font-family:var(--mono);font-size:10px;color:var(--teal);">418 pp · Preview →</span></div>
+  </a>
+
+  <a href="/cfactor/final-review/" class="lib-card rev" style="--ca:var(--green);">
+   <div class="lib-icon" style="background:rgba(46,213,115,.08);">⭐</div>
+   <div class="lib-name">Book 7 &middot; The Final Review <span style="color:var(--green);font-size:10px;">· FREE</span></div>
+   <div class="lib-desc">High-yield compression of every subject: discriminator index and test-day anchors. Read this two weeks before test day. Free, in your browser — no login.</div>
+   <div class="lib-foot"><span class="lib-avail" style="color:var(--green);">All Sections · FREE</span><span style="font-family:var(--mono);font-size:10px;color:var(--green);">Read now →</span></div>
+  </a>
+
+  <a href="/cfactor/cars/" class="lib-card rev" style="--ca:var(--teal);">
+   <div class="lib-icon" style="background:rgba(0,229,160,.08);">🧭</div>
+   <div class="lib-name">Book 8 &middot; CARS <span style="color:var(--teal);font-size:10px;">· FREE</span></div>
+   <div class="lib-desc">The Reasoning Engine — a complete CARS course. Four-move passage method, 11 question types, wrong-answer archetypes, a six-week program, and worked AAMC-style passages.</div>
+   <div class="lib-foot"><span class="lib-avail" style="color:var(--teal);">CARS · FREE</span><span style="font-family:var(--mono);font-size:10px;color:var(--teal);">Start course →</span></div>
+  </a>
+
+  <!-- BUNDLE CTA CARD -->
+  <div class="bundle-card">
+   <div class="bundle-text">
+    <h3>&#9733; The Complete Six-Book Set</h3>
+    <p>Books 1&ndash;6 &mdash; the full ~2,220-page mechanism-first set. Book 7 (The Final Review) and the <b style="color:var(--text);">5,717-card AAMC-tagged Anki deck</b> are <b style="color:var(--text);">free</b>. Video lectures for every chapter are coming soon &mdash; also free. Buy once, yours forever.</p>
+    <div style="display:flex;gap:1.2rem;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--text-dim);">
+     <span>&#10003; Instant PDF download</span>
+     <span>&#10003; Secure Payhip checkout</span>
+     <span>&#10003; Free Anki deck included</span>
+     <span>&#10003; Read Book 7 free first</span>
+    </div>
+   </div>
+   <div class="bundle-cta">
+    <div style="font-family:var(--mono);font-size:32px;font-weight:bold;color:var(--text);line-height:1;">$65<span style="display:block;font-size:11px;color:var(--text-dim);font-weight:normal;letter-spacing:1px;margin-top:3px;">ONE-TIME</span></div>
+    <button class="btn-buy-lg" onclick="window.open('https://payhip.com/b/dAnUk','_blank')">GET THE SET ↗</button>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--text-dim);">Processed via Payhip</div>
+   </div>
+  </div>
+
+ </div>
+</div>
+
+<!-- THE METHOD -->
+<div style="background:rgba(10,21,32,.55);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+<div class="sec rev" id="method">
+ <div class="sec-hdr">
+  <div class="sec-tag">THE METHOD</div>
+  <h2 class="sec-title">Four moves. Every concept.</h2>
+  <p class="sec-sub">Every chapter runs the same four moves so you internalize the pattern, not just the fact. By the final book these should feel like reflexes.</p>
+ </div>
+ <div class="method-grid">
+  <div class="method-card rev" style="--ca:var(--gold);">
+   <div class="method-icon" style="background:rgba(245,166,35,.08);">⚡</div>
+   <h4>DISCRIMINATOR</h4>
+   <p>The single feature that separates two confusable concepts. Flagged in every chapter. Tested directly on the MCAT. Never hunt for it again.</p>
+  </div>
+  <div class="method-card rev" style="--ca:var(--purple);">
+   <div class="method-icon" style="background:rgba(168,85,247,.08);">🔍</div>
+   <h4>WHY-BOX</h4>
+   <p>The physical or biochemical reason the fact is true. If you know the why, you reconstruct the what under pressure. Mechanism survives the exam. Memorization does not.</p>
+  </div>
+  <div class="method-card rev" style="--ca:var(--teal);">
+   <div class="method-icon" style="background:rgba(0,229,160,.08);">🏥</div>
+   <h4>CLINICAL BRIDGE</h4>
+   <p>From page one of Book 1, every mechanism connects to a disease, a drug, or a clinical scenario you will see in medical school. The bridge is always explicit.</p>
+  </div>
+  <div class="method-card rev" style="--ca:var(--green);">
+   <div class="method-icon" style="background:rgba(46,213,115,.08);">🎯</div>
+   <h4>HIGH-YIELD ANCHOR</h4>
+   <p>One-liner facts with the highest MCAT frequency, pulled directly into the Anki deck as cloze deletions, tagged by AAMC content category.</p>
+  </div>
+ </div>
+</div>
+</div>
+
+<!-- ANKI -->
+<div class="sec rev" id="anki">
+ <div class="sec-hdr">
+  <div class="sec-tag">THE ANKI ECOSYSTEM &middot; FREE</div>
+  <h2 class="sec-title">5,717 cards. Every concept tagged. Free.</h2>
+  <p class="sec-sub">The Anki deck is not a side product. It is the books converted into active recall, with a tag architecture that maps directly to the AAMC content outline. Download it free — no purchase required.</p>
+ </div>
+ <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:2rem 2rem 1.6rem;margin-bottom:2rem;">
+  <div style="font-family:var(--mono);font-size:10px;color:var(--text-dim);letter-spacing:1.5px;margin-bottom:14px;">EVERY CARD CARRIES THIS FULL TAG SET</div>
+  <div class="tag-row">
+   <span class="tag-pill tag-mcat">MCAT::B_B</span>
+   <span class="tag-pill tag-aamc">AAMC::B_B::1D_Enzyme_Kinetics</span>
+   <span class="tag-pill tag-course">Course::Biochemistry</span>
+   <span class="tag-pill tag-type">Type::Discriminator</span>
+   <span class="tag-pill tag-type">Skill::Compare_Contrast</span>
+   <span class="tag-pill tag-phase">Phase::MCAT_Prep</span>
+   <span class="tag-pill tag-mcat">Difficulty::Intermediate</span>
+  </div>
+  <p style="font-size:13px;color:var(--text-muted);margin-top:10px;line-height:1.65;">Filter by MCAT section, AAMC content category, pre-med course, card type, or difficulty. No ch0 orientation cards. Chapter objectives card included per chapter.</p>
+ </div>
+ <div style="background:var(--bg-card);border:1px solid rgba(0,229,160,.25);border-radius:var(--r);padding:2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-bottom:2.5rem;">
+  <div>
+   <div style="font-family:var(--mono);font-size:10px;color:var(--teal);letter-spacing:2px;margin-bottom:8px;">FREE DOWNLOAD &middot; .APKG FORMAT &middot; ANKI 2.1+</div>
+   <p style="font-size:14px;color:var(--text-muted);line-height:1.7;">Import directly into Anki: <b style="color:var(--text);">File &rarr; Import</b>. One combined deck with all 5,717 cards. No account, no purchase required.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:10px;min-width:200px;">
+   <a href="/cfactor/CFactor_v2_ALL.apkg" download class="btn-p" style="text-align:center;white-space:nowrap;">DOWNLOAD DECK (.APKG) ↓</a>
+   <a href="https://drive.google.com/file/d/1PAe7Tc0nvTZ6WfvTyvcgO0_OES_AxFNE/view?usp=sharing" target="_blank" rel="noopener" class="btn-o" style="text-align:center;white-space:nowrap;">Google Drive mirror →</a>
+  </div>
+ </div>
+
+ <!-- HOW TO USE THE ANKI DECK -->
+ <div style="margin-bottom:2.5rem;">
+  <div style="font-family:var(--mono);font-size:10px;color:var(--text-dim);letter-spacing:2px;margin-bottom:20px;">HOW TO USE THE DECK &middot; STEP BY STEP</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;">
+
+   <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.6rem;">
+    <div style="font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:1.5px;margin-bottom:10px;">STEP 1 &middot; GET ANKI</div>
+    <p style="font-size:13.5px;color:var(--text-muted);line-height:1.7;">Download <b style="color:var(--text);">Anki</b> free at apps.ankiweb.net. Desktop (Mac/Windows/Linux) is best. There is also AnkiMobile for iPhone ($25, one-time) and AnkiDroid for Android (free). All sync via a free AnkiWeb account.</p>
+   </div>
+
+   <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.6rem;">
+    <div style="font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:1.5px;margin-bottom:10px;">STEP 2 &middot; IMPORT THE DECK</div>
+    <p style="font-size:13.5px;color:var(--text-muted);line-height:1.7;">Download the <b style="color:var(--text);">.apkg file</b> from Google Drive. In Anki desktop: <b style="color:var(--text);">File → Import</b> and select the file. The deck and all cards load instantly. Choose the combined deck (all books) or individual book decks.</p>
+   </div>
+
+   <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.6rem;">
+    <div style="font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:1.5px;margin-bottom:10px;">STEP 3 &middot; FILTER BY MCAT SECTION</div>
+    <p style="font-size:13.5px;color:var(--text-muted);line-height:1.7;">In the card browser, filter by tag. Studying B/B sections? Type <b style="color:var(--teal);">tag:MCAT::B_B</b> in the search bar. Studying for Gen Chem specifically? Use <b style="color:var(--teal);">tag:Course::General_Chemistry</b>. You can combine tags to narrow further.</p>
+   </div>
+
+   <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.6rem;">
+    <div style="font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:1.5px;margin-bottom:10px;">STEP 4 &middot; USE THE TAG SYSTEM</div>
+    <p style="font-size:13.5px;color:var(--text-muted);line-height:1.7;">Every card has layered tags. <b style="color:var(--teal);">Type::Discriminator</b> = compare-and-contrast cards. <b style="color:var(--teal);">Type::Mechanism</b> = why-box cards. <b style="color:var(--teal);">Type::Clinical_Bridge</b> = disease application cards. <b style="color:var(--teal);">Type::Practice_Question</b> = full MCAT-style MCQs.</p>
+   </div>
+
+   <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.6rem;">
+    <div style="font-family:var(--mono);font-size:11px;color:var(--purple);letter-spacing:1.5px;margin-bottom:10px;">STEP 5 &middot; STUDY SCHEDULE</div>
+    <p style="font-size:13.5px;color:var(--text-muted);line-height:1.7;">Set Anki to <b style="color:var(--text);">20-30 new cards/day</b> max. Do not skip the review pile — that is where retention is built. Study new cards alongside the corresponding book chapter. Use <b style="color:var(--teal);">Difficulty::Foundation</b> cards first, then <b style="color:var(--teal);">Difficulty::Intermediate</b>, then <b style="color:var(--teal);">Difficulty::High_Yield</b>.</p>
+   </div>
+
+   <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.6rem;">
+    <div style="font-family:var(--mono);font-size:11px;color:var(--purple);letter-spacing:1.5px;margin-bottom:10px;">STEP 6 &middot; CLOZE VS BASIC CARDS</div>
+    <p style="font-size:13.5px;color:var(--text-muted);line-height:1.7;"><b style="color:var(--text);">Basic cards</b> show a question on the front, explanation on the back. <b style="color:var(--text);">Cloze cards</b> blank out a key value or term (like <b style="color:var(--teal);">Km = [S] at {{c1::Vmax/2}}</b>) — fill in the blank and flip to check. Both types are included and tagged identically.</p>
+   </div>
+
+  </div>
+
+  <!-- QUICK REFERENCE TAG TABLE -->
+  <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.6rem;margin-top:14px;">
+   <div style="font-family:var(--mono);font-size:10px;color:var(--text-dim);letter-spacing:1.5px;margin-bottom:14px;">QUICK TAG REFERENCE &middot; PASTE THESE INTO ANKI'S BROWSER SEARCH</div>
+   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;">
+    <div style="font-family:var(--mono);font-size:12px;"><span style="color:var(--teal);">tag:MCAT::B_B</span> <span style="color:var(--text-dim);">— Biological &amp; Biochemical Foundations</span></div>
+    <div style="font-family:var(--mono);font-size:12px;"><span style="color:var(--blue);">tag:MCAT::C_P</span> <span style="color:var(--text-dim);">— Chemical &amp; Physical Foundations</span></div>
+    <div style="font-family:var(--mono);font-size:12px;"><span style="color:var(--purple);">tag:MCAT::P_S</span> <span style="color:var(--text-dim);">— Psychological &amp; Social Foundations</span></div>
+    <div style="font-family:var(--mono);font-size:12px;"><span style="color:var(--gold);">tag:Type::Discriminator</span> <span style="color:var(--text-dim);">— compare-contrast cards only</span></div>
+    <div style="font-family:var(--mono);font-size:12px;"><span style="color:var(--gold);">tag:Type::Mechanism</span> <span style="color:var(--text-dim);">— why-box cards only</span></div>
+    <div style="font-family:var(--mono);font-size:12px;"><span style="color:var(--gold);">tag:Type::Clinical_Bridge</span> <span style="color:var(--text-dim);">— clinical application cards</span></div>
+    <div style="font-family:var(--mono);font-size:12px;"><span style="color:var(--green);">tag:Difficulty::Foundation</span> <span style="color:var(--text-dim);">— start here if you are new</span></div>
+    <div style="font-family:var(--mono);font-size:12px;"><span style="color:var(--green);">tag:Difficulty::High_Yield</span> <span style="color:var(--text-dim);">— MCAT-frequency MCQ cards</span></div>
+    <div style="font-family:var(--mono);font-size:12px;"><span style="color:var(--teal);">tag:Course::Biochemistry</span> <span style="color:var(--text-dim);">— Biochem course cards only</span></div>
+    <div style="font-family:var(--mono);font-size:12px;"><span style="color:var(--teal);">tag:Phase::MCAT_Prep</span> <span style="color:var(--text-dim);">— MCAT-phase cards across all books</span></div>
+   </div>
+  </div>
+ </div>
+</div>
+
+<!-- WHY THIS EXISTS -->
+<div style="background:rgba(10,21,32,.55);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+<div class="sec rev" id="why">
+ <div class="sec-hdr">
+  <div class="sec-tag">THE FOUNDER'S RATIONALE</div>
+  <h2 class="sec-title">Not a test-prep company.</h2>
+  <p class="sec-sub">We do not promise tricks, guaranteed scores, or secret strategies. We optimize for understanding the system that generated the question — not just the answer.</p>
+ </div>
+ <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;max-width:900px;flex-wrap:wrap;" class="proof-layout">
+  <div>
+   <div style="font-family:var(--mono);font-size:12px;color:var(--red);letter-spacing:1px;margin-bottom:12px;">THE PROBLEM</div>
+   <p style="font-size:14.5px;color:var(--text-muted);line-height:1.8;">Students spend years learning biology, chemistry, organic chemistry, physics, and biochemistry — and never see how they connect. Education becomes fact after fact instead of principle to mechanism to application. Knowledge accumulates. Understanding does not.</p>
+   <div style="margin-top:1.2rem;padding:1rem 1.2rem;background:var(--bg-card);border-left:3px solid var(--red);border-radius:0 var(--r) var(--r) 0;font-family:var(--mono);font-size:13px;color:var(--text-dim);">Fact → Fact → Fact → Fact</div>
+  </div>
+  <div>
+   <div style="font-family:var(--mono);font-size:12px;color:var(--teal);letter-spacing:1px;margin-bottom:12px;">THE SOLUTION</div>
+   <p style="font-size:14.5px;color:var(--text-muted);line-height:1.8;">Science is not a collection of subjects. It is a collection of connected principles. The C-Factor Series teaches the mechanism and lets the fact follow from it. A student who understands systems can solve unfamiliar problems. A student who memorizes answers cannot.</p>
+   <div style="margin-top:1.2rem;padding:1rem 1.2rem;background:var(--bg-card);border-left:3px solid var(--teal);border-radius:0 var(--r) var(--r) 0;font-family:var(--mono);font-size:13px;color:var(--teal);">Principle → Mechanism → Application</div>
+  </div>
+ </div>
+ <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-top:3rem;">
+  <div class="pillar">
+   <div class="pillar-num">C</div>
+   <div class="pillar-icon">🔗</div>
+   <h3>CONNECTION</h3>
+   <p>Every concept should connect to others. Physics becomes physiology. Chemistry becomes pharmacology. Biochemistry becomes disease.</p>
+  </div>
+  <div class="pillar">
+   <div class="pillar-num">C</div>
+   <div class="pillar-icon">⚙️</div>
+   <h3>CAUSATION</h3>
+   <p>Understand why before memorizing what. The mechanism is what survives exam pressure. The fact alone does not.</p>
+  </div>
+  <div class="pillar">
+   <div class="pillar-num">C</div>
+   <div class="pillar-icon">🧠</div>
+   <h3>COMPREHENSION</h3>
+   <p>Understanding should precede memorization. If you see the structure of the idea, the details become obvious.</p>
+  </div>
+  <div class="pillar">
+   <div class="pillar-num">C</div>
+   <div class="pillar-icon">📈</div>
+   <h3>CONTINUITY</h3>
+   <p>Learning builds vertically, not horizontally. Each book adds a layer. The Final Review is not a repeat — it is the synthesis.</p>
+  </div>
+ </div>
+</div>
+</div>
+
+<!-- PAUSE -->
+<div class="pause rev">
+ <h2>Most students do not fail the MCAT because they are lazy.</h2>
+ <p>They fail because they cannot separate mechanism from memorization under pressure.</p>
+</div>
+
+<!-- FINAL BUY -->
+<div style="background:linear-gradient(135deg,rgba(245,166,35,.12),rgba(245,166,35,.05));border-top:1px solid rgba(245,166,35,.25);border-bottom:1px solid rgba(245,166,35,.25);padding:3rem 2rem;">
+ <div style="max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+  <div style="flex:1;min-width:280px;">
+   <h3 style="font-family:var(--mono);font-size:22px;font-weight:bold;color:var(--gold);margin-bottom:8px;">The Complete C-Factor Set &middot; $65</h3>
+   <p style="font-size:14px;color:var(--text-muted);max-width:580px;line-height:1.75;">Books 1&ndash;6, ~2,220 pages, mechanism-first. Book 7, the 5,717-card Anki deck, and the study schedule are all free; video lectures are coming free too. Read the free book first — no pressure.</p>
+   <div style="display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:.8rem;font-family:var(--mono);font-size:11px;color:var(--text-dim);">
+    <span>&#10003; Secure Payhip checkout</span>
+    <span>&#10003; Instant PDF download</span>
+    <span>&#10003; No account needed</span>
+    <span>&#10003; Yours forever</span>
+   </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px;align-items:center;">
+   <button class="btn-buy-lg" onclick="window.open('https://payhip.com/b/dAnUk','_blank')">BUY ON PAYHIP · $65 ↗</button>
+   <a href="/cfactor/final-review/" style="font-family:var(--mono);font-size:11px;color:var(--teal);">Read the free book first →</a>
+  </div>
+ </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+ <div class="f-logo">B<sup style="color:var(--gold);">3</sup> Bit by Bit Pedagogy &middot; The C-Factor Series</div>
+ <div class="f-links">
+  <a href="/">Bit by Bit MD</a>
+  <a href="/cfactor/cars/">Free CARS Course</a>
+  <a href="#books">Books</a>
+  <a href="#anki">Free Anki</a>
+  <a href="/cfactor/final-review/">Free Book 7</a>
+  <a href="/cfactor/schedule/">Schedule</a>
+  <a href="/cfactor/pivot/">Pivot Sheet</a>
+  <a href="https://payhip.com/b/dAnUk" target="_blank">Buy ($65)</a>
+  <a href="https://www.instagram.com/bitbybitmd/" target="_blank">Instagram</a>
+ </div>
+</footer>
+<div class="disclaimer">
+ Bit by Bit Pedagogy is an independent educational platform. The C-Factor Series is a pre-med and MCAT review resource built on mechanism-first pedagogy. Not affiliated with, endorsed by, or connected to the AAMC, NBME, USMLE, or any exam body. Materials are for educational use only and do not guarantee score outcomes. &copy; 2026 Bit by Bit Pedagogy.
+</div>
+
+<script>
+function toggleNav(){
+ document.getElementById('nlinks').classList.toggle('open');
+}
+function closeNav(){
+ document.getElementById('nlinks').classList.remove('open');
+}
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on');}),{threshold:.08});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+
+/* Fact of the day — rotates by date; PREV/NEXT to browse. */
+(function(){
+ var off=0;
+ function render(){
+  var F=window.CFACTS;
+  if(!F||!F.length){return;}
+  var day=Math.floor(Date.now()/86400000);
+  var i=(((day+off)%F.length)+F.length)%F.length;
+  var f=F[i];
+  document.getElementById('fd-subj').textContent=f.s;
+  document.getElementById('fd-title').textContent=f.t;
+  document.getElementById('fd-body').textContent=f.b;
+  document.getElementById('fd-count').textContent=(off===0?'Today · ':'')+'card '+(i+1)+' of '+F.length;
+ }
+ window.fdStep=function(d){off+=d;render();};
+ document.addEventListener('DOMContentLoaded',render);
+ render();
+})();
+</script>
+</body>
+</html>

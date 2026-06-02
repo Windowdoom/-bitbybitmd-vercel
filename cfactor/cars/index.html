@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Free MCAT CARS Course — The Reasoning Engine | The C-Factor Series</title>
+<meta name="description" content="A complete, interactive MCAT CARS course, free, in your browser. The four-move passage method, all 11 question types, the four wrong-answer archetypes, the elimination protocol, a six-week training program, and original practice passages with validated answers. No login.">
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<link rel="stylesheet" href="/cfactor/cfactor.css">
+<style>
+.readbar{position:fixed;top:64px;left:0;height:3px;background:var(--teal);width:0;z-index:190;transition:width .1s linear;box-shadow:0 0 8px rgba(0,229,160,.5);}
+.course{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:300px 1fr;gap:0;align-items:start;}
+/* sidebar */
+.cside{position:sticky;top:67px;align-self:start;height:calc(100vh - 67px);overflow-y:auto;border-right:1px solid var(--border);padding:1.4rem 1rem 3rem;background:var(--bg-card);}
+.cside::-webkit-scrollbar{width:5px;}
+.side-top{display:flex;align-items:center;gap:14px;padding:.3rem .5rem 1rem;}
+.ring{--p:0;width:46px;height:46px;border-radius:50%;flex-shrink:0;background:conic-gradient(var(--teal) calc(var(--p)*1%),var(--bg-mid) 0);display:flex;align-items:center;justify-content:center;}
+.ring::before{content:'';position:absolute;width:34px;height:34px;border-radius:50%;background:var(--bg-card);}
+.ring span{position:relative;font-family:var(--mono);font-size:11px;font-weight:bold;color:var(--teal);}
+.side-top .st-txt{font-family:var(--mono);font-size:10px;color:var(--text-dim);line-height:1.5;letter-spacing:.3px;}
+.side-top .st-txt b{color:var(--text);display:block;font-size:11px;}
+.mod{margin-top:1.1rem;}
+.mod-h{font-family:var(--mono);font-size:9.5px;letter-spacing:1.5px;color:var(--text-dim);padding:0 .6rem;margin-bottom:.45rem;text-transform:uppercase;}
+.cnav-item{display:flex;gap:9px;align-items:baseline;padding:7px 10px;border-radius:7px;cursor:pointer;font-size:13px;color:var(--text-muted);line-height:1.35;transition:background .15s,color .15s;}
+.cnav-item:hover{background:var(--bg-mid);color:var(--text);}
+.cnav-item.active{background:var(--teal-soft);color:var(--teal);font-weight:600;}
+.cnav-item .cn{font-family:var(--mono);font-size:10px;color:var(--text-dim);flex-shrink:0;min-width:26px;}
+.cnav-item.active .cn{color:var(--teal);}
+.cnav-item .ck{margin-left:auto;color:var(--green);font-size:11px;opacity:0;flex-shrink:0;align-self:center;}
+.cnav-item.done .ck{opacity:1;}
+.cnav-item.is-home .cn{color:var(--gold);}
+/* main */
+.cmain{padding:2.4rem 0 5rem;min-width:0;}
+.cinner{max-width:760px;margin:0 auto;padding:0 2.2rem;}
+.cmeta{font-family:var(--mono);font-size:11px;color:var(--text-dim);letter-spacing:.5px;margin-bottom:.5rem;display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+.cmeta .dot{color:var(--border-bright);}
+.cmain .ph-title{margin-bottom:.7rem;font-size:clamp(25px,3.4vw,38px);}
+.prose p{font-size:15px;line-height:1.85;}
+.prose h2{scroll-margin-top:90px;}
+.obj-box{background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:var(--r);padding:1.2rem 1.4rem;margin:1.5rem 0 2rem;}
+.obj-box .box-label{color:var(--teal);font-family:var(--mono);font-size:10px;letter-spacing:1.5px;margin-bottom:10px;}
+.obj-box ul{list-style:none;margin:0;padding:0;}
+.obj-box li{font-size:13.5px;color:var(--text-muted);line-height:1.6;padding-left:1.4rem;position:relative;margin-bottom:7px;}
+.obj-box li::before{content:'◎';color:var(--teal);position:absolute;left:0;}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 2rem;}
+.chip{font-family:var(--mono);font-size:11px;color:var(--text-muted);background:var(--bg-card);border:1px solid var(--border);border-radius:99px;padding:5px 12px;cursor:pointer;transition:all .15s;}
+.chip:hover{border-color:var(--teal);color:var(--teal);}
+.cnav-foot{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;border-top:1px solid var(--border);padding-top:1.6rem;flex-wrap:wrap;align-items:center;}
+.markbtn{background:var(--teal);color:var(--bg);border:none;padding:11px 20px;border-radius:var(--r);font-family:var(--mono);font-size:11px;font-weight:bold;letter-spacing:.6px;}
+.markbtn.is-done{background:transparent;color:var(--green);border:1px solid var(--green);}
+/* overview */
+.ov-hero{background:radial-gradient(120% 120% at 100% 0,rgba(0,229,160,.1),transparent 60%);border:1px solid var(--border);border-radius:14px;padding:2.4rem;margin-bottom:2rem;}
+.ov-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin:1.8rem 0;}
+.ov-stat{background:var(--bg-card);padding:1.1rem .8rem;text-align:center;}
+.ov-stat b{font-family:var(--mono);font-size:22px;color:var(--teal);display:block;}
+.ov-stat span{font-size:11px;color:var(--text-muted);}
+.modcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:1.4rem 0 2rem;}
+.modcard{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.4rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+.modcard::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--ca,var(--teal));opacity:.7;}
+.modcard:hover{transform:translateY(-3px);border-color:var(--ca,var(--border-bright));}
+.modcard .mc-n{font-family:var(--mono);font-size:10px;color:var(--text-dim);letter-spacing:1px;margin-bottom:8px;}
+.modcard h4{font-family:var(--mono);font-size:14px;color:var(--text);margin-bottom:7px;}
+.modcard p{font-size:12.5px;color:var(--text-muted);line-height:1.6;}
+/* practice */
+.passage{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.6rem 1.8rem;margin:1rem 0 2.2rem;}
+.passage p{font-size:14.5px;color:var(--text);line-height:1.85;margin-bottom:1rem;}
+.passage p:last-child{margin-bottom:0;}
+.pmark{font-family:var(--mono);font-size:11px;color:var(--teal);margin-right:4px;}
+.qcard{border:1px solid var(--border);border-radius:var(--r);padding:1.4rem 1.5rem;margin-bottom:1.2rem;background:var(--bg-card);}
+.qmeta{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--text-dim);margin-bottom:8px;text-transform:uppercase;}
+.qstem{font-size:14.5px;color:var(--text);font-weight:600;line-height:1.6;margin-bottom:1rem;}
+.qchoices{display:flex;flex-direction:column;gap:8px;}
+.qchoice{display:flex;gap:11px;align-items:flex-start;padding:11px 13px;border:1px solid var(--border);border-radius:7px;cursor:pointer;transition:border-color .15s,background .15s;}
+.qchoice:hover{border-color:var(--border-bright);}
+.qchoice input{margin-top:3px;accent-color:var(--teal);flex-shrink:0;}
+.qletter{font-family:var(--mono);font-size:12px;font-weight:bold;color:var(--text-muted);flex-shrink:0;width:16px;}
+.qletter.sm{color:var(--text-dim);}
+.qtext{font-size:13.5px;color:var(--text-muted);line-height:1.55;}
+.qchoice.is-correct{border-color:var(--green);background:rgba(46,213,115,.08);}
+.qchoice.is-correct .qtext,.qchoice.is-correct .qletter{color:var(--green);}
+.qchoice.is-wrong{border-color:var(--red);background:rgba(255,71,87,.07);}
+.qchoice.is-wrong .qtext,.qchoice.is-wrong .qletter{color:var(--red);}
+.qexp{display:none;margin-top:1rem;border-top:1px solid var(--border);padding-top:1rem;}
+.exprow{display:flex;gap:10px;align-items:flex-start;margin-bottom:9px;}
+.exprow div{font-size:12.5px;color:var(--text-muted);line-height:1.55;}
+.resultbox{background:linear-gradient(135deg,rgba(0,229,160,.08),transparent);border:1px solid rgba(0,229,160,.25);border-radius:var(--r);padding:1.6rem 1.8rem;margin-bottom:1.6rem;display:none;}
+.resultbox h3{font-family:var(--mono);font-size:20px;color:var(--text);margin-bottom:6px;}
+.resultbox .rb-skill{font-size:12.5px;color:var(--text-muted);margin-top:4px;}
+/* ---- visual components (flowcharts / diagrams / table-free) ---- */
+.vbox{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.5rem 1.6rem;margin:1.6rem 0 2rem;}
+.vhead{font-family:var(--mono);font-size:12px;letter-spacing:1px;color:var(--teal);text-transform:uppercase;margin-bottom:1.1rem;}
+.vnote{font-size:13px;color:var(--text-dim);line-height:1.6;margin:.2rem 0 1.1rem;}
+.flow{display:flex;flex-direction:column;gap:0;}
+.fstep{display:flex;gap:14px;align-items:flex-start;padding:0 0 1.2rem;position:relative;}
+.fstep:not(:last-child)::before{content:'';position:absolute;left:15px;top:30px;bottom:0;width:2px;background:linear-gradient(var(--teal),var(--border));opacity:.5;}
+.fnum{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:var(--teal-soft);border:1px solid var(--teal);color:var(--teal);font-family:var(--mono);font-size:13px;font-weight:bold;display:flex;align-items:center;justify-content:center;z-index:1;}
+.fbody{padding-top:3px;}
+.fbody b{display:block;font-size:14.5px;color:var(--text);margin-bottom:3px;font-family:var(--mono);}
+.fbody span{display:block;font-size:13.5px;color:var(--text-muted);line-height:1.65;}
+.ftime{display:inline-block;margin-top:5px;font-family:var(--mono);font-size:10px;color:var(--text-dim);border:1px solid var(--border);border-radius:99px;padding:1px 8px;}
+.tree .fnum{background:rgba(255,71,87,.08);border-color:var(--red);color:var(--red);}
+.tree .fstep.keep .fnum{background:var(--teal-soft);border-color:var(--teal);color:var(--teal);}
+.seg{display:flex;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:1rem;min-height:64px;}
+.segpart{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.7rem .5rem;text-align:center;background:var(--teal-soft);color:var(--teal);border-right:1px solid var(--border);}
+.segpart:last-child{border-right:none;}
+.segpart b{font-family:var(--mono);font-size:22px;}
+.segpart span{font-size:10.5px;color:var(--text-muted);line-height:1.3;margin-top:3px;}
+.vcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;}
+.vcard{background:var(--bg-mid);border:1px solid var(--border);border-left:3px solid var(--ca,var(--teal));border-radius:8px;padding:1rem 1.1rem;}
+.vc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.vc-top b{font-family:var(--mono);font-size:14px;color:var(--text);}
+.vcard p{font-size:12.5px;color:var(--text-muted);line-height:1.6;margin:0;}
+.vcard em{color:var(--teal);font-style:normal;font-weight:600;}
+.wt{font-family:var(--mono);font-size:9px;font-weight:bold;letter-spacing:.5px;padding:2px 7px;border-radius:99px;}
+.wt.hi{background:rgba(46,213,115,.14);color:var(--green);}
+.wt.med{background:rgba(245,166,35,.14);color:var(--gold);}
+.wt.lo{background:var(--bg-card);color:var(--text-dim);}
+.tags{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+.tag{border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem;background:var(--bg-mid);}
+.tag b{font-family:var(--mono);font-size:13px;display:block;margin-bottom:4px;}
+.tag span{font-size:12px;color:var(--text-muted);line-height:1.5;display:block;margin-bottom:7px;}
+.tag i{font-family:var(--mono);font-size:10px;font-style:normal;letter-spacing:.5px;padding:2px 8px;border-radius:99px;}
+.tag.keep{border-color:var(--green);}.tag.keep b{color:var(--green);}.tag.keep i{background:rgba(46,213,115,.14);color:var(--green);}
+.tag.cut b{color:var(--text);}.tag.cut i{background:rgba(255,71,87,.12);color:var(--red);}
+/* table-free renderers */
+.speclist{border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:1.2rem 0 1.8rem;}
+.spec-cap{font-family:var(--mono);font-size:10px;letter-spacing:.5px;color:var(--text-dim);background:var(--bg-mid);padding:8px 14px;border-bottom:1px solid var(--border);text-transform:uppercase;}
+.spec-row{display:grid;grid-template-columns:minmax(120px,34%) 1fr;gap:14px;padding:11px 14px;border-bottom:1px solid var(--border);}
+.spec-row:last-child{border-bottom:none;}
+.spec-k{font-size:13px;color:var(--text);font-weight:600;}
+.spec-v{font-size:13px;color:var(--text-muted);line-height:1.6;}
+.reccards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin:1.2rem 0 1.8rem;}
+.rec-card{background:var(--bg-mid);border:1px solid var(--border);border-radius:8px;padding:1rem 1.1rem;}
+.rec-title{font-family:var(--mono);font-size:13px;font-weight:bold;color:var(--teal);margin-bottom:8px;line-height:1.3;}
+.rec-field{font-size:12.5px;color:var(--text-muted);line-height:1.55;margin-bottom:6px;}
+.rec-field span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--text-dim);text-transform:uppercase;margin-bottom:1px;}
+.vsub{font-family:var(--mono);font-size:11px;letter-spacing:.5px;margin:1.2rem 0 .6rem;padding-left:10px;border-left:3px solid var(--ca,var(--teal));color:var(--ca,var(--teal));}
+.vsub:first-of-type{margin-top:0;}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.compare .vcard{border-left-width:3px;}
+.ladder{display:flex;flex-direction:column;gap:6px;}
+.lrow{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:var(--bg-mid);border-radius:7px;padding:9px 13px;border-left:4px solid var(--lc,var(--green));}
+.lwhat{font-size:13px;color:var(--text);}
+.lwhat span{display:block;font-family:var(--mono);font-size:10px;color:var(--text-dim);}
+.lcost{font-family:var(--mono);font-size:12px;color:var(--lc,var(--green));font-weight:bold;text-align:right;white-space:nowrap;}
+.cmob-bar{display:none;}
+@media(max-width:900px){
+ .seg{flex-direction:column;}.segpart{border-right:none;border-bottom:1px solid var(--border);}
+ .compare{grid-template-columns:1fr;}
+ .course{grid-template-columns:1fr;}
+ .readbar{top:64px;}
+ .cside{position:fixed;top:64px;left:0;right:0;bottom:0;height:auto;z-index:150;display:none;border-right:none;}
+ .cside.open{display:block;}
+ .cinner{padding:0 1.3rem;}
+ .cmain{padding:1.4rem 0 4rem;}
+ .ov-stats{grid-template-columns:repeat(2,1fr);}
+ .cmob-bar{display:flex;align-items:center;gap:10px;position:sticky;top:64px;z-index:140;background:var(--bg-card);border-bottom:1px solid var(--border);padding:10px 1.3rem;}
+ .cmob-bar button{background:var(--teal-soft);color:var(--teal);border:1px solid var(--teal);border-radius:6px;padding:7px 12px;font-family:var(--mono);font-size:11px;font-weight:bold;}
+}
+</style>
+</head>
+<body>
+<nav>
+ <a href="/cfactor/" class="n-logo">
+  <svg width="26" height="30" viewBox="0 0 30 36" style="image-rendering:pixelated"><rect x="2" y="6" width="26" height="12" fill="#00E5A0"/><rect x="6" y="7" width="8" height="7" fill="#0D1B2E"/><rect x="16" y="7" width="8" height="7" fill="#0D1B2E"/><rect x="8" y="9" width="4" height="4" fill="#F5A623"/><rect x="18" y="9" width="4" height="4" fill="#F5A623"/><rect x="9" y="17" width="12" height="2" fill="#0D1B2E"/><rect x="3" y="23" width="24" height="12" fill="#00E5A0"/></svg>
+  B<sup style="color:var(--gold);font-size:.7em;">3</sup>&nbsp;BIT BY BIT<span class="gold">&nbsp;PEDAGOGY</span>
+ </a>
+ <div class="n-links" id="nlinks">
+  <a href="/cfactor/">C-FACTOR HOME</a>
+  <a href="/cfactor/#books">BOOKS</a>
+  <a href="/cfactor/final-review/">FREE BOOK 7</a>
+  <a href="/cfactor/#anki">FREE ANKI</a>
+ </div>
+ <div class="nav-right">
+  <button class="n-buy" onclick="window.open('https://payhip.com/b/dAnUk','_blank')">GET THE SET · $65 ↗</button>
+  <button class="n-ham" id="hamBtn" onclick="document.getElementById('nlinks').classList.toggle('open')">☰</button>
+ </div>
+</nav>
+<div class="readbar" id="readbar"></div>
+
+<div class="cmob-bar">
+ <button onclick="document.getElementById('cside').classList.toggle('open')">☰ MENU</button>
+ <span id="cmob-title" style="font-family:var(--mono);font-size:11px;color:var(--text-muted);"></span>
+</div>
+
+<div class="course">
+ <aside class="cside" id="cside">
+  <div class="side-top">
+   <div class="ring" id="ring" style="position:relative"><span id="ringTxt">0%</span></div>
+   <div class="st-txt"><b>Your progress</b><span id="progTxt">0 of 13 chapters</span></div>
+  </div>
+  <div class="cnav-item is-home" id="nav-home" onclick="location.hash='home'"><span class="cn">★</span><span>Course overview</span></div>
+  <div id="cnav"></div>
+  <div class="mod"><div class="mod-h">Practice passages</div><div id="pnav"></div></div>
+  <div class="mod"><div class="mod-h">Resources</div>
+   <div class="cnav-item" onclick="window.open('/cfactor/Bit_by_Bit_MD_C-Factor_Book8_CARS_The_Reasoning_Engine.pdf','_blank')"><span class="cn">PDF</span><span>Download the book</span></div>
+   <div class="cnav-item" onclick="location.href='/cfactor/#books'"><span class="cn">$65</span><span>The science set</span></div>
+  </div>
+ </aside>
+
+ <main class="cmain" id="cmain"><div class="cinner"></div></main>
+</div>
+
+<footer>
+ <div class="f-logo">B<sup style="color:var(--gold);">3</sup> Bit by Bit Pedagogy · The C-Factor Series</div>
+ <div class="f-links">
+  <a href="/cfactor/">C-Factor Home</a>
+  <a href="/cfactor/cars/">Free CARS Course</a>
+  <a href="/cfactor/final-review/">Free Book 7</a>
+  <a href="https://payhip.com/b/dAnUk" target="_blank" rel="noopener">Get the Set ($65)</a>
+  <a href="https://www.instagram.com/bitbybitmd/" target="_blank" rel="noopener">Instagram</a>
+ </div>
+</footer>
+<div class="disclaimer">Bit by Bit Pedagogy is an independent educational platform. The C-Factor Series is a pre-med and MCAT review resource built on mechanism-first pedagogy. Not affiliated with, endorsed by, or connected to the AAMC, NBME, USMLE, or any exam body. Materials are for educational use only and do not guarantee score outcomes. © 2026 Bit by Bit Pedagogy.</div>
+
+<script defer src="/cfactor/cars/cars-course.js"></script>
+<script defer src="/cfactor/cars/cars-practice.js"></script>
+<script defer src="/cfactor/cars/cars-visuals.js"></script>
+<script>
+document.querySelectorAll('.n-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nlinks').classList.remove('open')));
+var esc=function(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');};
+var DONE_KEY='cars_done_v1';
+function getDone(){try{return JSON.parse(localStorage.getItem(DONE_KEY))||{};}catch(e){return {};}}
+function setDone(d){try{localStorage.setItem(DONE_KEY,JSON.stringify(d));}catch(e){}}
+function chapLabel(n){return n===0?'Intro':'Ch '+n;}
+var MODULES=[
+ {name:'Start Here',chs:[0],ca:'var(--gold)',desc:'How to use the book and the promise behind it.'},
+ {name:'Foundations',chs:[1],ca:'var(--teal)',desc:'What CARS actually is, and the one rule everything follows from.'},
+ {name:'Reading & Mapping',chs:[2,3],ca:'var(--blue)',desc:"The reader's eye and a repeatable four-move passage method."},
+ {name:'Questions & Traps',chs:[4,5,6,7],ca:'var(--purple)',desc:'Every question type, the four wrong-answer archetypes, and the elimination protocol.'},
+ {name:'Execution',chs:[8,9],ca:'var(--red)',desc:'Timing discipline and the predictable passage genres.'},
+ {name:'Program & Test Day',chs:[10,11,12],ca:'var(--green)',desc:'A six-week plan, test-day mindset, and the high-yield cheat sheet.'}
+];
+function wordsOf(c){var n=0;c.blocks.forEach(function(b){if(b.t==='p')n+=b.x.split(' ').length;else if(b.t==='ul')b.items.forEach(function(i){n+=i.split(' ').length;});else if(b.t==='box')n+=(b.x||'').split(' ').length;});return n;}
+function readTime(c){return Math.max(2,Math.round(wordsOf(c)/210));}
+
+function renderBlock(b){
+ if(b.t==='h') return '<h2 id="sec-'+(b.num||'').replace('.','-')+'"><span class="pn">#</span> '+esc(b.x)+'</h2>';
+ if(b.t==='p') return '<p>'+esc(b.x)+'</p>';
+ if(b.t==='ul') return '<ul>'+b.items.map(function(i){return '<li>'+esc(i)+'</li>';}).join('')+'</ul>';
+ if(b.t==='table') return renderTableFree(b);
+ if(b.t==='box'){
+  var k=b.kind==='disc'?'box-disc':(b.kind==='bridge'?'box-why':'box-hy');
+  var lbl=(b.kind==='disc'?'⚡ ':(b.kind==='bridge'?'🌉 ':'◆ '))+esc(b.label);
+  var title=b.title?'<div class="box-title">'+esc(b.title)+'</div>':'';
+  return '<div class="box '+k+'"><div class="box-label">'+lbl+'</div>'+title+'<p>'+esc(b.x)+'</p></div>';
+ }
+ return '';
+}
+function renderTableFree(b){
+ var rows=b.rows; if(!rows||rows.length<1) return '';
+ var head=rows[0], data=rows.slice(1); if(!data.length) data=[head],head=head.map(function(){return '';});
+ if(head.length<=2){
+  var cap=(head[0]||head[1])?'<div class="spec-cap">'+esc(head[0]||'')+(head[1]?' — '+esc(head[1]):'')+'</div>':'';
+  return '<div class="speclist">'+cap+data.map(function(r){return '<div class="spec-row"><div class="spec-k">'+esc(r[0]||'')+'</div><div class="spec-v">'+esc(r[1]||'')+'</div></div>';}).join('')+'</div>';
+ }
+ return '<div class="reccards">'+data.map(function(r){
+  var f='';for(var i=1;i<head.length;i++){if(r[i])f+='<div class="rec-field"><span>'+esc(head[i]||'')+'</span>'+esc(r[i])+'</div>';}
+  return '<div class="rec-card"><div class="rec-title">'+esc(r[0]||'')+'</div>'+f+'</div>';
+ }).join('')+'</div>';
+}
+
+function buildNav(){
+ var C=window.CARS_COURSE, done=getDone(), html='';
+ MODULES.forEach(function(mo){
+  html+='<div class="mod"><div class="mod-h">'+esc(mo.name)+'</div>';
+  mo.chs.forEach(function(n){var c=C[n];if(!c)return;
+   html+='<div class="cnav-item'+(done[n]?' done':'')+'" id="nav-'+n+'" onclick="location.hash=\'ch'+n+'\'"><span class="cn">'+chapLabel(n)+'</span><span>'+esc(c.title.length>46?c.title.slice(0,44)+'…':c.title)+'</span><span class="ck">✓</span></div>';
+  });
+  html+='</div>';
+ });
+ document.getElementById('cnav').innerHTML=html;
+ buildPnav(); updateProg();
+}
+function buildPnav(){
+ var P=window.CARS_PRACTICE||[], el=document.getElementById('pnav');
+ if(!P.length){el.innerHTML='<div class="cnav-item" style="cursor:default;color:var(--text-dim)"><span class="cn">—</span><span>Coming soon</span></div>';return;}
+ var scores=getScores();
+ el.innerHTML=P.map(function(p,i){
+  var s=scores[p.id]!=null?' <span class="ck" style="opacity:1;color:var(--teal)">'+scores[p.id]+'%</span>':'<span class="ck">✓</span>';
+  return '<div class="cnav-item" id="pnavi-'+p.id+'" onclick="location.hash=\'practice-'+p.id+'\'"><span class="cn">P'+(i+1)+'</span><span>'+esc(p.title)+'</span>'+s+'</div>';
+ }).join('');
+}
+function getScores(){try{return JSON.parse(localStorage.getItem('cars_practice_v1'))||{};}catch(e){return {};}}
+function updateProg(){
+ var C=window.CARS_COURSE, done=getDone();
+ var n=C.filter(function(c){return done[c.n];}).length, pct=Math.round(n/C.length*100);
+ document.getElementById('ring').style.setProperty('--p',pct);
+ document.getElementById('ringTxt').textContent=pct+'%';
+ document.getElementById('progTxt').textContent=n+' of '+C.length+' chapters';
+}
+function setActive(id){document.querySelectorAll('.cnav-item').forEach(function(e){e.classList.remove('active');});var el=document.getElementById(id);if(el)el.classList.add('active');}
+
+/* ---------- OVERVIEW ---------- */
+function renderHome(){
+ setActive('nav-home');
+ var C=window.CARS_COURSE, P=window.CARS_PRACTICE||[], done=getDone();
+ var totalMin=C.reduce(function(a,c){return a+readTime(c);},0);
+ var nDone=C.filter(function(c){return done[c.n];}).length;
+ var firstUndone=0; for(var i=0;i<C.length;i++){if(!done[i]){firstUndone=i;break;}}
+ document.getElementById('cmob-title').textContent='Course overview';
+ var h='';
+ h+='<div class="ov-hero">';
+ h+='<span class="badge badge-free">★ FREE · NO LOGIN · INTERACTIVE</span>';
+ h+='<h1 class="ph-title">The Reasoning Engine<br><em>MCAT CARS</em>, the whole method</h1>';
+ h+='<p class="ph-sub">CARS is the one section you can\'t memorize. This is the complete course: a repeatable four-move passage method, all eleven question types, the four wrong-answer archetypes, an elimination protocol, a six-week program, and original practice passages with validated answers. Work through it in your browser — your progress saves automatically.</p>';
+ h+='<div class="btn-row"><a class="btn-p" href="#ch'+firstUndone+'">'+(nDone?'CONTINUE · '+chapLabel(firstUndone):'START THE COURSE →')+'</a>';
+ if(P.length)h+='<a class="btn-o" href="#practice-'+P[0].id+'">TRY A PRACTICE PASSAGE →</a>';
+ h+='</div></div>';
+ h+='<div class="ov-stats"><div class="ov-stat"><b>13</b><span>chapters</span></div><div class="ov-stat"><b>~'+totalMin+'</b><span>min of reading</span></div><div class="ov-stat"><b>'+P.length+'</b><span>practice passages</span></div><div class="ov-stat"><b>6-wk</b><span>training program</span></div></div>';
+ h+='<div class="box box-disc"><div class="box-label">⚡ THE ONE RULE THE WHOLE COURSE IS BUILT ON</div><div class="box-title">The passage is the only authority.</div><p>For the duration of a passage, your outside knowledge does not count — the author wins. An answer that is true in the real world but contradicts the passage is wrong; an answer that is false in the real world but matches the passage is correct. It\'s a trainable switch, not a personality change.</p></div>';
+ h+='<h2 style="font-family:var(--mono);font-size:20px;margin:2.4rem 0 .4rem;color:var(--text)">The six modules</h2>';
+ h+='<div class="modcards">';
+ MODULES.forEach(function(mo){
+  var t=mo.chs.reduce(function(a,n){return a+readTime(C[n]);},0);
+  var dn=mo.chs.filter(function(n){return done[n];}).length;
+  h+='<div class="modcard" style="--ca:'+mo.ca+'" onclick="location.hash=\'ch'+mo.chs[0]+'\'"><div class="mc-n">'+mo.chs.map(chapLabel).join(' · ')+' · ~'+t+' min</div><h4>'+esc(mo.name)+'</h4><p>'+esc(mo.desc)+'</p><div class="mc-n" style="margin-top:10px;color:'+(dn===mo.chs.length?'var(--green)':'var(--text-dim)')+'">'+dn+'/'+mo.chs.length+' done</div></div>';
+ });
+ h+='</div>';
+ h+='<div class="cta-strip"><div><h3>★ The same method, applied to the sciences</h3><p>If this free CARS course works for you, the six-book C-Factor set is the mechanism-first version for every other section — ~2,220 pages, $65 one-time.</p></div><div style="display:flex;flex-direction:column;align-items:center;gap:10px"><div class="cta-price">$65<small>ONE-TIME · PAYHIP</small></div><a href="https://payhip.com/b/dAnUk" target="_blank" rel="noopener" class="btn-gold">SEE THE SET ↗</a></div></div>';
+ setMain(h);
+}
+
+/* ---------- CHAPTER ---------- */
+function render(n){
+ var C=window.CARS_COURSE, c=C[n]; if(!c){renderHome();return;}
+ var done=getDone(); setActive('nav-'+n);
+ document.getElementById('cmob-title').textContent=chapLabel(n)+' · '+c.title;
+ var part=''; MODULES.forEach(function(mo){if(mo.chs.indexOf(n)>=0)part=mo.name;});
+ var secs=c.blocks.filter(function(b){return b.t==='h'&&b.num;});
+ var h='';
+ h+='<div class="crumb"><a href="#home">CARS Course</a> <span>/</span> '+esc(part)+'</div>';
+ h+='<div class="cmeta"><span>'+(n===0?'Introduction':'Chapter '+n+' of 12')+'</span><span class="dot">•</span><span>~'+readTime(c)+' min read</span>'+(done[n]?'<span class="dot">•</span><span style="color:var(--green)">✓ completed</span>':'')+'</div>';
+ h+='<h1 class="ph-title">'+esc(c.title)+'</h1>';
+ if(c.subtitle) h+='<p class="ph-sub" style="margin-bottom:1rem">'+esc(c.subtitle)+'</p>';
+ if(c.objectives&&c.objectives.length) h+='<div class="obj-box"><div class="box-label">◎ WHAT YOU\'LL BE ABLE TO DO</div><ul>'+c.objectives.map(function(o){return '<li>'+esc(o)+'</li>';}).join('')+'</ul></div>';
+ if(secs.length>1) h+='<div class="chips">'+secs.map(function(b){return '<span class="chip" onclick="jump(\'sec-'+(b.num||'').replace('.','-')+'\')">'+esc(b.num)+' '+esc(b.x.length>34?b.x.slice(0,32)+'…':b.x)+'</span>';}).join('')+'</div>';
+ var VIS=window.CARS_VIS||{}, SUP=window.CARS_SUP||{}, curSec=null, body='';
+ c.blocks.forEach(function(b){
+  if(b.t==='h'){ body+=renderBlock(b); curSec=b.num||null; if(VIS[n]&&curSec&&VIS[n][curSec]) body+=VIS[n][curSec]; return; }
+  if(b.t==='table'){ if(SUP[n]&&curSec&&SUP[n].indexOf(curSec)>=0) return; body+=renderTableFree(b); return; }
+  body+=renderBlock(b);
+ });
+ h+='<div class="prose">'+body+'</div>';
+ var prev=n>0?'<a class="btn-o" href="#ch'+(n-1)+'">‹ '+chapLabel(n-1)+'</a>':'<a class="btn-o" href="#home">‹ Overview</a>';
+ var next=n<C.length-1?'<a class="btn-o" href="#ch'+(n+1)+'">'+chapLabel(n+1)+' ›</a>':'<a class="btn-gold" href="/cfactor/#books">Get the science set ($65) ↗</a>';
+ var md=done[n];
+ h+='<div class="cnav-foot">'+prev+'<button class="markbtn'+(md?' is-done':'')+'" id="markBtn" onclick="toggleDone('+n+')">'+(md?'✓ COMPLETED':'MARK COMPLETE')+'</button>'+next+'</div>';
+ setMain(h);
+}
+function jump(id){var e=document.getElementById(id);if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
+function toggleDone(n){
+ var d=getDone(); d[n]=!d[n]; if(!d[n])delete d[n]; setDone(d);
+ var nv=document.getElementById('nav-'+n); if(nv)nv.classList.toggle('done',!!d[n]);
+ var b=document.getElementById('markBtn'); if(b){var on=!!d[n]; b.classList.toggle('is-done',on); b.textContent=on?'✓ COMPLETED':'MARK COMPLETE';}
+ updateProg();
+}
+
+/* ---------- PRACTICE ---------- */
+function renderPractice(id){
+ var P=window.CARS_PRACTICE||[], p=null;
+ for(var i=0;i<P.length;i++){if(P[i].id===id)p=P[i];}
+ if(!p){renderHome();return;}
+ setActive('pnavi-'+id);
+ document.getElementById('cmob-title').textContent='Practice · '+p.title;
+ var h='';
+ h+='<div class="crumb"><a href="#home">CARS Course</a> <span>/</span> Practice</div>';
+ h+='<div class="cmeta"><span>Practice passage</span><span class="dot">•</span><span>'+esc(p.genre)+'</span><span class="dot">•</span><span>'+p.questions.length+' questions</span></div>';
+ h+='<h1 class="ph-title">'+esc(p.title)+'</h1>';
+ h+='<p class="note" style="margin-bottom:1.4rem">'+esc(p.origin)+' · Run the four-move method first, then answer. The passage is the only authority.</p>';
+ h+='<div class="resultbox" id="resultbox"></div>';
+ h+='<div class="passage">'+p.paras.map(function(par,ix){return '<p><span class="pmark">['+(ix+1)+']</span> '+esc(par)+'</p>';}).join('')+'</div>';
+ p.questions.forEach(function(q,qi){
+  h+='<div class="qcard" id="q-'+qi+'"><div class="qmeta">Q'+(qi+1)+' · '+esc(q.skill)+' · '+esc(q.type)+'</div><div class="qstem">'+esc(q.stem)+'</div><div class="qchoices">';
+  q.choices.forEach(function(c,ci){
+   h+='<label class="qchoice" id="c-'+qi+'-'+ci+'"><input type="radio" name="q'+qi+'" value="'+ci+'" onchange="pick('+qi+','+ci+')"><span class="qletter">'+String.fromCharCode(65+ci)+'</span><span class="qtext">'+esc(c)+'</span></label>';
+  });
+  h+='</div><div class="qexp" id="exp-'+qi+'"></div></div>';
+ });
+ h+='<div class="cnav-foot"><button class="markbtn" id="checkBtn" onclick="checkPractice(\''+p.id+'\')">CHECK ANSWERS</button><a class="btn-o" href="#ch5">Review the archetypes ›</a></div>';
+ setMain(h); window._picks={};
+}
+function pick(qi,ci){window._picks=window._picks||{};window._picks[qi]=ci;}
+function checkPractice(id){
+ var P=window.CARS_PRACTICE||[], p=null;
+ for(var i=0;i<P.length;i++){if(P[i].id===id)p=P[i];}
+ if(!p)return; var picks=window._picks||{}, correct=0, bySkill={};
+ p.questions.forEach(function(q,qi){
+  var chosen=picks.hasOwnProperty(qi)?picks[qi]:-1, ok=chosen===q.answer;
+  bySkill[q.skill]=bySkill[q.skill]||[0,0]; bySkill[q.skill][1]++; if(ok)bySkill[q.skill][0]++;
+  for(var ci=0;ci<q.choices.length;ci++){var el=document.getElementById('c-'+qi+'-'+ci);el.classList.remove('is-correct','is-wrong');if(ci===q.answer)el.classList.add('is-correct');else if(ci===chosen)el.classList.add('is-wrong');}
+  if(ok)correct++;
+  var exp=document.getElementById('exp-'+qi);
+  exp.innerHTML=q.choices.map(function(c,ci){var tag=ci===q.answer?'<b style="color:var(--green)">✓ Correct</b>':'<b style="color:var(--red)">✗</b>';return '<div class="exprow"><span class="qletter sm">'+String.fromCharCode(65+ci)+'</span><div>'+tag+' — '+esc(q.why[ci])+'</div></div>';}).join('');
+  exp.style.display='block';
+ });
+ var pct=Math.round(correct/p.questions.length*100);
+ var skillTxt=Object.keys(bySkill).map(function(s){return esc(s)+': '+bySkill[s][0]+'/'+bySkill[s][1];}).join(' &nbsp;·&nbsp; ');
+ var rb=document.getElementById('resultbox');
+ rb.innerHTML='<h3>'+correct+' / '+p.questions.length+' correct &nbsp;<span style="color:var(--teal)">'+pct+'%</span></h3><div class="rb-skill">By skill — '+skillTxt+'</div><div style="margin-top:12px"><button class="btn-o" onclick="renderPractice(\''+id+'\')" style="padding:9px 16px">RETRY ↻</button></div>';
+ rb.style.display='block';
+ try{var d=getScores();d[id]=pct;localStorage.setItem('cars_practice_v1',JSON.stringify(d));}catch(e){}
+ buildPnav();
+ rb.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+/* ---------- shell ---------- */
+function setMain(html){var m=document.getElementById('cmain');m.innerHTML='<div class="cinner">'+html+'</div>';window.scrollTo(0,0);document.getElementById('cside').classList.remove('open');updateReadbar();}
+function updateReadbar(){var d=document.documentElement,max=d.scrollHeight-d.clientHeight;document.getElementById('readbar').style.width=(max>0?(d.scrollTop/max*100):0)+'%';}
+window.addEventListener('scroll',updateReadbar,{passive:true});
+document.addEventListener('keydown',function(e){
+ if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+ var m=(location.hash||'').match(/ch(\d+)/);if(!m)return;var n=parseInt(m[1]);
+ if(e.key==='ArrowRight'&&n<window.CARS_COURSE.length-1)location.hash='ch'+(n+1);
+ if(e.key==='ArrowLeft'){if(n>0)location.hash='ch'+(n-1);else location.hash='home';}
+});
+function route(){
+ if(!window.CARS_COURSE)return;
+ var hs=location.hash||'';
+ var hp=hs.match(/practice-([\w-]+)/); if(hp){renderPractice(hp[1]);return;}
+ if(hs.indexOf('home')>=0||hs===''||hs==='#'){renderHome();return;}
+ var m=hs.match(/ch(\d+)/); var n=m?parseInt(m[1]):0;
+ if(n<0||n>=window.CARS_COURSE.length)n=0;
+ render(n);
+}
+function init(){if(!window.CARS_COURSE||!window.CARS_PRACTICE){setTimeout(init,40);return;}buildNav();route();}
+window.addEventListener('hashchange',route);
+document.addEventListener('DOMContentLoaded',init);
+init();
+</script>
+</body>
+</html>
