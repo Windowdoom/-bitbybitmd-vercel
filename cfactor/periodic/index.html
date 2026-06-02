@@ -22,6 +22,7 @@
 .cell:hover{transform:translateY(-4px) scale(1.12);z-index:5;border-color:var(--cc);background:linear-gradient(155deg,color-mix(in srgb,var(--cc) 42%,var(--bg)),color-mix(in srgb,var(--cc) 22%,var(--bg)));box-shadow:0 10px 26px color-mix(in srgb,var(--cc) 45%,transparent),0 0 0 1px var(--cc);}
 .cell.hl{border-color:var(--cc);background:linear-gradient(155deg,color-mix(in srgb,var(--cc) 34%,var(--bg)),color-mix(in srgb,var(--cc) 16%,var(--bg)));box-shadow:0 0 14px color-mix(in srgb,var(--cc) 30%,transparent);}
 .pt.hovering .cell:not(.hl):not(:hover){opacity:.28;filter:saturate(.6);}
+.cell.dim2{opacity:.18;filter:saturate(.4);}
 /* panel */
 .panel{position:sticky;top:80px;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.4rem;min-height:420px;}
 .panel .ptile{width:88px;height:88px;border-radius:10px;display:flex;flex-direction:column;justify-content:center;align-items:center;border:2px solid var(--cc);background:color-mix(in srgb,var(--cc) 18%,var(--bg));margin-bottom:1rem;}
@@ -35,9 +36,19 @@
 .panel .cta{margin-top:1rem;width:100%;text-align:center;display:block;}
 .panel .ph{color:var(--text-dim);font-size:13px;line-height:1.6;}
 /* legend */
-.legend{display:flex;flex-wrap:wrap;gap:6px 14px;max-width:1280px;margin:0 auto;padding:.4rem 1.6rem 1.4rem;}
+.pt-modes{max-width:1280px;margin:0 auto;padding:.2rem 1.6rem 1rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.pt-modes .pm-lbl{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--text-dim);margin-right:4px;}
+.pm-btn{font-family:var(--mono);font-size:11.5px;color:var(--text-muted);background:var(--bg-card);border:1px solid var(--border);border-radius:99px;padding:7px 15px;transition:all .15s;}
+.pm-btn:hover{border-color:var(--border-bright);color:var(--text);}
+.pm-btn.on{background:var(--teal);border-color:var(--teal);color:var(--bg);font-weight:bold;}
+.legend{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;max-width:1280px;margin:0 auto;padding:.4rem 1.6rem 1.4rem;}
 .legend span{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10.5px;color:var(--text-muted);}
+.legend span.clk{cursor:pointer;border:1px solid transparent;border-radius:99px;padding:3px 8px;transition:all .15s;}
+.legend span.clk:hover{border-color:var(--border-bright);}
+.legend span.clk.sel{border-color:var(--cc);background:color-mix(in srgb,var(--cc) 14%,transparent);color:var(--text);}
 .legend i{width:11px;height:11px;border-radius:3px;background:var(--cc);border:1px solid var(--cc);}
+.legend .grad{width:200px;height:12px;border-radius:6px;background:linear-gradient(90deg,#4D9FFF,#2ED573,#F5A623,#FF4757);}
+.legend .gradlab{font-family:var(--mono);font-size:10px;color:var(--text-dim);}
 /* deep dive */
 .dd{position:fixed;inset:0;z-index:300;background:rgba(5,12,22,.75);backdrop-filter:blur(4px);overflow-y:auto;display:none;}
 .dd.open{display:block;}
@@ -79,6 +90,13 @@
  <span class="badge badge-free">★ FREE · INTERACTIVE</span>
  <h1 class="ph-title">The <em>living</em> periodic table</h1>
  <p class="ph-sub"><b>Hover</b> an element to see its story — and watch its group and period light up so you start <i>seeing the pattern</i>. <b>Click</b> any element for a deep dive into its role across medicine, chemistry, physics, engineering, and nature.</p>
+</div>
+
+<div class="pt-modes">
+ <span class="pm-lbl">COLOR BY</span>
+ <button class="pm-btn on" data-mode="cat" onclick="setMode('cat')">Category</button>
+ <button class="pm-btn" data-mode="en" onclick="setMode('en')">Electronegativity</button>
+ <button class="pm-btn" data-mode="state" onclick="setMode('state')">State at 25°C</button>
 </div>
 
 <div class="pt-wrap">
@@ -155,10 +173,22 @@ function buildGrid(){var g=document.getElementById('pt');var h='';
   cell.addEventListener('click',function(){openDeep(cell.dataset.sym);});
  });
  g.addEventListener('mouseleave',function(){g.classList.remove('hovering');cells.forEach(function(o){o.classList.remove('hl');});});
- // legend
- var seen={},lg='';PT.forEach(function(el){if(!seen[el.c]){seen[el.c]=1;lg+='<span style="--cc:'+COL[el.c]+'"><i></i>'+CATNAME[el.c]+'</span>';}});
- document.getElementById('legend').innerHTML=lg;
+ CELLS=cells;recolor();renderLegend();
 }
+var MODE='cat',FILTER=null,CELLS=null;
+var STATECOL={solid:'#4D9FFF',liquid:'#00E5A0',gas:'#F5A623',synthetic:'#A855F7'};
+var STATENAME={solid:'Solid',liquid:'Liquid',gas:'Gas',synthetic:'Synthetic / made in lab'};
+function _mix(c1,c2,t){var p=function(h){return [parseInt(h.substr(1,2),16),parseInt(h.substr(3,2),16),parseInt(h.substr(5,2),16)];};var a=p(c1),b=p(c2),L=function(x,y){return Math.round(x+(y-x)*t);};return 'rgb('+L(a[0],b[0])+','+L(a[1],b[1])+','+L(a[2],b[2])+')';}
+function enColor(v){var t=Math.max(0,Math.min(1,(v-0.7)/3.28)),st=['#4D9FFF','#2ED573','#F5A623','#FF4757'],seg=t*3,i=Math.floor(seg);if(i>=3)return st[3];return _mix(st[i],st[i+1],seg-i);}
+function colorFor(el){if(MODE==='en')return el.en==null?'#3b4d5e':enColor(el.en);if(MODE==='state')return STATECOL[el.st];return COL[el.c];}
+function recolor(){if(!CELLS)return;CELLS.forEach(function(cell){cell.style.setProperty('--cc',colorFor(bySym(cell.dataset.sym)));});applyFilter();}
+function applyFilter(){if(!CELLS)return;CELLS.forEach(function(cell){cell.classList.toggle('dim2',MODE==='cat'&&FILTER&&bySym(cell.dataset.sym).c!==FILTER);});}
+function toggleFilter(cat){FILTER=(FILTER===cat?null:cat);renderLegend();applyFilter();}
+function setMode(m){MODE=m;FILTER=null;document.querySelectorAll('.pm-btn').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-mode')===m);});recolor();renderLegend();}
+function renderLegend(){var L=document.getElementById('legend');
+ if(MODE==='cat'){var seen={},lg='';PT.forEach(function(el){if(!seen[el.c]){seen[el.c]=1;lg+='<span class="clk'+(FILTER===el.c?' sel':'')+'" style="--cc:'+COL[el.c]+'" onclick="toggleFilter(\''+el.c+'\')"><i></i>'+CATNAME[el.c]+'</span>';}});L.innerHTML=lg;}
+ else if(MODE==='en'){L.innerHTML='<span class="gradlab">0.7 less electronegative</span><span class="grad"></span><span class="gradlab">more 3.98</span><span class="gradlab" style="margin-left:12px">▪ no defined value</span>';}
+ else{var lg='';Object.keys(STATECOL).forEach(function(k){lg+='<span style="--cc:'+STATECOL[k]+'"><i></i>'+STATENAME[k]+'</span>';});L.innerHTML=lg;}}
 function showPanel(sym){var el=bySym(sym);if(!el)return;var d=(window.PT_DEEP||{})[sym]||{};var c=COL[el.c];var f=fill(el.n);
  document.getElementById('panel').innerHTML=
   '<div class="ptile" style="--cc:'+c+'"><span class="s" style="color:'+c+'">'+el.s+'</span><span class="z">'+el.n+'</span></div>'+
@@ -166,6 +196,8 @@ function showPanel(sym){var el=bySym(sym);if(!el)return;var d=(window.PT_DEEP||{
   bohr(el.n,150,c)+
   '<div class="rowf"><span>Atomic mass</span><b>'+el.m+'</b></div>'+
   '<div class="rowf"><span>Shells</span><b>'+f.shells.join(', ')+'</b></div>'+
+  (el.en!=null?'<div class="rowf"><span>Electronegativity</span><b>'+el.en+'</b></div>':'')+
+  '<div class="rowf"><span>State (25°C)</span><b>'+(STATENAME[el.st]||el.st)+'</b></div>'+
   '<div class="rowf"><span>Discovered</span><b>'+esc(el.d)+'</b></div>'+
   '<div class="rowf"><span>Name origin</span><b style="font-weight:400;color:var(--text-muted)">'+esc(el.o)+'</b></div>'+
   (d.nat?'<div class="rowf"><span>In nature</span><b style="font-weight:400;color:var(--text-muted)">'+esc(d.nat)+'</b></div>':'')+
