@@ -45,7 +45,9 @@ nav{position:sticky;top:0;z-index:200;height:64px;display:flex;align-items:cente
 .n-cta:hover{background:var(--teal-soft);}
 .n-buy{background:var(--gold);color:var(--bg);border:none;padding:8px 14px;border-radius:var(--r);font-family:var(--mono);font-size:11px;font-weight:bold;letter-spacing:.7px;transition:all .2s;cursor:pointer;}
 .n-buy:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 4px 15px rgba(245,166,35,.3);}
-.n-ham{display:none;background:none;border:none;color:var(--text-muted);font-size:22px;line-height:1;cursor:pointer;}
+.n-ham{display:none;position:relative;align-items:center;justify-content:center;width:40px;height:40px;background:none;border:none;color:var(--text-muted);font-size:22px;line-height:1;border-radius:9px;margin-left:8px;cursor:pointer;transition:color .2s,background .2s;}
+.n-ham:hover{color:var(--teal);background:var(--teal-soft);}
+.n-ham::before{content:'';position:absolute;left:-9px;top:50%;transform:translateY(-50%);height:20px;width:1px;background:var(--border);}
 
 /* TICKER */
 .ticker{background:var(--bg-card);border-bottom:1px solid var(--border);padding:8px 2rem;display:flex;gap:10px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--text-muted);overflow:hidden;white-space:nowrap;}
@@ -164,7 +166,7 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  .n-links{display:none;position:absolute;top:64px;left:0;right:0;background:var(--bg-card);border-bottom:1px solid var(--border);flex-direction:column;padding:1rem 0;}
  .n-links a{padding:.9rem 2rem;width:100%;border-bottom:1px solid var(--border);}
  .n-links.open{display:flex;}
- .n-ham{display:block;}
+ .n-ham{display:flex;}
  .n-buy{display:none;}
  .h-btns{flex-direction:column;}
  .btn-p,.btn-o,.btn-gold{width:100%;text-align:center;}
