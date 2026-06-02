@@ -1,4 +1,4 @@
-/* CARS practice — original passages written for Bit by Bit MD.
+/* CARS practice - original passages written for Bit by Bit MD.
    No copyrighted text is reproduced; topics are drawn from the public domain of ideas.
    Every answer is validated against the passage (the passage is the only authority),
    and each distractor is tagged with the wrong-answer archetype it illustrates. */
@@ -10,9 +10,9 @@ window.CARS_PRACTICE=[
  title:"The Restorer's Dilemma",
  paras:[
   "When a Renaissance fresco emerges from beneath centuries of grime, the public sees a miracle of recovery; conservators see a series of irreversible decisions. The popular conception of restoration imagines a painting returned to an original state, as if time were a varnish that could simply be lifted. But there is no original state to return to. The pigments the artist mixed have shifted in hue; the surface he intended to be seen by candlelight now hangs under electric glare; and the very damage the restorer removes was, for generations of viewers, part of what the painting was. To strip a work back to its presumed beginning is not to recover the past but to manufacture one version of it.",
-  "Defenders of aggressive cleaning argue that the conservator merely removes what the artist did not put there — the soot, the discolored varnish, the clumsy overpaint of earlier restorers. This sounds like a principle of humility, a refusal to add. Yet the decision about where the artist's work ends and later accretion begins is itself an interpretation, and frequently a contested one. A darkened glaze may be dirt, or it may be the artist's deliberate toning; the cleaning that reveals a brilliant blue may also erase the muted harmony the painter spent his final months achieving. The restorer who claims only to subtract is, in fact, choosing among possible paintings.",
+  "Defenders of aggressive cleaning argue that the conservator merely removes what the artist did not put there - the soot, the discolored varnish, the clumsy overpaint of earlier restorers. This sounds like a principle of humility, a refusal to add. Yet the decision about where the artist's work ends and later accretion begins is itself an interpretation, and frequently a contested one. A darkened glaze may be dirt, or it may be the artist's deliberate toning; the cleaning that reveals a brilliant blue may also erase the muted harmony the painter spent his final months achieving. The restorer who claims only to subtract is, in fact, choosing among possible paintings.",
   "None of this is an argument for neglect. A fresco left to flake is not thereby kept authentic; it is simply lost more slowly. The point is narrower: that intervention and preservation are not opposites, and that every act of conservation, however cautious, is also an act of authorship. The conservator's signature is invisible precisely because it takes the form of the work itself.",
-  "What follows is not paralysis but candor. If restoration is unavoidable interpretation, then the honest conservator documents her choices rather than concealing them, treats reversibility as a duty rather than a courtesy, and resists the seduction of the dramatic reveal that delights donors and the press. The worst restorations are not the timid ones but the confident ones — those undertaken by people certain they were merely uncovering what was always there.",
+  "What follows is not paralysis but candor. If restoration is unavoidable interpretation, then the honest conservator documents her choices rather than concealing them, treats reversibility as a duty rather than a courtesy, and resists the seduction of the dramatic reveal that delights donors and the press. The worst restorations are not the timid ones but the confident ones - those undertaken by people certain they were merely uncovering what was always there.",
   "The public, for its part, would do well to abandon the fantasy of the pristine original. A painting is not a fixed object briefly obscured but a thing with a history, and that history includes its wounds. To ask which state is the true one is to ask a question the work cannot answer. There is no moment to which a five-hundred-year-old surface 'belongs,' only a series of presents, each of which saw something the others could not."
  ],
  questions:[
@@ -31,7 +31,7 @@ window.CARS_PRACTICE=[
     "Extreme language. The author explicitly says this is 'not an argument for neglect' and that 'always damages' overstates a position the passage never takes.",
     "Correct. Paragraphs 2–4 build to the claim that 'every act of conservation … is also an act of authorship,' which the honest conservator should document rather than conceal.",
     "Faulty use of detail. Lighting appears once in paragraph 1 as one illustration; it is not the passage's thesis.",
-    "Distortion. The author rejects the idea of a recoverable 'intended state' — 'there is no original state to return to.'"
+    "Distortion. The author rejects the idea of a recoverable 'intended state' - 'there is no original state to return to.'"
    ]
   },
   {
@@ -48,7 +48,7 @@ window.CARS_PRACTICE=[
    why:[
     "Out of scope. No defender in the passage claims to 'improve' the colors; the claim is one of subtraction, not improvement.",
     "Faulty use of detail. Documentation is the author's own recommendation in paragraph 4, not a claim made by the defenders.",
-    "Correct. Paragraph 2: defenders argue the conservator 'merely removes what the artist did not put there — the soot, the discolored varnish … '",
+    "Correct. Paragraph 2: defenders argue the conservator 'merely removes what the artist did not put there - the soot, the discolored varnish … '",
     "Distortion. 'Returning to the intended state' is the popular conception the author critiques, not what the defenders themselves claim."
    ]
   },
@@ -64,7 +64,7 @@ window.CARS_PRACTICE=[
    ],
    answer:0,
    why:[
-    "Correct. The paragraph guards against a misreading ('not an argument for neglect') and states 'The point is narrower' — a qualification that limits scope.",
+    "Correct. The paragraph guards against a misreading ('not an argument for neglect') and states 'The point is narrower' - a qualification that limits scope.",
     "Distortion. The paragraph does not raise a fresh objection; it heads off a misinterpretation of the author's own view.",
     "Faulty use of detail / out of scope. No historical evidence is offered anywhere in the passage.",
     "Distortion. The author refines the claim; the argument is sharpened, not abandoned."
@@ -82,7 +82,7 @@ window.CARS_PRACTICE=[
    ],
    answer:3,
    why:[
-    "Distortion. The author says the claim only 'sounds like' humility, then argues it is actually an interpretation — he is not persuaded.",
+    "Distortion. The author says the claim only 'sounds like' humility, then argues it is actually an interpretation - he is not persuaded.",
     "Out of scope / contradicted. The author plainly cares about outcomes, devoting paragraph 4 to better practice.",
     "Extreme language. The critique is pointed but measured; 'contemptuous' overshoots the author's even tone.",
     "Correct. He doubts the 'only subtract' claim ('choosing among possible paintings') yet treats the boundary problem as genuinely hard."
@@ -101,7 +101,7 @@ window.CARS_PRACTICE=[
    answer:1,
    why:[
     "Out of scope. The passage never claims artists anticipated restoration; the argument does not rest on it.",
-    "Correct. The claim that there is no single 'true' state only follows if a work's identity includes its later history — 'a thing with a history, and that history includes its wounds.'",
+    "Correct. The claim that there is no single 'true' state only follows if a work's identity includes its later history - 'a thing with a history, and that history includes its wounds.'",
     "Extreme / distortion. The author faults the 'confident,' not the dishonest; bad faith is never asserted.",
     "Faulty use of detail. Donors and the press appear once as a 'seduction,' not as the principal cause."
    ]
@@ -120,7 +120,7 @@ window.CARS_PRACTICE=[
    why:[
     "Distortion / contradicted. This enacts the 'fantasy of the pristine original' the author urges the public to abandon.",
     "Distortion. The author explicitly rejects neglect: a work left to flake 'is simply lost more slowly.'",
-    "Correct. This matches paragraph 4 directly — reversibility 'as a duty' and documenting choices 'rather than concealing them.'",
+    "Correct. This matches paragraph 4 directly - reversibility 'as a duty' and documenting choices 'rather than concealing them.'",
     "Distortion / contradicted. There is 'no original state to return to,' so a 'single intended version' is precisely what the author denies."
    ]
   }
@@ -133,10 +133,10 @@ window.CARS_PRACTICE=[
  title:"The Logic of the Gift",
  paras:[
   "We are accustomed to setting the gift against the market: the gift generous and free, the market cold and calculating. The contrast flatters the gift, but it misunderstands it. A gift is not the absence of accounting; it is accounting of another kind, and often a more exacting one. The merchant's debt is discharged at the register and forgotten. The debt created by a gift is rarely so easily closed, and that is precisely the point of giving.",
-  "To receive a gift is to incur an obligation — to reciprocate, and to reciprocate well. In many societies the most lavish giver is not the most selfless figure but the most powerful one, because a gift that cannot be matched leaves its recipient diminished, marked as someone who could not keep pace. Generosity, in such settings, is a way of accumulating not goods but standing. The one who gives most is owed most, and being owed is a form of authority.",
+  "To receive a gift is to incur an obligation - to reciprocate, and to reciprocate well. In many societies the most lavish giver is not the most selfless figure but the most powerful one, because a gift that cannot be matched leaves its recipient diminished, marked as someone who could not keep pace. Generosity, in such settings, is a way of accumulating not goods but standing. The one who gives most is owed most, and being owed is a form of authority.",
   "It would be a mistake to conclude from this that givers are merely selfish, that beneath the warm surface lies a cold ledger. That reading simply smuggles the market back in. The argument is not that generosity is a disguise for calculation; it is that generosity and obligation are not opposites at all. The gift binds people together precisely because it is offered freely and yet must be returned. Its freedom and its compulsion are the same gesture seen from two sides.",
   "The market, by contrast, is designed to leave no residue. When the bill is paid, the parties are quits; they may walk away owing each other nothing, and that is its convenience. But the same feature that makes the market efficient makes it thin. It can move goods between strangers without ever turning them into anything more than strangers. The gift is slower and more entangling, and the entanglement is the product.",
-  "To praise the gift as pure altruism, then, is to miss its social genius. It is not the opposite of exchange but a more demanding species of it — a technology for making and holding people together, complete with its own debts, hierarchies, and rules. The gift is freest where it binds the most."
+  "To praise the gift as pure altruism, then, is to miss its social genius. It is not the opposite of exchange but a more demanding species of it - a technology for making and holding people together, complete with its own debts, hierarchies, and rules. The gift is freest where it binds the most."
  ],
  questions:[
   {
@@ -205,7 +205,7 @@ window.CARS_PRACTICE=[
    ],
    answer:1,
    why:[
-    "Distortion. The author says praising the gift as 'pure altruism' is 'to miss its social genius' — he disagrees.",
+    "Distortion. The author says praising the gift as 'pure altruism' is 'to miss its social genius' - he disagrees.",
     "Correct. He admires the gift ('social genius') yet corrects the altruism view, calling it 'a mistake' to read it that way.",
     "Extreme language. The tone is analytic and even appreciative, not bitter or contemptuous.",
     "Out of scope / contradicted. The author is clearly engaged, devoting the whole passage to the question."
@@ -255,9 +255,9 @@ window.CARS_PRACTICE=[
  origin:"Original passage. No copyrighted source text is reproduced.",
  title:"The Tyranny of the Turning Point",
  paras:[
-  "Histories love a turning point. The decisive battle, the pivotal invention, the year in which everything changed — these are the hinges on which the story of the past is made to swing. They are satisfying because they are legible: they convert the vast, diffuse motion of events into a single dramatic instant a reader can hold in mind. The trouble is that the past, as it was lived, almost never offered such instants. The turning point is rarely something the historian finds. It is something the historian makes.",
+  "Histories love a turning point. The decisive battle, the pivotal invention, the year in which everything changed - these are the hinges on which the story of the past is made to swing. They are satisfying because they are legible: they convert the vast, diffuse motion of events into a single dramatic instant a reader can hold in mind. The trouble is that the past, as it was lived, almost never offered such instants. The turning point is rarely something the historian finds. It is something the historian makes.",
   "The mechanism is hindsight. Because we already know how the story ends, we read backward from the outcome and crown a cause. An event that, to those who lived through it, was one uncertain episode among many is reassigned, after the fact, the role of the moment it all turned. The participants did not know they were standing at a hinge; we award them the hinge later, because we need one.",
-  "This is not to say that all moments are equal, or that nothing matters more than anything else. Some events do carry more weight, and a history that refused to distinguish them would be useless. The objection is narrower. It is that 'the moment it all changed' compresses a long and tangled process into a single flattering instant — flattering to our appetite for story, and to our wish that history be the kind of thing that has clear chapters.",
+  "This is not to say that all moments are equal, or that nothing matters more than anything else. Some events do carry more weight, and a history that refused to distinguish them would be useless. The objection is narrower. It is that 'the moment it all changed' compresses a long and tangled process into a single flattering instant - flattering to our appetite for story, and to our wish that history be the kind of thing that has clear chapters.",
   "Consider the so-called decisive battle. It earns the adjective only because the events that followed it did not reverse its result. Had they done so, the same battle would now be a footnote, and some later clash would wear the laurel. Its decisiveness was not a property it possessed on the day; it was conferred on it by everything that failed to happen afterward. Contingency is the rule; the turning point hides it.",
   "The honest historian, then, distrusts the hinge. She treats causes as plural and slow, watches for the long approach behind the apparent rupture, and remembers that the hunt for the pivotal moment often reveals more about the appetites of the storyteller than about the shape of the past."
  ],
@@ -310,7 +310,7 @@ window.CARS_PRACTICE=[
    ],
    answer:0,
    why:[
-    "Correct. It concedes that 'some events do carry more weight' and calls the objection 'narrower' — a qualification that guards against overreach.",
+    "Correct. It concedes that 'some events do carry more weight' and calls the objection 'narrower' - a qualification that guards against overreach.",
     "Distortion. The author refines the claim; he does not abandon it.",
     "Faulty use of detail / out of scope. No documentary evidence is offered.",
     "Out of scope. No rival historian is introduced."
@@ -347,7 +347,7 @@ window.CARS_PRACTICE=[
    answer:1,
    why:[
     "Faulty use of detail. Memorability supports, not undermines, the author's point about the appeal of turning points.",
-    "Correct. The author's case rests on hindsight — that participants 'did not know they were standing at a hinge.' Evidence that they did know would undercut it.",
+    "Correct. The author's case rests on hindsight - that participants 'did not know they were standing at a hinge.' Evidence that they did know would undercut it.",
     "Out of scope / supports. Historians' taste for drama is consistent with the author's claim, not a refutation.",
     "Out of scope. Commemoration concerns later memory, not whether decisiveness was knowable at the time."
    ]

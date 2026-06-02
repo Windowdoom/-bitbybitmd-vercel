@@ -1,4 +1,4 @@
-// Vercel Edge function — streams the Bit by Bit blueprint as plain-text chunks.
+// Vercel Edge function - streams the Bit by Bit blueprint as plain-text chunks.
 // POST /api/plan with JSON body. Response is a text stream (not JSON).
 // Includes a simple per-IP rate limit (3 blueprints / 24h / instance).
 
@@ -28,7 +28,7 @@ export default async function handler(req) {
     });
   }
 
-  // Admin-only — full blueprint generation is gated behind a shared token.
+  // Admin-only - full blueprint generation is gated behind a shared token.
   const adminToken = process.env.PLAN_ADMIN_TOKEN;
   const provided = req.headers.get('x-admin-token') || '';
   if (!adminToken || provided !== adminToken) {
@@ -74,7 +74,7 @@ Format the document in this exact 9-section structure. Use the exact section hea
 
 ---
 
-## Section 1 — Your Profile at a Glance
+## Section 1 - Your Profile at a Glance
 Short intro paragraph.
 ### Who You Are
 Bullet-style facts.
@@ -84,12 +84,12 @@ Two short paragraphs synthesising their actual study style.
 Four to six bullets.
 ### Your Schedule Reality
 Four to six bullets.
-### One Thing We Are Changing — Gradually
+### One Thing We Are Changing - Gradually
 The single biggest behavioural shift and how the plan builds it in.
 
 ---
 
-## Section 2 — Your Learning Modality and Protocol
+## Section 2 - Your Learning Modality and Protocol
 ### How You Learn Best: [Modality]
 Two short paragraphs.
 ### Protocol Tips Built for Your Modality
@@ -99,61 +99,61 @@ Diagnose. Name 2–3 root causes. Show how the plan addresses each.
 
 ---
 
-## Section 3 — The Bit by Bit NBME Review Protocol
+## Section 3 - The Bit by Bit NBME Review Protocol
 ### The 4-Step Master Pivot, Built for [Name]
 One-paragraph framing.
 
-**Step 1 — The Initial Triage (Do not skip this step)**
+**Step 1 - The Initial Triage (Do not skip this step)**
 Explain C / G / W categories.
 
-**Step 2 — The Differentiator Hunt**
+**Step 2 - The Differentiator Hunt**
 Pivot word, differentiator, why each wrong answer is wrong. One concrete worked example.
 
-**Step 3 — The Concept Anchor (Mechanism, not just fact)**
+**Step 3 - The Concept Anchor (Mechanism, not just fact)**
 Mechanism over memorisation. One worked example.
 
-**Step 4 — The 48-Hour Revisit**
+**Step 4 - The 48-Hour Revisit**
 Spaced repetition without flashcards.
 
 ---
 
-## Section 4 — Your Two Daily Systems
+## Section 4 - Your Two Daily Systems
 Brief framing.
-### System A — Full Study Day
-**Morning Block** / **Afternoon Block** / **Evening Block** — time-stamped bullets.
-### System B — Lighter Day
-**Option 1: Tutor Recommended** / **Option 2: [Student's current rhythm]** — time-stamped bullets.
+### System A - Full Study Day
+**Morning Block** / **Afternoon Block** / **Evening Block** - time-stamped bullets.
+### System B - Lighter Day
+**Option 1: Tutor Recommended** / **Option 2: [Student's current rhythm]** - time-stamped bullets.
 
 ---
 
-## Section 5 — [N]-Week Roadmap
+## Section 5 - [N]-Week Roadmap
 Break into ~2-week phases. For each:
-### Weeks X and Y — [Phase Name]
+### Weeks X and Y - [Phase Name]
 **Wake Time Target:** [time]
 One-paragraph intro.
 - **System Focus / UWorld / Resource Milestone / NBME / Habit Goal / Do not do** bullets.
 
 ---
 
-## Section 6 — NBME Form Schedule
+## Section 6 - NBME Form Schedule
 Framing paragraph + bulleted list of forms with week + target.
 
 ---
 
-## Section 7 — Your Personalised Resource Protocol
+## Section 7 - Your Personalised Resource Protocol
 For each resource they listed:
-### [Resource] — [Its Role]
+### [Resource] - [Its Role]
 - How to use (3–5 bullets) / Time cap / What to avoid
 End with the Concept Correction Log.
 
 ---
 
-## Section 8 — What Is at Stake for You, [Name]
+## Section 8 - What Is at Stake for You, [Name]
 Direct, paragraph form. Hold them to their target. Acknowledge what they did right. Talk about the hard days coming. Close with a one-line italic promise.
 
 ---
 
-## Section 9 — Your Bit by Bit Motto
+## Section 9 - Your Bit by Bit Motto
 
 **One block.**
 **One review.**
