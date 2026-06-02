@@ -81,6 +81,17 @@ body.nav-lock{overflow:hidden;}
 .n-ham{position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;background:none;border:none;color:var(--text-muted);font-size:22px;line-height:1;border-radius:9px;margin-left:8px;transition:color .2s,background .2s;}
 .n-ham:hover{color:var(--teal);background:rgba(0,229,160,.08);}
 .n-ham::before{content:'';position:absolute;left:-9px;top:50%;transform:translateY(-50%);height:20px;width:1px;background:var(--border);}
+.nav-group{width:100%;border-bottom:1px solid var(--border);}
+.nav-grp-btn{width:100%;background:none;border:none;cursor:pointer;text-align:left;font-family:var(--mono);font-size:12.5px;letter-spacing:1px;color:var(--text-muted);padding:1rem 1.7rem;display:flex;align-items:center;justify-content:space-between;transition:color .15s,background .15s;}
+.nav-grp-btn:hover{color:var(--teal);background:var(--bg-mid);}
+.nav-grp-btn .caret{color:var(--text-dim);transition:transform .25s;font-size:11px;}
+.nav-group.open .nav-grp-btn{color:var(--teal);}
+.nav-group.open .nav-grp-btn .caret{transform:rotate(180deg);color:var(--teal);}
+.nav-sub{display:none;flex-direction:column;background:rgba(0,0,0,.22);}
+.nav-group.open .nav-sub{display:flex;}
+.n-links .nav-sub a{font-size:11px;color:var(--text-dim);letter-spacing:.5px;padding:.72rem 1.7rem .72rem 2.5rem;border-bottom:1px solid rgba(30,58,80,.5);}
+.n-links .nav-sub a:hover{color:var(--teal);background:var(--bg-mid);}
+.n-links .nav-sub a::after{font-size:13px;}
 .n-ham:hover{color:var(--teal);}
 
 .ticker{background:var(--bg-card);border-bottom:1px solid var(--border);padding:8px 2rem;display:flex;gap:10px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--text-muted);overflow:hidden;white-space:nowrap;}
@@ -433,7 +444,24 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
 <div class="n-links" id="nlinks">
  <div class="drawer-head"><span class="dh-t">MENU</span><button class="drawer-x" onclick="closeNav()" aria-label="Close menu">✕</button></div>
  <a href="#method" onclick="closeNav()">METHOD</a>
- <a href="#free" onclick="closeNav()">FREE TOOLS</a>
+ <div class="nav-group" id="grpFree">
+  <button class="nav-grp-btn" onclick="toggleGrp('grpFree')">FREE TOOLS <span class="caret">▾</span></button>
+  <div class="nav-sub">
+   <a href="#free" onclick="closeNav()">Everything free, in one place</a>
+   <a href="#stuck" onclick="closeNav()">Why you feel stuck (diagnostic)</a>
+   <a href="#toolkit" onclick="closeNav()">The Free Toolkit</a>
+   <a href="#library" onclick="closeNav()">The Library · 14 guides</a>
+   <a href="/free-120/" onclick="closeNav()">NBME Free 120 guide</a>
+   <a href="/triage/" onclick="closeNav()">Study Triage</a>
+   <a href="/pivot-sheet/" onclick="closeNav()">The Pivot Sheet</a>
+   <a href="/nbme-traps.html" onclick="closeNav()">10 NBME Trap Patterns</a>
+   <a href="/habit-reset.html" onclick="closeNav()">50-Day Habit Reset</a>
+   <a href="/differentiators.html" onclick="closeNav()">High-Yield Differentiators</a>
+   <a href="/bit-150/" onclick="closeNav()">Bit 150 Exam</a>
+   <a href="/log.html" onclick="closeNav()">Concept Correction Log</a>
+   <a href="/plan.html" onclick="closeNav()">Find My Gap (diagnostic)</a>
+  </div>
+ </div>
  <a href="#library" onclick="closeNav()">LIBRARY</a>
  <a href="/free-120/" onclick="closeNav()">FREE 120</a>
  <a href="/cfactor/" onclick="closeNav()" style="color:var(--gold);">C-FACTOR</a>
@@ -1257,6 +1285,7 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
 /* ========== NAV ========== */
 function toggleNav(){const l=document.getElementById('nlinks');setNav(!l.classList.contains('open'));}
 function closeNav(){setNav(false);}
+function toggleGrp(id){var g=document.getElementById(id);if(g)g.classList.toggle('open');}
 function setNav(open){const l=document.getElementById('nlinks');const bd=document.getElementById('navBackdrop');l.classList.toggle('open',open);if(bd)bd.classList.toggle('open',open);document.body.classList.toggle('nav-lock',open);const b=document.getElementById('hamBtn');if(b){b.textContent=open?'✕':'☰';}}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeNav();});
 const BBB_EMAIL='sifrandcompany@gmail.com';
