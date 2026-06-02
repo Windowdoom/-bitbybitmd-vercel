@@ -7,7 +7,7 @@ EL=[ # Z, symbol, name, mass, category, nameOrigin, discovery
 (5,"B","Boron",10.81,"metalloid","borax","Davy / Gay-Lussac, 1808"),
 (6,"C","Carbon",12.011,"nonmetal","Latin carbo, 'coal'","known to antiquity"),
 (7,"N","Nitrogen",14.007,"nonmetal","Greek nitron+genes, 'niter-forming'","Rutherford, 1772"),
-(8,"O","Oxygen",15.999,"nonmetal","Greek oxys+genes, 'acid-forming'","Scheele/Priestley, 1771"),
+(8,"O","Oxygen",15.999,"nonmetal","Greek oxys+genes, 'acid-forming'","Scheele 1771 · Priestley 1774"),
 (9,"F","Fluorine",18.998,"halogen","Latin fluere, 'to flow'","Moissan, 1886"),
 (10,"Ne","Neon",20.180,"noble","Greek neos, 'new'","Ramsay/Travers, 1898"),
 (11,"Na","Sodium",22.990,"alkali","English soda (Latin natrium)","Davy, 1807"),

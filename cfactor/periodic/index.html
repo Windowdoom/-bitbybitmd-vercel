@@ -106,12 +106,35 @@ function sup(n){return (''+n).split('').map(function(d){return SUP[d];}).join(''
 // electron shells + config via Madelung fill
 var ORDER=[[1,0],[2,0],[2,1],[3,0],[3,1],[4,0],[3,2],[4,1],[5,0],[4,2],[5,1],[6,0],[4,3],[5,2],[6,1],[7,0],[5,3],[6,2],[7,1]];
 var LNAME=["s","p","d","f"],CAP=[2,6,10,14];
-function fill(Z){var left=Z,shells={},cfg=[];for(var i=0;i<ORDER.length&&left>0;i++){var n=ORDER[i][0],l=ORDER[i][1],e=Math.min(CAP[l],left);left-=e;shells[n]=(shells[n]||0)+e;cfg.push(n+LNAME[l]+sup(e));}var arr=[];for(var n=1;n<=7;n++)if(shells[n])arr.push(shells[n]);return {shells:arr,cfg:cfg.join(' ')};}
-function bohr(Z,size,col){var f=fill(Z),sh=f.shells,c=size/2,maxR=size/2-14,s=['<svg class="bohr" width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'">'];
- s.push('<circle cx="'+c+'" cy="'+c+'" r="'+(size*0.13)+'" fill="'+col+'" fill-opacity=".9"/>');
- s.push('<text x="'+c+'" y="'+(c+4)+'" text-anchor="middle" font-family="monospace" font-size="'+(size*0.12)+'" font-weight="bold" fill="#0D1B2E">'+Z+'</text>');
- for(var i=0;i<sh.length;i++){var r=size*0.20+(i+1)/sh.length*maxR;s.push('<circle cx="'+c+'" cy="'+c+'" r="'+r.toFixed(1)+'" fill="none" stroke="'+col+'" stroke-opacity=".35"/>');
-  var n=sh[i];for(var k=0;k<n;k++){var a=(-90+k*360/n)*Math.PI/180;s.push('<circle cx="'+(c+r*Math.cos(a)).toFixed(1)+'" cy="'+(c+r*Math.sin(a)).toFixed(1)+'" r="3" fill="'+col+'"/>');}}
+/* Known ground-state anomalies the simple Aufbau fill gets wrong (verified). */
+var ANOM={
+ 24:{shells:[2,8,13,1],cfg:"[Ar] 3d⁵ 4s¹"},
+ 29:{shells:[2,8,18,1],cfg:"[Ar] 3d¹⁰ 4s¹"},
+ 41:{shells:[2,8,18,12,1],cfg:"[Kr] 4d⁴ 5s¹"},
+ 42:{shells:[2,8,18,13,1],cfg:"[Kr] 4d⁵ 5s¹"},
+ 44:{shells:[2,8,18,15,1],cfg:"[Kr] 4d⁷ 5s¹"},
+ 45:{shells:[2,8,18,16,1],cfg:"[Kr] 4d⁸ 5s¹"},
+ 46:{shells:[2,8,18,18],cfg:"[Kr] 4d¹⁰"},
+ 47:{shells:[2,8,18,18,1],cfg:"[Kr] 4d¹⁰ 5s¹"},
+ 78:{shells:[2,8,18,32,17,1],cfg:"[Xe] 4f¹⁴ 5d⁹ 6s¹"},
+ 79:{shells:[2,8,18,32,18,1],cfg:"[Xe] 4f¹⁴ 5d¹⁰ 6s¹"}
+};
+function fill(Z){if(ANOM[Z])return ANOM[Z];var left=Z,shells={},cfg=[];for(var i=0;i<ORDER.length&&left>0;i++){var n=ORDER[i][0],l=ORDER[i][1],e=Math.min(CAP[l],left);left-=e;shells[n]=(shells[n]||0)+e;cfg.push(n+LNAME[l]+sup(e));}var arr=[];for(var n=1;n<=7;n++)if(shells[n])arr.push(shells[n]);return {shells:arr,cfg:cfg.join(' ')};}
+function bohr(Z,size,col){var f=fill(Z),sh=f.shells,c=size/2,gid='g'+Z+'_'+size,maxR=size/2-12,inner=size*0.22,nr=size*0.115;
+ var er=Math.max(2.4,size*0.022);
+ var s=['<svg class="bohr" width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'">'];
+ s.push('<defs><radialGradient id="'+gid+'" cx="38%" cy="32%" r="72%"><stop offset="0%" stop-color="#ffffff" stop-opacity=".9"/><stop offset="35%" stop-color="'+col+'"/><stop offset="100%" stop-color="'+col+'" stop-opacity=".75"/></radialGradient></defs>');
+ // shells
+ for(var i=0;i<sh.length;i++){var r=inner+(sh.length<=1?0:(i)/(sh.length-1)*(maxR-inner));if(sh.length===1)r=inner+maxR*0.5;
+  s.push('<circle cx="'+c+'" cy="'+c+'" r="'+r.toFixed(1)+'" fill="none" stroke="'+col+'" stroke-opacity=".3" stroke-width="1"/>');
+  var n=sh[i];for(var k=0;k<n;k++){var a=(-90+k*360/n+(i*9))*Math.PI/180,ex=c+r*Math.cos(a),ey=c+r*Math.sin(a);
+   s.push('<circle cx="'+ex.toFixed(1)+'" cy="'+ey.toFixed(1)+'" r="'+(er+1.4).toFixed(1)+'" fill="'+col+'" opacity=".25"/><circle cx="'+ex.toFixed(1)+'" cy="'+ey.toFixed(1)+'" r="'+er.toFixed(1)+'" fill="'+col+'"/>');}
+  if(size>120){s.push('<text x="'+(c+r).toFixed(1)+'" y="'+(c-3)+'" font-family="monospace" font-size="9" fill="'+col+'" opacity=".7">'+n+'</text>');}
+ }
+ // nucleus
+ s.push('<circle cx="'+c+'" cy="'+c+'" r="'+(nr*1.7).toFixed(1)+'" fill="'+col+'" opacity=".18"/>');
+ s.push('<circle cx="'+c+'" cy="'+c+'" r="'+nr.toFixed(1)+'" fill="url(#'+gid+')"/>');
+ s.push('<text x="'+c+'" y="'+(c+nr*0.4).toFixed(1)+'" text-anchor="middle" font-family="monospace" font-size="'+(nr*1.0).toFixed(1)+'" font-weight="bold" fill="#0D1B2E">'+Z+'</text>');
  s.push('</svg>');return s.join('');}
 function bySym(sym){for(var i=0;i<PT.length;i++)if(PT[i].s===sym)return PT[i];}
 // build grid
