@@ -23,4 +23,12 @@
   document.addEventListener('contextmenu', function(e){
     if (e.target && e.target.tagName === 'IMG') e.preventDefault();
   }, false);
+
+  // 3) Load the on-site translation widget (one script, every page).
+  try {
+    var i18n = document.createElement('script');
+    i18n.src = '/i18n.js';
+    i18n.defer = true;
+    document.head.appendChild(i18n);
+  } catch(_){}
 })();
