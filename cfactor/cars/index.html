@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Free MCAT CARS Course — The Reasoning Engine | The C-Factor Series</title>
+<title>The Free MCAT CARS Course - The Reasoning Engine | The C-Factor Series</title>
 <meta name="description" content="A complete, interactive MCAT CARS course, free, in your browser. The four-move passage method, all 11 question types, the four wrong-answer archetypes, the elimination protocol, a six-week training program, and original practice passages with validated answers. No login.">
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
 <script defer src="/_vercel/insights/script.js"></script>
@@ -159,6 +159,7 @@
  .cmob-bar button{background:var(--teal-soft);color:var(--teal);border:1px solid var(--teal);border-radius:6px;padding:7px 12px;font-family:var(--mono);font-size:11px;font-weight:bold;}
 }
 </style>
+  <script defer src="/protect.js"></script>
 </head>
 <body>
 <nav>
@@ -170,7 +171,7 @@
   <a href="/cfactor/">C-FACTOR HOME</a>
   <a href="/cfactor/#books">BOOKS</a>
   <a href="/cfactor/final-review/">FREE BOOK 7</a>
-  <a href="/cfactor/#anki">FREE ANKI</a>
+  <a href="/cfactor/#anki">ANKI</a>
  </div>
  <div class="nav-right">
   <button class="n-buy" onclick="window.open('https://payhip.com/b/dAnUk','_blank')">GET THE SET · $65 ↗</button>
@@ -212,7 +213,7 @@
   <a href="https://www.instagram.com/bitbybitmd/" target="_blank" rel="noopener">Instagram</a>
  </div>
 </footer>
-<div class="disclaimer">Bit by Bit Pedagogy is an independent educational platform. The C-Factor Series is a pre-med and MCAT review resource built on mechanism-first pedagogy. Not affiliated with, endorsed by, or connected to the AAMC, NBME, USMLE, or any exam body. Materials are for educational use only and do not guarantee score outcomes. © 2026 Bit by Bit Pedagogy.</div>
+<div class="disclaimer">Bit by Bit Pedagogy is an independent educational platform. The C-Factor Series is a pre-med and MCAT review resource built on mechanism-first pedagogy. Not affiliated with, endorsed by, or connected to the AAMC, NBME, USMLE, or any exam body. Materials are for educational use only and do not guarantee score outcomes. © 2026 Bit by Bit Pedagogy. All rights reserved. <a href="/terms/" style="color:var(--text-dim)">Terms &amp; Copyright</a></div>
 
 <script defer src="/cfactor/cars/cars-course.js"></script>
 <script defer src="/cfactor/cars/cars-practice.js"></script>
@@ -252,7 +253,7 @@ function renderTableFree(b){
  var rows=b.rows; if(!rows||rows.length<1) return '';
  var head=rows[0], data=rows.slice(1); if(!data.length) data=[head],head=head.map(function(){return '';});
  if(head.length<=2){
-  var cap=(head[0]||head[1])?'<div class="spec-cap">'+esc(head[0]||'')+(head[1]?' — '+esc(head[1]):'')+'</div>':'';
+  var cap=(head[0]||head[1])?'<div class="spec-cap">'+esc(head[0]||'')+(head[1]?' - '+esc(head[1]):'')+'</div>':'';
   return '<div class="speclist">'+cap+data.map(function(r){return '<div class="spec-row"><div class="spec-k">'+esc(r[0]||'')+'</div><div class="spec-v">'+esc(r[1]||'')+'</div></div>';}).join('')+'</div>';
  }
  return '<div class="reccards">'+data.map(function(r){
@@ -275,7 +276,7 @@ function buildNav(){
 }
 function buildPnav(){
  var P=window.CARS_PRACTICE||[], el=document.getElementById('pnav');
- if(!P.length){el.innerHTML='<div class="cnav-item" style="cursor:default;color:var(--text-dim)"><span class="cn">—</span><span>Coming soon</span></div>';return;}
+ if(!P.length){el.innerHTML='<div class="cnav-item" style="cursor:default;color:var(--text-dim)"><span class="cn">-</span><span>Coming soon</span></div>';return;}
  var scores=getScores();
  el.innerHTML=P.map(function(p,i){
   var s=scores[p.id]!=null?' <span class="ck" style="opacity:1;color:var(--teal)">'+scores[p.id]+'%</span>':'<span class="ck">✓</span>';
@@ -304,12 +305,12 @@ function renderHome(){
  h+='<div class="ov-hero">';
  h+='<span class="badge badge-free">★ FREE · NO LOGIN · INTERACTIVE</span>';
  h+='<h1 class="ph-title">The Reasoning Engine<br><em>MCAT CARS</em>, the whole method</h1>';
- h+='<p class="ph-sub">CARS is the one section you can\'t memorize. This is the complete course: a repeatable four-move passage method, all eleven question types, the four wrong-answer archetypes, an elimination protocol, a six-week program, and original practice passages with validated answers. Work through it in your browser — your progress saves automatically.</p>';
+ h+='<p class="ph-sub">CARS is the one section you can\'t memorize. This is the complete course: a repeatable four-move passage method, all eleven question types, the four wrong-answer archetypes, an elimination protocol, a six-week program, and original practice passages with validated answers. Work through it in your browser - your progress saves automatically.</p>';
  h+='<div class="btn-row"><a class="btn-p" href="#ch'+firstUndone+'">'+(nDone?'CONTINUE · '+chapLabel(firstUndone):'START THE COURSE →')+'</a>';
  if(P.length)h+='<a class="btn-o" href="#practice-'+P[0].id+'">TRY A PRACTICE PASSAGE →</a>';
  h+='</div></div>';
  h+='<div class="ov-stats"><div class="ov-stat"><b>13</b><span>chapters</span></div><div class="ov-stat"><b>~'+totalMin+'</b><span>min of reading</span></div><div class="ov-stat"><b>'+P.length+'</b><span>practice passages</span></div><div class="ov-stat"><b>6-wk</b><span>training program</span></div></div>';
- h+='<div class="box box-disc"><div class="box-label">⚡ THE ONE RULE THE WHOLE COURSE IS BUILT ON</div><div class="box-title">The passage is the only authority.</div><p>For the duration of a passage, your outside knowledge does not count — the author wins. An answer that is true in the real world but contradicts the passage is wrong; an answer that is false in the real world but matches the passage is correct. It\'s a trainable switch, not a personality change.</p></div>';
+ h+='<div class="box box-disc"><div class="box-label">⚡ THE ONE RULE THE WHOLE COURSE IS BUILT ON</div><div class="box-title">The passage is the only authority.</div><p>For the duration of a passage, your outside knowledge does not count - the author wins. An answer that is true in the real world but contradicts the passage is wrong; an answer that is false in the real world but matches the passage is correct. It\'s a trainable switch, not a personality change.</p></div>';
  h+='<h2 style="font-family:var(--mono);font-size:20px;margin:2.4rem 0 .4rem;color:var(--text)">The six modules</h2>';
  h+='<div class="modcards">';
  MODULES.forEach(function(mo){
@@ -318,7 +319,7 @@ function renderHome(){
   h+='<div class="modcard" style="--ca:'+mo.ca+'" onclick="location.hash=\'ch'+mo.chs[0]+'\'"><div class="mc-n">'+mo.chs.map(chapLabel).join(' · ')+' · ~'+t+' min</div><h4>'+esc(mo.name)+'</h4><p>'+esc(mo.desc)+'</p><div class="mc-n" style="margin-top:10px;color:'+(dn===mo.chs.length?'var(--green)':'var(--text-dim)')+'">'+dn+'/'+mo.chs.length+' done</div></div>';
  });
  h+='</div>';
- h+='<div class="cta-strip"><div><h3>★ The same method, applied to the sciences</h3><p>If this free CARS course works for you, the six-book C-Factor set is the mechanism-first version for every other section — ~2,220 pages, $65 one-time.</p></div><div style="display:flex;flex-direction:column;align-items:center;gap:10px"><div class="cta-price">$65<small>ONE-TIME · PAYHIP</small></div><a href="https://payhip.com/b/dAnUk" target="_blank" rel="noopener" class="btn-gold">SEE THE SET ↗</a></div></div>';
+ h+='<div class="cta-strip"><div><h3>★ The same method, applied to the sciences</h3><p>If this free CARS course works for you, the six-book C-Factor set is the mechanism-first version for every other section - ~2,220 pages, $65 one-time.</p></div><div style="display:flex;flex-direction:column;align-items:center;gap:10px"><div class="cta-price">$65<small>USD · ONE-TIME · PAYHIP</small></div><a href="https://payhip.com/b/dAnUk" target="_blank" rel="noopener" class="btn-gold">SEE THE SET ↗</a></div></div>';
  setMain(h);
 }
 
@@ -392,13 +393,13 @@ function checkPractice(id){
   for(var ci=0;ci<q.choices.length;ci++){var el=document.getElementById('c-'+qi+'-'+ci);el.classList.remove('is-correct','is-wrong');if(ci===q.answer)el.classList.add('is-correct');else if(ci===chosen)el.classList.add('is-wrong');}
   if(ok)correct++;
   var exp=document.getElementById('exp-'+qi);
-  exp.innerHTML=q.choices.map(function(c,ci){var tag=ci===q.answer?'<b style="color:var(--green)">✓ Correct</b>':'<b style="color:var(--red)">✗</b>';return '<div class="exprow"><span class="qletter sm">'+String.fromCharCode(65+ci)+'</span><div>'+tag+' — '+esc(q.why[ci])+'</div></div>';}).join('');
+  exp.innerHTML=q.choices.map(function(c,ci){var tag=ci===q.answer?'<b style="color:var(--green)">✓ Correct</b>':'<b style="color:var(--red)">✗</b>';return '<div class="exprow"><span class="qletter sm">'+String.fromCharCode(65+ci)+'</span><div>'+tag+' - '+esc(q.why[ci])+'</div></div>';}).join('');
   exp.style.display='block';
  });
  var pct=Math.round(correct/p.questions.length*100);
  var skillTxt=Object.keys(bySkill).map(function(s){return esc(s)+': '+bySkill[s][0]+'/'+bySkill[s][1];}).join(' &nbsp;·&nbsp; ');
  var rb=document.getElementById('resultbox');
- rb.innerHTML='<h3>'+correct+' / '+p.questions.length+' correct &nbsp;<span style="color:var(--teal)">'+pct+'%</span></h3><div class="rb-skill">By skill — '+skillTxt+'</div><div style="margin-top:12px"><button class="btn-o" onclick="renderPractice(\''+id+'\')" style="padding:9px 16px">RETRY ↻</button></div>';
+ rb.innerHTML='<h3>'+correct+' / '+p.questions.length+' correct &nbsp;<span style="color:var(--teal)">'+pct+'%</span></h3><div class="rb-skill">By skill - '+skillTxt+'</div><div style="margin-top:12px"><button class="btn-o" onclick="renderPractice(\''+id+'\')" style="padding:9px 16px">RETRY ↻</button></div>';
  rb.style.display='block';
  try{var d=getScores();d[id]=pct;localStorage.setItem('cars_practice_v1',JSON.stringify(d));}catch(e){}
  buildPnav();

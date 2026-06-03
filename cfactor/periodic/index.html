@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Living Periodic Table — every element, across all of STEM | The C-Factor Series</title>
+<title>The Living Periodic Table - every element, across all of STEM | The C-Factor Series</title>
 <meta name="description" content="An interactive periodic table: hover to see each element's story and watch its group and period light up; click for a deep dive into its role in medicine, chemistry, physics, engineering, and nature.">
 <script defer src="/_vercel/insights/script.js"></script>
 <link rel="stylesheet" href="/cfactor/cfactor.css">
@@ -70,6 +70,7 @@
 .dd-sec .ic{font-size:15px;}
 @media(max-width:1080px){.pt-wrap{grid-template-columns:1fr;}.panel{position:relative;top:0;}}
 </style>
+  <script defer src="/protect.js"></script>
 </head>
 <body>
 <nav>
@@ -78,7 +79,7 @@
   <a href="/cfactor/">C-FACTOR HOME</a>
   <a href="/cfactor/cars/" style="color:var(--teal)">CARS (FREE)</a>
   <a href="/cfactor/final-review/">FREE BOOK 7</a>
-  <a href="/cfactor/#anki">FREE ANKI</a>
+  <a href="/cfactor/#anki">ANKI</a>
  </div>
  <div class="nav-right">
   <button class="n-buy" onclick="window.open('https://payhip.com/b/dAnUk','_blank')">GET THE SET · $65 ↗</button>
@@ -89,7 +90,7 @@
 <div class="pt-head">
  <span class="badge badge-free">★ FREE · INTERACTIVE</span>
  <h1 class="ph-title">The <em>living</em> periodic table</h1>
- <p class="ph-sub"><b>Hover</b> an element to see its story — and watch its group and period light up so you start <i>seeing the pattern</i>. <b>Click</b> any element for a deep dive into its role across medicine, chemistry, physics, engineering, and nature.</p>
+ <p class="ph-sub"><b>Hover</b> an element to see its story - and watch its group and period light up so you start <i>seeing the pattern</i>. <b>Click</b> any element for a deep dive into its role across medicine, chemistry, physics, engineering, and nature.</p>
 </div>
 
 <div class="pt-modes">
@@ -111,7 +112,7 @@
  <div class="f-logo">B<sup style="color:var(--gold);">3</sup> Bit by Bit Pedagogy · The C-Factor Series</div>
  <div class="f-links"><a href="/cfactor/">C-Factor Home</a><a href="/cfactor/cars/">Free CARS Course</a><a href="https://payhip.com/b/dAnUk" target="_blank" rel="noopener">Get the Set ($65)</a><a href="https://www.instagram.com/bitbybitmd/" target="_blank" rel="noopener">Instagram</a></div>
 </footer>
-<div class="disclaimer">Bit by Bit Pedagogy is an independent educational platform. Not affiliated with the AAMC, NBME, or USMLE. Educational use only. © 2026 Bit by Bit Pedagogy.</div>
+<div class="disclaimer">Bit by Bit Pedagogy is an independent educational platform. Not affiliated with the AAMC, NBME, or USMLE. Educational use only. © 2026 Bit by Bit Pedagogy. All rights reserved. <a href="/terms/" style="color:var(--text-dim)">Terms &amp; Copyright</a></div>
 
 <script defer src="/cfactor/periodic/elements.js"></script>
 <script defer src="/cfactor/periodic/elements-deep.js"></script>
@@ -119,7 +120,7 @@
 document.querySelectorAll('.n-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nlinks').classList.remove('open')));
 var COL={alkali:"#FF7A6B",alkaline:"#F5A623",transition:"#4D9FFF",postt:"#7FA8BD",metalloid:"#2ED573",nonmetal:"#00E5A0",halogen:"#00C2D1",noble:"#A855F7",lan:"#C77DFF",act:"#FF8FB0",unknown:"#6F8CA0"};
 var CATNAME={alkali:"Alkali metal",alkaline:"Alkaline earth metal",transition:"Transition metal",postt:"Post-transition metal",metalloid:"Metalloid",nonmetal:"Reactive nonmetal",halogen:"Halogen",noble:"Noble gas",lan:"Lanthanide",act:"Actinide",unknown:"Unknown / predicted"};
-var CATBLURB={alkali:"Soft, highly reactive metals with a single valence electron they readily give up.",alkaline:"Reactive metals with two valence electrons; important in structure and signaling.",transition:"d-block metals with variable oxidation states, color, and catalytic power.",postt:"Softer metals to the right of the transition block, often low-melting.",metalloid:"In-between elements with properties of both metals and nonmetals — the semiconductors.",nonmetal:"Electron-hungry elements that build the molecules of life and air.",halogen:"Highly reactive nonmetals one electron short of a full shell.",noble:"Full-shell gases that almost never react.",lan:"The rare-earth f-block; near-identical chemistry, used in magnets and phosphors.",act:"Radioactive f-block metals, including the nuclear fuels.",unknown:"Synthetic superheavy elements; properties largely predicted, not measured."};
+var CATBLURB={alkali:"Soft, highly reactive metals with a single valence electron they readily give up.",alkaline:"Reactive metals with two valence electrons; important in structure and signaling.",transition:"d-block metals with variable oxidation states, color, and catalytic power.",postt:"Softer metals to the right of the transition block, often low-melting.",metalloid:"In-between elements with properties of both metals and nonmetals - the semiconductors.",nonmetal:"Electron-hungry elements that build the molecules of life and air.",halogen:"Highly reactive nonmetals one electron short of a full shell.",noble:"Full-shell gases that almost never react.",lan:"The rare-earth f-block; near-identical chemistry, used in magnets and phosphors.",act:"Radioactive f-block metals, including the nuclear fuels.",unknown:"Synthetic superheavy elements; properties largely predicted, not measured."};
 var esc=function(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');};
 var SUP={"0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
 function sup(n){return (''+n).split('').map(function(d){return SUP[d];}).join('');}
