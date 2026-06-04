@@ -42,6 +42,37 @@
     });
 
     document.body.appendChild(a);
+
+    addFooterLink();
+  }
+
+  /* Second, equally low-key placement: a small text link tucked into the
+     page footer. Adapts to either footer style (.site-footer text footer or
+     the cfactor .f-links row) and inherits the surrounding muted color. */
+  function addFooterLink() {
+    if (document.getElementById('bbb-support-footer')) return;
+    var foot = document.querySelector('.f-links') || document.querySelector('footer');
+    if (!foot) return;
+
+    var isLinkRow = foot.classList.contains('f-links');
+    var link = document.createElement('a');
+    link.id = 'bbb-support-footer';
+    link.href = 'https://dannyabbas.gumroad.com/coffee';
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.textContent = '☕ Support';
+    link.style.cssText = 'color:inherit;text-decoration:none;opacity:.7;';
+    link.addEventListener('mouseenter', function () { link.style.opacity = '1'; });
+    link.addEventListener('mouseleave', function () { link.style.opacity = '.7'; });
+
+    if (isLinkRow) {
+      // .f-links is a row of anchors — just append another one
+      foot.appendChild(link);
+    } else {
+      // text footer — prepend a subtle separator
+      foot.appendChild(document.createTextNode(' · '));
+      foot.appendChild(link);
+    }
   }
 
   if (document.readyState === 'loading') {
