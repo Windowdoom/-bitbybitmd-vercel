@@ -174,7 +174,7 @@
   <a href="/cfactor/#anki">ANKI</a>
  </div>
  <div class="nav-right">
-  <button class="n-buy" onclick="window.open('https://payhip.com/b/dAnUk','_blank')">GET THE SET · $65 ↗</button>
+  <button class="n-buy" onclick="window.open('https://payhip.com/b/dAnUk','_blank')">PDF SET · $40 ↗</button>
   <button class="n-ham" id="hamBtn" onclick="document.getElementById('nlinks').classList.toggle('open')">☰</button>
  </div>
 </nav>
@@ -196,7 +196,7 @@
   <div class="mod"><div class="mod-h">Practice passages</div><div id="pnav"></div></div>
   <div class="mod"><div class="mod-h">Resources</div>
    <div class="cnav-item" onclick="window.open('/cfactor/Bit_by_Bit_MD_C-Factor_Book8_CARS_The_Reasoning_Engine.pdf','_blank')"><span class="cn">PDF</span><span>Download the book</span></div>
-   <div class="cnav-item" onclick="location.href='/cfactor/#books'"><span class="cn">$65</span><span>The science set</span></div>
+   <div class="cnav-item" onclick="location.href='/cfactor/#books'"><span class="cn">B1</span><span>Free Biology course</span></div>
   </div>
  </aside>
 
@@ -209,7 +209,7 @@
   <a href="/cfactor/">C-Factor Home</a>
   <a href="/cfactor/cars/">Free CARS Course</a>
   <a href="/cfactor/final-review/">Free Book 7</a>
-  <a href="https://payhip.com/b/dAnUk" target="_blank" rel="noopener">Get the Set ($65)</a>
+  <a href="https://payhip.com/b/dAnUk" target="_blank" rel="noopener">PDF Set ($40)</a>
   <a href="https://www.instagram.com/bitbybitmd/" target="_blank" rel="noopener">Instagram</a>
  </div>
 </footer>
@@ -319,7 +319,7 @@ function renderHome(){
   h+='<div class="modcard" style="--ca:'+mo.ca+'" onclick="location.hash=\'ch'+mo.chs[0]+'\'"><div class="mc-n">'+mo.chs.map(chapLabel).join(' · ')+' · ~'+t+' min</div><h4>'+esc(mo.name)+'</h4><p>'+esc(mo.desc)+'</p><div class="mc-n" style="margin-top:10px;color:'+(dn===mo.chs.length?'var(--green)':'var(--text-dim)')+'">'+dn+'/'+mo.chs.length+' done</div></div>';
  });
  h+='</div>';
- h+='<div class="cta-strip"><div><h3>★ The same method, applied to the sciences</h3><p>If this free CARS course works for you, the six-book C-Factor set is the mechanism-first version for every other section - ~2,220 pages, $65 one-time.</p></div><div style="display:flex;flex-direction:column;align-items:center;gap:10px"><div class="cta-price">$65<small>USD · ONE-TIME · PAYHIP</small></div><a href="https://payhip.com/b/dAnUk" target="_blank" rel="noopener" class="btn-gold">SEE THE SET ↗</a></div></div>';
+ h+='<div class="cta-strip"><div><h3>★ The same method, applied to the sciences</h3><p>If this free CARS course works for you, the six science books are now FREE on-site courses too — same four-move method. Optional PDF set is $40 (founders; was $65).</p></div><div style="display:flex;flex-direction:column;align-items:center;gap:10px"><div class="cta-price">$40<small>FOUNDERS · WAS $65 · PDF</small></div><a href="https://payhip.com/b/dAnUk" target="_blank" rel="noopener" class="btn-gold">SEE THE SET ↗</a></div></div>';
  setMain(h);
 }
 
@@ -345,7 +345,7 @@ function render(n){
  });
  h+='<div class="prose">'+body+'</div>';
  var prev=n>0?'<a class="btn-o" href="#ch'+(n-1)+'">‹ '+chapLabel(n-1)+'</a>':'<a class="btn-o" href="#home">‹ Overview</a>';
- var next=n<C.length-1?'<a class="btn-o" href="#ch'+(n+1)+'">'+chapLabel(n+1)+' ›</a>':'<a class="btn-gold" href="/cfactor/#books">Get the science set ($65) ↗</a>';
+ var next=n<C.length-1?'<a class="btn-o" href="#ch'+(n+1)+'">'+chapLabel(n+1)+' ›</a>':'<a class="btn-gold" href="/cfactor/#books">Read free Biology course →</a>';
  var md=done[n];
  h+='<div class="cnav-foot">'+prev+'<button class="markbtn'+(md?' is-done':'')+'" id="markBtn" onclick="toggleDone('+n+')">'+(md?'✓ COMPLETED':'MARK COMPLETE')+'</button>'+next+'</div>';
  setMain(h);

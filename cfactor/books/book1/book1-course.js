@@ -621,7 +621,7 @@ function renderHome(){
  h+='<div class="ov-hero">';
  h+='<span class="badge badge-free">★ FREE · NO LOGIN · INTERACTIVE</span>';
  h+='<h1 class="ph-title">The Living Code<br><em>MCAT Biology</em>, mechanism-first.</h1>';
- h+='<p class="ph-sub">Book 1 of the C-Factor Series — a complete biology review from the carbon atom to the whole human body. Every chapter runs the four moves: <b>mechanism</b>, <b>discriminator</b>, <b>clinical bridge</b>, <b>high-yield anchor</b>. Section-level progress saves automatically. The PDF version is $65 if you want the artifact — the content here is free, forever.</p>';
+ h+='<p class="ph-sub">Book 1 of the C-Factor Series — a complete biology review from the carbon atom to the whole human body. Every chapter runs the four moves: <b>mechanism</b>, <b>discriminator</b>, <b>clinical bridge</b>, <b>high-yield anchor</b>. Section-level progress saves automatically. The PDF version is $40 (founders price; was $65) if you want the artifact — the content here is free, forever.</p>';
  var firstUndone=null;
  for(var i=0;i<C.length;i++){var anyUndone=C[i].sections.find(function(s){return !done[s.id];});if(anyUndone){firstUndone={ch:i,sec:anyUndone.id};break;}}
  if(!firstUndone)firstUndone={ch:0,sec:'0.1'};
@@ -630,7 +630,7 @@ function renderHome(){
  h+='<a class="btn-o" href="#ch0">★ READ CH 0 · ORIENTATION</a>';
  h+='</div>';
  h+=resume;
- h+='<div class="hero-pricing">FREE COURSE · <s>$65</s> PDF VERSION OPTIONAL · ANKI DECK <b>$5</b></div>';
+ h+='<div class="hero-pricing">FREE COURSE · PDF OPTIONAL · <s>$65</s> <b>$40 FOUNDERS</b> · ANKI DECK <b>$5</b></div>';
  h+='</div>';
 
  h+='<div class="ov-stats">'+
@@ -653,8 +653,8 @@ function renderHome(){
 
  h+='<div style="background:linear-gradient(135deg,rgba(0,229,160,.06),transparent);border:1px solid var(--border);border-radius:var(--r);padding:1.6rem 1.8rem;margin:2.4rem 0 1.4rem;display:flex;gap:1.6rem;align-items:center;flex-wrap:wrap">'+
    '<div style="flex:1;min-width:240px"><h3 style="font-family:var(--mono);font-size:17px;color:var(--text);margin-bottom:6px">★ Free, on-site, no gate</h3>'+
-   '<p style="font-size:13.5px;color:var(--text-muted);line-height:1.7">All MCAT content here is free. If you want the PDF artifact (a portable, offline-readable book), it\'s $65 one-time on Payhip — strictly optional. The Anki deck is $5 separately.</p></div>'+
-   '<div style="display:flex;flex-direction:column;gap:8px"><a class="btn-o" href="https://payhip.com/b/dAnUk" target="_blank" rel="noopener">PDF SET · $65 ↗</a>'+
+   '<p style="font-size:13.5px;color:var(--text-muted);line-height:1.7">All MCAT content here is free. If you want the PDF artifact (a portable, offline-readable book), the optional PDF set (all 6 books) is $40 founders price (was $65) on Payhip. The Anki deck is $5 separately.</p></div>'+
+   '<div style="display:flex;flex-direction:column;gap:8px"><a class="btn-o" href="https://payhip.com/b/dAnUk" target="_blank" rel="noopener">PDF SET · $40 ↗</a>'+
    '<a class="btn-o" href="/cfactor/#anki">ANKI DECK · $5</a></div></div>';
  setMain(h);
 }
