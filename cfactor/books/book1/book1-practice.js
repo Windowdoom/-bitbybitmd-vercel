@@ -1,5 +1,5 @@
-/* Book 1 — Biology · MCAT-style practice passages.
-   Each chapter gets 1–2 passages (4–6 questions each). They render through
+/* Book 1 - Biology · MCAT-style practice passages.
+   Each chapter gets 1-2 passages (4-6 questions each). They render through
    the same passage shell the CARS course uses, with answer reveal, score
    tracking in localStorage (book1_practice_v1), and a per-skill breakdown.
 
@@ -24,7 +24,7 @@ window.BOOK1_PRACTICE=[
      choices:['Valine for glutamate','Glutamate for valine','Lysine for glutamate','Aspartate for glutamate'],
      answer:0,
      why:['GAG codes for glutamate (Glu, E); GTG codes for valine (Val, V). The mutation replaces a negatively charged side chain with a hydrophobic one, exposing a sticky patch that drives HbS polymerization in deoxy conditions.',
-          'Reversed — the mutation is FROM glutamate TO valine.',
+          'Reversed - the mutation is FROM glutamate TO valine.',
           'Glutamate → lysine is the HbC mutation described in paragraph 3, not HbS.',
           'No such substitution in this passage; both Glu and Asp are acidic so a Glu↔Asp swap would not change charge.']},
 
@@ -33,7 +33,7 @@ window.BOOK1_PRACTICE=[
      choices:['HbS is larger so it sieves more slowly through the gel','HbS has lost a negative charge (Glu→Val), reducing its net negative charge at pH 8.6','HbS denatures partially at alkaline pH','HbS forms tetramers; HbA forms dimers at pH 8.6'],
      answer:1,
      why:['Mass change from one residue is negligible; charge dominates electrophoresis under these conditions.',
-          'At pH 8.6, Glu is deprotonated (–COO⁻). Replacing it with valine (neutral) removes one negative charge per β-chain, so HbS is less negatively charged and migrates more slowly toward the anode.',
+          'At pH 8.6, Glu is deprotonated (-COO⁻). Replacing it with valine (neutral) removes one negative charge per β-chain, so HbS is less negatively charged and migrates more slowly toward the anode.',
           'Hemoglobin is stable at pH 8.6; denaturation is not the explanation.',
           'Both HbA and HbS are α₂β₂ tetramers at physiological conditions.']},
 
@@ -41,8 +41,8 @@ window.BOOK1_PRACTICE=[
      stem:'HbC (Glu→Lys at β6) carries the same residue substitution position as HbS but does not polymerize into fibers. The most likely explanation is that:',
      choices:['Lysine is too large to fit into β-globin','Lysine is positively charged, not hydrophobic, so it does not form the hydrophobic sticky patch that drives HbS fiber formation','Lysine cannot be incorporated by the ribosome','HbC and HbS have different α-chain sequences'],
      answer:1,
-     why:['Lysine is well tolerated at the surface — many natural proteins have surface Lys.',
-          'HbS fibers form because deoxy-HbS exposes a hydrophobic pocket that the valine of one molecule fits into on a neighboring molecule. Lysine is hydrophilic and positively charged, so it cannot make that hydrophobic contact — HbC stays soluble (though it can crystallize at high concentration).',
+     why:['Lysine is well tolerated at the surface - many natural proteins have surface Lys.',
+          'HbS fibers form because deoxy-HbS exposes a hydrophobic pocket that the valine of one molecule fits into on a neighboring molecule. Lysine is hydrophilic and positively charged, so it cannot make that hydrophobic contact - HbC stays soluble (though it can crystallize at high concentration).',
           'Lysine is a standard amino acid encoded by AAA/AAG; translation is fine.',
           'Only the β-chain differs between HbS, HbC, and HbA.']},
 
@@ -109,13 +109,13 @@ window.checkBook1Practice=function(id){
   }
   if(ok)correct++;
   var exp=document.getElementById('bexp-'+qi);
-  exp.innerHTML=q.choices.map(function(c,ci){var tag=ci===q.answer?'<b style="color:var(--green)">✓ Correct</b>':'<b style="color:var(--red)">✗</b>';return '<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:9px;padding:6px 0"><span style="font-family:var(--mono);font-size:12px;color:var(--text-dim);width:18px;flex-shrink:0">'+String.fromCharCode(65+ci)+'</span><div style="font-size:12.5px;color:var(--text-muted);line-height:1.55">'+tag+' — '+esc(q.why[ci]||'')+'</div></div>';}).join('');
+  exp.innerHTML=q.choices.map(function(c,ci){var tag=ci===q.answer?'<b style="color:var(--green)">✓ Correct</b>':'<b style="color:var(--red)">✗</b>';return '<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:9px;padding:6px 0"><span style="font-family:var(--mono);font-size:12px;color:var(--text-dim);width:18px;flex-shrink:0">'+String.fromCharCode(65+ci)+'</span><div style="font-size:12.5px;color:var(--text-muted);line-height:1.55">'+tag+' - '+esc(q.why[ci]||'')+'</div></div>';}).join('');
   exp.classList.add('show');
  });
  var pct=Math.round(correct/p.questions.length*100);
  var skillTxt=Object.keys(bySkill).map(function(s){return esc(s)+': '+bySkill[s][0]+'/'+bySkill[s][1];}).join(' &nbsp;·&nbsp; ');
  var rb=document.getElementById('resultbox');
- rb.innerHTML='<h3 style="font-family:var(--mono);font-size:20px;color:var(--text);margin-bottom:6px">'+correct+' / '+p.questions.length+' correct &nbsp;<span style="color:var(--teal)">'+pct+'%</span></h3><div style="font-size:12.5px;color:var(--text-muted);margin-top:4px">By skill — '+skillTxt+'</div><div style="margin-top:12px"><button class="btn-o" onclick="window.renderBook1Practice(\''+id+'\')" style="padding:9px 16px">RETRY ↻</button></div>';
+ rb.innerHTML='<h3 style="font-family:var(--mono);font-size:20px;color:var(--text);margin-bottom:6px">'+correct+' / '+p.questions.length+' correct &nbsp;<span style="color:var(--teal)">'+pct+'%</span></h3><div style="font-size:12.5px;color:var(--text-muted);margin-top:4px">By skill - '+skillTxt+'</div><div style="margin-top:12px"><button class="btn-o" onclick="window.renderBook1Practice(\''+id+'\')" style="padding:9px 16px">RETRY ↻</button></div>';
  rb.style.display='block';
  setPScore(id,pct);
  rb.scrollIntoView({behavior:'smooth',block:'center'});

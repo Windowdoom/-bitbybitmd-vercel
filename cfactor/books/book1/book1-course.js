@@ -1,4 +1,4 @@
-/* Book 1 — Biology (The Living Code) · course content + renderer.
+/* Book 1 - Biology (The Living Code) · course content + renderer.
    Ported from the BBB Book Biology PDF (374pg).
    Section-level progress, sticky right-rail TOC, resume, inline quick-checks. */
 
@@ -33,16 +33,16 @@ var MODULES=[
 window.BOOK1_COURSE=[
 
 /* =========================================================== */
-/* CHAPTER 0 — ORIENTATION (FULLY PORTED) */
+/* CHAPTER 0 - ORIENTATION (FULLY PORTED) */
 /* =========================================================== */
 {
  n:0,
  title:'Orientation: How to Use This Book',
  subtitle:'The Posture of the Learner · Why Carbon · The Hierarchy of Life · The Method',
  tag:'Posture',
- foundational:'Course Roadmap — read first',
+ foundational:'Course Roadmap - read first',
  buildsOn:null,
- setsUp:'Ch 1 — The chemistry of life is built on carbon and the hierarchy.',
+ setsUp:'Ch 1 - The chemistry of life is built on carbon and the hierarchy.',
  objectives:[
   'Adopt the learning posture that makes deep understanding possible: humility before mastery',
   'Explain why carbon is the chemical foundation of all known life',
@@ -51,13 +51,13 @@ window.BOOK1_COURSE=[
   'Apply the method of this book: think mechanism, trust the discriminator, pivot fast, revisit',
   'Use the discriminators, clinical bridges, and high-yield anchors to study actively'
  ],
- opener:'Before the first fact, the posture. This short opening chapter installs the way of thinking the rest of the book assumes: why carbon anchors all of biology, why the cell is the pivot of the living hierarchy, the five themes that unify the field, and the method—mechanism first—that makes what you learn survive the exam and the wards. Get the posture right and everything after it becomes easier.\n\nThe beginning of wisdom is knowing that you do not know. Every student who fails to learn deeply fails the same way: they mistook recognizing a fact for understanding it. This chapter is the posture that prevents that mistake.\n\nWelcome to The C-Factor, a complete foundation in the biology that medicine is built on. This is not a list of facts to memorize; it is a way of seeing life, from the single carbon atom to the whole body, in which every level explains the one above it. By the end you will understand how a change in one chemical bond can impair one enzyme, disrupt one pathway, damage one organ, and present as a syndrome a physician must recognize on sight.\n\nEverything in this book follows one method and one structure. The method is mechanism first, memorization last. The structure repeats in every chapter: teaching prose builds the concept, a DISCRIMINATOR box sharpens the one distinction that is easy to get wrong, a CLINICAL BRIDGE shows where the concept reappears in medicine, and HIGH-YIELD ANCHORS compress what must survive forgetting. Read actively: predict the discriminator before you read it, and explain each clinical bridge to yourself in plain language.',
+ opener:'Before the first fact, the posture. This short opening chapter installs the way of thinking the rest of the book assumes: why carbon anchors all of biology, why the cell is the pivot of the living hierarchy, the five themes that unify the field, and the method - mechanism first - that makes what you learn survive the exam and the wards. Get the posture right and everything after it becomes easier.\n\nThe beginning of wisdom is knowing that you do not know. Every student who fails to learn deeply fails the same way: they mistook recognizing a fact for understanding it. This chapter is the posture that prevents that mistake.\n\nWelcome to The C-Factor, a complete foundation in the biology that medicine is built on. This is not a list of facts to memorize; it is a way of seeing life, from the single carbon atom to the whole body, in which every level explains the one above it. By the end you will understand how a change in one chemical bond can impair one enzyme, disrupt one pathway, damage one organ, and present as a syndrome a physician must recognize on sight.\n\nEverything in this book follows one method and one structure. The method is mechanism first, memorization last. The structure repeats in every chapter: teaching prose builds the concept, a DISCRIMINATOR box sharpens the one distinction that is easy to get wrong, a CLINICAL BRIDGE shows where the concept reappears in medicine, and HIGH-YIELD ANCHORS compress what must survive forgetting. Read actively: predict the discriminator before you read it, and explain each clinical bridge to yourself in plain language.',
  pinnedDisc:{t:'MECHANISM vs MEMORIZATION', x:'Memorization stores an isolated fact; it is brittle and collapses when the question is reworded. Mechanism stores the why; it regenerates the fact on demand and transfers to questions you have never seen. Always build the mechanism first and let the facts hang off it. A fact without its mechanism is a fact you will lose.'},
  sections:[
 
   { id:'0.1', num:'0.1', title:'The Posture Principle: Humility as a Tool',
     blocks:[
-     {t:'p',x:'Most learning failures are not failures of intelligence; they are failures of posture. The student who believes they already understand a topic stops processing it, and stops learning, the moment a familiar word appears. This is the most expensive habit in all of studying, and it has a name: premature closure. The cure is intellectual humility — the deliberate assumption that you do not yet fully understand, which keeps the mind open long enough to actually learn.'},
+     {t:'p',x:'Most learning failures are not failures of intelligence; they are failures of posture. The student who believes they already understand a topic stops processing it, and stops learning, the moment a familiar word appears. This is the most expensive habit in all of studying, and it has a name: premature closure. The cure is intellectual humility - the deliberate assumption that you do not yet fully understand, which keeps the mind open long enough to actually learn.'},
      {t:'p',x:'Humility is not modesty for its own sake; it is a cognitive tool. When you assume you might be wrong, you check your reasoning, you look for the detail that separates two similar ideas, and you notice the gap between recognizing a term and being able to explain it. The arrogant learner sees a word they have seen before and moves on; the humble learner asks whether they could rebuild the idea from scratch. Only the second kind of learner is actually studying.'},
      {t:'box',kind:'disc',label:'⚡ DISCRIMINATOR · RECOGNITION vs UNDERSTANDING',
        x:'RECOGNITION is the feeling that you have seen something before; it is fast, comfortable, and almost worthless under exam pressure. UNDERSTANDING is the ability to rebuild the idea from its mechanism and explain it in plain language. The trap is mistaking the first for the second. Test yourself constantly: not "have I seen this?" but "could I explain why this is true, from the ground up, right now?" If not, you do not own it yet, no matter how familiar it feels.'},
@@ -74,14 +74,14 @@ window.BOOK1_COURSE=[
      { stem:'A student reads a passage about competitive inhibition, recognizes the term, and moves on without pausing. Two weeks later they miss a question that reframes the same concept as "a drug that occupies the active site is displaced by adding more substrate." What study failure does this best illustrate?',
        choices:['Inadequate memorization of definitions','Premature closure: mistaking recognition for understanding','Insufficient practice question volume','Poor time management on test day'],
        answer:1,
-       why:'The student recognized the term but never built the mechanism. The reworded question exposes that recognition without understanding is brittle — exactly the trap Section 0.1 warns about.'}
+       why:'The student recognized the term but never built the mechanism. The reworded question exposes that recognition without understanding is brittle - exactly the trap Section 0.1 warns about.'}
     ]
   },
 
   { id:'0.2', num:'0.2', title:'Why Carbon: The Atom That Anchors Life',
     blocks:[
-     {t:'p',x:'This book is built around one atom: carbon. The reason is structural. Carbon has four valence electrons — exactly half of a full outer shell — so it forms four strong covalent bonds and shows no strong tendency to either give electrons away or take them. That balance lets carbon bond with itself and with many other elements in long chains, branched structures, and rings, building molecules of almost unlimited size and variety. No other common element is so versatile, which is why all known life is carbon-based and why the chemistry of carbon is the chemistry of life.'},
-     {t:'p',x:'Carbon\'s four-bond versatility is the foundation everything else rests on. The proteins, carbohydrates, lipids, and nucleic acids of the coming chapters are all carbon skeletons decorated with functional groups. The enzymes that run metabolism, the membranes that build cells, the DNA that stores heredity — every one is a carbon-based molecule. Understand why carbon can build such diversity and you understand why biology has the molecular richness it does.'},
+     {t:'p',x:'This book is built around one atom: carbon. The reason is structural. Carbon has four valence electrons - exactly half of a full outer shell - so it forms four strong covalent bonds and shows no strong tendency to either give electrons away or take them. That balance lets carbon bond with itself and with many other elements in long chains, branched structures, and rings, building molecules of almost unlimited size and variety. No other common element is so versatile, which is why all known life is carbon-based and why the chemistry of carbon is the chemistry of life.'},
+     {t:'p',x:'Carbon\'s four-bond versatility is the foundation everything else rests on. The proteins, carbohydrates, lipids, and nucleic acids of the coming chapters are all carbon skeletons decorated with functional groups. The enzymes that run metabolism, the membranes that build cells, the DNA that stores heredity - every one is a carbon-based molecule. Understand why carbon can build such diversity and you understand why biology has the molecular richness it does.'},
      {t:'vbox',head:'CARBON · WHY IT WINS THE LIFE LOTTERY',html:
       '<div class="compare">'+
       '<div class="cmp-card" style="--ca:var(--teal)"><div class="ct">CARBON</div><p>4 valence electrons → 4 covalent bonds. Stable enough to last; weak enough that enzymes can remake at body temperature. Chains, branches, rings: the molecular alphabet of life.</p><span class="ck">STABLE · REVERSIBLE</span></div>'+
@@ -105,7 +105,7 @@ window.BOOK1_COURSE=[
 
   { id:'0.3', num:'0.3', title:'The Hierarchy of Life and the Five Themes',
     blocks:[
-     {t:'p',x:'Biology is organized as a nested hierarchy, each level built from the one below and showing properties the lower level lacks: atom, molecule, organelle, cell, tissue, organ, organ system, organism, population, community, ecosystem, biosphere. This book walks up that ladder. A central idea makes it more than a list: emergent properties. At each level, new properties appear that none of the parts had alone — a single water molecule is not wet, a single neuron does not think. Life itself is an emergent property that appears at one specific rung, and that rung is the cell.'},
+     {t:'p',x:'Biology is organized as a nested hierarchy, each level built from the one below and showing properties the lower level lacks: atom, molecule, organelle, cell, tissue, organ, organ system, organism, population, community, ecosystem, biosphere. This book walks up that ladder. A central idea makes it more than a list: emergent properties. At each level, new properties appear that none of the parts had alone - a single water molecule is not wet, a single neuron does not think. Life itself is an emergent property that appears at one specific rung, and that rung is the cell.'},
      {t:'vbox',head:'THE HIERARCHY · WHERE LIFE BEGINS',html:
       '<div class="hier">'+
       '<div class="hier-row" style="--lc:var(--text-dim)"><span class="hier-n">01</span><div class="hier-w">Atom<span>The chemical unit</span></div><span class="hier-tag">chemistry</span></div>'+
@@ -118,37 +118,37 @@ window.BOOK1_COURSE=[
       '<div class="hier-row" style="--lc:var(--teal)"><span class="hier-n">08</span><div class="hier-w">Population → community → ecosystem → biosphere<span>Life in context</span></div><span class="hier-tag">life</span></div>'+
       '</div>'+
       '<div class="vnote">The cell is the smallest unit at which metabolism, reproduction, and response to environment all emerge together. Below the cell: chemistry. At and above the cell: life.</div>'},
-     {t:'p',x:'Across all its complexity, biology returns to five unifying themes, and naming them now gives you hooks for every later fact. Structure determines function (form fits function at every level — shaped wrong means works wrong, a huge share of disease). Information flows (DNA stores and transmits life\'s instructions). Energy and matter are captured and transformed (metabolism). Parts interact within and between systems (homeostasis and feedback). And evolution unifies all life (descent with modification). Of these, structure–function is the one you will use most, and evolution is the frame that makes the rest cohere.'},
+     {t:'p',x:'Across all its complexity, biology returns to five unifying themes, and naming them now gives you hooks for every later fact. Structure determines function (form fits function at every level - shaped wrong means works wrong, a huge share of disease). Information flows (DNA stores and transmits life\'s instructions). Energy and matter are captured and transformed (metabolism). Parts interact within and between systems (homeostasis and feedback). And evolution unifies all life (descent with modification). Of these, structure-function is the one you will use most, and evolution is the frame that makes the rest cohere.'},
      {t:'box',kind:'disc',label:'⚡ DISCRIMINATOR · THE CELL: WHERE NON-LIFE BECOMES LIFE',
        x:'The single most important boundary in the hierarchy is the CELL. Everything below it (atoms, molecules, even organelles) is chemistry, not alive on its own. The cell is the smallest unit that is alive, where metabolism, reproduction, and response to the environment all emerge together. This is why a virus (molecules, not a cell) sits in a gray zone, and why the cell is the pivot of the whole hierarchy. Below the cell: chemistry. At and above the cell: life.'},
      {t:'box',kind:'bridge',label:'🌉 CLINICAL BRIDGE · DISEASE LIVES AT EVERY LEVEL AT ONCE',
-       x:'A single disease threads through every rung of the hierarchy simultaneously. A mutation (a change in a molecule) alters a protein, disables a cell process, damages a tissue and organ, and presents as a syndrome in the whole person. Sickle cell disease is one changed amino acid that deforms a protein that deforms a red cell that blocks a vessel that infarcts an organ. Learning to read disease up and down the hierarchy — from molecule to patient — is exactly what clinical reasoning is, and it is the skill this book trains.'},
+       x:'A single disease threads through every rung of the hierarchy simultaneously. A mutation (a change in a molecule) alters a protein, disables a cell process, damages a tissue and organ, and presents as a syndrome in the whole person. Sickle cell disease is one changed amino acid that deforms a protein that deforms a red cell that blocks a vessel that infarcts an organ. Learning to read disease up and down the hierarchy - from molecule to patient - is exactly what clinical reasoning is, and it is the skill this book trains.'},
      {t:'box',kind:'hy',label:'◆ HIGH-YIELD',items:[
       'Hierarchy: atom → molecule → organelle → cell → tissue → organ → system → organism → population → community → ecosystem → biosphere',
       'Emergent properties: each level has properties its parts lack; life emerges at the CELL (the pivot)',
       'Five themes: structure/function, information flow, energy/matter, interactions, evolution',
-      'Structure–function is used most; evolution is the unifying frame; disease threads every level at once'
+      'Structure-function is used most; evolution is the unifying frame; disease threads every level at once'
      ]}
     ],
     quickcheck:[
      { stem:'Where in the biological hierarchy does "life" first emerge?',
        choices:['At the molecule (DNA can replicate)','At the organelle (mitochondria make ATP)','At the cell (metabolism, reproduction, and response all emerge together)','At the tissue (cells coordinate)'],
        answer:2,
-       why:'The cell is the pivot of the hierarchy — the smallest unit at which all three defining properties of life appear together. Everything below it is chemistry; viruses (mere molecules) sit in the gray zone for exactly this reason.'}
+       why:'The cell is the pivot of the hierarchy - the smallest unit at which all three defining properties of life appear together. Everything below it is chemistry; viruses (mere molecules) sit in the gray zone for exactly this reason.'}
     ]
   },
 
   { id:'0.4', num:'0.4', title:'The Method: How to Use This Book',
     blocks:[
-     {t:'p',x:'Every chapter is built around the same four cognitive moves, and by the end they should feel like reflexes. Think mechanism: before memorizing any fact, ask what is actually happening at the molecular or cellular level — because the mechanism survives when the memorized fact dissolves under pressure. Trust the discriminator: for any two ideas that are easy to confuse, find the one detail that separates them, since most exam errors come from picking the familiar neighbor of the right answer. Pivot fast: once you know the answer, commit and move on. Revisit in 48 hours: re-explain each new concept from memory two days later — the window where memory is most fragile and most improvable.'},
+     {t:'p',x:'Every chapter is built around the same four cognitive moves, and by the end they should feel like reflexes. Think mechanism: before memorizing any fact, ask what is actually happening at the molecular or cellular level - because the mechanism survives when the memorized fact dissolves under pressure. Trust the discriminator: for any two ideas that are easy to confuse, find the one detail that separates them, since most exam errors come from picking the familiar neighbor of the right answer. Pivot fast: once you know the answer, commit and move on. Revisit in 48 hours: re-explain each new concept from memory two days later - the window where memory is most fragile and most improvable.'},
      {t:'vbox',head:'THE FOUR MOVES · THE METHOD OF THIS BOOK',html:
       '<div class="path">'+
       '<div class="pstep"><div class="pnum">1</div><div class="pbody"><b>THINK MECHANISM</b><span>Ask what is physically happening before you memorize any fact. Mechanism regenerates the fact; memorization alone forgets it.</span></div></div>'+
       '<div class="pstep"><div class="pnum">2</div><div class="pbody"><b>TRUST THE DISCRIMINATOR</b><span>For any two confusable ideas, find the one detail that separates them. Most wrong answers are the familiar neighbor of the right answer.</span></div></div>'+
       '<div class="pstep"><div class="pnum">3</div><div class="pbody"><b>PIVOT FAST</b><span>Once you know the answer, commit and move on. Lingering is a losing trade against the clock.</span></div></div>'+
-      '<div class="pstep"><div class="pnum">4</div><div class="pbody"><b>REVISIT IN 48 HOURS</b><span>Re-explain from memory two days later — the window where memory is most fragile and most improvable.</span></div></div>'+
+      '<div class="pstep"><div class="pnum">4</div><div class="pbody"><b>REVISIT IN 48 HOURS</b><span>Re-explain from memory two days later - the window where memory is most fragile and most improvable.</span></div></div>'+
       '</div>'},
-     {t:'p',x:'The boxes in every chapter map onto these moves. Gold DISCRIMINATOR boxes are the one distinction to master. Blue CLINICAL BRIDGE boxes show where the science becomes medicine. Green HIGH-YIELD ANCHOR boxes compress the must-know facts. Use them actively — predict, explain, and self-test — rather than reading passively, and the book becomes a training program for clinical reasoning, not just a reference.'},
+     {t:'p',x:'The boxes in every chapter map onto these moves. Gold DISCRIMINATOR boxes are the one distinction to master. Blue CLINICAL BRIDGE boxes show where the science becomes medicine. Green HIGH-YIELD ANCHOR boxes compress the must-know facts. Use them actively - predict, explain, and self-test - rather than reading passively, and the book becomes a training program for clinical reasoning, not just a reference.'},
      {t:'box',kind:'disc',label:'⚡ DISCRIMINATOR · MECHANISM vs MEMORIZATION',
        x:'MEMORIZATION stores an isolated fact; it is brittle and collapses when the question is reworded. MECHANISM stores the why; it regenerates the fact on demand and transfers to questions you have never seen. Always build the mechanism first and let the facts hang off it. A fact without its mechanism is a fact you will lose. Flashcards retain what you have already understood; they never substitute for understanding it.'},
      {t:'box',kind:'hy',label:'◆ HIGH-YIELD',items:[
@@ -163,25 +163,25 @@ window.BOOK1_COURSE=[
      { stem:'You learn that competitive inhibitors raise apparent Km but leave Vmax unchanged. Two days later, you can\'t recall it. Which of the "four moves" did you most likely skip?',
        choices:['Pivot fast','Trust the discriminator','Think mechanism (and revisit in 48h)','Read more carefully the first time'],
        answer:2,
-       why:'The fact was memorized but the mechanism — that the inhibitor competes with substrate, so adding more substrate outcompetes it (Vmax preserved) but you need MORE substrate to reach it (Km up) — was never built. With the mechanism, the fact regenerates itself.'}
+       why:'The fact was memorized but the mechanism - that the inhibitor competes with substrate, so adding more substrate outcompetes it (Vmax preserved) but you need MORE substrate to reach it (Km up) - was never built. With the mechanism, the fact regenerates itself.'}
     ]
   }
  ],
  bottomLine:'Carbon\'s four-bond versatility is the chemical foundation of all life, and biology is a hierarchy from atom to biosphere in which the cell is the pivot where chemistry becomes life. Five themes unify the field: structure/function (used most), information flow, energy/matter, interactions, and evolution (the frame that makes the rest cohere). The posture that makes it all stick is humility: assume you do not yet understand, build mechanism before memorizing, trust the discriminator, pivot fast, and revisit in 48 hours. Recognition is not understanding, and only understanding survives the exam and the wards.',
- nextHint:'With the posture set and carbon at the center, Chapter 1 builds the complete chemistry foundation — atoms, bonds, water, pH, functional groups, the four biomolecule classes, and enzyme kinetics — that every later chapter depends on.'
+ nextHint:'With the posture set and carbon at the center, Chapter 1 builds the complete chemistry foundation - atoms, bonds, water, pH, functional groups, the four biomolecule classes, and enzyme kinetics - that every later chapter depends on.'
 },
 
 /* =========================================================== */
-/* CHAPTER 1 — AMINO ACIDS, PEPTIDES, AND PROTEINS (STRUCTURE + KEY BOXES) */
+/* CHAPTER 1 - AMINO ACIDS, PEPTIDES, AND PROTEINS (STRUCTURE + KEY BOXES) */
 /* =========================================================== */
 {
  n:1,
  title:'Amino Acids, Peptides, and Proteins',
  subtitle:'Foundational Concept 1 · AAMC Content Category 1A · Biochemistry',
  tag:'Biomolecules',
- foundational:'The verbs of biology — and the most-tested unit on the MCAT',
- buildsOn:'Ch 0 — carbon\'s four-bond versatility and the hierarchy of life.',
- setsUp:'Ch 2 — enzymes (folded proteins that do catalysis); Ch 13–14 — hemoglobin physiology.',
+ foundational:'The verbs of biology - and the most-tested unit on the MCAT',
+ buildsOn:'Ch 0 - carbon\'s four-bond versatility and the hierarchy of life.',
+ setsUp:'Ch 2 - enzymes (folded proteins that do catalysis); Ch 13-14 - hemoglobin physiology.',
  objectives:[
   'Draw the general amino acid; classify all 20 by side-chain chemistry including every special case',
   'Predict charge at any pH and calculate isoelectric point (pI) with worked numeric examples',
@@ -192,45 +192,45 @@ window.BOOK1_COURSE=[
   'Explain hemoglobin cooperativity, allostery, and the Bohr effect as the bridge to physiology',
   'Trace single sequence changes and amino-acid metabolic blocks to specific diseases'
  ],
- opener:'Proteins are not a topic. They are the verbs of biology. Almost everything a cell does, it does with a protein, and almost everything that goes wrong in medicine is a protein doing its job wrong.\n\nStart with a number that reframes the chapter: proteins make up more than half of the dry mass of most cells. They are the enzymes that run metabolism, the antibodies that fight infection, the channels that fire a neuron, the collagen that holds your skin together, the hemoglobin that carries your oxygen, and the receptors that every drug you will ever prescribe must bind. Understand proteins and you are not learning one MCAT topic — you are learning the machinery the rest of biology, all of biochemistry, and most of pathology are built on.\n\nThis chapter has two jobs at once. First, teach the college-level chemistry of amino acids and proteins completely, because it is the foundation everything else rests on. Second, at every step, answer the question college courses skip: so what, and why does it matter at the bedside.',
+ opener:'Proteins are not a topic. They are the verbs of biology. Almost everything a cell does, it does with a protein, and almost everything that goes wrong in medicine is a protein doing its job wrong.\n\nStart with a number that reframes the chapter: proteins make up more than half of the dry mass of most cells. They are the enzymes that run metabolism, the antibodies that fight infection, the channels that fire a neuron, the collagen that holds your skin together, the hemoglobin that carries your oxygen, and the receptors that every drug you will ever prescribe must bind. Understand proteins and you are not learning one MCAT topic - you are learning the machinery the rest of biology, all of biochemistry, and most of pathology are built on.\n\nThis chapter has two jobs at once. First, teach the college-level chemistry of amino acids and proteins completely, because it is the foundation everything else rests on. Second, at every step, answer the question college courses skip: so what, and why does it matter at the bedside.',
  pinnedDisc:{t:'WHAT HOLDS EACH LEVEL OF PROTEIN STRUCTURE TOGETHER',
   x:'Primary = covalent peptide bonds. Secondary = backbone H-bonds (α-helix and β-sheet). Tertiary = side-chain interactions (hydrophobic core, H-bonds, ionic pairs, disulfides). Quaternary = the same forces between separate subunits. Get these four bonds right and most protein-structure questions resolve themselves.'},
  sections:[
   { id:'1.1', num:'1.1', title:'The Amino Acid: One Design, Twenty Personalities',
     blocks:[
-     {t:'p',x:'Every amino acid in your body shares the same skeleton: a central carbon (the α-carbon) with four groups attached — an amino group (–NH₂), a carboxyl group (–COOH), a hydrogen, and a variable side chain (R). Twenty different R groups produce twenty different amino acids, but the shared backbone is what makes them chain together identically into proteins. The R group is the personality; the backbone is the framework.'},
-     {t:'formula',x:'H₂N — Cα(H)(R) — COOH',note:'The general amino acid. The α-carbon is the chiral center (except in glycine, where R = H).'},
-     {t:'p',x:'Side chains sort into four functional families: nonpolar (hydrophobic), polar uncharged, acidic (negative at physiological pH), and basic (positive at physiological pH). You do not need to draw all 20 from memory, but you must classify them on sight — because charge, polarity, and the special cases (glycine, proline, cysteine) drive every downstream question on folding, enzyme catalysis, and disease.'},
+     {t:'p',x:'Every amino acid in your body shares the same skeleton: a central carbon (the α-carbon) with four groups attached - an amino group (-NH₂), a carboxyl group (-COOH), a hydrogen, and a variable side chain (R). Twenty different R groups produce twenty different amino acids, but the shared backbone is what makes them chain together identically into proteins. The R group is the personality; the backbone is the framework.'},
+     {t:'formula',x:'H₂N - Cα(H)(R) - COOH',note:'The general amino acid. The α-carbon is the chiral center (except in glycine, where R = H).'},
+     {t:'p',x:'Side chains sort into four functional families: nonpolar (hydrophobic), polar uncharged, acidic (negative at physiological pH), and basic (positive at physiological pH). You do not need to draw all 20 from memory, but you must classify them on sight - because charge, polarity, and the special cases (glycine, proline, cysteine) drive every downstream question on folding, enzyme catalysis, and disease.'},
      {t:'box',kind:'bridge',label:'🌉 CLINICAL BRIDGE · ESSENTIAL AMINO ACIDS AND PKU',
-       x:'Nine amino acids are "essential" — you must eat them. The most clinically famous is phenylalanine: in phenylketonuria (PKU), a defective enzyme cannot convert it to tyrosine, so phenylalanine accumulates and damages the developing brain. PKU is the template for the entire class of inborn errors of metabolism: one missing enzyme, one accumulating substrate, one diagnosable syndrome.'},
-     {t:'scaffold',x:'Full content for §1.1 (all 20 side-chain classifications, the special cases — Gly, Pro, Cys — and worked examples) is being ported from the book in the next pass. The discriminator and clinical bridge above are the chapter\'s anchors for this section.'}
+       x:'Nine amino acids are "essential" - you must eat them. The most clinically famous is phenylalanine: in phenylketonuria (PKU), a defective enzyme cannot convert it to tyrosine, so phenylalanine accumulates and damages the developing brain. PKU is the template for the entire class of inborn errors of metabolism: one missing enzyme, one accumulating substrate, one diagnosable syndrome.'},
+     {t:'scaffold',x:'Full content for §1.1 (all 20 side-chain classifications, the special cases - Gly, Pro, Cys - and worked examples) is being ported from the book in the next pass. The discriminator and clinical bridge above are the chapter\'s anchors for this section.'}
     ],
     quickcheck:[
      { stem:'Which amino acid is the only one without a chiral α-carbon?',
        choices:['Alanine','Glycine','Serine','Proline'],
        answer:1,
-       why:'Glycine\'s R group is just a hydrogen, so its α-carbon has two identical H substituents — no chirality. Proline is also unusual (its R loops back to the amino group, making it the only secondary amine) but it remains chiral.'}
+       why:'Glycine\'s R group is just a hydrogen, so its α-carbon has two identical H substituents - no chirality. Proline is also unusual (its R loops back to the amino group, making it the only secondary amine) but it remains chiral.'}
     ]
   },
   { id:'1.2', num:'1.2', title:'Charge, pKa, and the Isoelectric Point',
     blocks:[
      {t:'box',kind:'disc',label:'⚡ DISCRIMINATOR · pKa vs pI',
-       x:'pKa is a property of one ionizable group — the pH at which that group is half protonated, half deprotonated. pI is a property of the whole amino acid — the pH at which the molecule\'s net charge is zero. For a simple amino acid with no charged side chain, pI = (pKa₁ + pKa₂) / 2. For acidic or basic side chains, average the two pKa\'s flanking the neutral form. Mix these up and every titration problem will look wrong.'},
+       x:'pKa is a property of one ionizable group - the pH at which that group is half protonated, half deprotonated. pI is a property of the whole amino acid - the pH at which the molecule\'s net charge is zero. For a simple amino acid with no charged side chain, pI = (pKa₁ + pKa₂) / 2. For acidic or basic side chains, average the two pKa\'s flanking the neutral form. Mix these up and every titration problem will look wrong.'},
      {t:'box',kind:'bridge',label:'🌉 CLINICAL BRIDGE · HISTIDINE, THE BUFFER IN YOUR BLOOD',
-       x:'Histidine\'s imidazole side chain has a pKa near 6.0 — uniquely close to physiological pH 7.4. That makes histidine residues the dominant pH buffers in proteins like hemoglobin, and they are exactly the residues that pick up the proton when CO₂ rises (the Bohr effect). One amino acid, one pKa, one mechanism behind the entire respiratory acid-base story.'},
+       x:'Histidine\'s imidazole side chain has a pKa near 6.0 - uniquely close to physiological pH 7.4. That makes histidine residues the dominant pH buffers in proteins like hemoglobin, and they are exactly the residues that pick up the proton when CO₂ rises (the Bohr effect). One amino acid, one pKa, one mechanism behind the entire respiratory acid-base story.'},
      {t:'scaffold',x:'Full §1.2 with worked pI calculations and titration curves is being ported next.'}
     ]
   },
   { id:'1.3', num:'1.3', title:'The Peptide Bond and Primary Structure',
-    blocks:[{t:'scaffold',x:'Section structure in place — peptide bond geometry, planarity, partial double-bond character, and why this geometry dictates the allowed backbone conformations. Full prose ports in the next pass.'}]
+    blocks:[{t:'scaffold',x:'Section structure in place - peptide bond geometry, planarity, partial double-bond character, and why this geometry dictates the allowed backbone conformations. Full prose ports in the next pass.'}]
   },
   { id:'1.4', num:'1.4', title:'The Four Levels of Protein Structure',
     blocks:[
      {t:'vbox',head:'THE FOUR LEVELS · WHAT HOLDS EACH ONE TOGETHER',html:
       '<div class="path">'+
       '<div class="pstep"><div class="pnum">1°</div><div class="pbody"><b>PRIMARY · sequence</b><span>Covalent peptide bonds. The amino-acid sequence written N→C.</span></div></div>'+
-      '<div class="pstep"><div class="pnum">2°</div><div class="pbody"><b>SECONDARY · local fold</b><span>Backbone hydrogen bonds — α-helix (intra-strand H-bonds) and β-sheet (inter-strand H-bonds).</span></div></div>'+
-      '<div class="pstep"><div class="pnum">3°</div><div class="pbody"><b>TERTIARY · 3D shape</b><span>Side-chain interactions: hydrophobic core, H-bonds, ionic pairs (salt bridges), and disulfide bonds (Cys–Cys).</span></div></div>'+
+      '<div class="pstep"><div class="pnum">2°</div><div class="pbody"><b>SECONDARY · local fold</b><span>Backbone hydrogen bonds - α-helix (intra-strand H-bonds) and β-sheet (inter-strand H-bonds).</span></div></div>'+
+      '<div class="pstep"><div class="pnum">3°</div><div class="pbody"><b>TERTIARY · 3D shape</b><span>Side-chain interactions: hydrophobic core, H-bonds, ionic pairs (salt bridges), and disulfide bonds (Cys-Cys).</span></div></div>'+
       '<div class="pstep"><div class="pnum">4°</div><div class="pbody"><b>QUATERNARY · assembly</b><span>The same forces, but BETWEEN separate polypeptide subunits (e.g. hemoglobin\'s two α + two β chains).</span></div></div>'+
       '</div>'},
      {t:'scaffold',x:'Worked examples (collagen triple helix, β-barrels, hemoglobin assembly) and the "what disrupts which force" discriminator port next.'}
@@ -240,7 +240,7 @@ window.BOOK1_COURSE=[
     blocks:[{t:'scaffold',x:'Chaperones, the folding funnel, denaturation vs misfolding vs mutation, and the amyloid/prion clinical bridge port next.'}]
   },
   { id:'1.6', num:'1.6', title:'Separating, Sequencing, and Quantifying Proteins',
-    blocks:[{t:'scaffold',x:'Electrophoresis (SDS-PAGE, isoelectric focusing), chromatography, Edman/mass spec, ELISA / Western — what each one separates by and when to pick which.'}]
+    blocks:[{t:'scaffold',x:'Electrophoresis (SDS-PAGE, isoelectric focusing), chromatography, Edman/mass spec, ELISA / Western - what each one separates by and when to pick which.'}]
   },
   { id:'1.7', num:'1.7', title:'Sickle Cell Disease: Primary Structure Controls Everything',
     blocks:[{t:'scaffold',x:'One amino acid (Glu→Val at β6) → one deformed protein → one sickled red cell → one infarcted organ. The template for tracing disease up the hierarchy.'}]
@@ -252,30 +252,30 @@ window.BOOK1_COURSE=[
     blocks:[{t:'scaffold',x:'Gly-X-Y repeat, hydroxylation (vitamin C), triple helix, and the classic discriminators: collagen vs elastin vs fibrillin (scurvy, Ehlers-Danlos, Marfan).'}]
   },
   { id:'1.10', num:'1.10', title:'Post-Translational Modification',
-    blocks:[{t:'scaffold',x:'Phosphorylation, glycosylation, ubiquitination, lipidation — modifications as the dynamic regulator of protein function (and as drug targets).'}]
+    blocks:[{t:'scaffold',x:'Phosphorylation, glycosylation, ubiquitination, lipidation - modifications as the dynamic regulator of protein function (and as drug targets).'}]
   },
   { id:'1.11', num:'1.11', title:'Worked MCAT-Style Passages',
-    blocks:[{t:'scaffold',x:'A pair of MCAT-format passages with full answer keys will be wired here — the assessment loop is already plumbed in book1-practice.js.'}]
+    blocks:[{t:'scaffold',x:'A pair of MCAT-format passages with full answer keys will be wired here - the assessment loop is already plumbed in book1-practice.js.'}]
   },
   { id:'1.12', num:'1.12', title:'High-Yield Cheat Sheet',
-    blocks:[{t:'scaffold',x:'One-page review of everything in this chapter — the exact card you scan five minutes before a test.'}]
+    blocks:[{t:'scaffold',x:'One-page review of everything in this chapter - the exact card you scan five minutes before a test.'}]
   }
  ],
- bottomLine:'Twenty amino acids, four side-chain families, four levels of structure, four stabilizing forces. The primary sequence is the only thing the genome specifies — everything else (fold, function, disease) follows from chemistry. One wrong amino acid (sickle cell) deforms the protein; one missing enzyme (PKU) accumulates the substrate; one misfold (amyloid, prions) kills the cell. Proteins are the verbs of biology.',
- nextHint:'Chapter 1 ended with a folded protein. Chapter 2 is about what most folded proteins do for a living: catalysis. Same chemistry, new question — how fast.'
+ bottomLine:'Twenty amino acids, four side-chain families, four levels of structure, four stabilizing forces. The primary sequence is the only thing the genome specifies - everything else (fold, function, disease) follows from chemistry. One wrong amino acid (sickle cell) deforms the protein; one missing enzyme (PKU) accumulates the substrate; one misfold (amyloid, prions) kills the cell. Proteins are the verbs of biology.',
+ nextHint:'Chapter 1 ended with a folded protein. Chapter 2 is about what most folded proteins do for a living: catalysis. Same chemistry, new question - how fast.'
 },
 
 /* =========================================================== */
-/* CHAPTER 2 — ENZYMES (STRUCTURE + KEY BOXES) */
+/* CHAPTER 2 - ENZYMES (STRUCTURE + KEY BOXES) */
 /* =========================================================== */
 {
  n:2,
  title:'Enzymes and Enzyme Kinetics',
  subtitle:'Foundational Concept 1 · AAMC Content Category 1D · Biochemistry',
  tag:'Biomolecules',
- foundational:'How proteins do work — and why most drugs are enzyme inhibitors',
- buildsOn:'Ch 1 — the folded protein and its active site.',
- setsUp:'Ch 7 — every metabolic step is an enzyme; Ch 10 — DNA/RNA polymerases.',
+ foundational:'How proteins do work - and why most drugs are enzyme inhibitors',
+ buildsOn:'Ch 1 - the folded protein and its active site.',
+ setsUp:'Ch 7 - every metabolic step is an enzyme; Ch 10 - DNA/RNA polymerases.',
  objectives:[
   'Explain what an enzyme does (lowers activation energy) and what it does not (change ΔG)',
   'Describe the active site, induced fit, and transition-state stabilization',
@@ -288,29 +288,29 @@ window.BOOK1_COURSE=[
   'Recognize covalent regulation (phosphorylation, zymogen cleavage)',
   'Use enzymes as diagnostic windows (troponin, AST/ALT, lipase, creatine kinase)'
  ],
- opener:'Chapter 1 ended with a folded protein. This chapter is about what most folded proteins do for a living: catalysis. An enzyme is a protein that speeds up a chemical reaction by many orders of magnitude without being consumed. That single ability is what makes life chemistry — without enzymes, your reactions would happen, but on geological timescales. With enzymes, the same reactions happen in milliseconds, under precise control, exactly where and when the cell needs them.',
+ opener:'Chapter 1 ended with a folded protein. This chapter is about what most folded proteins do for a living: catalysis. An enzyme is a protein that speeds up a chemical reaction by many orders of magnitude without being consumed. That single ability is what makes life chemistry - without enzymes, your reactions would happen, but on geological timescales. With enzymes, the same reactions happen in milliseconds, under precise control, exactly where and when the cell needs them.',
  pinnedDisc:{t:'COMPETITIVE vs NONCOMPETITIVE INHIBITION',
   x:'Competitive: inhibitor binds the active site, competes with substrate. Outcompeted by adding more substrate → Vmax UNCHANGED, apparent Km UP. Noncompetitive: binds a different site, can\'t be outcompeted. Vmax DOWN, Km unchanged. Memorize this pair and 80% of enzyme inhibitor questions resolve themselves.'},
  sections:[
   { id:'2.1', num:'2.1', title:'What an Enzyme Does: Activation Energy',
     blocks:[
-     {t:'p',x:'Every chemical reaction must climb an energy hill called the activation energy (Eₐ) before products can form. An enzyme lowers that hill without changing where the reaction ends up — the equilibrium constant and ΔG are fixed by thermodynamics, untouched by any catalyst. The enzyme changes how fast you get there, not where you go.'},
+     {t:'p',x:'Every chemical reaction must climb an energy hill called the activation energy (Eₐ) before products can form. An enzyme lowers that hill without changing where the reaction ends up - the equilibrium constant and ΔG are fixed by thermodynamics, untouched by any catalyst. The enzyme changes how fast you get there, not where you go.'},
      {t:'box',kind:'disc',label:'⚡ DISCRIMINATOR · WHAT AN ENZYME CHANGES vs WHAT IT DOES NOT',
-       x:'Enzymes lower activation energy — they speed BOTH the forward and reverse reactions by the same factor. They do NOT change ΔG, Keq, the position of equilibrium, or whether the reaction is favorable. A favorable reaction with no enzyme still happens; it just takes geological time. An unfavorable reaction with the world\'s best enzyme still does not run. Catalysis is about kinetics, not thermodynamics.'},
+       x:'Enzymes lower activation energy - they speed BOTH the forward and reverse reactions by the same factor. They do NOT change ΔG, Keq, the position of equilibrium, or whether the reaction is favorable. A favorable reaction with no enzyme still happens; it just takes geological time. An unfavorable reaction with the world\'s best enzyme still does not run. Catalysis is about kinetics, not thermodynamics.'},
      {t:'scaffold',x:'Full §2.1 prose + the coupling-vs-catalysis discriminator + the cyanide/ATP clinical bridge port next.'}
     ],
     quickcheck:[
      { stem:'An enzyme lowers the activation energy of a reaction by 25 kJ/mol. Which of the following also changes?',
        choices:['The equilibrium constant (Keq) shifts toward products','ΔG becomes more negative','The reaction reaches equilibrium faster, but Keq and ΔG are unchanged','The reverse reaction is now slower than the forward'],
        answer:2,
-       why:'Enzymes are kinetic, not thermodynamic. They speed both directions equally — Keq and ΔG are fixed by the chemistry of reactants and products and are untouched by the catalyst. The reaction simply reaches the same equilibrium faster.'}
+       why:'Enzymes are kinetic, not thermodynamic. They speed both directions equally - Keq and ΔG are fixed by the chemistry of reactants and products and are untouched by the catalyst. The reaction simply reaches the same equilibrium faster.'}
     ]
   },
   { id:'2.2', num:'2.2', title:'The Active Site and Induced Fit',
     blocks:[{t:'scaffold',x:'Lock-and-key vs induced fit, transition-state stabilization, and why drug specificity is possible.'}]
   },
   { id:'2.3', num:'2.3', title:'The Six Enzyme Classes',
-    blocks:[{t:'scaffold',x:'Oxidoreductases, transferases, hydrolases, lyases, isomerases, ligases — recognize each from a reaction.'}]
+    blocks:[{t:'scaffold',x:'Oxidoreductases, transferases, hydrolases, lyases, isomerases, ligases - recognize each from a reaction.'}]
   },
   { id:'2.4', num:'2.4', title:'Cofactors, Coenzymes, and Vitamins',
     blocks:[{t:'scaffold',x:'NAD+/FAD/CoA from B-vitamins; a vitamin deficiency IS an enzyme failure.'}]
@@ -319,7 +319,7 @@ window.BOOK1_COURSE=[
     blocks:[
      {t:'formula',x:'v = Vmax · [S] / (Km + [S])',note:'Km is the substrate concentration at which v = ½Vmax. Low Km = high affinity.'},
      {t:'box',kind:'disc',label:'⚡ DISCRIMINATOR · Km vs Vmax',
-      x:'Vmax is the ceiling — the rate when every enzyme molecule is saturated with substrate. It depends on [enzyme] and how fast the enzyme can turn over (kcat). Km is the substrate concentration at half-Vmax — a measure of enzyme-substrate AFFINITY (low Km = tight binding). Add inhibitor: competitive raises Km, leaves Vmax; noncompetitive lowers Vmax, leaves Km.'},
+      x:'Vmax is the ceiling - the rate when every enzyme molecule is saturated with substrate. It depends on [enzyme] and how fast the enzyme can turn over (kcat). Km is the substrate concentration at half-Vmax - a measure of enzyme-substrate AFFINITY (low Km = tight binding). Add inhibitor: competitive raises Km, leaves Vmax; noncompetitive lowers Vmax, leaves Km.'},
      {t:'scaffold',x:'Worked Km/Vmax problems and the fomepizole/alcohol-dehydrogenase clinical bridge port next.'}
     ]
   },
@@ -342,7 +342,7 @@ window.BOOK1_COURSE=[
     ],
     quickcheck:[
      { stem:'A drug binds an enzyme at the active site and competes directly with substrate. Adding excess substrate restores activity. On a Lineweaver-Burk plot, which intercept changes?',
-       choices:['Y-intercept rises (Vmax falls)','X-intercept moves toward zero (Km rises)','Both intercepts move together','Neither — competitive inhibitors don\'t show on Lineweaver-Burk'],
+       choices:['Y-intercept rises (Vmax falls)','X-intercept moves toward zero (Km rises)','Both intercepts move together','Neither - competitive inhibitors don\'t show on Lineweaver-Burk'],
        answer:1,
        why:'Competitive inhibition: Vmax unchanged (y-intercept fixed) but apparent Km rises, so the x-intercept (−1/Km) moves toward zero. The plot rotates around its y-intercept.'}
     ]
@@ -354,7 +354,7 @@ window.BOOK1_COURSE=[
     blocks:[{t:'scaffold',x:'Phosphorylation cascades and pancreatitis as a zymogen activated in the wrong place.'}]
   },
   { id:'2.10', num:'2.10', title:'Temperature, pH, and the Limits of an Enzyme',
-    blocks:[{t:'scaffold',x:'Pepsin at pH 2 vs trypsin at pH 8 — pH optima match anatomy.'}]
+    blocks:[{t:'scaffold',x:'Pepsin at pH 2 vs trypsin at pH 8 - pH optima match anatomy.'}]
   },
   { id:'2.11', num:'2.11', title:'Enzymes as Diagnostic Windows',
     blocks:[{t:'scaffold',x:'Troponin (MI), AST/ALT (liver), lipase (pancreas), CK (muscle).'}]
@@ -366,61 +366,61 @@ window.BOOK1_COURSE=[
     blocks:[{t:'scaffold',x:'One-page review.'}]
   }
  ],
- bottomLine:'An enzyme is a folded protein that lowers activation energy without changing thermodynamics. Michaelis-Menten describes how fast (Km = affinity, Vmax = ceiling). Inhibitors are the basis of pharmacology — competitive raises Km, noncompetitive lowers Vmax, uncompetitive lowers both. Allostery and covalent modification are how cells turn enzymes on and off. Diagnostic enzymes in blood are the bedside readout of which organ is failing.',
- nextHint:'Chapters 1–2 built proteins and the enzymes that run on them. Chapter 3 covers the other two great classes of biomolecules: carbohydrates (the fast fuel) and lipids (the membranes and stores).'
+ bottomLine:'An enzyme is a folded protein that lowers activation energy without changing thermodynamics. Michaelis-Menten describes how fast (Km = affinity, Vmax = ceiling). Inhibitors are the basis of pharmacology - competitive raises Km, noncompetitive lowers Vmax, uncompetitive lowers both. Allostery and covalent modification are how cells turn enzymes on and off. Diagnostic enzymes in blood are the bedside readout of which organ is failing.',
+ nextHint:'Chapters 1-2 built proteins and the enzymes that run on them. Chapter 3 covers the other two great classes of biomolecules: carbohydrates (the fast fuel) and lipids (the membranes and stores).'
 },
 
 /* =========================================================== */
-/* CHAPTERS 3–14 — SCAFFOLDED (titles + sections + dependency hints) */
+/* CHAPTERS 3-14 - SCAFFOLDED (titles + sections + dependency hints) */
 /* Section titles ported directly from the BBB Biology PDF. */
 /* =========================================================== */
 
 mkScaffold(3,'Carbohydrates and Lipids','Biomolecules','Sugars, fats, membranes, lipoproteins',
- 'Ch 1–2 — protein chemistry; Ch 0 — carbon skeletons','Ch 7 — these are the fuels respiration burns.',
+ 'Ch 1-2 - protein chemistry; Ch 0 - carbon skeletons','Ch 7 - these are the fuels respiration burns.',
  ['What a Carbohydrate Is: The Building Block','Stereochemistry of Sugars: D/L and Anomers','Glycosidic Bonds, Disaccharides, and Polysaccharides','Reducing Sugars and the Chemistry of Glucose Testing','When Sugar Metabolism Breaks: Inherited Disorders','What a Lipid Is: The Unifying Property','Fatty Acids and Triacylglycerols: Saturation and Cis/Trans','The Major Lipid Classes','The Cell Membrane: Bilayers, Fluid Mosaic, and Fluidity','Lipids in the Blood: Lipoproteins and Cardiovascular Disease','Worked MCAT-Style Passages','High-Yield Cheat Sheet']),
 
 mkScaffold(4,'Nucleotides and Nucleic Acids','Biomolecules','DNA/RNA structure, base pairing, the central dogma',
- 'Ch 1–3 — the other three biomolecule classes','Ch 6 — cell cycle; Ch 10 — molecular genetics.',
+ 'Ch 1-3 - the other three biomolecule classes','Ch 6 - cell cycle; Ch 10 - molecular genetics.',
  ['The Nucleotide: Three Parts','Functional Groups and Their Chemistry','The Backbone: Phosphodiester Bonds and Directionality','The Double Helix: Base Pairing, Antiparallel Strands, Chargaff','DNA vs RNA: Same Idea, Different Jobs','The RNA Cast and the Central Dogma (Overview)','Nucleotide Metabolism: Synthesis and Salvage','When Nucleotide Metabolism Breaks: Inherited Disease','DNA Packaging and a Glimpse of Replication','Worked MCAT-Style Passages','High-Yield Cheat Sheet']),
 
 mkScaffold(5,'The Cell: Structure and Organelles','The Cell','Compartments, transport, organelle disease',
- 'Ch 1–4 — all four biomolecule classes','Ch 6 — cycle and cancer; Ch 13–14 — physiology.',
+ 'Ch 1-4 - all four biomolecule classes','Ch 6 - cycle and cancer; Ch 13-14 - physiology.',
  ['Cell Theory and How We See Cells','Two Kinds of Cell: Prokaryote vs Eukaryote','The Nucleus: The Cell\'s Archive','The Endomembrane System: Manufacturing and Shipping','Lysosomes, Peroxisomes, and the Proteasome','Mitochondria: Power, Origins, and Death','Ribosomes: Where Proteins Are Made','The Cytoskeleton and Molecular Motors','Cilia and Flagella: Movement and Kartagener','Crossing the Membrane: Transport In and Out','Junctions and the Extracellular Matrix','Worked MCAT-Style Passages','High-Yield Cheat Sheet']),
 
 mkScaffold(6,'The Cell Cycle, Mitosis, Meiosis, and Cancer','The Cell','Checkpoints, division, aneuploidy, cancer',
- 'Ch 5 — the cell','Ch 9 — inheritance; Ch 10 — molecular genetics.',
+ 'Ch 5 - the cell','Ch 9 - inheritance; Ch 10 - molecular genetics.',
  ['The Cell Cycle: Phases and Purpose','Checkpoints: Cyclins, CDKs, and Tumor Suppressors','Mitosis: Making Two Identical Cells','Meiosis: Making Eggs and Sperm, and Genetic Diversity','When Division Goes Wrong I: Nondisjunction and Aneuploidy','When Division Goes Wrong II: Cancer','Worked Passages','High-Yield Cheat Sheet']),
 
 mkScaffold(7,'Cellular Respiration and Metabolism','Energy','Glycolysis, citric acid cycle, ATP, fuel use',
- 'Ch 2 — enzymes; Ch 3 — fuels','Ch 8 — photosynthesis runs it in reverse.',
- ['The Logic of Energy Harvest: Oxidation, ATP, Electron Carriers','Glycolysis: Splitting Glucose in the Cytosol','The Fates of Pyruvate and the Link Reaction','The Citric Acid Cycle','Oxidative Phosphorylation: The Electron Transport Chain','Adding It Up: Why ~30–32 ATP, Not 36–38','No Oxygen? Fermentation and the Oxygen Debt','Burning Fat and Protein: When Glucose Is Not Enough','Storing and Remaking Fuel: Fed and Fasting States','Controlling and Integrating the Engine','Metabolism in Disease and Medicine','Worked Passages','High-Yield Cheat Sheet']),
+ 'Ch 2 - enzymes; Ch 3 - fuels','Ch 8 - photosynthesis runs it in reverse.',
+ ['The Logic of Energy Harvest: Oxidation, ATP, Electron Carriers','Glycolysis: Splitting Glucose in the Cytosol','The Fates of Pyruvate and the Link Reaction','The Citric Acid Cycle','Oxidative Phosphorylation: The Electron Transport Chain','Adding It Up: Why ~30-32 ATP, Not 36-38','No Oxygen? Fermentation and the Oxygen Debt','Burning Fat and Protein: When Glucose Is Not Enough','Storing and Remaking Fuel: Fed and Fasting States','Controlling and Integrating the Engine','Metabolism in Disease and Medicine','Worked Passages','High-Yield Cheat Sheet']),
 
 mkScaffold(8,'Photosynthesis: Capturing the Energy of Light','Energy','Light reactions, Calvin cycle, the energy source',
- 'Ch 7 — respiration (this is the reverse)','Ch 12 — the diversity of life starts here.',
+ 'Ch 7 - respiration (this is the reverse)','Ch 12 - the diversity of life starts here.',
  ['The Big Picture: Photosynthesis as Reverse Respiration','The Chloroplast: Structure Built for the Job','Pigments, Light, and Why Plants Are Green','The Light Reactions: From Photon to ATP and NADPH','Photophosphorylation: Making ATP from the Proton Gradient','Cyclic vs Noncyclic Electron Flow','The Calvin Cycle: Building Sugar from Air','Photorespiration and the C4 / CAM Solutions','Closing the Loop: Energy Flow Through Life','Worked Passages','Discrete Question Bank','High-Yield Cheat Sheet']),
 
 mkScaffold(9,'Genetics: Patterns of Inheritance','Heredity','Mendel, pedigrees, inheritance patterns',
- 'Ch 6 — meiosis is the engine','Ch 10 — molecular genetics; Ch 11 — evolution.',
+ 'Ch 6 - meiosis is the engine','Ch 10 - molecular genetics; Ch 11 - evolution.',
  ['The Gene Concept and Mendel\'s Method','The Law of Segregation and the Monohybrid Cross','Independent Assortment, the Dihybrid Cross, and Probability','Extensions of Mendel: When One Gene Bends the Rules','Gene Interaction: Epistasis and Polygenic Traits','Linkage, Recombination, and Genetic Maps','The Chromosomal Basis of Inheritance and Sex Linkage','Pedigree Analysis','Quantitative Tools: Probability, the Chi-Square Test','Integration: Reading Inheritance From Mechanism to Pattern','Variation, Mutation, and the Source of New Alleles','Synthesis: One Framework, Many Faces']),
 
 mkScaffold(10,'Molecular Genetics: From DNA to Protein','Heredity','Replication, transcription, translation, regulation',
- 'Ch 4 — nucleic acid structure; Ch 9 — inheritance','Ch 11 — evolution; Ch 12 — microbiology.',
+ 'Ch 4 - nucleic acid structure; Ch 9 - inheritance','Ch 11 - evolution; Ch 12 - microbiology.',
  ['DNA Replication: Copying the Archive','The Central Dogma and Transcription: DNA to RNA','RNA Processing: Editing the Eukaryotic Transcript','The Genetic Code: Reading Three Letters at a Time','Translation: Building the Protein on the Ribosome','After Translation: Modification, Folding, and Targeting','Mutations: When the Sequence Changes','Prokaryotic Gene Regulation: lac and trp Operons','Eukaryotic Gene Regulation and Epigenetics','Epigenetics in Disease: Repeat Expansion and Anticipation','Biotechnology: Reading and Rewriting DNA','Worked Passages','High-Yield Cheat Sheet']),
 
 mkScaffold(11,'Evolution: The Logic of Life\'s Change','Heredity','Selection, drift, speciation, the clinical payoff',
- 'Ch 9–10 — variation source','Ch 12 — diversity is evolution\'s record.',
+ 'Ch 9-10 - variation source','Ch 12 - diversity is evolution\'s record.',
  ['Natural Selection: Darwin\'s Logic and the Evidence','The Raw Material: Sources of Genetic Variation','Populations Evolve, Not Individuals: Fitness and Adaptation','The Agents of Microevolution','Hardy-Weinberg: The Non-Evolving Baseline','Modes of Selection: Directional, Stabilizing, Disruptive','Speciation and Reproductive Isolation','Large-Scale Patterns: Convergence, Coevolution, Radiation','Phylogenetics, Cladistics, and the Origin of Life','Evolution in the Clinic: Resistance, Heterozygote Advantage','Worked Passages','High-Yield Cheat Sheet']),
 
 mkScaffold(12,'The Diversity of Life: Microbes and the Tree of Life','Diversity','Bacteria, archaea, viruses, fungi, protists',
- 'Ch 11 — evolution explains all of this','Ch 13–14 — and is the context for disease.',
+ 'Ch 11 - evolution explains all of this','Ch 13-14 - and is the context for disease.',
  ['Classifying Life: The Three Domains and the Hierarchy','Prokaryote vs Eukaryote: The Differences That Become Drug Targets','Bacterial Form: Shapes, Arrangements, and Surface','The Bacterial Cell Wall and the Gram Stain','Bacterial Growth: Binary Fission and the Growth Curve','Bacterial Genetics: Plasmids, Gene Transfer, Antibiotic Resistance','Targeting Bacteria: Antibiotics and Selective Toxicity','Archaea: Prokaryotes at the Extremes','Viruses: Life at the Edge','Viral Replication: Lytic vs Lysogenic','Retroviruses: HIV as the Model','Prions and Viroids','Protists: The Clinically Important Parasites','Fungi: Structure, Reproduction, Antifungal Targets','The Rest of the Tree: Plants and Animals in Brief','Worked Passages','Discrete Question Bank','High-Yield Cheat Sheet']),
 
-mkScaffold(13,'Animal Form & Function I: Homeostasis, Heart, Lungs, Kidneys','Physiology','Cardiovascular, respiratory, renal — the regulator triad',
- 'Ch 1 — hemoglobin; Ch 2 — enzymes; Ch 5 — cells','Ch 14 — the nervous & endocrine systems that control them.',
+mkScaffold(13,'Animal Form & Function I: Homeostasis, Heart, Lungs, Kidneys','Physiology','Cardiovascular, respiratory, renal - the regulator triad',
+ 'Ch 1 - hemoglobin; Ch 2 - enzymes; Ch 5 - cells','Ch 14 - the nervous & endocrine systems that control them.',
  ['Organization of the Body and the Logic of Homeostasis','The Cardiovascular System: Heart, Vessels, Blood Flow','The Cardiac Cycle, Conduction, and Cardiac Output','Blood Pressure and Its Regulation','Blood: Composition, Oxygen Transport, the Dissociation Curve','The Respiratory System: Airways, Mechanics, Gas Exchange','The Renal System: The Nephron and the Four Processes','Renal Regulation of Water and Sodium: ADH and Aldosterone','Acid-Base Balance: Lungs and Kidneys Together','Worked Passages','High-Yield Cheat Sheet']),
 
 mkScaffold(14,'Animal Form & Function II: Nervous, Endocrine, Immune, Muscular','Physiology','The signaling and defense systems that integrate the body',
- 'Ch 13 — the systems being controlled','End of Book 1 — onward to Books 2–6.',
+ 'Ch 13 - the systems being controlled','End of Book 1 - onward to Books 2-6.',
  ['The Neuron and the Resting Membrane Potential','The Action Potential','The Synapse and Neurotransmission','Organization of the Nervous System','The Endocrine System: Hormone Classes and Signaling','The Hypothalamic-Pituitary Axis and Negative Feedback','The Immune System: Innate and Adaptive Defense','Adaptive Immunity: Humoral and Cell-Mediated','The Muscular System: From Signal to Force','Integration: How the Four Systems Work as One'])
 
 ];
@@ -429,13 +429,13 @@ mkScaffold(14,'Animal Form & Function II: Nervous, Endocrine, Immune, Muscular',
 function mkScaffold(n,title,tag,foundational,buildsOn,setsUp,sectionTitles){
  var sections=sectionTitles.map(function(t,i){
   var id=n+'.'+(i+1);
-  return { id:id, num:id, title:t, blocks:[{t:'scaffold',x:'Full content for §'+id+' is being ported from the BBB Book Biology PDF. The chapter outline, dependency hints, and assessment scaffold are already wired — content drops in chapter-by-chapter as the pilot is approved.'}] };
+  return { id:id, num:id, title:t, blocks:[{t:'scaffold',x:'Full content for §'+id+' is being ported from the BBB Book Biology PDF. The chapter outline, dependency hints, and assessment scaffold are already wired - content drops in chapter-by-chapter as the pilot is approved.'}] };
  });
  return {
   n:n, title:title, subtitle:'C-Factor Book 1 · Biology', tag:tag, foundational:foundational,
   buildsOn:buildsOn, setsUp:setsUp,
   objectives:['Learning objectives port with the full chapter content in the next pass.'],
-  opener:'Chapter '+n+' content is being ported from the book. The full course structure — section navigation, progress, in-chapter TOC, and quick-check scaffolding — is already live so you can see the format end-to-end.',
+  opener:'Chapter '+n+' content is being ported from the book. The full course structure - section navigation, progress, in-chapter TOC, and quick-check scaffolding - is already live so you can see the format end-to-end.',
   pinnedDisc:null,
   sections:sections,
   bottomLine:null, nextHint:null,
@@ -603,7 +603,7 @@ function renderHome(){
  setActive('nav-home');
  var C=window.BOOK1_COURSE, done=getDone(), last=getLast();
  var nSec=totalSections(), dSec=doneSections();
- document.getElementById('cmob-title').textContent='Book 1 · Biology — Course Overview';
+ document.getElementById('cmob-title').textContent='Book 1 · Biology - Course Overview';
  document.getElementById('crail').innerHTML='';
 
  var resume='';
@@ -621,7 +621,7 @@ function renderHome(){
  h+='<div class="ov-hero">';
  h+='<span class="badge badge-free">★ FREE · NO LOGIN · INTERACTIVE</span>';
  h+='<h1 class="ph-title">The Living Code<br><em>MCAT Biology</em>, mechanism-first.</h1>';
- h+='<p class="ph-sub">Book 1 of the C-Factor Series — a complete biology review from the carbon atom to the whole human body. Every chapter runs the four moves: <b>mechanism</b>, <b>discriminator</b>, <b>clinical bridge</b>, <b>high-yield anchor</b>. Section-level progress saves automatically. The PDF version is $40 (founders price; was $65) if you want the artifact — the content here is free, forever.</p>';
+ h+='<p class="ph-sub">Book 1 of the C-Factor Series - a complete biology review from the carbon atom to the whole human body. Every chapter runs the four moves: <b>mechanism</b>, <b>discriminator</b>, <b>clinical bridge</b>, <b>high-yield anchor</b>. Section-level progress saves automatically. The PDF version is $40 (founders price; was $65) if you want the artifact - the content here is free, forever.</p>';
  var firstUndone=null;
  for(var i=0;i<C.length;i++){var anyUndone=C[i].sections.find(function(s){return !done[s.id];});if(anyUndone){firstUndone={ch:i,sec:anyUndone.id};break;}}
  if(!firstUndone)firstUndone={ch:0,sec:'0.1'};

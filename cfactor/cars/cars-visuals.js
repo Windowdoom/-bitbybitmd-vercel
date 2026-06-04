@@ -43,7 +43,7 @@ window.CARS_VIS={
    '<div class="vcard" style="--ca:var(--purple)"><div class="vc-top"><b>Extreme Language</b><span class="wt lo">tag: extreme</span></div><p><i>Always, never, only, all, none, must.</i> Eliminate unless the passage itself was that absolute.</p></div>'+
    '<div class="vcard" style="--ca:var(--blue)"><div class="vc-top"><b>Faulty Use of Detail</b><span class="wt lo">tag: wrong question</span></div><p>States something true about the passage that does not answer <i>this</i> question.</p></div>'+
    '</div></div>',
-  "5.6":'<div class="vbox"><div class="vhead">The wrong-answer decision tree</div><div class="vnote">Run all five checks on each of the four choices (~2–3 sec each). If any check triggers, eliminate immediately. The choice that triggers nothing is the answer.</div>'+
+  "5.6":'<div class="vbox"><div class="vhead">The wrong-answer decision tree</div><div class="vnote">Run all five checks on each of the four choices (~2-3 sec each). If any check triggers, eliminate immediately. The choice that triggers nothing is the answer.</div>'+
    '<div class="flow tree">'+
    '<div class="fstep"><div class="fnum">1</div><div class="fbody"><b>Something not in the passage?</b><span>→ eliminate as <b style="color:var(--red)">OUT OF SCOPE</b></span></div></div>'+
    '<div class="fstep"><div class="fnum">2</div><div class="fbody"><b>Extreme language (always, never, only, all, none, must)?</b><span>→ eliminate as <b style="color:var(--red)">EXTREME</b> (unless the passage was also extreme)</span></div></div>'+
@@ -54,7 +54,7 @@ window.CARS_VIS={
    '</div></div>'
  },
  6:{
-  "6.1":'<div class="vbox"><div class="vhead">The elimination protocol · ~40–60 sec per question</div>'+
+  "6.1":'<div class="vbox"><div class="vhead">The elimination protocol · ~40-60 sec per question</div>'+
    '<div class="flow">'+
    '<div class="fstep"><div class="fnum">1</div><div class="fbody"><b>Classify the stem</b><span>Name the question type in your head (main idea, detail, application…).</span><span class="ftime">3 sec</span></div></div>'+
    '<div class="fstep"><div class="fnum">2</div><div class="fbody"><b>Predict the answer shape</b><span>One-sentence prediction based on the type and your Mental Map.</span><span class="ftime">5 sec</span></div></div>'+
@@ -115,15 +115,15 @@ window.CARS_VIS={
   "8.1":'<div class="vbox"><div class="vhead">The ten-minute rule · why it isn\'t optional</div><div class="vnote">At the ten-minute mark for any passage, you are done with it. The cost of overstaying compounds - it isn\'t linear.</div>'+
    '<div class="ladder">'+
    '<div class="lrow" style="--lc:var(--green)"><div class="lwhat">Ran exactly to budget<span>10:00 each</span></div><div class="lcost">0 lost</div></div>'+
-   '<div class="lrow" style="--lc:var(--green)"><div class="lwhat">One slow passage (12 min)<span>+2 min over</span></div><div class="lcost">0–1 lost</div></div>'+
-   '<div class="lrow" style="--lc:var(--gold)"><div class="lwhat">Two slow passages<span>+4 min total</span></div><div class="lcost">1–2 lost</div></div>'+
-   '<div class="lrow" style="--lc:var(--gold)"><div class="lwhat">Three slow passages<span>+6 min · panic begins</span></div><div class="lcost">2–4 lost</div></div>'+
-   '<div class="lrow" style="--lc:var(--red)"><div class="lwhat">One locked-up passage (15 min)<span>+5 min · others rushed</span></div><div class="lcost">2–3 lost</div></div>'+
-   '<div class="lrow" style="--lc:var(--red)"><div class="lwhat">Two locked-up passages<span>+10 min · section in trouble</span></div><div class="lcost">5–7 lost</div></div>'+
+   '<div class="lrow" style="--lc:var(--green)"><div class="lwhat">One slow passage (12 min)<span>+2 min over</span></div><div class="lcost">0-1 lost</div></div>'+
+   '<div class="lrow" style="--lc:var(--gold)"><div class="lwhat">Two slow passages<span>+4 min total</span></div><div class="lcost">1-2 lost</div></div>'+
+   '<div class="lrow" style="--lc:var(--gold)"><div class="lwhat">Three slow passages<span>+6 min · panic begins</span></div><div class="lcost">2-4 lost</div></div>'+
+   '<div class="lrow" style="--lc:var(--red)"><div class="lwhat">One locked-up passage (15 min)<span>+5 min · others rushed</span></div><div class="lcost">2-3 lost</div></div>'+
+   '<div class="lrow" style="--lc:var(--red)"><div class="lwhat">Two locked-up passages<span>+10 min · section in trouble</span></div><div class="lcost">5-7 lost</div></div>'+
    '</div></div>',
   "8.3":'<div class="vbox"><div class="vhead">The emergency 7-3 split · when you\'ve fallen behind</div><div class="vnote">A rescue tool, not a default - accuracy drops because the question phase is rushed. Use it only when you\'re already behind.</div>'+
    '<div class="compare">'+
-   '<div class="vcard" style="--ca:var(--teal)"><div class="vc-top"><b>Standard 5-5</b><span class="wt hi">DEFAULT</span></div><p><b>Read:</b> 4–5 min, full method.<br><b>Mental Map:</b> 30 sec.<br><b>Questions:</b> 5–6 min for 5–7.<br><b>Hard Qs:</b> full elimination protocol.</p></div>'+
+   '<div class="vcard" style="--ca:var(--teal)"><div class="vc-top"><b>Standard 5-5</b><span class="wt hi">DEFAULT</span></div><p><b>Read:</b> 4-5 min, full method.<br><b>Mental Map:</b> 30 sec.<br><b>Questions:</b> 5-6 min for 5-7.<br><b>Hard Qs:</b> full elimination protocol.</p></div>'+
    '<div class="vcard" style="--ca:var(--red)"><div class="vc-top"><b>Emergency 7-3</b><span class="wt med">RESCUE</span></div><p><b>Read:</b> up to 7 min, no re-reads.<br><b>Mental Map:</b> 30 sec - non-negotiable.<br><b>Questions:</b> 3 min, ~30 sec each.<br><b>Hard Qs:</b> abbreviated - classify, cut the obvious, pick fast.</p></div>'+
    '</div></div>'
  },
@@ -150,8 +150,8 @@ window.CARS_VIS={
    '<div class="fstep"><div class="fnum">2</div><div class="fbody"><b>Add the question phase</b><span>The four-move method + the elimination protocol. Untimed questions.</span><span class="ftime">~60 min/day</span></div></div>'+
    '<div class="fstep"><div class="fnum">3</div><div class="fbody"><b>Time the question phase</b><span>Three passages a day; cap the questions to budget. Read still untimed.</span><span class="ftime">~75 min/day</span></div></div>'+
    '<div class="fstep"><div class="fnum">4</div><div class="fbody"><b>Full ten-minute budget</b><span>Five passages a day, ten minutes each. The common plateau week - push through it.</span><span class="ftime">~60 min/day</span></div></div>'+
-   '<div class="fstep"><div class="fnum">5</div><div class="fbody"><b>Full sections + targeting</b><span>Complete 9-passage sections in 90 min, alternating with weak-area practice.</span><span class="ftime">90–120 min/day</span></div></div>'+
-   '<div class="fstep"><div class="fnum">6</div><div class="fbody"><b>Simulation + mistake repair</b><span>Test-condition sections; deep-dive the wrong-answer patterns that persist. Taper before test day.</span><span class="ftime">90–180 min/day</span></div></div>'+
+   '<div class="fstep"><div class="fnum">5</div><div class="fbody"><b>Full sections + targeting</b><span>Complete 9-passage sections in 90 min, alternating with weak-area practice.</span><span class="ftime">90-120 min/day</span></div></div>'+
+   '<div class="fstep"><div class="fnum">6</div><div class="fbody"><b>Simulation + mistake repair</b><span>Test-condition sections; deep-dive the wrong-answer patterns that persist. Taper before test day.</span><span class="ftime">90-180 min/day</span></div></div>'+
    '</div></div>'
  }
 };

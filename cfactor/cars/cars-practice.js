@@ -29,7 +29,7 @@ window.CARS_PRACTICE=[
    answer:1,
    why:[
     "Extreme language. The author explicitly says this is 'not an argument for neglect' and that 'always damages' overstates a position the passage never takes.",
-    "Correct. Paragraphs 2–4 build to the claim that 'every act of conservation … is also an act of authorship,' which the honest conservator should document rather than conceal.",
+    "Correct. Paragraphs 2-4 build to the claim that 'every act of conservation … is also an act of authorship,' which the honest conservator should document rather than conceal.",
     "Faulty use of detail. Lighting appears once in paragraph 1 as one illustration; it is not the passage's thesis.",
     "Distortion. The author rejects the idea of a recoverable 'intended state' - 'there is no original state to return to.'"
    ]
@@ -275,7 +275,7 @@ window.CARS_PRACTICE=[
    answer:1,
    why:[
     "Distortion. The author says participants 'did not know they were standing at a hinge'; their intentions are not the route to finding turning points.",
-    "Correct. Paragraphs 1–2: the turning point is 'something the historian makes,' produced by reading backward from a known outcome.",
+    "Correct. Paragraphs 1-2: the turning point is 'something the historian makes,' produced by reading backward from a known outcome.",
     "Extreme language. Paragraph 3 explicitly grants that 'some events do carry more weight.'",
     "Distortion. The author's whole point is that the turning point is 'rarely something the historian finds.'"
    ]
