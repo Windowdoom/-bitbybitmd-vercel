@@ -219,8 +219,7 @@ null,
  bottomLine:'The four classes of biomolecules are applied organic chemistry, the bridge from Book 3 to Book 1. Carbohydrates are polyhydroxy carbonyls that cyclize to hemiacetals and link through acetal glycosidic bonds (Chapter 9); a free hemiacetal makes a sugar reducing. Lipids are esters of glycerol whose cis double bonds and amphipathy (Chapters 6, 10, and Book 2) build fats, oils, and the membrane bilayer; steroids are fused rings. Amino acids are bifunctional acids whose zwitterion and pI are Chapter 1 acid-base chemistry, joined by the resonance-stabilized amide peptide bond (Chapter 10) and folded by weak forces (Book 2). Nucleic acids are aromatic heterocycles (Chapter 12) on furanose sugars, joined by phosphodiester esters and zipped by hydrogen bonds, with ATP a high-energy phosphoanhydride. Biology is organic chemistry assembled; Book 1 begins exactly here.',
  nextHint:'Book 1, Biology: proteins folding and enzymes catalyzing, membranes compartmentalizing the cell, and DNA storing and replicating information, picking up precisely where this chapter ends. Keep following the electrons.',
 }
-];
-
+];;
 /* ====================================================================
    RENDERER · format upgrades over the CARS course:
      • section-level progress (each section can be checked off)
