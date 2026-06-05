@@ -3,12 +3,217 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Book 6: The Molecular Story (Biochemistry) - The C-Factor Series</title>
-<meta name="description" content="Book 6 of the C-Factor Series: The Molecular Story, a mechanism-first Biochemistry review for the MCAT. 418 pages, 13 chapters. Preview the contents; get the full set on Payhip.">
+<title>The Free MCAT Biochemistry Course · Book 6 · The Molecular Story · The C-Factor Series</title>
+<meta name="description" content="A complete, interactive MCAT Biochemistry course, free, in your browser. Mechanism-first review of amino acids, enzyme kinetics, metabolism, DNA/RNA, and translation. The highest-yield MCAT book. No login. PDF optional, $40.">
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <link rel="stylesheet" href="/cfactor/cfactor.css">
-  <script defer src="/protect.js"></script>
+<style>
+/* ============ COURSE LAYOUT ============ */
+.readbar{position:fixed;top:64px;left:0;height:3px;background:var(--teal);width:0;z-index:190;transition:width .1s linear;box-shadow:0 0 8px rgba(0,229,160,.5);}
+.course{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:280px 1fr 240px;gap:0;align-items:start;}
+@media(max-width:1280px){.course{grid-template-columns:260px 1fr;}.crail{display:none;}}
+@media(max-width:900px){.course{grid-template-columns:1fr;}}
+
+/* ============ SIDEBAR ============ */
+.cside{position:sticky;top:67px;align-self:start;height:calc(100vh - 67px);overflow-y:auto;border-right:1px solid var(--border);padding:1.2rem .8rem 3rem;background:var(--bg-card);}
+.cside::-webkit-scrollbar{width:5px;}
+.side-top{display:flex;align-items:center;gap:14px;padding:.3rem .5rem 1rem;border-bottom:1px solid var(--border);margin-bottom:1rem;}
+.ring{--p:0;width:46px;height:46px;border-radius:50%;flex-shrink:0;background:conic-gradient(var(--teal) calc(var(--p)*1%),var(--bg-mid) 0);display:flex;align-items:center;justify-content:center;position:relative;}
+.ring::before{content:'';position:absolute;width:34px;height:34px;border-radius:50%;background:var(--bg-card);}
+.ring span{position:relative;font-family:var(--mono);font-size:11px;font-weight:bold;color:var(--teal);}
+.side-top .st-txt{font-family:var(--mono);font-size:10px;color:var(--text-dim);line-height:1.5;letter-spacing:.3px;}
+.side-top .st-txt b{color:var(--text);display:block;font-size:11px;}
+
+/* search */
+.csearch{position:relative;margin:0 .3rem 1rem;}
+.csearch input{width:100%;background:var(--bg-mid);border:1px solid var(--border);border-radius:8px;padding:8px 10px 8px 30px;font-family:var(--mono);font-size:11.5px;color:var(--text);outline:none;}
+.csearch input:focus{border-color:var(--teal);}
+.csearch input::placeholder{color:var(--text-dim);}
+.csearch::before{content:'⌕';position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--text-dim);pointer-events:none;}
+
+/* nav */
+.mod{margin-top:.4rem;}
+.mod-h{font-family:var(--mono);font-size:9.5px;letter-spacing:1.4px;color:var(--text-dim);padding:0 .6rem;margin:.8rem 0 .4rem;text-transform:uppercase;}
+.cnav-item{display:flex;gap:8px;align-items:center;padding:6px 9px;border-radius:6px;cursor:pointer;font-size:12.5px;color:var(--text-muted);line-height:1.3;transition:background .15s,color .15s;user-select:none;}
+.cnav-item:hover{background:var(--bg-mid);color:var(--text);}
+.cnav-item.active{background:var(--teal-soft);color:var(--teal);font-weight:600;}
+.cnav-item .cn{font-family:var(--mono);font-size:10px;color:var(--text-dim);flex-shrink:0;min-width:30px;}
+.cnav-item.active .cn{color:var(--teal);}
+.cnav-item.is-home .cn{color:var(--gold);}
+.cnav-item .ck{margin-left:auto;color:var(--green);font-size:11px;opacity:0;flex-shrink:0;}
+.cnav-item.done .ck{opacity:1;}
+.cnav-item .cdot{margin-left:auto;width:6px;height:6px;border-radius:50%;background:var(--text-dim);opacity:.4;flex-shrink:0;}
+.cnav-item.partial .cdot{background:var(--gold);opacity:1;}
+.cnav-chev{margin-left:auto;font-size:9px;color:var(--text-dim);transition:transform .2s;}
+.cnav-item.open .cnav-chev{transform:rotate(90deg);color:var(--teal);}
+.subnav{display:none;margin:2px 0 4px 18px;border-left:1px solid var(--border);padding-left:8px;}
+.subnav.open{display:block;}
+.subnav-item{display:flex;gap:7px;align-items:flex-start;padding:5px 8px;border-radius:5px;cursor:pointer;font-size:11.5px;color:var(--text-dim);line-height:1.35;transition:all .15s;}
+.subnav-item:hover{background:var(--bg-mid);color:var(--text-muted);}
+.subnav-item.active{color:var(--teal);background:var(--teal-soft);}
+.subnav-item.done{color:var(--text-muted);}
+.subnav-item .sn{font-family:var(--mono);font-size:9.5px;color:var(--text-dim);flex-shrink:0;min-width:22px;}
+.subnav-item.active .sn{color:var(--teal);}
+.subnav-item .stk{margin-left:auto;color:var(--green);font-size:10px;opacity:0;flex-shrink:0;}
+.subnav-item.done .stk{opacity:1;}
+
+/* ============ MAIN ============ */
+.cmain{padding:2.2rem 0 5rem;min-width:0;}
+.cinner{max-width:780px;margin:0 auto;padding:0 2.2rem;}
+.cmeta{font-family:var(--mono);font-size:11px;color:var(--text-dim);letter-spacing:.5px;margin-bottom:.6rem;display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+.cmeta .dot{color:var(--border-bright);}
+.cmain .ph-title{margin-bottom:.7rem;font-size:clamp(25px,3.4vw,38px);}
+.prose p{font-size:15px;line-height:1.85;}
+.prose h2{scroll-margin-top:90px;}
+.prose h3{scroll-margin-top:90px;}
+
+/* objectives box */
+.obj-box{background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:var(--r);padding:1.2rem 1.4rem;margin:1.5rem 0 2rem;}
+.obj-box .box-label{color:var(--teal);font-family:var(--mono);font-size:10px;letter-spacing:1.5px;margin-bottom:10px;font-weight:bold;}
+.obj-box ul{list-style:none;margin:0;padding:0;}
+.obj-box li{font-size:13.5px;color:var(--text-muted);line-height:1.6;padding-left:1.4rem;position:relative;margin-bottom:7px;}
+.obj-box li::before{content:'◎';color:var(--teal);position:absolute;left:0;}
+
+/* connector strip (builds on / sets up) */
+.conn{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:1.4rem 0 1.8rem;font-family:var(--mono);font-size:11px;}
+.conn-c{padding:.7rem 1rem;border:1px solid var(--border);border-radius:7px;background:var(--bg-card);}
+.conn-c b{color:var(--text-dim);display:block;font-size:9px;letter-spacing:1.3px;margin-bottom:4px;}
+.conn-c span{color:var(--text-muted);font-size:11.5px;line-height:1.5;}
+.conn-c.from{border-left:2px solid var(--purple);}
+.conn-c.to{border-left:2px solid var(--teal);}
+@media(max-width:600px){.conn{grid-template-columns:1fr;}}
+
+/* discriminator banner at top of chapter */
+.disc-banner{background:linear-gradient(135deg,rgba(245,166,35,.1),transparent 70%);border:1px solid rgba(245,166,35,.3);border-left:3px solid var(--gold);border-radius:var(--r);padding:1.2rem 1.4rem;margin:1.6rem 0;}
+.disc-banner .db-lab{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--gold);font-weight:bold;margin-bottom:6px;}
+.disc-banner .db-t{font-family:var(--mono);font-size:14.5px;color:var(--text);margin-bottom:8px;font-weight:bold;}
+.disc-banner p{font-size:13.5px;color:var(--text-muted);line-height:1.7;margin:0;}
+
+/* sections */
+.sec-h{display:flex;align-items:flex-start;gap:12px;margin:2.8rem 0 1rem;border-bottom:1px solid var(--border);padding-bottom:.6rem;scroll-margin-top:90px;}
+.sec-h h2{flex:1;font-family:var(--mono);font-size:clamp(19px,2.3vw,24px);color:var(--text);margin:0;border:none;padding:0;letter-spacing:.3px;}
+.sec-h h2 .pn{color:var(--teal);font-weight:normal;margin-right:6px;}
+.sec-check{flex-shrink:0;width:24px;height:24px;border:1.5px solid var(--border-bright);border-radius:6px;background:transparent;color:transparent;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .2s;margin-top:2px;}
+.sec-check:hover{border-color:var(--teal);color:var(--teal);}
+.sec-check.done{background:var(--teal);border-color:var(--teal);color:var(--bg);}
+
+/* quick check (inline assessment) */
+.qcheck{background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:var(--r);padding:1.3rem 1.5rem;margin:1.5rem 0;}
+.qcheck-lab{font-family:var(--mono);font-size:10px;letter-spacing:1.4px;color:var(--blue);font-weight:bold;margin-bottom:10px;}
+.qc-stem{font-size:14px;color:var(--text);font-weight:600;line-height:1.6;margin-bottom:.9rem;}
+.qc-choices{display:flex;flex-direction:column;gap:7px;}
+.qc-choice{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:all .15s;}
+.qc-choice:hover{border-color:var(--border-bright);}
+.qc-choice input{margin-top:3px;accent-color:var(--blue);flex-shrink:0;}
+.qc-letter{font-family:var(--mono);font-size:11.5px;font-weight:bold;color:var(--text-muted);flex-shrink:0;width:14px;}
+.qc-text{font-size:13.5px;color:var(--text-muted);line-height:1.55;}
+.qc-choice.is-correct{border-color:var(--green);background:rgba(46,213,115,.07);}
+.qc-choice.is-correct .qc-text,.qc-choice.is-correct .qc-letter{color:var(--green);}
+.qc-choice.is-wrong{border-color:var(--red);background:rgba(255,71,87,.06);}
+.qc-choice.is-wrong .qc-text,.qc-choice.is-wrong .qc-letter{color:var(--red);}
+.qc-exp{display:none;margin-top:.9rem;padding-top:.9rem;border-top:1px solid var(--border);font-size:13px;color:var(--text-muted);line-height:1.65;}
+.qc-exp.show{display:block;}
+.qc-exp b{color:var(--green);}
+.qcheck .btn-check{background:var(--blue);color:var(--bg);border:none;padding:8px 16px;border-radius:6px;font-family:var(--mono);font-size:10.5px;font-weight:bold;letter-spacing:.5px;margin-top:.8rem;}
+.qcheck .btn-check:hover{opacity:.85;}
+
+/* chapter foot */
+.cnav-foot{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;border-top:1px solid var(--border);padding-top:1.6rem;flex-wrap:wrap;align-items:center;}
+.markbtn{background:var(--teal);color:var(--bg);border:none;padding:11px 20px;border-radius:var(--r);font-family:var(--mono);font-size:11px;font-weight:bold;letter-spacing:.6px;}
+.markbtn.is-done{background:transparent;color:var(--green);border:1px solid var(--green);}
+
+/* overview hero */
+.ov-hero{background:radial-gradient(120% 120% at 100% 0,rgba(0,229,160,.12),transparent 60%);border:1px solid var(--border);border-radius:14px;padding:2.4rem;margin-bottom:2rem;}
+.ov-resume{background:var(--bg-card);border:1px solid var(--teal);border-radius:8px;padding:.9rem 1.2rem;margin:1.4rem 0 0;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.ov-resume .rs-lab{font-family:var(--mono);font-size:10px;letter-spacing:1.3px;color:var(--teal);text-transform:uppercase;}
+.ov-resume .rs-where{font-size:13.5px;color:var(--text);font-weight:600;}
+.ov-resume .rs-where span{color:var(--text-dim);font-weight:400;font-size:12px;}
+.ov-resume a{margin-left:auto;background:var(--teal);color:var(--bg);padding:8px 16px;border-radius:6px;font-family:var(--mono);font-size:11px;font-weight:bold;letter-spacing:.5px;}
+.ov-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin:1.8rem 0;}
+.ov-stat{background:var(--bg-card);padding:1.1rem .8rem;text-align:center;}
+.ov-stat b{font-family:var(--mono);font-size:22px;color:var(--teal);display:block;}
+.ov-stat span{font-size:11px;color:var(--text-muted);}
+.modcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:1.4rem 0 2rem;}
+.modcard{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.4rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+.modcard::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--ca,var(--teal));opacity:.7;}
+.modcard:hover{transform:translateY(-3px);border-color:var(--ca,var(--border-bright));}
+.modcard .mc-n{font-family:var(--mono);font-size:10px;color:var(--text-dim);letter-spacing:1px;margin-bottom:8px;}
+.modcard h4{font-family:var(--mono);font-size:14px;color:var(--text);margin-bottom:7px;}
+.modcard p{font-size:12.5px;color:var(--text-muted);line-height:1.6;}
+
+/* ============ RIGHT RAIL (in-chapter TOC) ============ */
+.crail{position:sticky;top:67px;align-self:start;max-height:calc(100vh - 67px);overflow-y:auto;padding:2.4rem 1rem 3rem;border-left:1px solid var(--border);}
+.crail-h{font-family:var(--mono);font-size:10px;letter-spacing:1.4px;color:var(--text-dim);text-transform:uppercase;margin-bottom:.7rem;padding-left:.5rem;}
+.crail-item{display:flex;align-items:flex-start;gap:8px;padding:6px 8px 6px 12px;border-left:2px solid var(--border);font-size:11.5px;color:var(--text-dim);line-height:1.4;cursor:pointer;transition:all .15s;}
+.crail-item:hover{color:var(--text-muted);border-left-color:var(--border-bright);}
+.crail-item.active{color:var(--teal);border-left-color:var(--teal);background:var(--teal-soft);}
+.crail-item.done{color:var(--text-muted);}
+.crail-item .crn{font-family:var(--mono);font-size:9.5px;color:var(--text-dim);flex-shrink:0;}
+.crail-item.active .crn{color:var(--teal);}
+.crail-item .crk{margin-left:auto;color:var(--green);font-size:10px;opacity:0;flex-shrink:0;}
+.crail-item.done .crk{opacity:1;}
+
+/* ============ MOBILE BAR ============ */
+.cmob-bar{display:none;}
+@media(max-width:900px){
+ .course{grid-template-columns:1fr;}
+ .cside{position:fixed;top:64px;left:0;right:0;bottom:0;height:auto;z-index:150;display:none;border-right:none;}
+ .cside.open{display:block;}
+ .cinner{padding:0 1.3rem;}
+ .cmain{padding:1.4rem 0 4rem;}
+ .ov-stats{grid-template-columns:repeat(2,1fr);}
+ .cmob-bar{display:flex;align-items:center;gap:10px;position:sticky;top:64px;z-index:140;background:var(--bg-card);border-bottom:1px solid var(--border);padding:10px 1.3rem;}
+ .cmob-bar button{background:var(--teal-soft);color:var(--teal);border:1px solid var(--teal);border-radius:6px;padding:7px 12px;font-family:var(--mono);font-size:11px;font-weight:bold;}
+ .readbar{top:64px;}
+}
+
+/* ============ STEM-SPECIFIC VISUAL PRIMITIVES (better than CARS) ============ */
+.vbox{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.4rem 1.5rem;margin:1.5rem 0 1.9rem;}
+.vhead{font-family:var(--mono);font-size:11.5px;letter-spacing:1px;color:var(--teal);text-transform:uppercase;margin-bottom:1rem;}
+.vnote{font-size:13px;color:var(--text-dim);line-height:1.6;margin:.4rem 0 .9rem;}
+
+/* hierarchy ladder (atom → biosphere) */
+.hier{display:flex;flex-direction:column;gap:6px;}
+.hier-row{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;background:var(--bg-mid);border-radius:7px;padding:9px 13px;border-left:3px solid var(--lc,var(--teal));}
+.hier-n{font-family:var(--mono);font-size:11px;color:var(--text-dim);}
+.hier-w{font-size:13.5px;color:var(--text);}
+.hier-w span{display:block;font-family:var(--mono);font-size:10.5px;color:var(--text-dim);margin-top:1px;}
+.hier-tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--lc,var(--teal));background:var(--bg-card);padding:2px 8px;border-radius:99px;}
+
+/* pathway flow (with optional branches) */
+.path{display:flex;flex-direction:column;gap:0;}
+.pstep{display:flex;gap:14px;align-items:flex-start;padding:0 0 1.2rem;position:relative;}
+.pstep:not(:last-child)::before{content:'';position:absolute;left:15px;top:30px;bottom:0;width:2px;background:linear-gradient(var(--teal),var(--border));opacity:.5;}
+.pnum{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:var(--teal-soft);border:1px solid var(--teal);color:var(--teal);font-family:var(--mono);font-size:13px;font-weight:bold;display:flex;align-items:center;justify-content:center;z-index:1;}
+.pbody{padding-top:3px;flex:1;}
+.pbody b{display:block;font-size:14px;color:var(--text);margin-bottom:3px;font-family:var(--mono);}
+.pbody span{display:block;font-size:13px;color:var(--text-muted);line-height:1.65;}
+
+/* compare (side-by-side discriminator) */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:1rem 0 1.5rem;}
+.cmp-card{background:var(--bg-mid);border:1px solid var(--border);border-left:3px solid var(--ca,var(--teal));border-radius:8px;padding:1rem 1.1rem;}
+.cmp-card .ct{font-family:var(--mono);font-size:13px;color:var(--text);margin-bottom:6px;font-weight:bold;}
+.cmp-card p{font-size:12.5px;color:var(--text-muted);line-height:1.65;margin:0;}
+.cmp-card .ck{font-family:var(--mono);font-size:10px;color:var(--ca,var(--teal));margin-top:8px;display:block;}
+@media(max-width:600px){.compare{grid-template-columns:1fr;}}
+
+/* formula display */
+.formula{background:var(--bg-mid);border:1px solid var(--border);border-radius:8px;padding:1rem 1.2rem;margin:1rem 0 1.4rem;font-family:var(--mono);font-size:15px;color:var(--text);text-align:center;line-height:1.7;}
+.formula .fnote{display:block;font-size:11px;color:var(--text-dim);margin-top:6px;font-style:italic;}
+
+/* coming-soon scaffold marker */
+.scaffold{background:linear-gradient(135deg,rgba(168,85,247,.06),transparent 70%);border:1px dashed var(--purple);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem 0;}
+.scaffold .scl{font-family:var(--mono);font-size:10px;letter-spacing:1.4px;color:var(--purple);font-weight:bold;margin-bottom:8px;}
+.scaffold p{font-size:13.5px;color:var(--text-muted);line-height:1.65;margin:0;}
+
+/* free-course badge in the hero */
+.hero-pricing{margin-top:1.3rem;display:inline-flex;align-items:center;gap:.7rem;padding:.55rem .9rem;background:var(--bg-card);border:1px solid var(--border);border-radius:99px;font-family:var(--mono);font-size:11px;color:var(--text-muted);}
+.hero-pricing b{color:var(--teal);}
+.hero-pricing s{color:var(--text-dim);}
+</style>
+<script defer src="/protect.js"></script>
+<script defer src="/support.js"></script>
 </head>
 <body>
 <nav>
@@ -18,85 +223,63 @@
  </a>
  <div class="n-links" id="nlinks">
   <a href="/cfactor/">C-FACTOR HOME</a>
-  <a href="/cfactor/cars/" style="color:var(--teal)">CARS (FREE)</a>
-  <a href="/cfactor/#books">BOOKS</a>
-  <a href="/cfactor/final-review/">FREE BOOK 7</a>
-  <a href="/cfactor/#anki">ANKI</a>
+  <a href="/cfactor/cars/">CARS (FREE)</a>
+  <a href="/cfactor/books/book6/" style="color:var(--teal)">BIOCHEM (FREE)</a>
+  <a href="/cfactor/#books">ALL BOOKS</a>
+  <a href="/cfactor/#anki">ANKI · $5</a>
  </div>
  <div class="nav-right">
-  <button class="n-buy" onclick="window.open('https://payhip.com/b/dAnUk','_blank')">PDF SET · $40 ↗</button>
+  <button class="n-cta" onclick="window.open('https://payhip.com/b/dAnUk','_blank')">PDF SET · $40 ↗</button>
   <button class="n-ham" id="hamBtn" onclick="document.getElementById('nlinks').classList.toggle('open')">☰</button>
  </div>
 </nav>
-<div class="wrap">
- <div class="crumb"><a href="/cfactor/">C-Factor</a> <span>/</span> <a href="/cfactor/#books">Books</a> <span>/</span> Book 6</div>
- <span class="badge badge-free">★ FREE ON-SITE COURSE · IN PROGRESS</span>
- <div class="ph-tag">Book 6 of 7 · Biochemistry</div>
- <h1 class="ph-title" style="color:var(--teal)">The Molecular Story</h1>
- <p class="ph-sub">The highest-yield MCAT book: proteins and enzyme kinetics through every metabolic pathway, DNA, transcription, and translation.</p>
- <div style="display:flex;gap:1.4rem;flex-wrap:wrap;margin-top:1.2rem;font-family:var(--mono);font-size:12px;color:var(--text-dim)">
-  <span><b style="color:var(--text)">418</b> pages</span>
-  <span><b style="color:var(--text)">13</b> chapters</span>
-  <span>MCAT: <b style="color:var(--teal)">B/B · C/P</b></span>
-  <span>Mechanism-first</span>
- </div>
- <div class="btn-row">
-  <a href="/cfactor/books/book1/" class="btn-p">PREVIEW FORMAT · FREE BIOLOGY →</a><a href="https://payhip.com/b/dAnUk" target="_blank" rel="noopener" class="btn-o">PDF SET · $40 ↗</a>
-  <a href="/cfactor/final-review/" class="btn-o">READ BOOK 7 FREE →</a>
- </div>
+<div class="readbar" id="readbar"></div>
 
-  <div class="box box-disc">
-   <div class="box-label">⚡ SAMPLE DISCRIMINATOR · FROM THIS BOOK (PORTING TO ON-SITE COURSE)</div>
-   <div class="box-title">WHAT RESTRICTS BACKBONE FLEXIBILITY</div>
-   <p>PEPTIDE BOND (omega angle): rigid and planar due to resonance delocalization; cannot rotate freely; essentially always trans (&gt;99.9%); the C-N bond has ~40% double bond character. PHI ANGLE (N-Cα bond): can rotate, but restricted by steric clash between the carbonyl oxygen of the preceding residue and the R group of the current residue. PSI ANGLE (Cα-C bond): can rotate, but restricted by steric clash between the amino group of the following residue and the R group of the current residue. GLYCINE: phi and psi essen…</p>
-  </div>
- <div class="prose">
-  <h2><span class="pn">#</span> What's inside - all 13 chapters</h2>
-  <p><b>The on-site course for this book is being ported chapter-by-chapter from the PDF.</b> Book 1 (Biology) is live now at the URL above - same format will appear here as content drops in. Every chapter runs the same four moves - <b>discriminator</b>, <b>why-box</b>, <b>clinical bridge</b>, and <b>high-yield anchor</b> - plus MCAT-format practice passages.</p>
- </div>
- <div class="toc">
-   <div class="toc-item"><span class="tn">Ch 1</span><b>Amino Acids and Protein Structure</b></div>
-   <div class="toc-item"><span class="tn">Ch 2</span><b>Enzyme Kinetics and Regulation</b></div>
-   <div class="toc-item"><span class="tn">Ch 3</span><b>Carbohydrates, Glycolysis, and the TCA Cycle</b></div>
-   <div class="toc-item"><span class="tn">Ch 4</span><b>Oxidative Phosphorylation and Bioenergetics</b></div>
-   <div class="toc-item"><span class="tn">Ch 5</span><b>Gluconeogenesis, Glycogen Metabolism, and the Pentose Phosphate Pathway</b></div>
-   <div class="toc-item"><span class="tn">Ch 6</span><b>Lipid Metabolism and Lipoprotein Biology</b></div>
-   <div class="toc-item"><span class="tn">Ch 7</span><b>Amino Acid Catabolism and the Urea Cycle</b></div>
-   <div class="toc-item"><span class="tn">Ch 8</span><b>Nucleotide Metabolism</b></div>
-   <div class="toc-item"><span class="tn">Ch 9</span><b>Vitamins, Cofactors, and Specialty Pathways</b></div>
-   <div class="toc-item"><span class="tn">Ch 10</span><b>Hormonal Regulation and Metabolic Integration</b></div>
-   <div class="toc-item"><span class="tn">Ch 11</span><b>DNA Structure, Replication, and Repair</b></div>
-   <div class="toc-item"><span class="tn">Ch 12</span><b>Transcription and Gene Regulation</b></div>
-   <div class="toc-item"><span class="tn">Ch 13</span><b>Translation, Post-Translational Modification, and Protein Targeting</b></div>
- </div>
- <div class="box box-hy">
-  <div class="box-label">✓ INCLUDED FREE WITH THE SERIES</div>
-  <p>The <a href="/cfactor/final-review/" style="color:var(--teal)"><b>Book 7 Final Review</b></a> is free, and the <a href="/cfactor/#anki" style="color:var(--teal)"><b>5,600+ card Anki deck</b></a> is just $5 (free in the set). Video lectures for every chapter are coming soon, also free.</p>
- </div>
- <div class="cta-strip">
-  <div>
-   <h3>★ Optional PDF Set · $40 founders price</h3>
-   <p>All six science books are now FREE on-site courses (Book 1 live, Books 2-6 porting). If you want the PDF artifact - portable, offline-readable, yours forever - the optional set is $40 founders price (was $65). The Anki deck is $5 (included in the PDF set).</p>
-  </div>
-  <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
-   <div class="cta-price">$40<small>FOUNDERS · WAS $65 · PDF</small></div>
-   <a href="https://payhip.com/b/dAnUk" target="_blank" rel="noopener" class="btn-gold">PDF SET · $40 ↗</a>
-  </div>
- </div>
- <hr class="hr">
- <p class="note">Other books: <a href="/cfactor/books/book1/" style="color:var(--text-muted)">Book 1</a> · <a href="/cfactor/books/book2/" style="color:var(--text-muted)">Book 2</a> · <a href="/cfactor/books/book3/" style="color:var(--text-muted)">Book 3</a> · <a href="/cfactor/books/book4/" style="color:var(--text-muted)">Book 4</a> · <a href="/cfactor/books/book5/" style="color:var(--text-muted)">Book 5</a></p>
+<div class="cmob-bar">
+ <button onclick="document.getElementById('cside').classList.toggle('open')">☰ MENU</button>
+ <span id="cmob-title" style="font-family:var(--mono);font-size:11px;color:var(--text-muted);"></span>
 </div>
+
+<div class="course">
+ <aside class="cside" id="cside">
+  <div class="side-top">
+   <div class="ring" id="ring"><span id="ringTxt">0%</span></div>
+   <div class="st-txt"><b>Book 6 · Biochemistry</b><span id="progTxt">0 sections complete</span></div>
+  </div>
+  <div class="csearch"><input type="text" id="csearch" placeholder="Search chapters & sections…" oninput="filterNav(this.value)"></div>
+  <div class="cnav-item is-home" id="nav-home" onclick="location.hash='home'"><span class="cn">★</span><span>Course overview</span></div>
+  <div id="cnav"></div>
+  <div class="mod"><div class="mod-h">Resources</div>
+   <div class="cnav-item" onclick="location.href='/cfactor/cars/'"><span class="cn">CARS</span><span>Free CARS course</span></div>
+   <div class="cnav-item" onclick="location.href='/cfactor/final-review/'"><span class="cn">B7</span><span>Free Final Review</span></div>
+   <div class="cnav-item" onclick="window.open('https://payhip.com/b/dAnUk','_blank')"><span class="cn">PDF</span><span>$40 - full PDF set (optional)</span></div>
+   <div class="cnav-item" onclick="location.href='/cfactor/#anki'"><span class="cn">$5</span><span>The Anki deck</span></div>
+  </div>
+ </aside>
+
+ <main class="cmain" id="cmain"><div class="cinner"></div></main>
+
+ <aside class="crail" id="crail"></aside>
+</div>
+
 <footer>
  <div class="f-logo">B<sup style="color:var(--gold);">3</sup> Bit by Bit Pedagogy · The C-Factor Series</div>
  <div class="f-links">
   <a href="/cfactor/">C-Factor Home</a>
+  <a href="/cfactor/cars/">Free CARS Course</a>
+  <a href="/cfactor/books/book6/" style="color:var(--teal)">Free Biochem</a>
   <a href="/cfactor/final-review/">Free Book 7</a>
-  <a href="/cfactor/#anki">Anki deck</a>
   <a href="https://payhip.com/b/dAnUk" target="_blank" rel="noopener">PDF Set ($40)</a>
   <a href="https://www.instagram.com/bitbybitmd/" target="_blank" rel="noopener">Instagram</a>
  </div>
 </footer>
 <div class="disclaimer">Bit by Bit Pedagogy is an independent educational platform. The C-Factor Series is a pre-med and MCAT review resource built on mechanism-first pedagogy. Not affiliated with, endorsed by, or connected to the AAMC, NBME, USMLE, or any exam body. Materials are for educational use only and do not guarantee score outcomes. © 2026 Bit by Bit Pedagogy. All rights reserved. <a href="/terms/" style="color:var(--text-dim)">Terms &amp; Copyright</a></div>
-<script>document.querySelectorAll('.n-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nlinks').classList.remove('open')));</script>
+
+<script defer src="ch0-orientation.js"></script>
+<script defer src="book6-course.js"></script>
+<script defer src="book6-practice.js"></script>
+<script>
+document.querySelectorAll('.n-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nlinks').classList.remove('open')));
+</script>
 </body>
 </html>
