@@ -37,7 +37,7 @@ Use exactly this structure:
 
 ## The Read
 
-One short paragraph (3–4 sentences) synthesising their situation. Address them in second person. Be direct and observant - quote one specific thing they told you. Do NOT be generic.
+One short paragraph (3-4 sentences) synthesising their situation. Address them in second person. Be direct and observant - quote one specific thing they told you. Do NOT be generic.
 
 ## Three Things Slowing You Down
 
@@ -47,7 +47,7 @@ One short paragraph (3–4 sentences) synthesising their situation. Address them
 
 ## The Fastest Path Forward
 
-One paragraph (3–4 sentences) describing what would change first if you worked together. Reference the Bit by Bit approach (the Master Pivot, the Concept Correction Log, fixed wake time, two-week phases) where it lands naturally - but don't list our method. Make it about them.
+One paragraph (3-4 sentences) describing what would change first if you worked together. Reference the Bit by Bit approach (the Master Pivot, the Concept Correction Log, fixed wake time, two-week phases) where it lands naturally - but don't list our method. Make it about them.
 
 Do NOT include a "book a session" CTA - the page already has one. Just end on the fastest-path paragraph.
 

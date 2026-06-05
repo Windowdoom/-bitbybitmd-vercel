@@ -1,1 +1,1 @@
-/* Book 6 practice — coming soon */
+/* Book 6 practice - coming soon */
