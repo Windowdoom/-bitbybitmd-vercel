@@ -1159,7 +1159,7 @@ null,
   {
    id: '4.15', num: '4.15', title: 'Worked Passages',
    blocks: [
-    { t:'p', x:'Three practice passages close the chapter: a fertilizer synthesis exploring limiting reagent and percent yield (N2 + 3 H2 yields 2 NH3), a pediatric IV preparation exploring M1V1 = M2V2 and mass-volume conversion, and an acid-base titration of acetic acid with NaOH exploring equivalence-point bookkeeping and the diprotic correction.' },
+    { t:'p', x:'Three practice passages close the chapter: a fertilizer synthesis covering limiting reagent and percent yield (N2 + 3 H2 yields 2 NH3), a pediatric IV preparation using M1V1 = M2V2 and mass-volume conversion, and an acid-base titration of acetic acid with NaOH covering equivalence-point bookkeeping and the diprotic correction.' },
     { t:'p', x:'Worked passages render through the practice loop, see book2-practice.js.' }
    ]
   },
