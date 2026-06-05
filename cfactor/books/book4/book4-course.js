@@ -511,7 +511,7 @@ function render(n,secId){
  }
 
  var prev=n>1?'<a class="btn-o" href="#ch'+(n-1)+'">‹ '+chapLabel(n-1)+'</a>':'<a class="btn-o" href="#home">‹ Overview</a>';
- var next=n<C.length-1?'<a class="btn-o" href="#ch'+(n+1)+'">'+chapLabel(n+1)+' ›</a>':'<a class="btn-gold" href="/cfactor/books/book6/">Next: Biochemistry →</a>';
+ var next=n<C.length-1?'<a class="btn-o" href="#ch'+(n+1)+'">'+chapLabel(n+1)+' ›</a>':'<a class="btn-gold" href="/cfactor/books/book5/">Next: Psych/Soc →</a>';
  h+='<div class="cnav-foot">'+prev+'<span style="font-family:var(--mono);font-size:11px;color:var(--text-dim)">'+st.done+'/'+st.total+' sections complete</span>'+next+'</div>';
 
  setMain(h);
