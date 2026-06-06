@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spiral Stop, 60-Second Mid-Block Panic Protocol | Bit by Bit Pedagogy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0D1B2E;
+    --gold:#F5A623;
+    --teal:#00E5A0;
+    --cream:#e8dfc8;
+    --border:rgba(248,245,235,.1);
+    --bg-card:rgba(255,255,255,.04);
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --mono:'JetBrains Mono',monospace;
+    --transition:240ms cubic-bezier(0.22,1,0.36,1);
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--cream);font-family:var(--serif);font-weight:400;min-height:100vh;line-height:1.6}
+
+  nav{display:flex;justify-content:space-between;align-items:center;height:64px;padding:0 2rem;border-bottom:1px solid var(--border);background:rgba(13,27,46,.96);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100}
+  .nav-brand{font-family:var(--serif);font-weight:600;font-size:1.1rem;color:var(--cream);text-decoration:none;letter-spacing:.02em}
+  .nav-brand-inner{display:flex;align-items:center;gap:.625rem;text-decoration:none}
+  .nav-monogram{width:28px;height:28px;border:1.5px solid var(--gold);border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:500;color:var(--gold);flex-shrink:0}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{font-family:var(--mono);font-weight:300;font-size:.75rem;color:rgba(232,223,200,.6);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
+  .nav-links a:hover{color:var(--gold)}
+
+  main{max-width:720px;margin:0 auto;padding:3rem 2rem 6rem;min-height:calc(100vh - 64px - 120px)}
+  .screen{display:none;animation:fadeUp .35s cubic-bezier(0.22,1,0.36,1)}
+  .screen.active{display:block}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+  /* Landing */
+  .landing{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-top:2rem}
+  .landing h1{font-family:var(--serif);font-weight:300;font-size:2.4rem;color:var(--cream);line-height:1.2;margin-bottom:.75rem;max-width:520px}
+  .landing h1 em{font-style:italic;color:var(--gold)}
+  .landing p{font-size:1.1rem;color:rgba(232,223,200,.6);font-weight:300;max-width:520px;margin-bottom:3rem}
+  .big-btn{display:block;width:100%;max-width:520px;background:var(--gold);color:var(--bg);border:none;font-family:var(--serif);font-weight:400;font-size:1.6rem;padding:2.5rem 2rem;border-radius:4px;cursor:pointer;letter-spacing:.01em;transition:transform 200ms cubic-bezier(0.22,1,0.36,1),background 200ms ease;will-change:transform}
+  .big-btn:hover{background:#ffb13e}
+  .big-btn:active{transform:translateY(1px) scale(.985)}
+  .log-link{margin-top:2rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(232,223,200,.4);text-decoration:none;border-bottom:1px solid rgba(232,223,200,.15);padding-bottom:2px}
+  .log-link:hover{color:var(--gold);border-color:var(--gold)}
+
+  /* Protocol */
+  .protocol-wrap{text-align:center;padding-top:1rem}
+  .phase-label{font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(232,223,200,.4);margin-bottom:1rem}
+  .timer{font-family:var(--mono);font-size:4.5rem;font-weight:300;color:var(--cream);letter-spacing:.05em;line-height:1;margin-bottom:1.5rem}
+  .breath-circle{width:240px;height:240px;border-radius:50%;background:radial-gradient(circle at center,rgba(245,166,35,.18),rgba(245,166,35,.04) 65%,transparent);border:1.5px solid rgba(245,166,35,.5);margin:1rem auto 2rem;display:flex;align-items:center;justify-content:center;transform:scale(.6);transition:transform 4s cubic-bezier(0.4,0,0.6,1)}
+  .breath-cue{font-family:var(--mono);font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  .phase-text{font-family:var(--serif);font-weight:300;font-size:1.5rem;color:var(--cream);line-height:1.4;max-width:560px;margin:0 auto 2rem;font-style:italic}
+  .phase-sub{font-family:var(--mono);font-size:.75rem;color:rgba(232,223,200,.45);letter-spacing:.05em;margin-top:1rem}
+
+  .protocol-actions{display:flex;flex-direction:column;gap:1rem;align-items:center;margin-top:2rem}
+  .btn{background:transparent;border:1px solid var(--border);color:var(--cream);font-family:var(--mono);font-size:.78rem;font-weight:400;letter-spacing:.08em;text-transform:uppercase;padding:.9rem 1.6rem;border-radius:3px;cursor:pointer;text-decoration:none;display:inline-block;will-change:transform;transition:transform 200ms cubic-bezier(0.22,1,0.36,1),background 200ms ease,border-color 200ms ease,color 200ms ease}
+  .btn:hover{border-color:var(--gold);color:var(--gold)}
+  .btn:active{transform:translateY(1px) scale(.985)}
+  .btn-primary{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+  .btn-primary:hover{background:#ffb13e;color:var(--bg)}
+  .btn-ghost{border:none;color:rgba(232,223,200,.45);font-size:.7rem}
+  .btn-ghost:hover{color:var(--gold)}
+
+  /* Debrief */
+  .debrief-header{margin-bottom:2rem}
+  .debrief-header h2{font-family:var(--serif);font-weight:300;font-size:2rem;color:var(--cream);margin-bottom:.5rem}
+  .debrief-header h2 em{font-style:italic;color:var(--gold)}
+  .debrief-header p{font-size:1rem;color:rgba(232,223,200,.6);font-weight:300}
+  .progress-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+  .progress-label{font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(232,223,200,.4)}
+  .progress-count{font-family:var(--mono);font-size:.68rem;color:rgba(232,223,200,.35)}
+  .progress-track{height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;margin-bottom:2.5rem}
+  .progress-fill{height:100%;background:var(--gold);border-radius:2px;transition:width .4s ease}
+
+  .question-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:2rem 2.5rem 2.5rem;animation:fadeUp .25s ease}
+  .q-number{font-family:var(--mono);font-size:.65rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(232,223,200,.35);margin-bottom:1rem}
+  .q-text{font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--cream);line-height:1.3;margin-bottom:1.75rem}
+
+  .chip-group{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1.5rem}
+  .chip{background:transparent;border:1px solid var(--border);color:var(--cream);font-family:var(--mono);font-size:.78rem;font-weight:300;letter-spacing:.04em;padding:.65rem 1rem;border-radius:3px;cursor:pointer;transition:transform 180ms cubic-bezier(0.22,1,0.36,1),border-color 200ms ease,background 200ms ease,color 200ms ease}
+  .chip:hover{border-color:rgba(245,166,35,.5);color:var(--gold)}
+  .chip.selected{background:rgba(245,166,35,.12);border-color:var(--gold);color:var(--gold)}
+  .chip:active{transform:scale(.96)}
+
+  textarea,input[type=text]{width:100%;background:rgba(0,0,0,.2);border:1px solid var(--border);color:var(--cream);font-family:var(--serif);font-size:1.05rem;font-weight:300;padding:.85rem 1rem;border-radius:3px;resize:vertical;line-height:1.5;outline:none;transition:border-color .2s}
+  textarea:focus,input[type=text]:focus{border-color:rgba(245,166,35,.5)}
+
+  .q-actions{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;gap:1rem;flex-wrap:wrap}
+
+  /* Pattern */
+  .pattern-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:2rem 2.5rem;margin-bottom:1.5rem}
+  .pattern-card h3{font-family:var(--serif);font-weight:300;font-size:1.5rem;color:var(--cream);margin-bottom:1rem}
+  .pattern-row{display:flex;justify-content:space-between;align-items:baseline;padding:.75rem 0;border-bottom:1px solid var(--border);gap:1rem;flex-wrap:wrap}
+  .pattern-row:last-child{border-bottom:none}
+  .pattern-label{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(232,223,200,.45)}
+  .pattern-value{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:1.05rem}
+  .entry-list{margin-top:2rem}
+  .entry{padding:1rem 0;border-bottom:1px solid var(--border)}
+  .entry:last-child{border-bottom:none}
+  .entry-date{font-family:var(--mono);font-size:.7rem;color:rgba(232,223,200,.4);letter-spacing:.05em;margin-bottom:.4rem}
+  .entry-body{font-family:var(--serif);font-size:.98rem;color:rgba(232,223,200,.75);line-height:1.5}
+  .entry-body span{color:var(--gold);font-style:italic}
+
+  footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
+  .footer-inner{max-width:760px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem}
+  .footer-brand{font-family:var(--serif);font-weight:600;font-size:.95rem;color:rgba(232,223,200,.4)}
+  .footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+  .footer-links a{font-family:var(--mono);font-size:.65rem;font-weight:300;letter-spacing:.09em;text-transform:uppercase;color:rgba(232,223,200,.35);text-decoration:none;transition:color .2s}
+  .footer-links a:hover{color:var(--gold)}
+
+  @media(max-width:640px){
+    nav{padding:1rem}
+    .nav-links{gap:1.25rem}
+    .nav-links a{font-size:.65rem}
+    main{padding:2rem 1rem 4rem}
+    .landing h1{font-size:1.8rem}
+    .big-btn{font-size:1.25rem;padding:1.75rem 1.25rem}
+    .timer{font-size:3.2rem}
+    .breath-circle{width:180px;height:180px}
+    .phase-text{font-size:1.2rem}
+    .question-card{padding:1.5rem}
+    .q-text{font-size:1.25rem}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand nav-brand-inner">
+    <div class="nav-monogram">B&#179;</div>
+    <span>Bit by Bit Pedagogy</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/cfactor/">MCAT</a></li>
+    <li><a href="/">Step 1</a></li>
+    <li><a href="/triage/">Find your pattern</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- LANDING -->
+  <section id="screen-landing" class="screen active landing">
+    <h1>You are in a block. Something <em>seized</em>.</h1>
+    <p>Pause the timer in UWorld or NBME. The button is there. It always has been. Then press this.</p>
+    <button class="big-btn" onclick="startProtocol()">I am spiraling right now.</button>
+    <a href="#" id="log-link" class="log-link" style="display:none" onclick="showPatternFromLanding(event)"></a>
+  </section>
+
+  <!-- PROTOCOL -->
+  <section id="screen-protocol" class="screen">
+    <div class="protocol-wrap">
+      <div class="phase-label" id="phase-label">Phase 1 of 3, Breath</div>
+      <div class="timer" id="timer">0:60</div>
+      <div id="breath-area">
+        <div class="breath-circle" id="breath-circle"><span class="breath-cue" id="breath-cue">Begin</span></div>
+        <p class="phase-text" id="phase-text">Pause the question. The timer can be paused. The timer can be paused. Two cycles of breath.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- POST-PROTOCOL CHOICE -->
+  <section id="screen-after" class="screen">
+    <div class="debrief-header">
+      <h2>Sixty seconds <em>logged</em>.</h2>
+      <p>Two paths. Both are valid. The block is still there.</p>
+    </div>
+    <div class="protocol-actions" style="align-items:stretch">
+      <button class="btn btn-primary" onclick="goLanding()">Continue your block</button>
+      <button class="btn" onclick="startDebrief()">Show me the post-block debrief</button>
+    </div>
+  </section>
+
+  <!-- DEBRIEF -->
+  <section id="screen-debrief" class="screen">
+    <div class="debrief-header">
+      <h2>Debrief.</h2>
+      <p>Each spiral is a data point. The chart is built from honest entries.</p>
+    </div>
+    <div class="progress-container">
+      <div class="progress-meta">
+        <span class="progress-label">Debrief</span>
+        <span class="progress-count" id="dprog">1 of 6</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="dfill" style="width:16.67%"></div></div>
+    </div>
+    <div class="question-card" id="dcard"></div>
+  </section>
+
+  <!-- PATTERN -->
+  <section id="screen-pattern" class="screen">
+    <div class="debrief-header">
+      <h2>Pattern <em>log</em>.</h2>
+      <p id="pattern-sub">Aggregated from your recorded spirals.</p>
+    </div>
+    <div id="pattern-content"></div>
+    <div class="protocol-actions" style="margin-top:2rem">
+      <button class="btn" onclick="goLanding()">Back to start</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-brand">Bit by Bit Pedagogy</span>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/tools/">All tools</a></li>
+      <li><a href="/triage/">Find your pattern</a></li>
+      <li><a href="/the-drowner/">The Drowner profile</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+const LOG_KEY='bbb_spiral_log';
+
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+
+function refreshLogLink(){
+  const log=JSON.parse(localStorage.getItem(LOG_KEY)||'[]');
+  const link=document.getElementById('log-link');
+  if(log.length){link.style.display='inline-block';link.textContent='View pattern log ('+log.length+' '+(log.length===1?'entry':'entries')+')'}
+  else link.style.display='none';
+}
+
+function showPatternFromLanding(e){e.preventDefault();renderPattern();show('screen-pattern')}
+function goLanding(){refreshLogLink();show('screen-landing')}
+
+/* ---------- Protocol ---------- */
+let protoTimer=null,breathTimer=null,protoSec=60;
+const phaseTextEl=()=>document.getElementById('phase-text');
+const phaseLabelEl=()=>document.getElementById('phase-label');
+const breathAreaEl=()=>document.getElementById('breath-area');
+
+function fmt(s){const m=Math.floor(s/60),r=s%60;return m+':'+String(r).padStart(2,'0')}
+
+function startProtocol(){
+  show('screen-protocol');
+  protoSec=60;
+  document.getElementById('timer').textContent=fmt(protoSec);
+  breathAreaEl().style.display='block';
+  phaseLabelEl().textContent='Phase 1 of 3, Breath';
+  phaseTextEl().textContent='Pause the question. The timer can be paused. The timer can be paused. Two cycles of breath.';
+  startBreath();
+  protoTimer=setInterval(()=>{
+    protoSec--;
+    document.getElementById('timer').textContent=fmt(protoSec);
+    if(protoSec===30){
+      stopBreath();
+      breathAreaEl().innerHTML='<p class="phase-text" id="phase-text">Name one fact you know about the current question. Out loud or in your head. Any fact. The location of the organ. The drug class. The patient’s age. Anything that is not the question’s answer.</p>';
+      phaseLabelEl().textContent='Phase 2 of 3, Anchor';
+    }
+    if(protoSec===15){
+      breathAreaEl().innerHTML='<p class="phase-text" id="phase-text">Now go back to the question. Read it once more. The fact you just named is your foothold. Pick the answer that sits closest to that fact.</p>';
+      phaseLabelEl().textContent='Phase 3 of 3, Return';
+    }
+    if(protoSec<=0){
+      clearInterval(protoTimer);protoTimer=null;
+      show('screen-after');
+    }
+  },1000);
+}
+
+const breathPhases=[
+  {cue:'Breathe in',dur:4000,scale:1},
+  {cue:'Hold',dur:4000,scale:1},
+  {cue:'Breathe out',dur:4000,scale:.6},
+  {cue:'Hold',dur:4000,scale:.6}
+];
+let breathIdx=0;
+function startBreath(){
+  breathIdx=0;
+  stepBreath();
+}
+function stepBreath(){
+  const c=document.getElementById('breath-circle');
+  const cue=document.getElementById('breath-cue');
+  if(!c||!cue)return;
+  const p=breathPhases[breathIdx%breathPhases.length];
+  c.style.transitionDuration=p.dur+'ms';
+  c.style.transform='scale('+p.scale+')';
+  cue.textContent=p.cue;
+  breathIdx++;
+  breathTimer=setTimeout(stepBreath,p.dur);
+}
+function stopBreath(){if(breathTimer){clearTimeout(breathTimer);breathTimer=null}}
+
+/* ---------- Debrief ---------- */
+const debriefQs=[
+  {q:'What were you doing when the spiral hit?',type:'chip',opts:['Reading the stem','Eliminating options','Time pressure visible','The patient was younger than expected','The patient was older than expected','Specific topic appeared','Other']},
+  {q:'Where did you feel it first?',type:'chip',opts:['Chest tightness','Throat','Stomach','Shoulders','Face heat','Hands','Did not notice it physically']},
+  {q:'What was the thought?',type:'chip',opts:['I am going to fail','I do not know anything','I will run out of time','Everyone else knows this','I should have studied more','I cannot focus','Nothing specific']},
+  {q:'Did you pause the timer?',type:'chip',opts:['Yes','No','Did not know I could','Did not think of it']},
+  {q:'How long did the spiral last?',type:'chip',opts:['Under 30 seconds','30 to 60 seconds','1 to 2 minutes','Over 2 minutes','Did not recover, ended the block']},
+  {q:'Topic that triggered it (if any)',type:'text',opt:true}
+];
+let dIdx=0,dAns={};
+
+function startDebrief(){dIdx=0;dAns={};show('screen-debrief');renderDebrief()}
+
+function renderDebrief(){
+  const q=debriefQs[dIdx];
+  document.getElementById('dprog').textContent=(dIdx+1)+' of '+debriefQs.length;
+  document.getElementById('dfill').style.width=(((dIdx+1)/debriefQs.length)*100)+'%';
+  const card=document.getElementById('dcard');
+  let html='<div class="q-number">Question 0'+(dIdx+1)+'</div><div class="q-text">'+q.q+'</div>';
+  if(q.type==='chip'){
+    html+='<div class="chip-group">'+q.opts.map(o=>'<button class="chip" data-v="'+o.replace(/"/g,'&quot;')+'">'+o+'</button>').join('')+'</div>';
+  }else{
+    html+='<input type="text" id="dtext" placeholder="Type or skip. Optional."><div style="height:1rem"></div>';
+  }
+  html+='<div class="q-actions">';
+  if(dIdx>0)html+='<button class="btn" onclick="prevDebrief()">Back</button>';else html+='<span></span>';
+  html+='<button class="btn btn-primary" id="dnext" onclick="nextDebrief()" '+(q.type==='chip'?'disabled style="opacity:.4;pointer-events:none"':'')+'>'+(dIdx===debriefQs.length-1?'Save':'Next')+'</button>';
+  html+='</div>';
+  card.innerHTML=html;
+  if(q.type==='chip'){
+    card.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
+      card.querySelectorAll('.chip').forEach(x=>x.classList.remove('selected'));
+      c.classList.add('selected');
+      dAns[dIdx]=c.dataset.v;
+      const btn=document.getElementById('dnext');
+      btn.removeAttribute('disabled');btn.style.opacity='1';btn.style.pointerEvents='auto';
+    }));
+    if(dAns[dIdx]){
+      const sel=card.querySelector('.chip[data-v="'+dAns[dIdx].replace(/"/g,'&quot;')+'"]');
+      if(sel)sel.classList.add('selected');
+      const btn=document.getElementById('dnext');btn.removeAttribute('disabled');btn.style.opacity='1';btn.style.pointerEvents='auto';
+    }
+  }else{
+    const t=document.getElementById('dtext');
+    if(dAns[dIdx])t.value=dAns[dIdx];
+  }
+}
+
+function nextDebrief(){
+  const q=debriefQs[dIdx];
+  if(q.type==='text'){dAns[dIdx]=document.getElementById('dtext').value.trim()}
+  if(dIdx<debriefQs.length-1){dIdx++;renderDebrief()}
+  else{saveDebrief();renderPattern();show('screen-pattern')}
+}
+function prevDebrief(){if(dIdx>0){dIdx--;renderDebrief()}}
+
+function saveDebrief(){
+  const log=JSON.parse(localStorage.getItem(LOG_KEY)||'[]');
+  log.push({t:Date.now(),a:Object.assign({},dAns)});
+  localStorage.setItem(LOG_KEY,JSON.stringify(log));
+}
+
+function mostCommon(arr){const c={};arr.forEach(v=>{if(!v)return;c[v]=(c[v]||0)+1});let best=null,n=0;for(const k in c){if(c[k]>n){n=c[k];best=k}}return best}
+
+function renderPattern(){
+  const log=JSON.parse(localStorage.getItem(LOG_KEY)||'[]');
+  const el=document.getElementById('pattern-content');
+  if(!log.length){el.innerHTML='<div class="pattern-card"><p style="color:rgba(232,223,200,.6);font-style:italic">No entries yet. The log fills as you log.</p></div>';return}
+  const n=log.length;
+  let html='';
+  if(n>=3){
+    const t=mostCommon(log.map(e=>e.a[0]));
+    const p=mostCommon(log.map(e=>e.a[1]));
+    const th=mostCommon(log.map(e=>e.a[2]));
+    const pauseY=log.filter(e=>e.a[3]==='Yes').length;
+    html+='<div class="pattern-card"><h3>The pattern, '+n+' entries.</h3>';
+    if(t)html+='<div class="pattern-row"><span class="pattern-label">Trigger</span><span class="pattern-value">'+t+'</span></div>';
+    if(p)html+='<div class="pattern-row"><span class="pattern-label">Physical signal</span><span class="pattern-value">'+p+'</span></div>';
+    if(th)html+='<div class="pattern-row"><span class="pattern-label">Recurring thought</span><span class="pattern-value">'+th+'</span></div>';
+    html+='<div class="pattern-row"><span class="pattern-label">Paused the timer</span><span class="pattern-value">'+pauseY+' of '+n+' times</span></div>';
+    html+='</div>';
+  }else{
+    html+='<div class="pattern-card"><h3>'+n+' '+(n===1?'entry':'entries')+' logged.</h3><p style="color:rgba(232,223,200,.6);font-style:italic;font-family:var(--serif);font-size:1.05rem">The pattern emerges after three. Keep logging.</p></div>';
+  }
+  const recent=log.slice(-5).reverse();
+  html+='<div class="pattern-card"><h3>Last '+recent.length+'.</h3><div class="entry-list">';
+  recent.forEach(e=>{
+    const d=new Date(e.t);
+    const ds=d.toLocaleDateString(undefined,{month:'short',day:'numeric'})+', '+d.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});
+    html+='<div class="entry"><div class="entry-date">'+ds+'</div><div class="entry-body">Trigger, <span>'+(e.a[0]||'unspecified')+'</span>. Felt in <span>'+(e.a[1]||'unspecified')+'</span>. Thought, <span>'+(e.a[2]||'unspecified')+'</span>. Lasted <span>'+(e.a[4]||'unspecified')+'</span>.'+(e.a[5]?' Topic, <span>'+e.a[5]+'</span>.':'')+'</div></div>';
+  });
+  html+='</div></div>';
+  el.innerHTML=html;
+}
+
+refreshLogLink();
+</script>
+</body>
+</html>

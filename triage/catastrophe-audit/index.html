@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catastrophe Audit, Reality Check for Doom-Thinking | Bit by Bit Pedagogy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0D1B2E;
+    --gold:#F5A623;
+    --teal:#00E5A0;
+    --cream:#e8dfc8;
+    --border:rgba(248,245,235,.1);
+    --bg-card:rgba(255,255,255,.04);
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --mono:'JetBrains Mono',monospace;
+    --transition:240ms cubic-bezier(0.22,1,0.36,1);
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--cream);font-family:var(--serif);font-weight:400;min-height:100vh;line-height:1.6}
+
+  nav{display:flex;justify-content:space-between;align-items:center;height:64px;padding:0 2rem;border-bottom:1px solid var(--border);background:rgba(13,27,46,.96);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100}
+  .nav-brand{font-family:var(--serif);font-weight:600;font-size:1.1rem;color:var(--cream);text-decoration:none;letter-spacing:.02em}
+  .nav-brand-inner{display:flex;align-items:center;gap:.625rem;text-decoration:none}
+  .nav-monogram{width:28px;height:28px;border:1.5px solid var(--gold);border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:500;color:var(--gold);flex-shrink:0}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{font-family:var(--mono);font-weight:300;font-size:.75rem;color:rgba(232,223,200,.6);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
+  .nav-links a:hover{color:var(--gold)}
+
+  main{max-width:720px;margin:0 auto;padding:3rem 2rem 6rem}
+  .screen{display:none;animation:fadeUp .35s cubic-bezier(0.22,1,0.36,1)}
+  .screen.active{display:block}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+  .page-header{margin-bottom:2rem}
+  .page-header h1{font-family:var(--serif);font-weight:300;font-size:2.4rem;color:var(--cream);line-height:1.2;margin-bottom:.75rem}
+  .page-header h1 em{font-style:italic;color:var(--gold)}
+  .page-header p{font-size:1.1rem;color:rgba(232,223,200,.65);font-weight:300;max-width:580px}
+
+  /* Progress dots */
+  .dots{display:flex;gap:.5rem;margin-bottom:2rem;justify-content:center}
+  .dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.08);transition:background var(--transition),transform var(--transition)}
+  .dot.active{background:var(--gold);transform:scale(1.3)}
+  .dot.done{background:rgba(245,166,35,.4)}
+
+  .question-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:2rem 2.5rem 2.5rem}
+  .q-number{font-family:var(--mono);font-size:.65rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(232,223,200,.35);margin-bottom:1rem}
+  .q-text{font-family:var(--serif);font-size:1.6rem;font-weight:300;color:var(--cream);line-height:1.3;margin-bottom:1.5rem}
+  .q-help{font-family:var(--serif);font-size:1rem;color:rgba(232,223,200,.55);font-style:italic;margin-bottom:1.25rem;line-height:1.5}
+
+  textarea,input[type=text],input[type=number],input[type=date]{width:100%;background:rgba(0,0,0,.2);border:1px solid var(--border);color:var(--cream);font-family:var(--serif);font-size:1.1rem;font-weight:300;padding:.95rem 1rem;border-radius:3px;resize:vertical;line-height:1.5;outline:none;transition:border-color .2s}
+  textarea:focus,input:focus{border-color:rgba(245,166,35,.5)}
+  textarea{min-height:140px;font-family:var(--serif)}
+  input[type=number],input[type=date]{font-family:var(--mono);font-size:.95rem}
+  label{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(232,223,200,.5);margin-bottom:.5rem;margin-top:1.25rem}
+  label:first-child{margin-top:0}
+  .yn{display:flex;gap:.6rem;margin-top:.5rem}
+
+  .chip-group{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1rem}
+  .chip{background:transparent;border:1px solid var(--border);color:var(--cream);font-family:var(--mono);font-size:.78rem;font-weight:300;letter-spacing:.04em;padding:.7rem 1.05rem;border-radius:3px;cursor:pointer;transition:transform 180ms cubic-bezier(0.22,1,0.36,1),border-color 200ms ease,background 200ms ease,color 200ms ease}
+  .chip:hover{border-color:rgba(245,166,35,.5);color:var(--gold)}
+  .chip.selected{background:rgba(245,166,35,.12);border-color:var(--gold);color:var(--gold)}
+  .chip:active{transform:scale(.96)}
+
+  .q-actions{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;gap:1rem;flex-wrap:wrap}
+  .btn{background:transparent;border:1px solid var(--border);color:var(--cream);font-family:var(--mono);font-size:.78rem;font-weight:400;letter-spacing:.08em;text-transform:uppercase;padding:.85rem 1.5rem;border-radius:3px;cursor:pointer;text-decoration:none;display:inline-block;will-change:transform;transition:transform 200ms cubic-bezier(0.22,1,0.36,1),background 200ms ease,border-color 200ms ease,color 200ms ease}
+  .btn:hover{border-color:var(--gold);color:var(--gold)}
+  .btn:active{transform:translateY(1px) scale(.985)}
+  .btn-primary{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+  .btn-primary:hover{background:#ffb13e;color:var(--bg)}
+  .btn-primary:disabled{opacity:.35;cursor:not-allowed;pointer-events:none}
+
+  /* Output */
+  .output-section{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:2rem 2.5rem;margin-bottom:1.5rem}
+  .output-label{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(232,223,200,.45);margin-bottom:.85rem}
+  .output-thought{font-family:var(--serif);font-style:italic;font-size:1.7rem;font-weight:300;color:var(--gold);line-height:1.35}
+  .output-body{font-family:var(--serif);font-size:1.15rem;font-weight:300;color:var(--cream);line-height:1.55}
+  .output-action{font-family:var(--serif);font-size:1.35rem;font-weight:400;color:var(--cream);font-style:italic;margin-bottom:.85rem}
+  .output-action-note{font-family:var(--mono);font-size:.78rem;color:rgba(232,223,200,.5);letter-spacing:.04em;line-height:1.6}
+
+  .past-link{display:block;margin-top:1.5rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(232,223,200,.4);text-decoration:none;text-align:center;border-bottom:1px solid transparent;padding-bottom:2px}
+  .past-link:hover{color:var(--gold)}
+
+  .audit-entry{padding:1.25rem 0;border-bottom:1px solid var(--border)}
+  .audit-entry:last-child{border-bottom:none}
+  .audit-date{font-family:var(--mono);font-size:.7rem;color:rgba(232,223,200,.4);letter-spacing:.05em;margin-bottom:.5rem}
+  .audit-thought{font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--gold);margin-bottom:.35rem;line-height:1.4}
+  .audit-action{font-family:var(--mono);font-size:.78rem;color:rgba(232,223,200,.6);letter-spacing:.04em}
+
+  footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
+  .footer-inner{max-width:760px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem}
+  .footer-brand{font-family:var(--serif);font-weight:600;font-size:.95rem;color:rgba(232,223,200,.4)}
+  .footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+  .footer-links a{font-family:var(--mono);font-size:.65rem;font-weight:300;letter-spacing:.09em;text-transform:uppercase;color:rgba(232,223,200,.35);text-decoration:none;transition:color .2s}
+  .footer-links a:hover{color:var(--gold)}
+
+  @media(max-width:640px){
+    nav{padding:1rem}
+    .nav-links{gap:1.25rem}
+    .nav-links a{font-size:.65rem}
+    main{padding:2rem 1rem 4rem}
+    .page-header h1{font-size:1.85rem}
+    .question-card,.output-section{padding:1.5rem}
+    .q-text{font-size:1.3rem}
+    .output-thought{font-size:1.35rem}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand nav-brand-inner">
+    <div class="nav-monogram">B&#179;</div>
+    <span>Bit by Bit Pedagogy</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/cfactor/">MCAT</a></li>
+    <li><a href="/">Step 1</a></li>
+    <li><a href="/triage/">Find your pattern</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- AUDIT SCREEN -->
+  <section id="screen-audit" class="screen active">
+    <div class="page-header">
+      <h1>Catastrophe <em>audit</em>.</h1>
+      <p>Five questions. The thought stays in the head until it is written. Once written, it can be examined.</p>
+    </div>
+    <div class="dots" id="dots"></div>
+    <div class="question-card" id="card"></div>
+    <a href="#" id="past-link" class="past-link" style="display:none" onclick="showPast(event)"></a>
+  </section>
+
+  <!-- OUTPUT SCREEN -->
+  <section id="screen-output" class="screen">
+    <div class="page-header">
+      <h1>Audit <em>complete</em>.</h1>
+      <p>Three sections. The thought, the evidence, the next twenty minutes.</p>
+    </div>
+    <div class="output-section">
+      <div class="output-label">The thought you typed</div>
+      <div class="output-thought" id="out-thought"></div>
+    </div>
+    <div class="output-section">
+      <div class="output-label">The evidence</div>
+      <div class="output-body" id="out-evidence"></div>
+    </div>
+    <div class="output-section">
+      <div class="output-label">The next twenty minutes</div>
+      <div class="output-action" id="out-action"></div>
+      <div class="output-action-note">Set a timer for 20 minutes. Do this. Then come back to this tool and tell yourself whether the thought softened.</div>
+    </div>
+    <div class="q-actions">
+      <button class="btn" onclick="restart()">Run another audit</button>
+      <button class="btn" onclick="showPast()">View past audits</button>
+    </div>
+  </section>
+
+  <!-- PAST AUDITS -->
+  <section id="screen-past" class="screen">
+    <div class="page-header">
+      <h1>Past <em>audits</em>.</h1>
+      <p>The thoughts you have logged, in order. Note which ones recur.</p>
+    </div>
+    <div class="output-section" id="past-content"></div>
+    <div class="q-actions">
+      <button class="btn" onclick="restart()">New audit</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-brand">Bit by Bit Pedagogy</span>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/tools/">All tools</a></li>
+      <li><a href="/triage/">Find your pattern</a></li>
+      <li><a href="/the-drowner/">The Drowner profile</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+const LOG_KEY='bbb_catastrophe_log';
+const questions=[
+  {n:1,q:'Name the catastrophe.',help:'Type the thought that is in your head right now. Word for word. Examples, "I am going to fail Step 1." "I will never match." "I do not know anything." "Everyone else knows this and I do not."',type:'textarea'},
+  {n:2,q:'What is the latest piece of real data you have?',help:'A score from a recent practice form. Be honest about the conditions.',type:'data'},
+  {n:3,q:'What is the worst-case scenario if you took the exam tomorrow?',type:'chip',opts:['I would fail by a wide margin','I would fail by a few points','I would barely pass','I would pass comfortably','I am genuinely not sure']},
+  {n:4,q:'How many weeks until the actual exam?',type:'weeks'},
+  {n:5,q:'What is one thing you can do in the next 20 minutes that moves your readiness forward?',type:'chip',opts:['Review 10 wrong answers from yesterday','Read one Mehlman PDF section','Do a 10-question UWorld block (tutor mode)','Watch one Pathoma chapter','Sketchy, one disease','Anki, 50 cards','Take a 20-minute walk and come back','Sleep (it is genuinely the answer right now)']}
+];
+let idx=0,answers={};
+
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+
+function renderDots(){
+  const d=document.getElementById('dots');
+  d.innerHTML=questions.map((_,i)=>'<div class="dot '+(i===idx?'active':i<idx?'done':'')+'"></div>').join('');
+}
+
+function render(){
+  renderDots();
+  const q=questions[idx];
+  let html='<div class="q-number">Question 0'+q.n+' of 05</div><div class="q-text">'+q.q+'</div>';
+  if(q.help)html+='<div class="q-help">'+q.help+'</div>';
+  if(q.type==='textarea'){
+    html+='<textarea id="inp" placeholder="Type it. Verbatim. No editing.">'+(answers[idx]||'')+'</textarea>';
+  }else if(q.type==='data'){
+    const a=answers[idx]||{};
+    html+='<label>Last NBME or full-length score</label><input type="number" id="score" value="'+(a.score!==undefined?a.score:'')+'" placeholder="e.g. 215, or 62">';
+    html+='<label>When you took it</label><input type="date" id="date" value="'+(a.date||'')+'">';
+    html+='<label>Were the conditions test-like (timed, no phone, no breaks)?</label>';
+    html+='<div class="yn"><button class="chip'+(a.cond==='Yes'?' selected':'')+'" data-c="Yes">Yes</button><button class="chip'+(a.cond==='No'?' selected':'')+'" data-c="No">No</button><button class="chip'+(a.cond==='No recent data'?' selected':'')+'" data-c="No recent data">No recent data</button></div>';
+  }else if(q.type==='weeks'){
+    html+='<input type="number" id="inp" value="'+(answers[idx]!==undefined?answers[idx]:'')+'" placeholder="Number of weeks" min="0" max="104">';
+  }else if(q.type==='chip'){
+    html+='<div class="chip-group">'+q.opts.map(o=>'<button class="chip'+(answers[idx]===o?' selected':'')+'" data-v="'+o.replace(/"/g,'&quot;')+'">'+o+'</button>').join('')+'</div>';
+  }
+  html+='<div class="q-actions">';
+  html+=idx>0?'<button class="btn" onclick="prev()">Back</button>':'<span></span>';
+  html+='<button class="btn btn-primary" id="next-btn" onclick="next()">'+(idx===questions.length-1?'Complete audit':'Next')+'</button>';
+  html+='</div>';
+  document.getElementById('card').innerHTML=html;
+  bindCard();
+  validate();
+}
+
+function bindCard(){
+  const q=questions[idx];
+  const card=document.getElementById('card');
+  if(q.type==='chip'){
+    card.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
+      card.querySelectorAll('.chip').forEach(x=>x.classList.remove('selected'));
+      c.classList.add('selected');
+      answers[idx]=c.dataset.v;
+      validate();
+    }));
+  }else if(q.type==='data'){
+    const upd=()=>{
+      const cond=card.querySelector('.chip.selected');
+      answers[idx]={score:document.getElementById('score').value,date:document.getElementById('date').value,cond:cond?cond.dataset.c:''};
+      validate();
+    };
+    document.getElementById('score').addEventListener('input',upd);
+    document.getElementById('date').addEventListener('input',upd);
+    card.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
+      card.querySelectorAll('.chip').forEach(x=>x.classList.remove('selected'));
+      c.classList.add('selected');upd();
+    }));
+  }else if(q.type==='textarea'){
+    document.getElementById('inp').addEventListener('input',e=>{answers[idx]=e.target.value;validate()});
+  }else if(q.type==='weeks'){
+    document.getElementById('inp').addEventListener('input',e=>{answers[idx]=e.target.value;validate()});
+  }
+}
+
+function validate(){
+  const q=questions[idx];
+  const btn=document.getElementById('next-btn');
+  let ok=false;
+  if(q.type==='textarea')ok=(answers[idx]||'').trim().length>0;
+  else if(q.type==='chip')ok=!!answers[idx];
+  else if(q.type==='data'){const a=answers[idx]||{};ok=!!a.cond}
+  else if(q.type==='weeks')ok=answers[idx]!==''&&answers[idx]!==undefined;
+  btn.disabled=!ok;
+}
+
+function next(){
+  if(idx<questions.length-1){idx++;render()}
+  else{complete()}
+}
+function prev(){if(idx>0){idx--;render()}}
+
+function classifyScore(score){
+  if(!score)return null;
+  const s=parseFloat(score);
+  if(isNaN(s))return null;
+  if(s>=200){
+    if(s>=240)return 'high';
+    if(s>=210)return 'mid';
+    return 'low';
+  }
+  if(s>=60)return 'high';
+  if(s>=50)return 'mid';
+  return 'low';
+}
+
+function complete(){
+  const thought=(answers[0]||'').trim();
+  const data=answers[1]||{};
+  const action=answers[4]||'a single focused action';
+  document.getElementById('out-thought').textContent=thought||'(no thought recorded)';
+  let evidence='';
+  if(data.cond==='No recent data'||!data.score){
+    evidence='No recent practice data. The catastrophe is currently unfalsifiable. The single most useful thing you can do this week is take a baseline form.';
+  }else{
+    const cls=classifyScore(data.score);
+    if(cls==='high')evidence='Your last data point says you are above the line. The thought is not consistent with the evidence.';
+    else if(cls==='mid')evidence='Your last data point says you are at the line. The thought overstates the risk. There is room and there is work.';
+    else if(cls==='low')evidence='Your last data point says there is real work to do. The thought may be technically correct in some form, but it is unhelpful. The reschedule conversation might be appropriate. The next 20 minutes are not.';
+    else evidence='The score did not parse. Re-enter it as a number and the audit will judge against it.';
+    if(data.cond==='No'){evidence+=' Note, your conditions were not test-like. The number is softer than it looks, in both directions.'}
+  }
+  document.getElementById('out-evidence').textContent=evidence;
+  document.getElementById('out-action').textContent=action;
+  save({t:Date.now(),thought,data,worstCase:answers[2],weeks:answers[3],action});
+  show('screen-output');
+  refreshPastLink();
+}
+
+function save(entry){
+  const log=JSON.parse(localStorage.getItem(LOG_KEY)||'[]');
+  log.push(entry);
+  localStorage.setItem(LOG_KEY,JSON.stringify(log));
+}
+
+function refreshPastLink(){
+  const log=JSON.parse(localStorage.getItem(LOG_KEY)||'[]');
+  const link=document.getElementById('past-link');
+  if(log.length){link.style.display='block';link.textContent='View past audits ('+log.length+')'}else link.style.display='none';
+}
+
+function showPast(e){
+  if(e)e.preventDefault();
+  const log=JSON.parse(localStorage.getItem(LOG_KEY)||'[]');
+  const el=document.getElementById('past-content');
+  if(!log.length){el.innerHTML='<p style="color:rgba(232,223,200,.6);font-style:italic;font-family:var(--serif);font-size:1.05rem">No past audits.</p>'}
+  else{
+    const rev=[...log].reverse();
+    el.innerHTML=rev.map(e=>{
+      const d=new Date(e.t);
+      const ds=d.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'})+', '+d.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});
+      return '<div class="audit-entry"><div class="audit-date">'+ds+'</div><div class="audit-thought">'+(e.thought||'(no thought)')+'</div><div class="audit-action">Next 20 min, '+(e.action||'unspecified')+'</div></div>';
+    }).join('');
+  }
+  show('screen-past');
+}
+
+function restart(){idx=0;answers={};show('screen-audit');render();refreshPastLink()}
+
+render();refreshPastLink();
+</script>
+</body>
+</html>
