@@ -196,16 +196,15 @@
     opacity: 1;
   }
 
-  body[data-scene="intro"]    .scene-intro    { display: block; opacity: 1; }
-  body[data-scene="chooser"]  .scene-chooser  { display: block; opacity: 1; }
-  body[data-scene="locked"]   .scene-locked   { display: block; opacity: 1; }
-  body[data-scene="chart"]    .scene-chart    { display: block; opacity: 1; }
-  body[data-scene="path"]     .scene-path     { display: block; opacity: 1; }
-  body[data-scene="vow"]      .scene-vow      { display: block; opacity: 1; }
+  body[data-scene="intro"]    .scene-intro    { display: flex; opacity: 1; }
+  body[data-scene="chooser"]  .scene-chooser  { display: flex; opacity: 1; }
+  body[data-scene="locked"]   .scene-locked   { display: flex; opacity: 1; }
+  body[data-scene="chart"]    .scene-chart    { display: flex; opacity: 1; }
+  body[data-scene="path"]     .scene-path     { display: flex; opacity: 1; }
+  body[data-scene="vow"]      .scene-vow      { display: flex; opacity: 1; }
 
   /* ---- SCENE 0: INTRO ---- */
   .scene-intro {
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -346,12 +345,10 @@
 
   /* ---- SCENE 1: CHOOSER ---- */
   .scene-chooser {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 2rem 2rem 0;
-    display: flex;
     flex-direction: column;
+    padding: 2rem 2rem 0;
   }
+  .scene-chooser > * { max-width: 860px; width: 100%; margin-left: auto; margin-right: auto; }
 
   .scene-heading {
     font-family: 'Cormorant Garamond', serif;
@@ -515,15 +512,13 @@
 
   /* ---- SCENE 2: LOCKED ---- */
   .scene-locked {
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 3rem 2rem;
     text-align: center;
-    max-width: 640px;
-    margin: 0 auto;
   }
+  .scene-locked > * { max-width: 640px; }
 
   .locked-eyebrow {
     font-family: 'JetBrains Mono', monospace;
@@ -574,12 +569,10 @@
 
   /* ---- SCENE 3: CHART ---- */
   .scene-chart {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 2rem 2rem 0;
-    display: flex;
     flex-direction: column;
+    padding: 2rem 2rem 0;
   }
+  .scene-chart > * { max-width: 760px; width: 100%; margin-left: auto; margin-right: auto; }
 
   .chart-eyebrow {
     font-family: 'JetBrains Mono', monospace;
@@ -679,12 +672,10 @@
 
   /* ---- SCENE 4: PATH ---- */
   .scene-path {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 2rem 2rem 0;
-    display: flex;
     flex-direction: column;
+    padding: 2rem 2rem 0;
   }
+  .scene-path > * { max-width: 760px; width: 100%; margin-left: auto; margin-right: auto; }
 
   .path-heading {
     font-family: 'JetBrains Mono', monospace;
@@ -810,7 +801,6 @@
 
   /* ---- SCENE 5: VOW ---- */
   .scene-vow {
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
