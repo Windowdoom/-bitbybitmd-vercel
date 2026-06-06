@@ -537,7 +537,7 @@ const FLAG_PRIORITY = [
   "stale_baseline","long_runway_softened","format_calibration"
 ];
 
-const SEVERITY_ORDER = ["reschedule","borderline","tighten_content","on_track_watch","on_track"];
+const SEVERITY_ORDER = ["on_track","on_track_watch","tighten_content","borderline","reschedule"];
 function sevIndex(s){ return SEVERITY_ORDER.indexOf(s); }
 function sevMax(a,b){ return sevIndex(a) >= sevIndex(b) ? a : b; }
 function sevMin(a,b){ return sevIndex(a) <= sevIndex(b) ? a : b; }
@@ -705,7 +705,7 @@ function compute(){
   const today = new Date().toISOString().slice(0,10);
   const weeks = state.examDate ? weeksBetween(today, state.examDate) : 0;
 
-  /* Section 6 — baseline gate */
+  /* Section 6, baseline gate */
   if (state.baselineDone === "no" || state.assessments.length === 0){
     let copy;
     if (state.category === "usmd" || state.category === "usdo")
@@ -717,7 +717,7 @@ function compute(){
     return { state:"baseline_needed", primary:null, adjusted:null, weeks, flags:[], copy, consistency:"unknown", reason:"baseline" };
   }
 
-  /* Section 7 — primary score */
+  /* Section 7, primary score */
   const enriched = state.assessments.map(a => ({
     ...a,
     adjusted: a.rawScore + offsetFor(a.formId, state.examType)
@@ -737,7 +737,7 @@ function compute(){
   const SLOPE_RECENT = n >= 2 ? adjScores[n-1] - adjScores[n-2] : 0;
   const FULL_RANGE_DROP = OLDEST - LATEST;
 
-  /* Section 8 — consistency */
+  /* Section 8, consistency */
   const range = Math.max(...adjScores) - Math.min(...adjScores);
   let consistency = "unknown";
   if (n === 5) consistency = range <= 5 ? "stable" : range <= 11 ? "moderate" : "volatile";
@@ -745,7 +745,7 @@ function compute(){
   else if (n === 3) consistency = range <= 4 ? "stable" : range <= 9 ? "moderate" : "volatile";
   else if (n === 2) { const r = Math.abs(adjScores[1]-adjScores[0]); consistency = r <= 4 ? "stable" : r <= 12 ? "moderate" : "volatile"; }
 
-  /* Section 9 — confounders */
+  /* Section 9, confounders */
   const anx = state.testAnxiety === "high" ? 4 : state.testAnxiety === "moderate" ? 2 : 0;
   const slp = state.sleepStatus === "poor" ? 3 : state.sleepStatus === "reduced" ? 1 : 0;
   const att = state.attemptNumber === "3+" ? 3 : state.attemptNumber === "2" ? 2 : 0;
@@ -762,7 +762,7 @@ function compute(){
   let ADJUSTED = PRIMARY - CW;
   if (CW >= 8) flags.add("adjustment_capped");
 
-  /* Section 10 — slope trust */
+  /* Section 10, slope trust */
   let SLOPE_TRUST = 1.0;
   if (n >= 2){
     const dist = Math.abs(tierFor(scoresAll[n-1].formId, state.examType) - tierFor(scoresAll[n-2].formId, state.examType));
@@ -772,18 +772,18 @@ function compute(){
   const trustSlope = state.spacing === "yes";
   if (state.spacing === "no") flags.add("spacingWarning");
 
-  /* Section 12 — base state */
+  /* Section 12, base state */
   let st;
   if (ADJUSTED >= t.strong) st = "on_track";
   else if (ADJUSTED >= t.ok) st = "tighten_content";
   else if (ADJUSTED >= t.marginal) st = "borderline";
   else st = "reschedule";
 
-  /* Section 13 — modifiers */
+  /* Section 13, modifiers */
   let climbing_rescue_fired = false;
   let stateReason = "generic";
 
-  // Modifier 1 — falling trend
+  // Modifier 1, falling trend
   if (n >= 3 && FULL_RANGE_DROP >= 6 && EFFECTIVE_SLOPE > t.negSlope) {
     flags.add("slow_decline");
     st = downgrade(st);
@@ -799,7 +799,7 @@ function compute(){
     if (st === "reschedule" && !flags.has("volatile_decline")) stateReason = "falling";
   }
 
-  // Modifier 2 — climbing rescue
+  // Modifier 2, climbing rescue
   if (n >= 2 && EFFECTIVE_SLOPE >= t.posSlope && ADJUSTED >= t.marginal){
     let monotonic = false;
     if (n >= 3){
@@ -820,7 +820,7 @@ function compute(){
     }
   }
 
-  // Modifier 3 — short runway escalation
+  // Modifier 3, short runway escalation
   if (weeks <= 3 && (st === "tighten_content" || st === "borderline") && EFFECTIVE_SLOPE < t.posSlope){
     if (n >= 2){
       if (trustSlope){ st = "reschedule"; flags.add("no_runway"); stateReason = "no_runway"; }
@@ -828,7 +828,7 @@ function compute(){
     }
   }
 
-  // Modifier 4 — long runway softener
+  // Modifier 4, long runway softener
   if (weeks >= 12 && st === "reschedule"){
     let blocked = false;
     if (ADJUSTED < t.weak) blocked = true;
@@ -838,7 +838,7 @@ function compute(){
     if (!blocked){ st = "tighten_content"; flags.add("long_runway_softened"); }
   }
 
-  // Modifier 5 — sub-threshold floor
+  // Modifier 5, sub-threshold floor
   if (ADJUSTED < t.ok && weeks <= 6) st = sevMax(st, "borderline");
   if (ADJUSTED < t.ok && weeks <= 4){
     const exception = climbing_rescue_fired && consistency !== "volatile" && EFFECTIVE_SLOPE >= (t.posSlope+2) && LATEST >= 68;
@@ -846,7 +846,7 @@ function compute(){
   }
   if (ADJUSTED < t.weak && weeks <= 8){ st = "reschedule"; stateReason = "no_runway"; }
 
-  // Modifier 6 — single-score floor
+  // Modifier 6, single-score floor
   if (n === 1){
     if (weeks > 3 && weeks <= 10) flags.add("data_thin");
     else if (weeks <= 3){ st = sevMax(st, "borderline"); flags.add("data_thin_critical"); }
@@ -854,17 +854,17 @@ function compute(){
     else if (ADJUSTED <= t.ok + 4) st = sevMax(st, "borderline");
   }
 
-  // Modifier 7 — qbank concern
+  // Modifier 7, qbank concern
   if (state.qbankAccuracy < 50 && weeks <= 4){ st = sevMax(st, "borderline"); flags.add("qbank_concern"); }
   if (state.qbankTrend === "declining" && weeks <= 6) flags.add("qbank_decline");
 
-  // Modifier 8 — volatility floor
+  // Modifier 8, volatility floor
   if (consistency === "volatile"){
     if (weeks <= 2){ st = sevMax(st, "reschedule"); flags.add("volatile_floor_hard"); }
     else if (weeks <= 4){ st = sevMax(st, "borderline"); flags.add("volatile_floor_soft"); }
   }
 
-  /* Section 14 — checkpoint (lightweight) */
+  /* Section 14, checkpoint (lightweight) */
   if (n >= 2){
     const delta = adjScores[n-1] - adjScores[0];
     let traj;
@@ -877,7 +877,7 @@ function compute(){
     if (traj === "serious_decline"){ st = sevMax(st, "reschedule"); flags.add("serious_decline"); }
   }
 
-  /* Section 19 — stale baseline */
+  /* Section 19, stale baseline */
   if (state.assessments.length >= 2){
     const first = new Date(state.assessments[0].date || today);
     const last = new Date(state.assessments[state.assessments.length-1].date || today);
@@ -1007,7 +1007,7 @@ function buildSchedule(result){
     cur.setDate(cur.getDate() + cycle);
   }
 
-  // Selection logic — diagnostic-first for low baseline, then progression
+  // Selection logic, diagnostic-first for low baseline, then progression
   let order = [];
   if (baseline < 60 && result.weeks >= 8){
     order = ["Form 24","Form 26","Form 28","Form 29","Form 30","Form 31","Form 32"];
