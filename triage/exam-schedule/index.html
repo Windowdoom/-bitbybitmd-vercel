@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Free USMLE Step 1, CBSE, MCAT Schedule Builder | NBME Form Pacing + Readiness Check</title>
-<meta name="description" content="Free schedule builder for Step 1, CBSE, and MCAT. Cycle-based NBME and AAMC form pacing, last-48-hours plan, daily must-dos, readiness check on your last 1-3 practice scores. Calendar export. No signup.">
+<meta name="description" content="Free schedule builder for Step 1, CBSE, and MCAT. Cycle-based NBME and AAMC form pacing, last-48-hours plan, daily must-dos, readiness check on your last 1-5 practice scores. Calendar export. No signup.">
 <meta name="keywords" content="USMLE Step 1 schedule, NBME schedule, CBSE schedule, MCAT schedule, Step 1 dedicated plan, NBME form schedule, AAMC FL schedule, Free 120 schedule">
 <link rel="canonical" href="https://bitbybitpedagogy.com/triage/exam-schedule/">
 <meta property="og:title" content="Free Step 1 / CBSE / MCAT Schedule Builder | Bit by Bit Pedagogy">
@@ -24,6 +24,7 @@
   --gold: #F5A623;
   --gold-soft: rgba(245,166,35,.08);
   --teal: #00E5A0;
+  --teal-soft: rgba(0,229,160,.08);
   --cream: #e8dfc8;
   --cream-dim: rgba(232,223,200,.62);
   --cream-faint: rgba(232,223,200,.4);
@@ -44,7 +45,6 @@
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--cream);font-family:var(--serif);font-weight:400;min-height:100vh;line-height:1.65}
 
-/* NAV */
 nav{display:flex;justify-content:space-between;align-items:center;height:64px;padding:0 2rem;border-bottom:1px solid var(--border);background:rgba(13,27,46,.96);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100}
 .nav-brand{font-family:var(--serif);font-weight:600;font-size:1.05rem;color:var(--cream);text-decoration:none;letter-spacing:.02em}
 .nav-brand-inner{display:flex;align-items:center;gap:.625rem;text-decoration:none}
@@ -55,32 +55,46 @@ nav{display:flex;justify-content:space-between;align-items:center;height:64px;pa
 
 main{max-width:880px;margin:0 auto;padding:3rem 2rem 4rem}
 
-/* HEADER */
 .page-header{margin-bottom:2.75rem}
 .page-eyebrow{font-family:var(--mono);font-size:.7rem;font-weight:500;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem}
 .page-header h1{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(2.2rem,5vw,3.4rem);color:var(--cream);line-height:1.12;margin-bottom:1rem;letter-spacing:-.01em}
 .page-header h1 em{font-style:italic;color:var(--gold);font-weight:400}
 .page-header p{font-size:1.1rem;font-weight:300;color:var(--cream-dim);max-width:640px;line-height:1.75}
+.page-header p strong{color:var(--cream);font-weight:400}
 
-/* FORM */
-.form-card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:2.5rem;margin-bottom:2rem;animation:fadeUp 480ms cubic-bezier(0.22, 1, 0.36, 1) both}
+.form-card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:2rem 2.25rem 2.25rem;margin-bottom:2rem;animation:fadeUp 480ms cubic-bezier(0.22, 1, 0.36, 1) both}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem 2rem}
+
+.section-block{padding:1.25rem 0;border-top:1px solid var(--border)}
+.section-block:first-of-type{border-top:none;padding-top:.25rem}
+.section-head{display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:.5rem 0;user-select:none}
+.section-head h3{font-family:var(--serif);font-weight:300;font-style:italic;font-size:1.45rem;color:var(--cream)}
+.section-head .toggle{font-family:var(--mono);font-size:.7rem;color:var(--gold);letter-spacing:.12em}
+.section-body{padding-top:1.25rem;display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem 2rem}
+.section-body.collapsed{display:none}
 .form-group{display:flex;flex-direction:column;gap:.5rem}
 .form-group.full{grid-column:1/-1}
 .form-group label{font-family:var(--mono);font-size:.7rem;font-weight:500;color:var(--cream);letter-spacing:.08em;text-transform:uppercase}
 .form-group .hint{font-family:var(--serif);font-size:.92rem;font-weight:300;font-style:italic;color:var(--cream-faint);line-height:1.5}
-input[type="date"],input[type="number"],select{background:transparent;border:1px solid var(--border-strong);border-radius:4px;padding:.7rem .9rem;color:var(--cream);font-family:var(--mono);font-size:.9rem;font-weight:400;transition:border-color var(--transition),background var(--transition)}
+input[type="date"],input[type="number"],select{background:transparent;border:1px solid var(--border-strong);border-radius:4px;padding:.7rem .9rem;color:var(--cream);font-family:var(--mono);font-size:.88rem;font-weight:400;transition:border-color var(--transition),background var(--transition);width:100%}
 input[type="date"]:focus,input[type="number"]:focus,select:focus{outline:none;border-color:var(--gold);background:var(--gold-soft)}
 select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%23F5A623' stroke-width='1.4' fill='none'/></svg>");background-repeat:no-repeat;background-position:right .9rem center;padding-right:2rem}
 .radio-row{display:flex;gap:.5rem;flex-wrap:wrap}
-.radio-btn{flex:1;min-width:140px;background:transparent;border:1px solid var(--border-strong);border-radius:4px;padding:.7rem .9rem;color:var(--cream-dim);font-family:var(--mono);font-size:.78rem;font-weight:400;letter-spacing:.05em;cursor:pointer;text-align:center;transition:border-color var(--transition),background var(--transition),color var(--transition)}
+.radio-btn{flex:1;min-width:90px;background:transparent;border:1px solid var(--border-strong);border-radius:4px;padding:.65rem .7rem;color:var(--cream-dim);font-family:var(--mono);font-size:.72rem;font-weight:400;letter-spacing:.05em;cursor:pointer;text-align:center;transition:border-color var(--transition),background var(--transition),color var(--transition)}
 .radio-btn:hover{border-color:rgba(245,166,35,.4);color:var(--cream)}
 .radio-btn.selected{border-color:var(--gold);background:var(--gold-soft);color:var(--cream)}
-.score-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
-.score-row input{text-align:center}
-.error-msg{font-family:var(--mono);font-size:.7rem;color:var(--warn);min-height:1em;letter-spacing:.04em}
-.submit-row{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.5rem;grid-column:1/-1}
+
+.assessments-table{display:flex;flex-direction:column;gap:.6rem;width:100%}
+.assess-row{display:grid;grid-template-columns:2fr 1fr 1.4fr 32px;gap:.5rem;align-items:center}
+.assess-row select,.assess-row input{padding:.55rem .65rem;font-size:.82rem}
+.remove-row-btn{background:transparent;border:1px solid var(--border-strong);color:var(--cream-faint);border-radius:4px;height:32px;width:32px;cursor:pointer;font-family:var(--mono);font-size:.95rem;line-height:1;transition:color var(--transition),border-color var(--transition)}
+.remove-row-btn:hover{color:var(--warn);border-color:var(--warn)}
+.add-row-btn{align-self:flex-start;background:transparent;border:1px dashed var(--border-strong);color:var(--cream-dim);font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;padding:.55rem 1rem;border-radius:4px;cursor:pointer;text-transform:uppercase;transition:color var(--transition),border-color var(--transition);margin-top:.4rem}
+.add-row-btn:hover{color:var(--gold);border-color:var(--gold)}
+.assess-head{display:grid;grid-template-columns:2fr 1fr 1.4fr 32px;gap:.5rem;font-family:var(--mono);font-size:.62rem;color:var(--cream-faint);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.2rem;padding:0 .2rem}
+
+.error-msg{font-family:var(--mono);font-size:.7rem;color:var(--warn);min-height:1em;letter-spacing:.04em;margin-top:.4rem}
+.submit-row{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border)}
 .btn{font-family:var(--mono);font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:.95rem 1.75rem;border-radius:3px;cursor:pointer;border:none;transition:transform var(--transition),background var(--transition),border-color var(--transition),color var(--transition);will-change:transform}
 .btn:active{transform:translateY(1px) scale(.985)}
 .btn-primary{background:var(--gold);color:var(--bg)}
@@ -90,88 +104,81 @@ select{appearance:none;-webkit-appearance:none;background-image:url("data:image/
 .btn-ghost{background:transparent;color:var(--cream-faint);font-size:.7rem;padding:.95rem 1rem}
 .btn-ghost:hover{color:var(--gold)}
 
-/* RESULT */
 .result-section{display:none;animation:fadeUp 540ms cubic-bezier(0.22, 1, 0.36, 1) both}
 .result-section.visible{display:block}
 
+.foundation-banner{padding:1rem 1.25rem;border:1px solid var(--border);border-radius:6px;background:var(--bg-card);margin-bottom:1.5rem;font-family:var(--serif);font-style:italic;font-weight:300;font-size:1.02rem;color:var(--cream-dim);line-height:1.55}
+
 .readiness-card{padding:2rem 2rem 1.75rem;border-radius:8px;margin-bottom:1.75rem;border:1px solid var(--border);border-left:3px solid var(--gold);background:var(--bg-card)}
 .readiness-card.state-on_track,.readiness-card.state-on_track_watch{border-left-color:var(--teal)}
+.readiness-card.state-on_track_watch{border-left-color:rgba(0,229,160,.65)}
 .readiness-card.state-tighten_content{border-left-color:var(--gold)}
 .readiness-card.state-borderline{border-left-color:var(--warn)}
 .readiness-card.state-reschedule{border-left-color:var(--warn);background:var(--warn-bg)}
-.readiness-card.state-baseline_needed{border-left-color:rgba(232,223,200,.5)}
-.readiness-label{font-family:var(--mono);font-size:.65rem;font-weight:500;color:var(--cream-faint);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.6rem}
-.readiness-title{font-family:var(--serif);font-style:italic;font-weight:300;font-size:1.85rem;color:var(--cream);line-height:1.2;margin-bottom:1rem;letter-spacing:-.01em}
-.readiness-body{font-size:1rem;font-weight:300;color:var(--cream-dim);line-height:1.7;max-width:620px}
+.readiness-card.state-baseline_needed{border-left-color:var(--cream-faint)}
+.readiness-state{font-family:var(--mono);font-size:.7rem;font-weight:500;color:var(--cream-faint);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.6rem}
+.readiness-title{font-family:var(--serif);font-weight:300;font-style:italic;font-size:1.9rem;color:var(--cream);line-height:1.2;margin-bottom:1rem}
+.readiness-card.state-on_track .readiness-title em,.readiness-card.state-on_track_watch .readiness-title em{color:var(--teal)}
+.readiness-card.state-tighten_content .readiness-title em{color:var(--gold)}
+.readiness-card.state-borderline .readiness-title em,.readiness-card.state-reschedule .readiness-title em{color:var(--warn)}
+.readiness-body{font-size:1.05rem;font-weight:300;color:var(--cream-dim);line-height:1.7;margin-bottom:1rem}
+.advisor-prompt{padding:.85rem 1rem;background:rgba(13,27,46,.5);border:1px solid var(--border);border-radius:5px;font-family:var(--serif);font-style:italic;font-weight:300;font-size:.98rem;color:var(--cream-dim);line-height:1.55;margin-top:1rem}
+.category-addendum{margin-top:1rem;padding:.85rem 1rem;border:1px dashed var(--border-strong);border-radius:5px;font-size:.95rem;font-weight:300;color:var(--cream-dim);line-height:1.6}
 
-.section{margin-bottom:2rem}
-.section-eyebrow{font-family:var(--mono);font-size:.65rem;font-weight:500;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.65rem}
-.section h2{font-family:var(--serif);font-style:italic;font-weight:300;font-size:1.6rem;color:var(--cream);line-height:1.2;margin-bottom:1.25rem;letter-spacing:-.01em}
-.section h2 em{color:var(--gold);font-style:italic;font-weight:400}
-.section-intro{font-size:.98rem;font-weight:300;color:var(--cream-dim);line-height:1.7;margin-bottom:1.25rem;max-width:640px}
+.flags-card{padding:1.5rem 1.75rem;border:1px solid var(--border);border-radius:6px;background:var(--bg-card);margin-bottom:1.75rem}
+.flags-head{font-family:var(--mono);font-size:.7rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.85rem}
+.flags-list{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.flags-list li{font-size:.97rem;font-weight:300;color:var(--cream-dim);line-height:1.55;padding-left:1rem;position:relative}
+.flags-list li::before{content:"";position:absolute;left:0;top:.7em;width:.4rem;height:1px;background:var(--gold)}
+.flags-multi-note{margin-top:.85rem;font-family:var(--serif);font-style:italic;color:var(--warn);font-size:.95rem}
+.view-all-btn{margin-top:.85rem;background:transparent;border:none;color:var(--gold);font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;padding:0}
 
-.cycle-card{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:1.5rem 1.75rem;display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:center}
-.cycle-badge{font-family:var(--mono);font-size:.65rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;text-align:center;border:1px solid var(--gold);border-radius:4px;padding:.6rem 1rem;line-height:1.3;min-width:90px}
-.cycle-badge strong{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.6rem;display:block;color:var(--cream);text-transform:none;letter-spacing:0;margin-bottom:.2rem}
-.cycle-note{font-size:1rem;font-weight:300;color:var(--cream-dim);line-height:1.65}
-@media(max-width:520px){.cycle-card{grid-template-columns:1fr}}
+.result-block{padding:1.75rem;border:1px solid var(--border);border-radius:6px;background:var(--bg-card);margin-bottom:1.5rem}
+.result-block h2{font-family:var(--serif);font-weight:300;font-style:italic;font-size:1.55rem;color:var(--cream);margin-bottom:1rem}
+.result-block h2 em{color:var(--gold)}
+.result-block p{font-size:1rem;font-weight:300;color:var(--cream-dim);line-height:1.7;margin-bottom:.85rem}
+.result-block .mandatory-note{padding:1rem 1.15rem;border-left:2px solid var(--gold);background:var(--gold-soft);font-style:italic;font-weight:300;color:var(--cream-dim);font-size:.98rem;line-height:1.65;margin-top:1rem}
 
-.schedule-list{border:1px solid var(--border);border-radius:6px;overflow:hidden;background:var(--bg-card)}
-.schedule-row{display:grid;grid-template-columns:120px 1fr;gap:1.25rem;padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);align-items:start;transition:background var(--transition)}
-.schedule-row:last-child{border-bottom:none}
-.schedule-row:hover{background:var(--bg-card-hover)}
-.schedule-row.nbme{border-left:3px solid var(--gold)}
-.schedule-row.final{border-left:3px solid var(--teal)}
-.schedule-row.rest{border-left:3px solid var(--cream-faint);background:rgba(232,223,200,.02)}
-.schedule-row.content{border-left:3px solid transparent}
-.schedule-date{font-family:var(--mono);font-size:.72rem;color:var(--gold);letter-spacing:.05em;line-height:1.4;display:flex;flex-direction:column;gap:.15rem}
-.schedule-date .countdown{font-size:.6rem;color:var(--cream-faint);letter-spacing:.08em;text-transform:uppercase}
-.schedule-detail{display:flex;flex-direction:column;gap:.3rem}
-.schedule-title{font-family:var(--serif);font-weight:400;font-size:1.08rem;color:var(--cream);line-height:1.4}
-.schedule-title strong{font-weight:600;font-style:italic;color:var(--gold);font-style:italic}
-.schedule-sub{font-size:.92rem;font-weight:300;color:var(--cream-dim);line-height:1.55}
-@media(max-width:520px){.schedule-row{grid-template-columns:1fr;gap:.25rem}}
+.cycle-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:1rem}
+.cycle-stat{padding:.85rem 1rem;border:1px solid var(--border);border-radius:5px}
+.cycle-stat .k{font-family:var(--mono);font-size:.62rem;color:var(--cream-faint);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem}
+.cycle-stat .v{font-family:var(--serif);font-weight:300;font-size:1.4rem;color:var(--cream)}
 
-.cycle-ref{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:1.5rem 1.75rem}
-.cycle-ref-day{display:grid;grid-template-columns:90px 1fr;gap:1.25rem;padding:.85rem 0;border-bottom:1px solid var(--border)}
-.cycle-ref-day:last-child{border-bottom:none}
-.cycle-ref-label{font-family:var(--mono);font-size:.7rem;font-weight:500;color:var(--gold);letter-spacing:.08em;line-height:1.4;padding-top:.1rem}
-.cycle-ref-text{font-size:.95rem;font-weight:300;color:var(--cream-dim);line-height:1.65}
-.cycle-ref-text strong{color:var(--cream);font-weight:600}
+.schedule-table{width:100%;border-collapse:collapse;margin-top:.5rem}
+.schedule-table th,.schedule-table td{padding:.85rem .75rem;border-bottom:1px solid var(--border);text-align:left;font-size:.92rem}
+.schedule-table th{font-family:var(--mono);font-size:.62rem;color:var(--cream-faint);letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.schedule-table td{font-weight:300;color:var(--cream-dim)}
+.schedule-table td:first-child{font-family:var(--mono);font-size:.8rem;color:var(--cream);white-space:nowrap}
+.schedule-table td:nth-child(2){color:var(--cream);font-weight:400}
 
-.daily-card{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:1.5rem 1.75rem}
-.daily-list{list-style:none;display:flex;flex-direction:column;gap:.9rem}
-.daily-list li{display:grid;grid-template-columns:8px 1fr;gap:.9rem;align-items:start;font-size:.98rem;font-weight:300;color:var(--cream-dim);line-height:1.65}
-.daily-list li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);margin-top:.6rem}
-.daily-list li strong{color:var(--cream);font-weight:600}
-.daily-list li.optional::before{background:var(--cream-faint)}
-.daily-note{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--border);font-family:var(--serif);font-style:italic;font-size:.92rem;font-weight:300;color:var(--cream-faint);line-height:1.65}
+.behavioral-list{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin-top:.5rem}
+.behavioral-list li{padding:.7rem .9rem;border:1px solid var(--border);border-radius:5px;font-size:.97rem;font-weight:300;color:var(--cream-dim);line-height:1.55}
 
-.action-row{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+.action-row{display:flex;gap:.85rem;flex-wrap:wrap;margin-top:2rem}
 
-/* FOOTER */
-footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
-.footer-inner{max-width:880px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem}
-.footer-brand{font-family:var(--serif);font-weight:600;font-size:.95rem;color:rgba(232,223,200,.4)}
-.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
-.footer-links a{font-family:var(--mono);font-size:.65rem;font-weight:300;letter-spacing:.09em;text-transform:uppercase;color:rgba(232,223,200,.35);text-decoration:none;transition:color var(--transition)}
+.consultation-cta{margin-top:1.75rem;padding:1.75rem 2rem;border:1px solid var(--border);border-radius:6px;background:var(--bg-card)}
+.consultation-cta h3{font-family:var(--serif);font-weight:300;font-style:italic;font-size:1.4rem;color:var(--cream);margin-bottom:.75rem}
+.consultation-cta h3 em{color:var(--gold)}
+.consultation-cta p{font-size:1rem;font-weight:300;color:var(--cream-dim);line-height:1.65;margin-bottom:1rem}
+.consultation-cta a{display:inline-block;padding:.85rem 1.5rem;background:transparent;border:1px solid var(--gold);color:var(--gold);text-decoration:none;font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;border-radius:3px;transition:background var(--transition),color var(--transition)}
+.consultation-cta a:hover{background:var(--gold);color:var(--bg)}
+
+footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:3rem;background:rgba(15,34,56,.4)}
+.footer-inner{max-width:880px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-family:var(--serif);font-style:italic;font-weight:300;color:var(--cream-dim);font-size:1.05rem}
+.footer-links{list-style:none;display:flex;gap:1.5rem;flex-wrap:wrap}
+.footer-links a{font-family:var(--mono);font-size:.7rem;color:var(--cream-faint);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color var(--transition)}
 .footer-links a:hover{color:var(--gold)}
 
-@media(max-width:600px){
+@media(max-width:720px){
   main{padding:2rem 1.25rem 3rem}
-  .form-card{padding:1.5rem}
-  .form-grid{grid-template-columns:1fr;gap:1.25rem}
+  .form-card{padding:1.5rem 1.25rem}
+  .section-body{grid-template-columns:1fr;gap:1.2rem}
+  .assess-row,.assess-head{grid-template-columns:1.7fr 1fr 1.2fr 28px;gap:.35rem}
+  .readiness-card{padding:1.5rem 1.25rem 1.25rem}
+  .readiness-title{font-size:1.55rem}
   .nav-links{gap:1rem}
   .nav-links a{font-size:.65rem}
-  nav{padding:0 1.25rem}
-}
-
-@media print{
-  nav,footer,.action-row,.submit-row{display:none!important}
-  body{background:#fff;color:#000}
-  .schedule-row,.cycle-card,.cycle-ref,.daily-card,.readiness-card{background:#fff;border:1px solid #ccc;color:#000;break-inside:avoid}
-  .schedule-title,.cycle-ref-text,.daily-list li,.section h2,.readiness-title{color:#000}
-  .section-eyebrow,.readiness-label{color:#666}
 }
 </style>
 </head>
@@ -190,169 +197,236 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
 </nav>
 
 <main>
-  <header class="page-header">
-    <div class="page-eyebrow">Scheduling tool</div>
-    <h1>Build your <em>exam schedule</em></h1>
-    <p>Enter your exam date and a few details. The tool spaces NBME or AAMC forms on a 3, 4, or 5 day cycle, reserves the final 48 hours, and produces a readiness read on your recent practice scores.</p>
-  </header>
 
-  <!-- FORM -->
-  <section id="form-section" class="form-card">
-    <form id="schedule-form" novalidate>
-      <div class="form-grid">
+<header class="page-header">
+  <div class="page-eyebrow">Scheduling tool</div>
+  <h1>Build your <em>exam schedule</em></h1>
+  <p><strong>This is a starting point.</strong> A schedule and a readiness check, built from your actual practice scores. Use it to build the conversation with your advisor, not to replace it.</p>
+</header>
 
-        <div class="form-group full">
-          <label>Which exam</label>
-          <div class="radio-row" id="exam-type-row">
-            <button type="button" class="radio-btn" data-exam="step1">Step 1</button>
-            <button type="button" class="radio-btn" data-exam="cbse">CBSE</button>
-            <button type="button" class="radio-btn" data-exam="mcat">MCAT</button>
-          </div>
-          <input type="hidden" id="exam-type" required>
-          <div class="error-msg" id="err-type"></div>
+<section class="form-card" id="formCard">
+
+  <div class="section-block">
+    <div class="section-head" data-section="exam">
+      <h3>Your exam</h3>
+      <span class="toggle">[ Expand ]</span>
+    </div>
+    <div class="section-body" id="section-exam">
+
+      <div class="form-group">
+        <label>Exam type</label>
+        <div class="radio-row" data-field="examType">
+          <button type="button" class="radio-btn selected" data-value="step1">Step 1</button>
+          <button type="button" class="radio-btn" data-value="cbse">CBSE</button>
+          <button type="button" class="radio-btn" data-value="mcat">MCAT</button>
         </div>
-
-        <div class="form-group full" id="category-group" style="display:none">
-          <label>Your category</label>
-          <div class="radio-row" id="category-row">
-            <button type="button" class="radio-btn" data-cat="usmd">US MD</button>
-            <button type="button" class="radio-btn" data-cat="usdo">US DO</button>
-            <button type="button" class="radio-btn" data-cat="usimg">US-IMG</button>
-            <button type="button" class="radio-btn" data-cat="fmg">FMG / non-US IMG</button>
-          </div>
-          <input type="hidden" id="category">
-          <span class="hint">This is used to calibrate the recommendation, not to predict your outcome. Historical first-attempt rates differ across categories, and the language adjusts accordingly.</span>
-        </div>
-
-        <div class="form-group">
-          <label for="exam-date">Exam date</label>
-          <input type="date" id="exam-date" required>
-          <div class="error-msg" id="err-date"></div>
-        </div>
-
-        <div class="form-group">
-          <label for="hours-per-day">Realistic study hours per day</label>
-          <input type="number" id="hours-per-day" min="2" max="14" placeholder="8" required>
-          <div class="error-msg" id="err-hours"></div>
-        </div>
-
-        <div class="form-group">
-          <label for="qbank-pct">Qbank done so far (%)</label>
-          <input type="number" id="qbank-pct" min="0" max="100" placeholder="40">
-          <span class="hint">UWorld / AMBOSS / AAMC Section Bank. Approximate is fine.</span>
-        </div>
-
-        <div class="form-group">
-          <label for="weak-system" id="weak-label">Weakest system</label>
-          <select id="weak-system">
-            <option value="">Select one</option>
-          </select>
-        </div>
-
-        <div class="form-group full">
-          <label>Have you taken a baseline practice exam yet</label>
-          <div class="radio-row" id="baseline-row">
-            <button type="button" class="radio-btn" data-baseline="yes">Yes</button>
-            <button type="button" class="radio-btn" data-baseline="no">Not yet</button>
-          </div>
-          <input type="hidden" id="baseline-done">
-        </div>
-
-        <div class="form-group full">
-          <label>Do you struggle with sustained focus or have ADHD</label>
-          <div class="radio-row" id="focus-row">
-            <button type="button" class="radio-btn" data-focus="no">No</button>
-            <button type="button" class="radio-btn" data-focus="some">Sometimes</button>
-            <button type="button" class="radio-btn" data-focus="yes">Yes / diagnosed</button>
-          </div>
-          <input type="hidden" id="focus-issue">
-          <span class="hint">This is not a label. It changes the daily floor, block lengths, and how the cycle days are structured.</span>
-        </div>
-
-        <div class="form-group full" id="scores-group" style="display:none">
-          <label id="scores-label">Last 1 to 3 practice scores (oldest first)</label>
-          <div class="score-row">
-            <input type="number" id="score1" placeholder="60" min="0" max="528">
-            <input type="number" id="score2" placeholder="63" min="0" max="528">
-            <input type="number" id="score3" placeholder="66" min="0" max="528">
-          </div>
-          <span class="hint" id="scores-hint">NBME forms are 0 to 100. Older forms are less predictive. Recent ones first.</span>
-        </div>
-
-        <div class="form-group full" id="spacing-group" style="display:none">
-          <label>Was there meaningful content review time between your last two forms</label>
-          <div class="radio-row" id="spacing-row">
-            <button type="button" class="radio-btn" data-spacing="yes">Yes (a few days or more)</button>
-            <button type="button" class="radio-btn" data-spacing="no">No (back-to-back)</button>
-            <button type="button" class="radio-btn" data-spacing="unsure">Not sure</button>
-          </div>
-          <input type="hidden" id="spacing">
-          <span class="hint">If your last two forms were taken back-to-back with no review in between, the trend between them is not reliable. The recommendation softens accordingly.</span>
-        </div>
-
-        <div class="submit-row">
-          <button type="submit" class="btn btn-primary">Build my schedule</button>
-        </div>
-
       </div>
-    </form>
-  </section>
 
-  <!-- RESULT -->
-  <section id="result-section" class="result-section">
-
-    <div class="readiness-card" id="readiness-card">
-      <div class="readiness-label">Readiness read</div>
-      <h2 class="readiness-title" id="readiness-title"></h2>
-      <p class="readiness-body" id="readiness-body"></p>
-    </div>
-
-    <div class="section">
-      <div class="section-eyebrow">Cycle</div>
-      <div class="cycle-card">
-        <div class="cycle-badge"><strong id="cycle-num">4</strong>day cycle</div>
-        <div class="cycle-note" id="cycle-note"></div>
+      <div class="form-group">
+        <label for="examDate">Exam date</label>
+        <input type="date" id="examDate" required>
       </div>
-    </div>
 
-    <div class="section">
-      <div class="section-eyebrow">Schedule</div>
-      <h2>Your <em>form sequence</em></h2>
-      <p class="section-intro" id="schedule-intro"></p>
-      <div class="schedule-list" id="schedule-list"></div>
-    </div>
-
-    <div class="section">
-      <div class="section-eyebrow">Cycle structure</div>
-      <h2>What <em>each cycle</em> looks like</h2>
-      <p class="section-intro">The form day itself is full test conditions. Following days break the work into review, targeted practice, and consolidation. Questions never stop, except on the form day.</p>
-      <div class="cycle-ref" id="cycle-ref"></div>
-    </div>
-
-    <div class="section">
-      <div class="section-eyebrow">Daily floor</div>
-      <h2>Non-negotiables, <em>every day</em></h2>
-      <p class="section-intro">These hold the line between form days. Skip them and the cycle loses its compounding effect.</p>
-      <div class="daily-card">
-        <ul class="daily-list" id="daily-list"></ul>
-        <p class="daily-note">High-yield arrow series (Mehlman for Step 1 / CBSE, AAMC Section Bank rapid review for MCAT) are not strictly required — students pass without them — but they are the highest leverage-per-hour resource available for pattern recognition. If you have not started, this week is a reasonable time to begin.</p>
+      <div class="form-group" id="examFormatGroup">
+        <label>Exam format</label>
+        <div class="radio-row" data-field="examFormat">
+          <button type="button" class="radio-btn selected" data-value="standard">Standard</button>
+          <button type="button" class="radio-btn" data-value="new_2026">New 2026 (14 blocks)</button>
+        </div>
+        <span class="hint">For Step 1. The 2026 format uses 14 blocks of 20 questions.</span>
       </div>
-    </div>
 
-    <div class="action-row">
-      <button class="btn btn-primary" id="btn-ics">Download as calendar (.ics)</button>
-      <button class="btn btn-secondary" id="btn-print">Print this plan</button>
-      <button class="btn btn-ghost" id="btn-restart">Start over</button>
-    </div>
+      <div class="form-group">
+        <label for="hoursPerDay">Study hours per day</label>
+        <input type="number" id="hoursPerDay" min="2" max="14" value="8" required>
+        <span class="hint">Honest number. 2 to 14.</span>
+      </div>
 
-    <div class="consult-card" style="margin-top:2.5rem;padding:1.75rem 2rem;border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:6px;background:var(--bg-card)">
-      <div style="font-family:var(--mono);font-size:.65rem;color:var(--teal);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.7rem">Beyond the foundation</div>
-      <h3 style="font-family:var(--serif);font-style:italic;font-weight:300;font-size:1.4rem;color:var(--cream);margin-bottom:.75rem;line-height:1.3">This tool is a starting point, not a coach.</h3>
-      <p style="font-size:.98rem;font-weight:300;color:var(--cream-dim);line-height:1.7;margin-bottom:1.25rem">It will not know your specific weak chapter, your school's CBSE cutoff, the politics around your reschedule conversation, or which UWorld system you should triage first. For any of that, work with the resources you have or talk to someone who knows your situation. A short consultation is faster than another month of guesswork.</p>
-      <a href="/plan.html" class="btn btn-secondary" style="display:inline-block;text-decoration:none;font-size:.7rem">Book a personalized blueprint →</a>
-    </div>
+      <div class="form-group" id="categoryGroup">
+        <label>Your category</label>
+        <div class="radio-row" data-field="category">
+          <button type="button" class="radio-btn selected" data-value="usmd">US MD</button>
+          <button type="button" class="radio-btn" data-value="usdo">US DO</button>
+          <button type="button" class="radio-btn" data-value="usimg">US IMG</button>
+          <button type="button" class="radio-btn" data-value="fmg">FMG</button>
+        </div>
+      </div>
 
-  </section>
+      <div class="form-group full">
+        <label for="weakSystem">Weakest system</label>
+        <select id="weakSystem">
+          <option value="cardio">Cardio</option>
+          <option value="renal">Renal</option>
+          <option value="pulm">Pulm</option>
+          <option value="gi">GI</option>
+          <option value="endo">Endo</option>
+          <option value="heme_onc">Heme / Onc</option>
+          <option value="neuro">Neuro</option>
+          <option value="repro">Repro</option>
+          <option value="msk_derm">MSK / Derm</option>
+          <option value="micro_immuno">Micro / Immuno</option>
+          <option value="biochem_genetics">Biochem / Genetics</option>
+          <option value="behavioral">Behavioral</option>
+          <option value="biostats">Biostats</option>
+        </select>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-head" data-section="scores">
+      <h3>Your practice scores</h3>
+      <span class="toggle">[ Expand ]</span>
+    </div>
+    <div class="section-body" id="section-scores">
+
+      <div class="form-group full">
+        <label>Have you taken a baseline form?</label>
+        <div class="radio-row" data-field="baselineDone">
+          <button type="button" class="radio-btn selected" data-value="yes">Yes</button>
+          <button type="button" class="radio-btn" data-value="no">No</button>
+        </div>
+      </div>
+
+      <div class="form-group full">
+        <label>Practice forms taken (up to 5, oldest first)</label>
+        <span class="hint">Add your forms in chronological order. The most recent forms are weighted highest.</span>
+        <div class="assess-head">
+          <span>Form</span><span>Raw score</span><span>Date</span><span></span>
+        </div>
+        <div class="assessments-table" id="assessmentsTable"></div>
+        <button type="button" class="add-row-btn" id="addRowBtn">+ Add another assessment</button>
+      </div>
+
+      <div class="form-group full">
+        <label>Was there content review time between your last two forms?</label>
+        <div class="radio-row" data-field="spacing">
+          <button type="button" class="radio-btn selected" data-value="yes">Yes, spaced</button>
+          <button type="button" class="radio-btn" data-value="no">No, back to back</button>
+          <button type="button" class="radio-btn" data-value="unsure">Not sure</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-head" data-section="conditions">
+      <h3>Your study conditions</h3>
+      <span class="toggle">[ Expand ]</span>
+    </div>
+    <div class="section-body" id="section-conditions">
+
+      <div class="form-group full">
+        <label>Test anxiety</label>
+        <div class="radio-row" data-field="testAnxiety">
+          <button type="button" class="radio-btn" data-value="low">Low</button>
+          <button type="button" class="radio-btn selected" data-value="moderate">Moderate</button>
+          <button type="button" class="radio-btn" data-value="high">High</button>
+        </div>
+      </div>
+
+      <div class="form-group full">
+        <label>Sleep</label>
+        <div class="radio-row" data-field="sleepStatus">
+          <button type="button" class="radio-btn selected" data-value="adequate">7 plus hours</button>
+          <button type="button" class="radio-btn" data-value="reduced">5 to 6 hours</button>
+          <button type="button" class="radio-btn" data-value="poor">Under 5 or irregular</button>
+        </div>
+      </div>
+
+      <div class="form-group full">
+        <label>Focus during study</label>
+        <div class="radio-row" data-field="focusIssue">
+          <button type="button" class="radio-btn selected" data-value="no">No issue</button>
+          <button type="button" class="radio-btn" data-value="some">Some difficulty</button>
+          <button type="button" class="radio-btn" data-value="yes">Significant difficulty</button>
+        </div>
+      </div>
+
+      <div class="form-group full">
+        <label>Attempt number</label>
+        <div class="radio-row" data-field="attemptNumber">
+          <button type="button" class="radio-btn selected" data-value="1">First</button>
+          <button type="button" class="radio-btn" data-value="2">Second</button>
+          <button type="button" class="radio-btn" data-value="3+">Third or later</button>
+        </div>
+      </div>
+
+      <div class="form-group full">
+        <label>When do you usually practice?</label>
+        <div class="radio-row" data-field="practiceTimeMatch">
+          <button type="button" class="radio-btn" data-value="morning">Morning</button>
+          <button type="button" class="radio-btn" data-value="afternoon">Afternoon</button>
+          <button type="button" class="radio-btn" data-value="evening">Evening</button>
+          <button type="button" class="radio-btn selected" data-value="variable">Variable</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-head" data-section="qbank">
+      <h3>Your qbank</h3>
+      <span class="toggle">[ Expand ]</span>
+    </div>
+    <div class="section-body" id="section-qbank">
+
+      <div class="form-group">
+        <label for="qbankCompletion">Qbank completion (%)</label>
+        <input type="number" id="qbankCompletion" min="0" max="100" value="40">
+      </div>
+
+      <div class="form-group">
+        <label for="qbankAccuracy">Qbank accuracy (%)</label>
+        <input type="number" id="qbankAccuracy" min="0" max="100" value="65">
+      </div>
+
+      <div class="form-group full">
+        <label>Qbank trend</label>
+        <div class="radio-row" data-field="qbankTrend">
+          <button type="button" class="radio-btn" data-value="improving">Improving</button>
+          <button type="button" class="radio-btn selected" data-value="flat">Flat</button>
+          <button type="button" class="radio-btn" data-value="declining">Declining</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="error-msg" id="errorMsg"></div>
+
+  <div class="submit-row">
+    <button type="button" class="btn btn-primary" id="buildBtn">Build my schedule</button>
+    <button type="button" class="btn btn-secondary" id="resetBtn">Reset</button>
+  </div>
+
+</section>
+
+<section class="result-section" id="resultSection">
+  <div class="foundation-banner" id="foundationBanner">This is a starting point. Use it to build the conversation, not to replace it.</div>
+  <div id="readinessHost"></div>
+  <div id="flagsHost"></div>
+  <div id="cycleHost"></div>
+  <div id="scheduleHost"></div>
+  <div id="dailyHost"></div>
+  <div id="last48Host"></div>
+  <div id="behavioralHost"></div>
+
+  <div class="action-row">
+    <button type="button" class="btn btn-primary" id="downloadIcsBtn">Download .ics</button>
+    <button type="button" class="btn btn-secondary" id="printBtn">Print</button>
+    <button type="button" class="btn btn-ghost" id="startOverBtn">Start over</button>
+  </div>
+
+  <div class="consultation-cta">
+    <h3>Want a <em>personalized plan</em>?</h3>
+    <p>This tool is a foundation, not a coach. For specific advice on your situation, book a personalized blueprint.</p>
+    <a href="/plan.html">Book a blueprint</a>
+  </div>
+</section>
 
 </main>
 
@@ -361,614 +435,873 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
     <span class="footer-brand">Bit by Bit Pedagogy</span>
     <ul class="footer-links">
       <li><a href="/">Home</a></li>
-      <li><a href="/cfactor/">MCAT</a></li>
-      <li><a href="/">Step 1</a></li>
+      <li><a href="/tools/">All tools</a></li>
       <li><a href="/triage/">Find your pattern</a></li>
-      <li><a href="/archetypes/">Study profiles</a></li>
+      <li><a href="/cfactor/">MCAT</a></li>
     </ul>
   </div>
 </footer>
 
 <script>
-(function(){
+"use strict";
 
-  // ===========================================
-  // CONFIG: forms, systems, scoring thresholds
-  // ===========================================
-  const FORMS = {
-    step1: ['Form 26','Form 27','Form 28','Form 29','Form 30','Form 31','Form 32','Form 33','Free 120 (old)','Free 120 (new)'],
-    cbse:  ['Form 24','Form 25','Form 26','Form 27','Form 28','Form 29','Form 30','Form 31','Form 32','Form 33'],
-    mcat:  ['AAMC Sample (Unscored)','AAMC FL1','AAMC FL2','AAMC FL3','AAMC FL4','AAMC FL5'],
-  };
+/* ============================================================
+   FORM POOLS
+   ============================================================ */
+const FORM_POOLS = {
+  step1: [
+    { id:'Form 21', tier:1, offset:-2 },
+    { id:'Form 22', tier:1, offset:-2 },
+    { id:'Form 23', tier:1, offset:-2 },
+    { id:'Form 24', tier:1, offset:-2 },
+    { id:'Form 25', tier:1, offset:-2 },
+    { id:'Form 26', tier:1, offset:-2 },
+    { id:'Form 27', tier:2, offset:0 },
+    { id:'Form 28', tier:2, offset:0 },
+    { id:'Form 29', tier:2, offset:0 },
+    { id:'Form 30', tier:3, offset:2 },
+    { id:'Form 31', tier:3, offset:2 },
+    { id:'Form 32', tier:3, offset:2 },
+    { id:'Form 33', tier:3, offset:2 },
+    { id:'Free 120 (old)', tier:3, offset:0 },
+    { id:'Free 120 (2024)', tier:3, offset:1 },
+    { id:'Free 120 (2026)', tier:3, offset:1 },
+  ],
+  cbse: [
+    { id:'Form 21', tier:1, offset:-2 },
+    { id:'Form 22', tier:1, offset:-2 },
+    { id:'Form 23', tier:1, offset:-2 },
+    { id:'Form 24', tier:1, offset:-2 },
+    { id:'Form 25', tier:1, offset:-2 },
+    { id:'Form 26', tier:1, offset:-2 },
+    { id:'Form 27', tier:2, offset:0 },
+    { id:'Form 28', tier:2, offset:0 },
+    { id:'Form 29', tier:2, offset:0 },
+    { id:'Form 30', tier:3, offset:2 },
+    { id:'Form 31', tier:3, offset:2 },
+    { id:'Form 32', tier:3, offset:2 },
+    { id:'Form 33', tier:3, offset:2 },
+  ],
+  mcat: [
+    { id:'Sample', tier:1, offset:0 },
+    { id:'FL1', tier:1, offset:-1 },
+    { id:'FL2', tier:2, offset:0 },
+    { id:'FL3', tier:3, offset:0 },
+    { id:'FL4', tier:3, offset:0 },
+    { id:'FL5', tier:3, offset:1 },
+  ],
+};
 
-  const SYSTEMS = {
-    step1: ['Cardiovascular','Pulmonary','Renal','Gastrointestinal','Endocrine','Reproductive','Musculoskeletal / Rheum','Neurology / Special Senses','Hematology / Oncology','Psychiatry / Behavioral','Microbiology / Immunology','Pharmacology','Biochem / Genetics'],
-    cbse:  ['Cardiovascular','Pulmonary','Renal','Gastrointestinal','Endocrine','Reproductive','Musculoskeletal / Rheum','Neurology / Special Senses','Hematology / Oncology','Psychiatry / Behavioral','Microbiology / Immunology','Pharmacology','Biochem / Genetics'],
-    mcat:  ['Chem / Phys (C/P)','CARS','Bio / Biochem (B/B)','Psych / Soc (P/S)'],
-  };
+const FLAG_COPY = {
+  sleep_confound: "Sleep deprivation may be affecting your scores.",
+  volatile_decline: "Your scores are both inconsistent and trending down.",
+  volatile_floor_hard: "Your scores are highly inconsistent with little time remaining.",
+  repeat_attempt_serious: "Third or later attempt. Take this readiness check with extra weight.",
+  data_thin_critical: "Only one practice form with critical runway. Treat conservatively.",
+  serious_decline: "Your scores have dropped significantly from baseline.",
+  category_risk_no_soften: "Your category historically faces higher first-attempt risk at this score level.",
+  short_runway_unconfirmed: "Short runway with an unconfirmed trend.",
+  volatile_climb_suppressed: "Climbing pattern present but scores are too volatile to trust as a real climb.",
+  volatile_climb_partial_credit: "Climbing pattern with volatility. Partial credit applied.",
+  volatile_floor_soft: "Your scores are inconsistent. Stabilize before treating any one form as the signal.",
+  anxiety_high: "High anxiety is a meaningful confounder.",
+  confounder_interaction: "Multiple factors interacting. Combined effect is reflected in your score.",
+  flat_plateau_mid_prep: "Scores have plateaued at a meaningful point in your prep.",
+  repeat_attempt: "Repeat attempt context.",
+  falling_unconfirmed: "Falling trend present but cannot be confirmed.",
+  slow_decline: "Slow consistent decline detected.",
+  sleep_caution: "Reduced sleep may be affecting your work.",
+  anxiety_moderate: "Moderate anxiety noted.",
+  qbank_concern: "Qbank accuracy is below the comfort range.",
+  diagnostic_regression_needed: "A diagnostic form is recommended next.",
+  trajectory_graduation: "Early gains are closing foundational gaps.",
+  flat_plateau_early: "Scores have not moved across recent weeks.",
+  data_thin: "Single-form orientation. Add another spaced form to confirm.",
+  spacingWarning: "Last two forms were taken back-to-back. The trend may not be informative.",
+  qbank_decline: "Qbank trend is declining.",
+  climbing_capped_short_runway: "Climbing trend rescued the recommendation, but runway is short.",
+  adjustment_capped: "Confounder adjustment hit its cap.",
+  stale_baseline: "Your earliest form is over three months old. Recent forms count for more.",
+  long_runway_softened: "Long runway softens the recommendation. Use it well.",
+  format_calibration: "New format calibration: schedule the new Free 120 early.",
+};
 
-  const LABELS = {
-    step1: { weak:'Weakest organ system', scoreUnit:'NBME forms are 0 to 100. Recent ones first.', forms:'NBME forms', qbank:'UWorld or AMBOSS' },
-    cbse:  { weak:'Weakest organ system', scoreUnit:'NBME forms are 0 to 100. Recent ones first.', forms:'NBME forms', qbank:'UWorld or AMBOSS' },
-    mcat:  { weak:'Weakest section',      scoreUnit:'AAMC FL scores are 472 to 528. Recent ones first.', forms:'AAMC full-lengths', qbank:'AAMC Section Bank' },
-  };
+const FLAG_PRIORITY = [
+  "sleep_confound","volatile_decline","volatile_floor_hard","repeat_attempt_serious",
+  "data_thin_critical","serious_decline","category_risk_no_soften","short_runway_unconfirmed",
+  "volatile_climb_suppressed","volatile_climb_partial_credit","volatile_floor_soft",
+  "anxiety_high","confounder_interaction","flat_plateau_mid_prep","repeat_attempt",
+  "falling_unconfirmed","slow_decline","sleep_caution","anxiety_moderate","qbank_concern",
+  "diagnostic_regression_needed","trajectory_graduation","flat_plateau_early","data_thin",
+  "spacingWarning","qbank_decline","climbing_capped_short_runway","adjustment_capped",
+  "stale_baseline","long_runway_softened","format_calibration"
+];
 
-  // ===========================================
-  // STATE
-  // ===========================================
-  let state = { examType:null, baselineDone:null, lastSchedule:null };
+const SEVERITY_ORDER = ["reschedule","borderline","tighten_content","on_track_watch","on_track"];
+function sevIndex(s){ return SEVERITY_ORDER.indexOf(s); }
+function sevMax(a,b){ return sevIndex(a) >= sevIndex(b) ? a : b; }
+function sevMin(a,b){ return sevIndex(a) <= sevIndex(b) ? a : b; }
+function downgrade(s){
+  const map={on_track:"on_track_watch",on_track_watch:"tighten_content",tighten_content:"borderline",borderline:"reschedule",reschedule:"reschedule"};
+  return map[s]||s;
+}
+function upgrade(s){
+  const map={reschedule:"borderline",borderline:"tighten_content",tighten_content:"on_track_watch",on_track_watch:"on_track",on_track:"on_track"};
+  return map[s]||s;
+}
 
-  // ===========================================
-  // INIT
-  // ===========================================
-  document.querySelectorAll('#exam-type-row .radio-btn').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      document.querySelectorAll('#exam-type-row .radio-btn').forEach(b=>b.classList.remove('selected'));
-      btn.classList.add('selected');
-      const t = btn.dataset.exam;
-      state.examType = t;
-      document.getElementById('exam-type').value = t;
-      populateSystems(t);
-      updateLabels(t);
-      // Show category only for Step 1 / CBSE (MCAT category framing is different)
-      document.getElementById('category-group').style.display = (t === 'step1' || t === 'cbse') ? 'flex' : 'none';
-      // Clear stale scores when exam type changes (scoring scales differ)
-      ['score1','score2','score3'].forEach(id => document.getElementById(id).value = '');
+/* ============================================================
+   STATE
+   ============================================================ */
+const state = {
+  examType: "step1",
+  examFormat: "standard",
+  examDate: "",
+  hoursPerDay: 8,
+  weakSystem: "cardio",
+  category: "usmd",
+  focusIssue: "no",
+  baselineDone: "yes",
+  spacing: "yes",
+  testAnxiety: "moderate",
+  sleepStatus: "adequate",
+  attemptNumber: "1",
+  practiceTimeMatch: "variable",
+  qbankCompletion: 40,
+  qbankAccuracy: 65,
+  qbankTrend: "flat",
+  assessments: [],
+};
+
+/* ============================================================
+   ASSESSMENTS TABLE
+   ============================================================ */
+function renderAssessments(){
+  const host = document.getElementById("assessmentsTable");
+  host.innerHTML = "";
+  const pool = FORM_POOLS[state.examType];
+  state.assessments.forEach((a, idx) => {
+    const row = document.createElement("div");
+    row.className = "assess-row";
+    const sel = document.createElement("select");
+    pool.forEach(f => {
+      const o = document.createElement("option");
+      o.value = f.id; o.textContent = f.id;
+      if (a.formId === f.id) o.selected = true;
+      sel.appendChild(o);
     });
+    sel.addEventListener("change", e => { state.assessments[idx].formId = e.target.value; });
+    const sc = document.createElement("input");
+    sc.type = "number";
+    if (state.examType === "mcat") { sc.min = 472; sc.max = 528; sc.placeholder = "score"; }
+    else { sc.min = 0; sc.max = 100; sc.placeholder = "raw"; }
+    sc.value = a.rawScore;
+    sc.addEventListener("input", e => { state.assessments[idx].rawScore = parseFloat(e.target.value)||0; });
+    const dt = document.createElement("input");
+    dt.type = "date";
+    dt.value = a.date;
+    dt.addEventListener("change", e => { state.assessments[idx].date = e.target.value; });
+    const rm = document.createElement("button");
+    rm.type = "button"; rm.className = "remove-row-btn"; rm.textContent = "×";
+    rm.addEventListener("click", () => {
+      state.assessments.splice(idx,1);
+      renderAssessments();
+    });
+    row.append(sel, sc, dt, rm);
+    host.appendChild(row);
   });
+  document.getElementById("addRowBtn").disabled = state.assessments.length >= 5;
+}
 
-  document.querySelectorAll('#baseline-row .radio-btn').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      document.querySelectorAll('#baseline-row .radio-btn').forEach(b=>b.classList.remove('selected'));
-      btn.classList.add('selected');
-      const v = btn.dataset.baseline;
-      state.baselineDone = v;
-      document.getElementById('baseline-done').value = v;
-      document.getElementById('scores-group').style.display = v==='yes' ? 'flex' : 'none';
-      document.getElementById('spacing-group').style.display = v==='yes' ? 'flex' : 'none';
-    });
+function defaultFormForExam(){
+  const pool = FORM_POOLS[state.examType];
+  return pool[Math.min(pool.length-1, 8)].id;
+}
+
+function addAssessment(){
+  if (state.assessments.length >= 5) return;
+  state.assessments.push({
+    formId: defaultFormForExam(),
+    rawScore: state.examType === "mcat" ? 505 : 65,
+    date: ""
   });
+  renderAssessments();
+}
 
-  document.querySelectorAll('#spacing-row .radio-btn').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      document.querySelectorAll('#spacing-row .radio-btn').forEach(b=>b.classList.remove('selected'));
-      btn.classList.add('selected');
-      const v = btn.dataset.spacing;
-      state.spacing = v;
-      document.getElementById('spacing').value = v;
-    });
-  });
-
-  document.querySelectorAll('#focus-row .radio-btn').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      document.querySelectorAll('#focus-row .radio-btn').forEach(b=>b.classList.remove('selected'));
-      btn.classList.add('selected');
-      const v = btn.dataset.focus;
-      state.focusIssue = v;
-      document.getElementById('focus-issue').value = v;
-    });
-  });
-
-  document.querySelectorAll('#category-row .radio-btn').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      document.querySelectorAll('#category-row .radio-btn').forEach(b=>b.classList.remove('selected'));
-      btn.classList.add('selected');
-      const v = btn.dataset.cat;
-      state.category = v;
-      document.getElementById('category').value = v;
-    });
-  });
-
-  function populateSystems(type){
-    const sel = document.getElementById('weak-system');
-    sel.innerHTML = '<option value="">Select one</option>';
-    SYSTEMS[type].forEach(s=>{
-      const opt = document.createElement('option');
-      opt.value = s; opt.textContent = s;
-      sel.appendChild(opt);
-    });
-  }
-
-  function updateLabels(type){
-    document.getElementById('weak-label').textContent = LABELS[type].weak;
-    document.getElementById('scores-hint').textContent = LABELS[type].scoreUnit;
-    const maxScore = type==='mcat' ? 528 : 100;
-    ['score1','score2','score3'].forEach(id=>document.getElementById(id).max = maxScore);
-    if (type==='mcat') {
-      document.getElementById('score1').placeholder='505';
-      document.getElementById('score2').placeholder='508';
-      document.getElementById('score3').placeholder='512';
-    } else {
-      document.getElementById('score1').placeholder='60';
-      document.getElementById('score2').placeholder='63';
-      document.getElementById('score3').placeholder='66';
-    }
-  }
-
-  // ===========================================
-  // ALGORITHM
-  // ===========================================
-  function startOfDay(d){ const x = new Date(d); x.setHours(0,0,0,0); return x; }
-  function addDays(d, n){ const x = new Date(d); x.setDate(x.getDate()+n); return x; }
-  function fmtDate(d){ return d.toLocaleDateString('en-US',{weekday:'short', month:'short', day:'numeric'}); }
-  function fmtISO(d){ return d.toISOString().slice(0,10).replace(/-/g,''); }
-
-  function buildSchedule(input){
-    const today = startOfDay(new Date());
-    const exam = startOfDay(new Date(input.examDate));
-    const daysToExam = Math.round((exam - today) / 86400000);
-    const weeks = daysToExam / 7;
-    const out = { daysToExam, weeks, exam, today };
-
-    if (daysToExam < 5) {
-      out.error = 'The exam is in less than five days. This tool will not build a schedule on that runway. Focus on sleep, a light review of recent NBME themes, and the test-day logistics.';
-      return out;
-    }
-
-    // Cycle gating (corrected math)
-    if (weeks >= 10) { out.cycleLength = 5; out.cycleNote = 'Five-day cycle. You have runway. The extra day in each cycle is for content review on the weak system identified by the form before. Use it.'; }
-    else if (weeks >= 6) { out.cycleLength = 4; out.cycleNote = 'Four-day cycle. Standard pacing. Each form gets a review day, a targeted-practice day, and a consolidation day before the next form.'; }
-    else if (weeks >= 3) { out.cycleLength = 3; out.cycleNote = 'Three-day cycle. This is emergency pacing. Every cycle is a form, a review, and a consolidation. There is no slack.'; }
-    else { out.cycleLength = 3; out.cycleNote = 'Under three weeks. Three-day cycle, but you will not get through every form. The schedule below uses the most recent forms only — those carry the most predictive weight.'; }
-
-    // Forms list (trim for very short runway)
-    let forms = FORMS[input.examType].slice();
-    const maxForms = Math.max(2, Math.floor((daysToExam - 1) / out.cycleLength));
-    if (forms.length > maxForms) forms = forms.slice(-maxForms);
-    out.formsUsed = forms;
-    out.formsDropped = FORMS[input.examType].filter(f=>!forms.includes(f));
-
-    // Backward placement: last form 2 days before exam, rest day at day -1
-    // Day index: 0 = today, daysToExam = exam day
-    const restDay = daysToExam - 1;
-    const lastFormDay = daysToExam - 2;
-
-    const scheduledForms = [];
-    let cursor = lastFormDay;
-    for (let i = forms.length - 1; i >= 0; i--) {
-      if (cursor < 0) break;
-      scheduledForms.unshift({ dayOffset: cursor, form: forms[i], isFinal: (i === forms.length - 1) });
-      cursor -= out.cycleLength;
-    }
-    out.scheduledForms = scheduledForms;
-
-    // Build full schedule rows (forms + cycle days between them)
-    const rows = [];
-    const firstFormDay = scheduledForms[0].dayOffset;
-
-    // Content review phase (before first form)
-    if (firstFormDay > 0) {
-      rows.push({
-        type:'content', dayOffset:0, endOffset:firstFormDay-1,
-        title:'Content review phase',
-        sub:`${firstFormDay} day${firstFormDay===1?'':'s'} of focused content work before the first form. Cover your weakest system end to end. ${input.qbankPct < 50 ? 'Push qbank coverage up to at least 50% before the form phase starts.' : 'Spaced qbank review of completed material.'} Daily floor still applies.`
-      });
-    }
-
-    // NBME phase rows
-    scheduledForms.forEach((f, idx) => {
-      const next = scheduledForms[idx + 1];
-      rows.push({
-        type:'nbme', dayOffset:f.dayOffset, form:f.form,
-        title:`<strong>${f.form}</strong> — full test conditions`,
-        sub:`Five blocks, timed, no phone. Evening: brief debrief only. No new content.`,
-        isFinal:f.isFinal,
-      });
-      // Cycle interior days
-      const cycleEnd = next ? next.dayOffset : restDay;
-      const span = cycleEnd - f.dayOffset - 1;
-      if (span > 0) {
-        rows.push({
-          type:'review', dayOffset:f.dayOffset + 1,
-          title:`Form review (half day)`,
-          sub:`Go through every missed and uncertain question. Write the mechanism, not the answer. ${input.weakSystem ? input.weakSystem + ' gets first priority if any of these questions touch it.' : ''} Floor: ${LABELS[input.examType].qbank} 60+ questions.`
-        });
-      }
-      if (span > 1) {
-        // mid days
-        for (let d = 2; d < span; d++) {
-          if (d === span - 1) {
-            rows.push({
-              type:'consolidation', dayOffset:f.dayOffset + d,
-              title:'Consolidation (4 hour minimum)',
-              sub:`All missed topics from the last form plus your running UWorld wrong-answer notes. This is the day that turns scores into score improvements. Floor: 60+ questions.`
-            });
-          } else {
-            rows.push({
-              type:'targeted', dayOffset:f.dayOffset + d,
-              title:'Targeted topic block + mixed practice',
-              sub:`One timed topic block on the weak system from the last form. One random mixed block (timed or tutor mode). Floor: 60+ questions.`
-            });
-          }
+/* ============================================================
+   EVENT WIRING
+   ============================================================ */
+function wireRadios(){
+  document.querySelectorAll("[data-field]").forEach(group => {
+    const field = group.getAttribute("data-field");
+    group.querySelectorAll(".radio-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        group.querySelectorAll(".radio-btn").forEach(b => b.classList.remove("selected"));
+        btn.classList.add("selected");
+        const val = btn.getAttribute("data-value");
+        state[field] = val;
+        if (field === "examType") {
+          renderAssessments();
+          document.getElementById("examFormatGroup").style.display = val === "step1" ? "" : "none";
+          document.getElementById("categoryGroup").style.display = val === "mcat" ? "none" : "";
         }
-      }
+      });
     });
+  });
+}
 
-    // Rest day
-    rows.push({
-      type:'rest', dayOffset:restDay,
-      title:'Light review only — no new content',
-      sub:`Glance over recent NBME wrong-answer themes for 60 to 90 minutes maximum. Confirm exam logistics. Light Anki maintenance if you use it. Stop by early evening. Sleep.`
+function wireSections(){
+  document.querySelectorAll(".section-head").forEach(h => {
+    h.addEventListener("click", () => {
+      const key = h.getAttribute("data-section");
+      const body = document.getElementById("section-"+key);
+      body.classList.toggle("collapsed");
+      h.querySelector(".toggle").textContent = body.classList.contains("collapsed") ? "[ Expand ]" : "[ Collapse ]";
     });
+  });
+}
 
-    // Exam day
-    rows.push({
-      type:'exam', dayOffset:daysToExam,
-      title:`<strong>${input.examType==='mcat' ? 'MCAT' : input.examType==='cbse' ? 'CBSE' : 'Step 1'} exam</strong>`,
-      sub:'Eat. Hydrate. Show up early. Trust the cycles.'
-    });
+function wireInputs(){
+  document.getElementById("examDate").addEventListener("change", e => state.examDate = e.target.value);
+  document.getElementById("hoursPerDay").addEventListener("input", e => state.hoursPerDay = parseFloat(e.target.value)||8);
+  document.getElementById("weakSystem").addEventListener("change", e => state.weakSystem = e.target.value);
+  document.getElementById("qbankCompletion").addEventListener("input", e => state.qbankCompletion = parseFloat(e.target.value)||0);
+  document.getElementById("qbankAccuracy").addEventListener("input", e => state.qbankAccuracy = parseFloat(e.target.value)||0);
+  document.getElementById("addRowBtn").addEventListener("click", addAssessment);
+  document.getElementById("buildBtn").addEventListener("click", build);
+  document.getElementById("resetBtn").addEventListener("click", () => location.reload());
+  document.getElementById("startOverBtn").addEventListener("click", () => location.reload());
+  document.getElementById("printBtn").addEventListener("click", () => window.print());
+  document.getElementById("downloadIcsBtn").addEventListener("click", downloadIcs);
+}
 
-    out.rows = rows;
+/* ============================================================
+   CORE COMPUTATION
+   ============================================================ */
+function offsetFor(formId, examType){
+  const pool = FORM_POOLS[examType];
+  const f = pool.find(x => x.id === formId);
+  return f ? f.offset : 0;
+}
+function tierFor(formId, examType){
+  const pool = FORM_POOLS[examType];
+  const f = pool.find(x => x.id === formId);
+  return f ? f.tier : 2;
+}
 
-    // Readiness (internal formula — outputs state only)
-    out.readiness = assessReadiness(input);
+function thresholdsFor(examType){
+  if (examType === "mcat") return { strong:515, ok:510, marginal:505, weak:500, negSlope:-3, posSlope:4 };
+  return { strong:70, ok:65, marginal:60, weak:55, negSlope:-4, posSlope:3 };
+}
 
-    return out;
+function weeksBetween(now, exam){
+  const ms = new Date(exam) - new Date(now);
+  return Math.max(0, Math.round(ms / (1000*60*60*24*7)));
+}
+
+function compute(){
+  const t = thresholdsFor(state.examType);
+  const flags = new Set();
+  const today = new Date().toISOString().slice(0,10);
+  const weeks = state.examDate ? weeksBetween(today, state.examDate) : 0;
+
+  /* Section 6 — baseline gate */
+  if (state.baselineDone === "no" || state.assessments.length === 0){
+    let copy;
+    if (state.category === "usmd" || state.category === "usdo")
+      copy = "Take a baseline form this week. It gives you a starting point to build a schedule from, nothing more, nothing less.";
+    else if (state.category === "usimg" || state.category === "fmg")
+      copy = "Take a baseline form as soon as possible, ideally this week. Students in your category benefit most from early gap identification. For CBSE, Form 25 or 26 is a reasonable starting point.";
+    else
+      copy = "Take a baseline form this week to establish your starting point.";
+    return { state:"baseline_needed", primary:null, adjusted:null, weeks, flags:[], copy, consistency:"unknown", reason:"baseline" };
   }
 
-  function assessReadiness(input){
-    const scores = (input.scores || []).filter(s => s != null && !isNaN(s) && s > 0);
-    const weeks = input.weeksRemaining;
-    const type = input.examType;
-    const isMcat = type === 'mcat';
+  /* Section 7 — primary score */
+  const enriched = state.assessments.map(a => ({
+    ...a,
+    adjusted: a.rawScore + offsetFor(a.formId, state.examType)
+  }));
+  const scoresAll = enriched.slice(-5);
+  const adjScores = scoresAll.map(s => s.adjusted);
+  let PRIMARY;
+  const n = adjScores.length;
+  if (n === 1) PRIMARY = adjScores[0];
+  else if (n === 2) PRIMARY = 0.65*adjScores[1] + 0.35*adjScores[0];
+  else if (n === 3) PRIMARY = 0.55*adjScores[2] + 0.30*adjScores[1] + 0.15*adjScores[0];
+  else if (n === 4) PRIMARY = 0.50*adjScores[3] + 0.25*adjScores[2] + 0.15*adjScores[1] + 0.10*adjScores[0];
+  else PRIMARY = 0.45*adjScores[4] + 0.25*adjScores[3] + 0.15*adjScores[2] + 0.10*adjScores[1] + 0.05*adjScores[0];
 
-    // Category-aware baseline urgency
-    // Historical first-attempt pass rates (FSMB / NBME / AAMC published data) differ across categories.
-    // USMD/USDO baseline trajectories are more predictable from school performance, so a no-baseline
-    // student in those categories has more inferred runway. US-IMG and FMG have wider variance and
-    // historically lower first-attempt rates, so an early baseline is more time-critical.
-    const cat = input.category || (isMcat ? 'mcat' : 'unknown');
+  const LATEST = adjScores[n-1];
+  const OLDEST = adjScores[0];
+  const SLOPE_RECENT = n >= 2 ? adjScores[n-1] - adjScores[n-2] : 0;
+  const FULL_RANGE_DROP = OLDEST - LATEST;
 
-    if (input.baselineDone === 'no' || scores.length === 0) {
-      const firstForm = type==='step1'?'NBME Form 26' : type==='cbse'?'NBME Form 24' : 'AAMC FL1';
-      let body;
-      if (cat === 'usmd' || cat === 'usdo') {
-        body = `Without at least one full practice form, every recommendation here is partly guesswork. Use ${firstForm} as your baseline this week. School performance tends to track baseline reasonably well for US graduates, but the actual number changes the cycle calibration. It is information, not judgment.`;
-      } else if (cat === 'usimg') {
-        body = `Use ${firstForm} as your baseline this week. US-IMG trajectories vary widely with school resources and clinical exposure. Baseline early — what you find guides whether to optimize content review or jump into the form cycle.`;
-      } else if (cat === 'fmg') {
-        body = `Baseline this week. ${firstForm} first, then come back here. Without it, weeks of work could be mis-targeted. The FMG first-attempt pass rate is meaningfully lower than the US graduate rate, and the single highest-leverage intervention is knowing where you actually are.`;
+  /* Section 8 — consistency */
+  const range = Math.max(...adjScores) - Math.min(...adjScores);
+  let consistency = "unknown";
+  if (n === 5) consistency = range <= 5 ? "stable" : range <= 11 ? "moderate" : "volatile";
+  else if (n === 4) consistency = range <= 5 ? "stable" : range <= 10 ? "moderate" : "volatile";
+  else if (n === 3) consistency = range <= 4 ? "stable" : range <= 9 ? "moderate" : "volatile";
+  else if (n === 2) { const r = Math.abs(adjScores[1]-adjScores[0]); consistency = r <= 4 ? "stable" : r <= 12 ? "moderate" : "volatile"; }
+
+  /* Section 9 — confounders */
+  const anx = state.testAnxiety === "high" ? 4 : state.testAnxiety === "moderate" ? 2 : 0;
+  const slp = state.sleepStatus === "poor" ? 3 : state.sleepStatus === "reduced" ? 1 : 0;
+  const att = state.attemptNumber === "3+" ? 3 : state.attemptNumber === "2" ? 2 : 0;
+  if (anx === 4) flags.add("anxiety_high");
+  else if (anx === 2) flags.add("anxiety_moderate");
+  if (slp === 3) flags.add("sleep_confound");
+  else if (slp === 1) flags.add("sleep_caution");
+  if (att === 3) flags.add("repeat_attempt_serious");
+  else if (att === 2) flags.add("repeat_attempt");
+  const active = [anx, slp, att].filter(x => x > 0).length;
+  let CW;
+  if (active >= 2){ CW = Math.min((anx+slp+att)*0.85, 10); flags.add("confounder_interaction"); }
+  else CW = Math.min(anx+slp+att, 10);
+  let ADJUSTED = PRIMARY - CW;
+  if (CW >= 8) flags.add("adjustment_capped");
+
+  /* Section 10 — slope trust */
+  let SLOPE_TRUST = 1.0;
+  if (n >= 2){
+    const dist = Math.abs(tierFor(scoresAll[n-1].formId, state.examType) - tierFor(scoresAll[n-2].formId, state.examType));
+    SLOPE_TRUST = dist === 0 ? 1.0 : dist === 1 ? 0.75 : 0.5;
+  }
+  let EFFECTIVE_SLOPE = n === 1 ? 0 : SLOPE_RECENT * SLOPE_TRUST;
+  const trustSlope = state.spacing === "yes";
+  if (state.spacing === "no") flags.add("spacingWarning");
+
+  /* Section 12 — base state */
+  let st;
+  if (ADJUSTED >= t.strong) st = "on_track";
+  else if (ADJUSTED >= t.ok) st = "tighten_content";
+  else if (ADJUSTED >= t.marginal) st = "borderline";
+  else st = "reschedule";
+
+  /* Section 13 — modifiers */
+  let climbing_rescue_fired = false;
+  let stateReason = "generic";
+
+  // Modifier 1 — falling trend
+  if (n >= 3 && FULL_RANGE_DROP >= 6 && EFFECTIVE_SLOPE > t.negSlope) {
+    flags.add("slow_decline");
+    st = downgrade(st);
+  }
+  if (n >= 2 && EFFECTIVE_SLOPE <= t.negSlope){
+    st = downgrade(st);
+    if (trustSlope){
+      if (consistency === "volatile"){ st = "reschedule"; flags.add("volatile_decline"); stateReason = "falling"; }
+      else stateReason = "falling";
+    } else {
+      flags.add("falling_unconfirmed");
+    }
+    if (st === "reschedule" && !flags.has("volatile_decline")) stateReason = "falling";
+  }
+
+  // Modifier 2 — climbing rescue
+  if (n >= 2 && EFFECTIVE_SLOPE >= t.posSlope && ADJUSTED >= t.marginal){
+    let monotonic = false;
+    if (n >= 3){
+      monotonic = true;
+      for (let i = 0; i < adjScores.length - 1; i++) if (!(adjScores[i+1] > adjScores[i])) monotonic = false;
+    }
+    if (consistency === "volatile"){
+      if (monotonic && weeks >= 6 && FULL_RANGE_DROP < 0 && ADJUSTED >= t.marginal){
+        st = sevMax(st, "borderline"); flags.add("volatile_climb_partial_credit"); climbing_rescue_fired = true;
       } else {
-        body = `Without at least one full practice form, every recommendation here is partly guesswork. Use ${firstForm} as your baseline. It is information, not judgment.`;
+        flags.add("volatile_climb_suppressed");
       }
-      return { state:'baseline_needed', title:'Take a baseline this week before anything else', body, _reason:'no-baseline', _category:cat };
+    } else {
+      climbing_rescue_fired = true;
+      if (weeks <= 3){ st = sevMin(upgrade(st), "tighten_content"); flags.add("climbing_capped_short_runway"); }
+      else if (weeks <= 6 && ADJUSTED < t.ok) st = sevMin(upgrade(st), "borderline");
+      else st = upgrade(st);
     }
+  }
 
-    // Primary signal: weighted toward the most recent score (latest > middle > oldest)
-    // Reason: oldest scores reflect an older you. Recent ones predict the actual exam.
-    let primary;
-    if (scores.length === 1) primary = scores[0];
-    else if (scores.length === 2) primary = scores[1] * 0.65 + scores[0] * 0.35;
-    else primary = scores[2] * 0.55 + scores[1] * 0.3 + scores[0] * 0.15;
-
-    // Recent slope: difference between the latest two forms only.
-    // This is what actually informs a reschedule conversation — not a 3-form trend that
-    // may include an old baseline. With one score, no slope information.
-    const slopeRecent = scores.length >= 2 ? (scores[scores.length-1] - scores[scores.length-2]) : 0;
-    const latest = scores[scores.length - 1];
-
-    // Spacing gate: was there content review time between the last two forms?
-    // If "no" (back-to-back), the trend is not informative — slope signal is suppressed.
-    // If "unsure", slope informs but cannot escalate all the way to reschedule.
-    const spacing = input.spacing || 'unsure';
-    const trustSlope = spacing === 'yes';
-    const suppressSlope = spacing === 'no';
-
-    // Thresholds (scaled per exam)
-    const T = isMcat
-      ? { strong:515, ok:510, marginal:505, weak:500 }
-      : { strong:70,  ok:65,  marginal:60,  weak:55 };
-    const negSlope = isMcat ? -3 : -2;   // dropping this much per form = trajectory warning
-    const posSlope = isMcat ?  4 :  3;   // climbing this much per form = trajectory rescue
-
-    // Base state from primary (recent-weighted)
-    let st;
-    if (primary >= T.strong)        st = 'on_track';
-    else if (primary >= T.ok)       st = 'tighten_content';
-    else if (primary >= T.marginal) st = 'borderline';
-    else if (primary >= T.weak)     st = 'borderline';
-    else                            st = 'reschedule';
-
-    // Track which signal dominated for honest copy
-    let reason = 'primary';
-
-    // Slope downgrade — a real drop matters regardless of average, but only when the trend
-    // is informative. Back-to-back forms (no review between them) do not produce a real trend.
-    const downgrade = { on_track:'on_track_watch', on_track_watch:'tighten_content', tighten_content:'borderline', borderline:'reschedule', reschedule:'reschedule' };
-    const upgrade   = { reschedule:'borderline', borderline:'tighten_content', tighten_content:'on_track_watch', on_track_watch:'on_track', on_track:'on_track' };
-
-    if (!suppressSlope && slopeRecent <= negSlope && scores.length >= 2) {
-      st = downgrade[st]; reason = 'falling';
-      // If spacing is "unsure", do not let slope alone push all the way to reschedule.
-      // Information is incomplete — soften to borderline instead.
-      if (!trustSlope && st === 'reschedule') { st = 'borderline'; reason = 'falling-unconfirmed'; }
+  // Modifier 3 — short runway escalation
+  if (weeks <= 3 && (st === "tighten_content" || st === "borderline") && EFFECTIVE_SLOPE < t.posSlope){
+    if (n >= 2){
+      if (trustSlope){ st = "reschedule"; flags.add("no_runway"); stateReason = "no_runway"; }
+      else { if (st === "tighten_content") st = "borderline"; flags.add("short_runway_unconfirmed"); }
     }
+  }
 
-    // Slope rescue — strong recent climb with limited runway should not be auto-rescheduled
-    if (!suppressSlope && slopeRecent >= posSlope && scores.length >= 2 && weeks <= 4 && latest >= T.marginal) {
-      st = upgrade[st]; reason = 'climbing';
-    }
+  // Modifier 4 — long runway softener
+  if (weeks >= 12 && st === "reschedule"){
+    let blocked = false;
+    if (ADJUSTED < t.weak) blocked = true;
+    if ((state.category === "usimg" || state.category === "fmg") && ADJUSTED <= 62){ blocked = true; flags.add("category_risk_no_soften"); }
+    if (consistency === "volatile") blocked = true;
+    if (state.attemptNumber === "2" || state.attemptNumber === "3+") blocked = true;
+    if (!blocked){ st = "tighten_content"; flags.add("long_runway_softened"); }
+  }
 
-    // Short runway tightener — borderline at 2 weeks with no upward trajectory = reschedule signal
-    // Only escalate when we have at least 2 scores AND the trend is informative
-    if (weeks <= 2 && scores.length >= 2 && (st === 'tighten_content' || st === 'borderline') && slopeRecent < posSlope && !suppressSlope) {
-      // Only fully escalate when slope is trusted. Otherwise soften to borderline.
-      if (trustSlope) { st = 'reschedule'; reason = 'no-runway'; }
-      else if (st === 'tighten_content') { st = 'borderline'; reason = 'no-runway-unconfirmed'; }
-    }
+  // Modifier 5 — sub-threshold floor
+  if (ADJUSTED < t.ok && weeks <= 6) st = sevMax(st, "borderline");
+  if (ADJUSTED < t.ok && weeks <= 4){
+    const exception = climbing_rescue_fired && consistency !== "volatile" && EFFECTIVE_SLOPE >= (t.posSlope+2) && LATEST >= 68;
+    if (!exception) st = sevMax(st, "reschedule");
+  }
+  if (ADJUSTED < t.weak && weeks <= 8){ st = "reschedule"; stateReason = "no_runway"; }
 
-    // Long runway softener — extreme runway means a "reschedule" call is premature
-    if (weeks >= 12 && st === 'reschedule') { st = 'tighten_content'; reason = 'early-runway'; }
+  // Modifier 6 — single-score floor
+  if (n === 1){
+    if (weeks > 3 && weeks <= 10) flags.add("data_thin");
+    else if (weeks <= 3){ st = sevMax(st, "borderline"); flags.add("data_thin_critical"); }
+    if (ADJUSTED < t.ok) st = sevMax(st, "reschedule");
+    else if (ADJUSTED <= t.ok + 4) st = sevMax(st, "borderline");
+  }
 
-    const examLabel = isMcat ? 'MCAT' : type === 'cbse' ? 'CBSE' : 'Step 1';
-    const COPY = {
-      on_track: {
-        title:'On track. Protect what you have.',
-        body:`Your recent ${isMcat?'AAMC FL':'NBME'} scores point above the safety threshold. The work between now and exam day is not more content. It is sleep, timing on long blocks, test-day logistics, and one full day off per week. New resources at this point cost more than they return.`
-      },
-      on_track_watch: reason === 'climbing' ? {
-        title:'Climbing fast. Latest score is what counts.',
-        body:`Your earliest score in this set is well below your latest. Treat the most recent form as the truer signal. Keep the consolidation cycle running, do not abandon the things that produced the climb, and protect sleep.`
-      } : {
-        title:'On track, but the trend is drifting.',
-        body:'Scores are strong on average but moving down across recent forms. That is almost always fatigue, not content. Do not add new material. Sleep, hydration, and a real rest day are the interventions here. The score recovers when the body does.'
-      },
-      tighten_content: {
-        title:'Recent scores show content gaps. Prioritize review.',
-        body:`Your most recent ${isMcat?'FL':'NBME'} sits in the range where targeted weak-system work will move the next score. Until the next form, prioritize wrong-answer review and weak-system content over new question volume. The questions you got wrong are the curriculum now.`
-      },
-      borderline: {
-        title:'At the pass borderline. Forms over content from here.',
-        body:'Recent scores are close to the line and runway is shrinking. Extract every lesson from each form rather than chasing breadth. The wrong answers from the last two forms outweigh any new content review. Do not skip the consolidation day in each cycle.'
-      },
-      reschedule: reason === 'falling' ? {
-        title:'The trajectory is the warning, not the average.',
-        body:`Your latest score has dropped meaningfully from your earlier ones. Even if the average still looks acceptable, the trend is the predictor. Step back to identify whether this is fatigue or a content regression. If it is fatigue: a real rest day, then re-test. If it is content: a reschedule conversation is appropriate.`
-      } : reason === 'no-runway' ? {
-        title:'Limited runway and no upward trajectory.',
-        body:`Scores are at the pass borderline with under two weeks remaining and no strong climb. A reschedule conversation is appropriate. Passing ${examLabel} once matters more than passing it on schedule. Talk to your advisor or program director.`
-      } : {
-        title:'A reschedule conversation is appropriate.',
-        body:`Recent scores fall below the safety threshold with limited runway. This is not a verdict. It is a signal. Talk to your advisor. Passing ${examLabel} once matters more than passing it on schedule. If a reschedule is not possible, the schedule below shifts to highest-yield forms and consolidation only.`
-      },
+  // Modifier 7 — qbank concern
+  if (state.qbankAccuracy < 50 && weeks <= 4){ st = sevMax(st, "borderline"); flags.add("qbank_concern"); }
+  if (state.qbankTrend === "declining" && weeks <= 6) flags.add("qbank_decline");
+
+  // Modifier 8 — volatility floor
+  if (consistency === "volatile"){
+    if (weeks <= 2){ st = sevMax(st, "reschedule"); flags.add("volatile_floor_hard"); }
+    else if (weeks <= 4){ st = sevMax(st, "borderline"); flags.add("volatile_floor_soft"); }
+  }
+
+  /* Section 14 — checkpoint (lightweight) */
+  if (n >= 2){
+    const delta = adjScores[n-1] - adjScores[0];
+    let traj;
+    if (delta >= 7) traj = "strong_gain";
+    else if (delta >= 3) traj = "moderate_gain";
+    else if (delta >= -2) traj = "flat";
+    else if (delta >= -6) traj = "concerning_decline";
+    else traj = "serious_decline";
+    if (traj === "flat" && weeks <= 6){ st = sevMax(st, "borderline"); flags.add("flat_plateau_mid_prep"); }
+    if (traj === "serious_decline"){ st = sevMax(st, "reschedule"); flags.add("serious_decline"); }
+  }
+
+  /* Section 19 — stale baseline */
+  if (state.assessments.length >= 2){
+    const first = new Date(state.assessments[0].date || today);
+    const last = new Date(state.assessments[state.assessments.length-1].date || today);
+    const days = (last - first) / (1000*60*60*24);
+    if (days > 90) flags.add("stale_baseline");
+  }
+
+  /* on_track_watch refinement */
+  if (st === "on_track" && climbing_rescue_fired && weeks <= 6) st = "on_track_watch";
+
+  // Determine reason for on_track_watch
+  let watchReason = null;
+  if (st === "on_track_watch"){
+    watchReason = climbing_rescue_fired ? "climbing_fast" : "trend_drifting";
+  }
+
+  return {
+    state: st, primary: PRIMARY, adjusted: ADJUSTED, weeks,
+    flags: Array.from(flags), consistency,
+    effectiveSlope: EFFECTIVE_SLOPE, slopeTrust: SLOPE_TRUST,
+    latest: LATEST, oldest: OLDEST,
+    confounderWeight: CW,
+    reason: stateReason, watchReason,
+    enriched, climbing_rescue_fired
+  };
+}
+
+/* ============================================================
+   STATE COPY
+   ============================================================ */
+function stateCopy(result){
+  const s = result.state;
+  if (s === "baseline_needed") return { label:"Baseline needed", body: result.copy };
+  if (s === "on_track") return {
+    label:"On track",
+    body:"Your scores are in a solid range. Protect what you have: prioritize sleep, lock in your test-day timing, and avoid adding new content this late. Your next step is review, not rebuild. Start with your advisor to confirm your exam date."
+  };
+  if (s === "on_track_watch"){
+    if (result.watchReason === "climbing_fast") return {
+      label:"On track, watch",
+      body:"You are improving quickly. Make sure gains reflect real learning, not increasing familiarity with form format. Your next step is a spaced form with content review in between."
     };
-
-    return { state:st, title:COPY[st].title, body:COPY[st].body, _primary:primary, _slope:slopeRecent, _reason:reason, _category:cat };
-  }
-
-  // ===========================================
-  // RENDER
-  // ===========================================
-  function render(input){
-    const sched = buildSchedule(input);
-    state.lastSchedule = { input, sched };
-
-    if (sched.error) {
-      alert(sched.error);
-      return;
-    }
-
-    // readiness
-    const card = document.getElementById('readiness-card');
-    card.className = 'readiness-card state-' + sched.readiness.state;
-    document.getElementById('readiness-title').textContent = sched.readiness.title;
-    document.getElementById('readiness-body').textContent = sched.readiness.body;
-
-    // cycle
-    document.getElementById('cycle-num').textContent = sched.cycleLength;
-    document.getElementById('cycle-note').textContent = sched.cycleNote;
-
-    // intro
-    const formsUsedCount = sched.formsUsed.length;
-    const formsAvail = FORMS[input.examType].length;
-    let introText = `${formsUsedCount} of ${formsAvail} available ${LABELS[input.examType].forms} placed on a ${sched.cycleLength}-day cycle. `;
-    if (sched.formsDropped.length > 0) {
-      introText += `Skipped: ${sched.formsDropped.join(', ')}. These were dropped because the runway will not hold all of them. `;
-    }
-    introText += `Final form sits two days before the exam. The day before the exam is a rest day, not a study day.`;
-    document.getElementById('schedule-intro').textContent = introText;
-
-    // schedule rows
-    const list = document.getElementById('schedule-list');
-    list.innerHTML = '';
-    sched.rows.forEach(r => {
-      const row = document.createElement('div');
-      row.className = 'schedule-row ' + (r.type === 'nbme' && r.isFinal ? 'final' : r.type === 'nbme' ? 'nbme' : r.type === 'rest' ? 'rest' : r.type === 'exam' ? 'final' : 'content');
-      const date = r.endOffset != null
-        ? `${fmtDate(addDays(sched.today, r.dayOffset))}<br><span class="countdown">through ${fmtDate(addDays(sched.today, r.endOffset))}</span>`
-        : `${fmtDate(addDays(sched.today, r.dayOffset))}<br><span class="countdown">${r.dayOffset === 0 ? 'today' : r.dayOffset + ' day' + (r.dayOffset===1?'':'s') + ' out'}</span>`;
-      row.innerHTML = `<div class="schedule-date">${date}</div>
-                       <div class="schedule-detail">
-                         <div class="schedule-title">${r.title}</div>
-                         <div class="schedule-sub">${r.sub}</div>
-                       </div>`;
-      list.appendChild(row);
-    });
-
-    // cycle reference
-    renderCycleRef(sched.cycleLength, input.examType, input.focusIssue);
-
-    // daily list
-    renderDaily(input.examType, input.focusIssue);
-
-    // show result
-    document.getElementById('form-section').style.display = 'none';
-    const res = document.getElementById('result-section');
-    res.classList.add('visible');
-    setTimeout(()=>res.scrollIntoView({behavior:'smooth', block:'start'}), 50);
-  }
-
-  function renderCycleRef(cycleLength, examType, focusIssue){
-    const REF = {
-      3: [
-        ['Day 1','<strong>Form day.</strong> Full test conditions. No questions afterward, just a brief evening debrief.'],
-        ['Day 2','<strong>Form review + questions.</strong> Go through every missed and uncertain question with mechanism. Floor: 60 questions, plus arrow series.'],
-        ['Day 3','<strong>Consolidation + targeted practice.</strong> All missed topics from this form, plus running UWorld wrong-answer notes. Floor: 60 questions, plus arrow series.'],
-      ],
-      4: [
-        ['Day 1','<strong>Form day.</strong> Full test conditions.'],
-        ['Day 2','<strong>Half-day form review.</strong> Every missed and uncertain question, mechanism written out. Floor: 60 questions.'],
-        ['Day 3','<strong>Targeted topic block + mixed practice.</strong> Timed block on the weak system, plus one random mixed block (timed or tutor).'],
-        ['Day 4','<strong>Consolidation (4 hour minimum).</strong> All missed topics from the last form + UWorld wrong-answer notes. Floor: 60 questions.'],
-      ],
-      5: [
-        ['Day 1','<strong>Form day.</strong> Full test conditions.'],
-        ['Day 2','<strong>Half-day form review.</strong> Floor: 60 questions, plus arrow series.'],
-        ['Day 3','<strong>Targeted topic block + mixed practice.</strong> Timed block on the weak system, plus one random mixed block.'],
-        ['Day 4','<strong>Content review on weak system.</strong> Full read of the system that the form flagged. Plus a random mixed block.'],
-        ['Day 5','<strong>Consolidation (half day).</strong> All missed topics from the last form + UWorld wrong-answer notes. Floor: 60 questions.'],
-      ],
+    return {
+      label:"On track, watch",
+      body:"Scores are stable but showing early softening. No urgent action needed. Your next form is the key data point. Review your wrong answers from your most recent form today."
     };
-    const days = REF[cycleLength];
-    const ref = document.getElementById('cycle-ref');
-    let html = days.map(([label, text]) =>
-      `<div class="cycle-ref-day"><div class="cycle-ref-label">${label}</div><div class="cycle-ref-text">${text}</div></div>`
-    ).join('');
-    if (focusIssue === 'yes' || focusIssue === 'some') {
-      const focusText = focusIssue === 'yes'
-        ? 'Block structure inside each day: <strong>45 minute focus block + 10 minute break</strong>, repeating. Hard stop time at the end of the day (set it, write it, hold it). Single resource per block (no tab-switching). Phone in another room.'
-        : 'Block structure inside each day: <strong>50 minute focus block + 10 minute break</strong>, repeating. Set a hard stop time and hold it. One resource per block.';
-      html += `<div class="cycle-ref-day"><div class="cycle-ref-label" style="color:var(--teal)">Focus</div><div class="cycle-ref-text">${focusText}</div></div>`;
-    }
-    ref.innerHTML = html;
+  }
+  if (s === "tighten_content") return {
+    label:"Tighten content",
+    body:"You are in a workable range with room to close gaps. Prioritize wrong-answer review and your identified weak systems over new content reading. Every form from here is a learning event. Your next step: pull your most recent form's wrong answers and find the pattern."
+  };
+  if (s === "borderline") return {
+    label:"Borderline",
+    body:"You have a real signal to work with and runway to act on it. Forms are your primary tool now, not passive content review. Your next step: take your next scheduled form, then spend the full cycle interval on targeted review of what it reveals. Talk to your advisor about your timeline."
+  };
+  if (s === "reschedule"){
+    if (result.reason === "falling") return {
+      label:"Consider rescheduling",
+      body:"Your score trend is the signal here, not any single form. More time is the highest-leverage move available. Your next step: talk to your advisor this week before you reschedule. They need to know what the pattern looks like."
+    };
+    if (result.reason === "no_runway") return {
+      label:"Consider rescheduling",
+      body:"The gap between your current score and a safe margin is real, and the runway to close it is short. Your next step: talk to your advisor before making any decisions. This tool is giving you a starting point for that conversation."
+    };
+    return {
+      label:"Consider rescheduling",
+      body:"Your current scores suggest more preparation time would serve you well. Your next step: talk to your advisor about what a realistic extended timeline looks like."
+    };
+  }
+  return { label:s, body:"" };
+}
+
+function categoryAddendum(result){
+  if (state.category !== "usimg" && state.category !== "fmg") return null;
+  if (result.flags.includes("category_risk_no_soften"))
+    return "With significant runway remaining, your score is still in the range where your category faces higher risk on first attempt. Use this time fully. Your advisor can help you build a plan that matches your situation.";
+  if (result.state === "borderline" || result.state === "reschedule")
+    return "Community data for students in your category shows first-attempt outcomes at this score level are below the national average. A target range of 70-75 plus is associated with more consistent outcomes, not as a guaranteed threshold, but as a meaningful directional signal. Your advisor can help you interpret what this means for your specific situation.";
+  if (result.state === "on_track" || result.state === "on_track_watch" || result.state === "tighten_content")
+    return "Good progress. Community data for your category suggests a target range of 70-75 plus to achieve outcomes comparable to the national average. If your current score is below that range, talk to your advisor about whether extending your timeline makes sense.";
+  return null;
+}
+
+/* ============================================================
+   SCHEDULE GENERATION (Section 15)
+   ============================================================ */
+function cycleDays(weeks){
+  if (weeks >= 10) return 5;
+  if (weeks >= 6) return 4;
+  if (weeks >= 3) return 3;
+  return 3;
+}
+
+function contentReviewRange(baseline){
+  if (baseline >= 65) return [7,14];
+  if (baseline >= 60) return [14,21];
+  if (baseline >= 55) return [21,28];
+  return [28,35];
+}
+
+function buildSchedule(result){
+  if (!state.examDate) return { rows:[], cycle:cycleDays(result.weeks||0) };
+  const cycle = cycleDays(result.weeks);
+  const examDate = new Date(state.examDate);
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const totalDays = Math.max(0, Math.round((examDate - today)/(1000*60*60*24)));
+  const finalFormDate = new Date(examDate); finalFormDate.setDate(finalFormDate.getDate() - 2);
+  const restDate = new Date(examDate); restDate.setDate(restDate.getDate() - 1);
+  const rows = [];
+
+  const pool = FORM_POOLS[state.examType].slice();
+  const baseline = result.adjusted || 60;
+
+  // Reserve final
+  let finalForm;
+  if (state.examType === "step1" && state.examFormat === "new_2026") finalForm = "Free 120 (2026)";
+  else if (state.examType === "step1") finalForm = "Free 120 (2024)";
+  else if (state.examType === "mcat") finalForm = "FL5";
+  else finalForm = "Form 33";
+
+  const cur = new Date(today);
+  cur.setDate(cur.getDate() + 7); // first form ~ a week out
+  const slots = [];
+  while (cur < finalFormDate){
+    slots.push(new Date(cur));
+    cur.setDate(cur.getDate() + cycle);
   }
 
-  function renderDaily(examType, focusIssue){
-    // ADHD / focus adjustment: lower question floor, quality over volume
-    const qbankRange = focusIssue === 'yes'    ? '40 to 80 questions'
-                    : focusIssue === 'some'   ? '50 to 100 questions'
-                    : '60 to 120 questions';
-    const qbankBody = focusIssue === 'yes'
-      ? 'When sustained focus is hard, quality of review beats volume. Forty in 45-minute blocks with full mechanism review beats one hundred half-attended questions. Less than 30 only on form days.'
-      : focusIssue === 'some'
-      ? 'Aim for fifty in your most-focused window of the day. Less than 40 only on form days.'
-      : (examType === 'mcat'
-        ? 'AAMC Section Bank or Q-Pack. 60 is the floor, 120 the ceiling. Less than 40 questions only on full-length days.'
-        : 'UWorld or AMBOSS. 60 is the floor, 120 the ceiling. Less than 40 only on form days.');
-
-    const items = examType === 'mcat'
-      ? [
-        [qbankRange, qbankBody, false],
-        ['Section review', 'Even when not on a section bank block, ten to twenty minutes of section-specific review (CARS passage, P/S concept, B/B mechanism). Pattern recognition compounds.', false],
-        ['Sleep, 7 to 9 hours', 'Working memory is the single most fragile component on the MCAT. Cognitive performance after a single sub-six-hour night drops measurably.', true],
-        ['One full day off per week', 'Not optional. The brain consolidates on rest days. Skipping rest days hurts scores.', true],
-      ]
-      : [
-        [qbankRange, qbankBody, false],
-        ['Mehlman HY Arrows', 'Highest leverage-per-hour resource for Step 1 / CBSE pattern recognition. Twenty to thirty arrows daily. If you have not started, this week is reasonable.', false],
-        ['Wrong-answer notes', 'Every UWorld or AMBOSS question you miss or guess on goes into a running notes document. Reviewed on consolidation days, not in the moment.', false],
-        ['Sleep, 7 to 9 hours', 'Sleep is the most under-leveraged study tool. Cognitive performance after a single sub-six-hour night drops measurably.', true],
-        ['One full day off per week', 'Not optional. The brain consolidates on rest days. Skipping rest days hurts scores.', true],
-      ];
-
-    if (focusIssue === 'yes' || focusIssue === 'some') {
-      items.splice(1, 0, [
-        'Hard stop time',
-        'Pick the time studying ends each day before you start. Write it down. Hold it. Open-ended days are how focus difficulty turns into twelve-hour low-yield days. The cycle does not get better by staying longer at the desk.',
-        false
-      ]);
-    }
-
-    const list = document.getElementById('daily-list');
-    list.innerHTML = items.map(([title, body, optional]) =>
-      `<li class="${optional?'optional':''}"><div><strong>${title}.</strong> ${body}</div></li>`
-    ).join('');
+  // Selection logic — diagnostic-first for low baseline, then progression
+  let order = [];
+  if (baseline < 60 && result.weeks >= 8){
+    order = ["Form 24","Form 26","Form 28","Form 29","Form 30","Form 31","Form 32"];
+  } else if (state.examType === "mcat"){
+    order = ["FL1","FL2","FL3","FL4"];
+  } else {
+    order = ["Form 28","Form 29","Form 30","Form 31","Form 32","Form 33"];
   }
 
-  // ===========================================
-  // FORM SUBMIT
-  // ===========================================
-  document.getElementById('schedule-form').addEventListener('submit', function(e){
-    e.preventDefault();
+  // Free 120 (2026) early calibration
+  let usedFormat = false;
+  if (state.examType === "step1" && state.examFormat === "new_2026" && result.weeks >= 5){
+    order.unshift("Free 120 (2026)");
+    usedFormat = true;
+  }
 
-    // Reset errors
-    ['err-type','err-date','err-hours'].forEach(id => document.getElementById(id).textContent = '');
+  slots.forEach((d, i) => {
+    const f = order[i % order.length];
+    rows.push({ date: d.toISOString().slice(0,10), form: f, note: `Take form. Review every wrong answer same day. Use the next ${cycle-1} days for targeted content in ${labelSystem(state.weakSystem)}.` });
+  });
 
-    const examType = document.getElementById('exam-type').value;
-    const examDate = document.getElementById('exam-date').value;
-    const hours = parseFloat(document.getElementById('hours-per-day').value);
-    const qbank = parseFloat(document.getElementById('qbank-pct').value) || 0;
-    const weakSystem = document.getElementById('weak-system').value;
-    const baselineDone = document.getElementById('baseline-done').value;
+  rows.push({ date: finalFormDate.toISOString().slice(0,10), form: finalForm, note: "Calibration form. Light review only. No new content." });
+  rows.push({ date: restDate.toISOString().slice(0,10), form: "Rest day", note: "No questions. No content. Sleep, hydrate, set up logistics." });
+  rows.push({ date: examDate.toISOString().slice(0,10), form: "Exam", note: "Exam day." });
 
-    let ok = true;
-    if (!examType) { document.getElementById('err-type').textContent = 'Pick an exam.'; ok = false; }
-    if (!examDate) { document.getElementById('err-date').textContent = 'Pick a date.'; ok = false; }
-    else {
-      const days = Math.round((startOfDay(new Date(examDate)) - startOfDay(new Date())) / 86400000);
-      if (days < 5) { document.getElementById('err-date').textContent = 'Date is less than five days out — too short for this tool.'; ok = false; }
-      if (days > 365) { document.getElementById('err-date').textContent = 'Over a year out — focus on coursework, come back closer to the date.'; ok = false; }
-    }
-    if (!hours || hours < 2 || hours > 14) { document.getElementById('err-hours').textContent = 'Enter a number between 2 and 14.'; ok = false; }
-    if (!ok) return;
+  return { rows, cycle, usedFormat };
+}
 
-    const scores = [
-      parseFloat(document.getElementById('score1').value),
-      parseFloat(document.getElementById('score2').value),
-      parseFloat(document.getElementById('score3').value),
-    ];
-    const weeks = Math.round((startOfDay(new Date(examDate)) - startOfDay(new Date())) / 86400000) / 7;
-    const focusIssue = document.getElementById('focus-issue').value || 'no';
-    const category = document.getElementById('category').value || null;
-    const spacing = document.getElementById('spacing').value || 'unsure';
+function labelSystem(s){
+  const map = { cardio:"cardio", renal:"renal", pulm:"pulm", gi:"GI", endo:"endo", heme_onc:"heme / onc", neuro:"neuro", repro:"repro", msk_derm:"MSK / derm", micro_immuno:"micro / immuno", biochem_genetics:"biochem / genetics", behavioral:"behavioral", biostats:"biostats"};
+  return map[s] || s;
+}
 
-    render({
-      examType, examDate, hoursPerDay:hours, qbankPct:qbank, weakSystem,
-      baselineDone, scores, weeksRemaining:weeks, focusIssue, category, spacing,
+/* ============================================================
+   DAILY FLOOR (Section 16)
+   ============================================================ */
+function dailyFloor(){
+  let effFocus = state.focusIssue;
+  let notes = [];
+  if (state.testAnxiety === "high" && effFocus === "no"){
+    effFocus = "some";
+    notes.push("High anxiety. Treat your study blocks as if focus needs structure: 50 minutes on, 10 off.");
+  }
+  let lo, hi, hardstop, blockNote;
+  if (effFocus === "no"){ lo = 60; hi = 120; hardstop = "optional"; blockNote = "Hard stops optional."; }
+  else if (effFocus === "some"){ lo = 50; hi = 100; hardstop = "required"; blockNote = "50 minutes on, 10 minutes off. Hard stops required."; }
+  else { lo = 40; hi = 80; hardstop = "required"; blockNote = "45 minutes on, 10 minutes off. Single resource per block. Hard stops required."; }
+
+  let ceilingNote = null;
+  if (state.hoursPerDay <= 5){
+    hi = Math.min(hi, 60);
+    ceilingNote = `With ${state.hoursPerDay} hours per day, 60 targeted questions reviewed thoroughly outperform 120 reviewed under time pressure.`;
+  }
+  let sleepNote = null;
+  if (state.sleepStatus === "poor"){
+    hi = Math.round(hi * 0.8);
+    lo = Math.round(lo * 0.8);
+    sleepNote = "Fewer questions reviewed well outperforms more questions reviewed tired. Sleep is preparation.";
+  }
+  return { lo, hi, hardstop, blockNote, ceilingNote, sleepNote, notes };
+}
+
+/* ============================================================
+   BEHAVIORAL COPY (Section 19)
+   ============================================================ */
+function behavioralCopy(){
+  const out = [];
+  if (state.practiceTimeMatch !== "morning")
+    out.push("Step exams typically begin at a morning start time. Schedule your final 2 to 3 forms for morning starts to calibrate to exam-day conditions.");
+  if (state.sleepStatus === "reduced" || state.sleepStatus === "poor")
+    out.push("Schedule at least one full rest day between forms. Seven or more hours before a form is higher yield than an additional hour of review.");
+  if (state.testAnxiety === "high")
+    out.push("Consider a deliberate mock test-day run at your exam time in an unfamiliar location. Anxiety responses are partly conditioned to environment. Planned exposure reduces them over time.");
+  return out;
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+function build(){
+  const err = document.getElementById("errorMsg");
+  err.textContent = "";
+  if (!state.examDate){ err.textContent = "Please pick an exam date."; return; }
+  if (state.assessments.some(a => !a.date)){ err.textContent = "Each assessment needs a date."; return; }
+
+  const result = compute();
+  renderResult(result);
+  document.getElementById("formCard").style.display = "none";
+  document.getElementById("resultSection").classList.add("visible");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderResult(result){
+  const sc = stateCopy(result);
+  const advisor = result.state === "reschedule"
+    ? "This tool sees your score pattern. It does not see your full situation. Before you reschedule, have a real conversation with your advisor or program director."
+    : (result.state === "borderline" || result.state === "tighten_content")
+      ? "This is a starting point. Talk to your advisor before making final decisions about your exam date."
+      : "Use this as a frame for the conversation, not the final word.";
+
+  const addendum = categoryAddendum(result);
+  const titleEm = result.state === "baseline_needed" ? "Baseline first" : sc.label.toLowerCase();
+  const titleText = result.state === "baseline_needed"
+    ? `<em>Baseline</em> first`
+    : `Your read: <em>${escapeHtml(sc.label.toLowerCase())}</em>`;
+
+  document.getElementById("readinessHost").innerHTML = `
+    <div class="readiness-card state-${result.state}">
+      <div class="readiness-state">${escapeHtml(sc.label)}</div>
+      <div class="readiness-title">${titleText}</div>
+      <div class="readiness-body">${escapeHtml(sc.body)}</div>
+      <div class="advisor-prompt">${escapeHtml(advisor)}</div>
+      ${addendum ? `<div class="category-addendum">${escapeHtml(addendum)}</div>` : ""}
+    </div>
+  `;
+
+  // Flags
+  const flagsHost = document.getElementById("flagsHost");
+  if (result.flags.length === 0){
+    flagsHost.innerHTML = "";
+  } else {
+    const sortedFlags = result.flags.slice().sort((a,b) => {
+      const ai = FLAG_PRIORITY.indexOf(a), bi = FLAG_PRIORITY.indexOf(b);
+      return (ai < 0 ? 999 : ai) - (bi < 0 ? 999 : bi);
     });
-  });
-
-  // ===========================================
-  // ACTIONS
-  // ===========================================
-  document.getElementById('btn-restart').addEventListener('click', ()=>{
-    document.getElementById('result-section').classList.remove('visible');
-    document.getElementById('form-section').style.display = 'block';
-    document.getElementById('schedule-form').reset();
-    document.querySelectorAll('.radio-btn').forEach(b=>b.classList.remove('selected'));
-    state = { examType:null, baselineDone:null, focusIssue:null, category:null, spacing:null, lastSchedule:null };
-    document.getElementById('scores-group').style.display = 'none';
-    document.getElementById('spacing-group').style.display = 'none';
-    document.getElementById('category-group').style.display = 'none';
-    // Reset the systems dropdown so a different exam type can repopulate it
-    document.getElementById('weak-system').innerHTML = '<option value="">Select one</option>';
-    ['err-type','err-date','err-hours'].forEach(id => document.getElementById(id).textContent = '');
-    window.scrollTo({top:0, behavior:'smooth'});
-  });
-
-  document.getElementById('btn-print').addEventListener('click', ()=>window.print());
-
-  document.getElementById('btn-ics').addEventListener('click', ()=>{
-    if (!state.lastSchedule) return;
-    const { input, sched } = state.lastSchedule;
-    const labelMap = { step1:'Step 1', cbse:'CBSE', mcat:'MCAT' };
-    let ics = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//BBB Exam Schedule//EN\r\nCALSCALE:GREGORIAN\r\n';
-    sched.rows.forEach(r => {
-      if (r.type === 'content') return; // skip the block summary row
-      const startDate = addDays(sched.today, r.dayOffset);
-      const endDate = addDays(startDate, 1);
-      const uid = `bbb-${input.examType}-${r.dayOffset}-${Date.now()}@bitbybitpedagogy.com`;
-      const summary = r.title.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
-      const desc = r.sub.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
-      ics += 'BEGIN:VEVENT\r\n';
-      ics += `UID:${uid}\r\n`;
-      ics += `DTSTAMP:${fmtISO(new Date())}T000000Z\r\n`;
-      ics += `DTSTART;VALUE=DATE:${fmtISO(startDate)}\r\n`;
-      ics += `DTEND;VALUE=DATE:${fmtISO(endDate)}\r\n`;
-      ics += `SUMMARY:${labelMap[input.examType]} — ${summary}\r\n`;
-      ics += `DESCRIPTION:${desc}\r\n`;
-      ics += 'END:VEVENT\r\n';
+    const top = sortedFlags.slice(0,5);
+    const rest = sortedFlags.slice(5);
+    const multiNote = result.flags.length >= 3
+      ? `<div class="flags-multi-note">Multiple factors flagged. Review all before making decisions.</div>` : "";
+    const restHtml = rest.length
+      ? `<button type="button" class="view-all-btn" id="viewAllFlagsBtn">View all flags</button>
+         <ul class="flags-list" id="restFlagsList" style="display:none;margin-top:.6rem">${rest.map(f => `<li>${escapeHtml(FLAG_COPY[f]||f)}</li>`).join("")}</ul>`
+      : "";
+    flagsHost.innerHTML = `
+      <div class="flags-card">
+        <div class="flags-head">What to weigh</div>
+        <ul class="flags-list">${top.map(f => `<li>${escapeHtml(FLAG_COPY[f]||f)}</li>`).join("")}</ul>
+        ${restHtml}
+        ${multiNote}
+      </div>
+    `;
+    const va = document.getElementById("viewAllFlagsBtn");
+    if (va) va.addEventListener("click", () => {
+      document.getElementById("restFlagsList").style.display = "block";
+      va.style.display = "none";
     });
-    ics += 'END:VCALENDAR';
-    const blob = new Blob([ics], {type:'text/calendar'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = `${input.examType}-schedule.ics`;
-    document.body.appendChild(a); a.click(); a.remove();
-    URL.revokeObjectURL(url);
-  });
+  }
 
-})();
+  if (result.state === "baseline_needed"){
+    document.getElementById("cycleHost").innerHTML = "";
+    document.getElementById("scheduleHost").innerHTML = "";
+    document.getElementById("dailyHost").innerHTML = "";
+    document.getElementById("last48Host").innerHTML = "";
+    document.getElementById("behavioralHost").innerHTML = "";
+    return;
+  }
+
+  // Cycle summary
+  const sched = buildSchedule(result);
+  const [crLo, crHi] = contentReviewRange(result.adjusted || 60);
+  const crHigh = (state.sleepStatus !== "adequate" || state.focusIssue !== "no" || state.testAnxiety === "high");
+  const crVal = crHigh ? crHi : `${crLo} to ${crHi}`;
+
+  document.getElementById("cycleHost").innerHTML = `
+    <div class="result-block">
+      <h2>Your <em>cycle</em></h2>
+      <div class="cycle-stats">
+        <div class="cycle-stat"><div class="k">Weeks remaining</div><div class="v">${result.weeks}</div></div>
+        <div class="cycle-stat"><div class="k">Cycle length</div><div class="v">${sched.cycle} days</div></div>
+        <div class="cycle-stat"><div class="k">Content review</div><div class="v">${crVal} days</div></div>
+        <div class="cycle-stat"><div class="k">Adjusted primary</div><div class="v">${result.adjusted ? result.adjusted.toFixed(1) : "n/a"}</div></div>
+      </div>
+    </div>
+  `;
+
+  // Schedule
+  if (sched.rows.length){
+    document.getElementById("scheduleHost").innerHTML = `
+      <div class="result-block">
+        <h2>Your <em>form schedule</em></h2>
+        <table class="schedule-table">
+          <thead><tr><th>Date</th><th>Form</th><th>What to do</th></tr></thead>
+          <tbody>
+            ${sched.rows.map(r => `<tr><td>${escapeHtml(r.date)}</td><td>${escapeHtml(r.form)}</td><td>${escapeHtml(r.note)}</td></tr>`).join("")}
+          </tbody>
+        </table>
+        <div class="mandatory-note">Each form is separated by ${sched.cycle} days. The interval is your primary learning window, not rest time. Review all wrong answers on the day of each form. Use remaining interval days for targeted content in your identified weak systems. Do not compress the interval.</div>
+      </div>
+    `;
+  } else {
+    document.getElementById("scheduleHost").innerHTML = "";
+  }
+
+  // Daily floor
+  const df = dailyFloor();
+  document.getElementById("dailyHost").innerHTML = `
+    <div class="result-block">
+      <h2>Your <em>daily floor</em></h2>
+      <p><strong style="color:var(--cream);font-weight:400">${df.lo} to ${df.hi} questions per day,</strong> reviewed thoroughly.</p>
+      <p>${escapeHtml(df.blockNote)}</p>
+      ${df.ceilingNote ? `<p>${escapeHtml(df.ceilingNote)}</p>` : ""}
+      ${df.sleepNote ? `<p>${escapeHtml(df.sleepNote)}</p>` : ""}
+      ${df.notes.map(n => `<p>${escapeHtml(n)}</p>`).join("")}
+    </div>
+  `;
+
+  // Last 48 hours
+  document.getElementById("last48Host").innerHTML = `
+    <div class="result-block">
+      <h2>Your <em>last 48 hours</em></h2>
+      <p><strong style="color:var(--cream);font-weight:400">Day before exam:</strong> Rest. No questions. No content review. Sleep, hydrate, prepare logistics. Drive to the test center if you have not. Lay out clothes, ID, snacks.</p>
+      <p><strong style="color:var(--cream);font-weight:400">Two days before:</strong> Final form completed (low-stakes calibration). Light review of high-yield personal notes only. Stop studying by mid-afternoon.</p>
+      <p><strong style="color:var(--cream);font-weight:400">Morning of:</strong> Normal breakfast. Light cardio if it is your habit. Arrive 30 minutes early.</p>
+    </div>
+  `;
+
+  // Behavioral
+  const bc = behavioralCopy();
+  if (bc.length){
+    document.getElementById("behavioralHost").innerHTML = `
+      <div class="result-block">
+        <h2>Behavioral <em>notes</em></h2>
+        <ul class="behavioral-list">
+          ${bc.map(b => `<li>${escapeHtml(b)}</li>`).join("")}
+        </ul>
+      </div>
+    `;
+  } else {
+    document.getElementById("behavioralHost").innerHTML = "";
+  }
+}
+
+function escapeHtml(s){
+  if (s == null) return "";
+  return String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[c]));
+}
+
+/* ============================================================
+   ICS EXPORT
+   ============================================================ */
+function downloadIcs(){
+  const result = compute();
+  const sched = buildSchedule(result);
+  if (!sched.rows.length){ alert("No schedule to export. Build your schedule first."); return; }
+  const lines = [
+    "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Bit by Bit Pedagogy//Exam Schedule//EN","CALSCALE:GREGORIAN"
+  ];
+  sched.rows.forEach((r, i) => {
+    const d = r.date.replace(/-/g,"");
+    lines.push("BEGIN:VEVENT");
+    lines.push("UID:" + d + "-" + i + "@bitbybit");
+    lines.push("DTSTAMP:" + new Date().toISOString().replace(/[-:.]/g,"").slice(0,15) + "Z");
+    lines.push("DTSTART;VALUE=DATE:" + d);
+    lines.push("SUMMARY:" + r.form);
+    lines.push("DESCRIPTION:" + r.note.replace(/\n/g," "));
+    lines.push("END:VEVENT");
+  });
+  lines.push("END:VCALENDAR");
+  const blob = new Blob([lines.join("\r\n")], { type:"text/calendar" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "exam-schedule.ics"; document.body.appendChild(a); a.click();
+  setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 100);
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+function init(){
+  wireRadios();
+  wireSections();
+  wireInputs();
+  // Collapse non-first sections by default
+  ["conditions","qbank"].forEach(k => {
+    document.getElementById("section-"+k).classList.add("collapsed");
+    const head = document.querySelector(`[data-section="${k}"]`);
+    if (head) head.querySelector(".toggle").textContent = "[ Expand ]";
+  });
+  ["exam","scores"].forEach(k => {
+    const head = document.querySelector(`[data-section="${k}"]`);
+    if (head) head.querySelector(".toggle").textContent = "[ Collapse ]";
+  });
+  // Default exam date 8 weeks out
+  const dt = new Date(); dt.setDate(dt.getDate() + 56);
+  document.getElementById("examDate").value = dt.toISOString().slice(0,10);
+  state.examDate = dt.toISOString().slice(0,10);
+  // Seed one assessment
+  addAssessment();
+  // Show/hide format and category
+  document.getElementById("examFormatGroup").style.display = state.examType === "step1" ? "" : "none";
+  document.getElementById("categoryGroup").style.display = state.examType === "mcat" ? "none" : "";
+}
+
+document.addEventListener("DOMContentLoaded", init);
 </script>
 
 </body>
