@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Collector: A Study Pattern Profile | Bit by Bit Pedagogy</title>
+  <meta name="description" content="The Collector accumulates resources, strategies, and tools faster than they can be used. Here is what that costs and how to stop the loop.">
+  <link rel="canonical" href="https://bitbybitpedagogy.com/the-collector/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"The Collector: A Study Pattern Profile","description":"The Collector accumulates resources, strategies, and tools faster than they can be used. Here is what that costs and how to stop the loop.","author":{"@type":"Organization","name":"Bit by Bit Pedagogy"},"publisher":{"@type":"Organization","name":"Bit by Bit Pedagogy","url":"https://bitbybitpedagogy.com"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://bitbybitpedagogy.com/"},{"@type":"ListItem","position":2,"name":"Archetypes","item":"https://bitbybitpedagogy.com/archetypes/"},{"@type":"ListItem","position":3,"name":"The Collector","item":"https://bitbybitpedagogy.com/the-collector/"}]}
+  </script>
+  <style>
+    :root{--bg:#0D1B2E;--gold:#F5A623;--teal:#00E5A0;--cream:#e8dfc8;--border:rgba(248,245,235,.1);--bg-card:rgba(255,255,255,.04);--serif:'Cormorant Garamond',Georgia,serif;--mono:'JetBrains Mono',monospace}
+    @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--cream);font-family:var(--serif);font-size:1.125rem;line-height:1.8;min-height:100vh}
+    nav{position:sticky;top:0;z-index:100;background:rgba(13,27,46,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between}
+    .nav-brand{font-family:var(--serif);font-weight:600;font-size:1.05rem;color:var(--cream);text-decoration:none;letter-spacing:.02em}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{font-family:var(--mono);font-size:.72rem;font-weight:400;color:rgba(232,223,200,.55);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
+    .nav-links a:hover{color:var(--gold)}
+    .breadcrumb{padding:1.25rem 2rem;max-width:820px;margin:0 auto}
+    .breadcrumb ol{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem;font-family:var(--mono);font-size:.68rem;color:rgba(232,223,200,.38)}
+    .breadcrumb li+li::before{content:'/';margin-right:.4rem;color:rgba(232,223,200,.2)}
+    .breadcrumb a{color:rgba(232,223,200,.38);text-decoration:none;transition:color .2s}
+    .breadcrumb a:hover{color:var(--gold)}
+    .breadcrumb li:last-child{color:var(--gold)}
+    .hero{max-width:820px;margin:0 auto;padding:4rem 2rem 3.5rem;border-bottom:1px solid var(--border)}
+    .archetype-label{font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem}
+    .hero h1{font-family:var(--serif);font-size:clamp(3rem,7vw,5rem);font-weight:300;font-style:italic;color:var(--cream);line-height:1.08;margin-bottom:1.5rem}
+    .hero-desc{font-family:var(--serif);font-size:1.2rem;font-weight:300;color:rgba(232,223,200,.72);max-width:600px;line-height:1.75}
+    .score-badge{display:inline-block;margin-top:2rem;font-family:var(--mono);font-size:.7rem;font-weight:500;letter-spacing:.1em;color:var(--bg);background:var(--gold);padding:.35rem 1rem;border-radius:2px}
+    .content{max-width:820px;margin:0 auto;padding:0 2rem 6rem}
+    .section{padding:4rem 0 3rem;border-bottom:1px solid var(--border);opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+    .section.revealed{opacity:1;transform:translateY(0)}
+    .section:last-of-type{border-bottom:none}
+    .section-number{font-family:var(--mono);font-size:.62rem;font-weight:300;letter-spacing:.22em;color:rgba(232,223,200,.28);text-transform:uppercase;margin-bottom:.75rem}
+    .section h2{font-family:var(--serif);font-size:clamp(1.65rem,3.5vw,2.3rem);font-weight:300;font-style:italic;color:var(--cream);line-height:1.18;margin-bottom:2rem}
+    .section h2 em{color:var(--gold);font-style:normal;font-weight:600}
+    p{margin-bottom:1.45rem;color:rgba(232,223,200,.85);font-weight:300}
+    p:last-child{margin-bottom:0}
+    .pull-quote{margin:2.5rem 0;padding:1.75rem 2rem;border-left:2px solid var(--gold);background:var(--bg-card)}
+    .pull-quote p{font-family:var(--serif);font-size:1.3rem;font-style:italic;font-weight:300;color:var(--cream);margin:0;line-height:1.6}
+    .interventions{margin-top:2rem;display:flex;flex-direction:column;gap:1.4rem}
+    .intervention-item{background:var(--bg-card);border:1px solid var(--border);border-left:2px solid var(--teal);padding:1.5rem 1.75rem}
+    .intervention-item strong{display:block;font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.1em;color:var(--teal);text-transform:uppercase;margin-bottom:.6rem}
+    .intervention-item p{font-size:1rem;margin:0;color:rgba(232,223,200,.8);line-height:1.7}
+    .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:2rem}
+    .tool-card{background:var(--bg-card);border:1px solid var(--border);padding:1.75rem;text-decoration:none;display:block;transition:border-color .25s,background .25s}
+    .tool-card:hover{border-color:rgba(245,166,35,.35);background:rgba(245,166,35,.04)}
+    .tool-card-label{font-family:var(--mono);font-size:.62rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+    .tool-card h3{font-family:var(--serif);font-size:1.25rem;font-weight:600;color:var(--cream);margin-bottom:.6rem}
+    .tool-card p{font-size:.92rem;color:rgba(232,223,200,.58);margin:0;line-height:1.6}
+    .tool-card-arrow{display:inline-block;margin-top:1rem;font-family:var(--mono);font-size:.7rem;color:var(--gold);letter-spacing:.05em}
+    .testimony{background:var(--bg-card);border:1px solid var(--border);padding:2.5rem;margin-top:2rem}
+    .testimony p{font-family:var(--serif);font-size:1.12rem;font-style:italic;font-weight:300;color:rgba(232,223,200,.78);line-height:1.82}
+    .testimony-source{margin-top:1.25rem;font-family:var(--mono);font-size:.65rem;font-weight:300;letter-spacing:.12em;text-transform:uppercase;color:rgba(232,223,200,.3)}
+    footer{border-top:1px solid var(--border);padding:3rem 2rem}
+    .footer-inner{max-width:820px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem}
+    .footer-brand{font-family:var(--serif);font-weight:600;font-size:.95rem;color:rgba(232,223,200,.45)}
+    .footer-links{display:flex;gap:1.75rem;list-style:none;flex-wrap:wrap}
+    .footer-links a{font-family:var(--mono);font-size:.68rem;font-weight:300;letter-spacing:.09em;text-transform:uppercase;color:rgba(232,223,200,.38);text-decoration:none;transition:color .2s}
+    .footer-links a:hover{color:var(--gold)}
+    @media(max-width:640px){nav{padding:0 1.25rem}.nav-links{gap:1rem}.nav-links li:nth-child(3){display:none}.hero,.breadcrumb{padding-left:1.25rem;padding-right:1.25rem}.content{padding-left:1.25rem;padding-right:1.25rem}.testimony{padding:1.5rem 1.25rem}.tools-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand">Bit by Bit Pedagogy</a>
+  <ul class="nav-links">
+    <li><a href="/cfactor/">MCAT</a></li>
+    <li><a href="/">Step 1</a></li>
+    <li><a href="/triage/">Find your pattern</a></li>
+  </ul>
+</nav>
+
+<div class="breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li><a href="/archetypes/">Archetypes</a></li>
+    <li>The Collector</li>
+  </ol>
+</div>
+
+<header class="hero">
+  <div class="archetype-label">Study Pattern Profile</div>
+  <h1>The Collector</h1>
+  <p class="hero-desc">You accumulate resources, strategies, and tools faster than any of them can be used. The collection itself becomes the obstacle.</p>
+  <div class="score-badge">Typical ceiling: 215&ndash;225</div>
+</header>
+
+<main class="content">
+
+  <section class="section" id="recognition">
+    <div class="section-number">Section 01</div>
+    <h2>What this pattern looks like from <em>outside</em></h2>
+    <div class="pull-quote">
+      <p>You have three Anki decks open right now, none of them finished.</p>
+    </div>
+    <p>The Pathoma folder has tabs through chapter four. Boards and Beyond has a playlist you started in January that sits at 34 percent complete. There is a Google Sheet, color-coded, titled something like "Step 1 Master Plan v3," with daily hour allocations that have not been followed for more than two consecutive days. Your Notion workspace has a study system that would work beautifully if you executed it consistently.</p>
+    <p>The bookmarks bar holds six YouTube channels you found during a Reddit deep-dive at 1am three weeks ago. You have annotated PDFs from two different review courses. The annotations are thorough. You have not looked at them since you made them. You have also heard about a new Anki deck that a student on a forum claimed pushed their score from 228 to 249. It has been downloaded. It has not been opened.</p>
+    <p>When someone mentions a resource you have not heard of, there is an immediate pull toward it. Not mild curiosity. Something more urgent. The feeling that maybe this is the one that finally maps the terrain clearly enough that studying becomes easier. The tabs multiply. The decks multiply. The sense of productive momentum is consistent and real. The review sessions are not.</p>
+    <p>This is recognizable not because it is unusual but because the logic behind it is almost reasonable. You are a thorough person. You want to make sure you have the best tools available. That instinct is not wrong. It just runs ahead of execution at a pace that eventually makes execution impossible.</p>
+  </section>
+
+  <section class="section" id="loop">
+    <div class="section-number">Section 02</div>
+    <h2>The <em>loop</em> that keeps it going</h2>
+    <p>Every new resource arrives as a hypothesis: this might be the missing piece. The Anki deck you have is not building the right connections. Maybe this other deck, more heavily annotated by a student who scored 260, will do it differently. The First Aid you are reading feels inert. Maybe the Sketchy videos will make it stick. The feeling of adding a new resource is real and immediate. The anxiety of not having that resource is also real: a low-grade worry that something important is being missed.</p>
+    <p>The collection grows. And now the review sessions become impossible in a different way. You sit down to study and there are four systems you could be working on, three decks for cardiovascular alone, two overlapping video series at different points in completion. The cognitive cost of choosing what to do becomes significant enough that on many days it displaces the studying itself. Sessions start late, end early, or get replaced by more collection.</p>
+    <p>What happens after a poor review session, or after a practice NBME that returns a number lower than expected? The same pattern: something about the current stack must be insufficient. A search for something better. A new resource. The loop closes and begins again.</p>
+    <p>The internal logic here is entirely coherent, which is what makes this pattern so durable. You are trying to solve a real problem, the feeling of inadequate preparation, with the tool that feels most like action: acquiring better materials. The problem is that acquisition is not preparation. The loop can run for months before this distinction becomes visible.</p>
+  </section>
+
+  <section class="section" id="ceiling">
+    <div class="section-number">Section 03</div>
+    <h2>What the pattern costs in <em>points</em></h2>
+    <p>The realistic ceiling for this pattern is somewhere in the 215-225 range, and the mechanism is specific. Knowledge density across multiple resources is genuinely high. A student running this pattern often has more raw content exposure than students scoring in the 240s. The deficit is not coverage. It is depth of processing on any single framework.</p>
+    <p>The USMLE Step 1 does not test whether you have read about a concept. It tests whether you have processed a concept deeply enough to recognize it under conditions of presentation variation, time pressure, and deliberate misdirection. That processing requires repeated engagement with the same material from the same framework, spaced over time, with active retrieval. When the framework shifts every three days because a better resource appeared, that spaced retrieval never accumulates. You recognize the topic in the vague sense of having encountered it. You do not have the automatic, confident pattern-recognition the exam rewards.</p>
+    <p>This shows up as a specific kind of wrong answer: the one where you know you know something about the topic, you can feel the familiarity, but you cannot retrieve the specific discriminating detail under time pressure. That feeling of almost-knowing is the direct product of shallow processing across multiple sources. Deep processing of one source would have turned that almost-knowing into automatic recall.</p>
+    <p>The NBME question writers are skilled at identifying the discriminating detail that separates a student who has skimmed a topic from one who has processed it across multiple review cycles. That detail is often not in the first-pass explanation. It lives in the worked example, the review question, the case in the deck you set aside after deck three replaced it. None of this content is inaccessible. It has simply never had time to consolidate.</p>
+  </section>
+
+  <section class="section" id="needle">
+    <div class="section-number">Section 04</div>
+    <h2>What actually <em>moves the needle</em></h2>
+    <div class="interventions">
+      <div class="intervention-item">
+        <strong>01 / Physical abandonment</strong>
+        <p>Choose one stack today and close, archive, or physically remove the others. Not mental commitment to use only one. Physical removal. The discomfort you feel at not having access to the other resources is not a warning sign that you are missing something. It is the intervention. The goal is to make the cost of switching resources high enough that you stay with one long enough for it to work.</p>
+      </div>
+      <div class="intervention-item">
+        <strong>02 / Spaced repetition from one source only</strong>
+        <p>If you use Anki, one deck. If that deck does not have a card on something you missed in UWorld, you add a card to that deck. You do not find another deck that covers it better. The constraint is the point. The constraint forces deep processing rather than lateral search.</p>
+      </div>
+      <div class="intervention-item">
+        <strong>03 / Questions before new content</strong>
+        <p>A rule worth testing for two weeks: do 40 UWorld questions before adding any new content to your review stack. This is not about question volume. It is about identifying what you actually do not know before deciding what to study. New resources usually solve the wrong problem. Questions identify the right one.</p>
+      </div>
+      <div class="intervention-item">
+        <strong>04 / Commit a minimum evaluation window</strong>
+        <p>Any resource needs at least three weeks of consistent use before you can evaluate whether it is working. Most resources that feel insufficient were never used long enough to produce results. Set a minimum commitment before any evaluation: 21 days, then assess with a full-length NBME, not a feeling or a forum post.</p>
+      </div>
+      <div class="intervention-item">
+        <strong>05 / Quarantine new recommendations</strong>
+        <p>Reddit threads, Discord servers, and classmate conversations generate resource recommendations continuously. For the next 30 days, log them in a file you do not open. The log exists to reduce the anxiety of not acting on them. Acting on them is not the goal during this window.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tools">
+    <div class="section-number">Section 05</div>
+    <h2>The tools built for this <em>pattern</em></h2>
+    <p>Two tools are directly relevant here. The first helps you commit to a single coherent stack. The second identifies the specific pivot points where your current stack is not translating into correct answers on practice exams.</p>
+    <div class="tools-grid">
+      <a href="/triage/stack-recommender/" class="tool-card">
+        <div class="tool-card-label">Tool 01</div>
+        <h3>Stack Recommender</h3>
+        <p>Analyzes your current resources, timeline, and baseline score to identify a single coherent stack. The output is specific enough to act on today, without requiring you to evaluate every alternative yourself.</p>
+        <span class="tool-card-arrow">Use this tool &rarr;</span>
+      </a>
+      <a href="/triage/pivot-pair-finder/" class="tool-card">
+        <div class="tool-card-label">Tool 02</div>
+        <h3>Pivot Pair Finder</h3>
+        <p>Identifies the topics where your existing knowledge is not converting to correct answers. Directs you toward depth before widening coverage, so the next review cycle compounds rather than restarts.</p>
+        <span class="tool-card-arrow">Use this tool &rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="testimony">
+    <div class="section-number">Section 06</div>
+    <h2>A moment of <em>recognition</em></h2>
+    <div class="testimony">
+      <p>A third-year student preparing for Step 1 had six weeks left when a triage session surfaced the pattern clearly: four active Anki decks, none above 60 percent completion, Boards and Beyond at 41 percent complete, an NBME score of 212 despite above-average performance on content quizzes. The intervention was one afternoon of archiving. Three decks closed. Two video playlists removed from the queue. Six weeks later, the single remaining deck had been reviewed to 94 percent retention. The NBME came back at 237. The knowledge had been present the whole time. The framework for using it had not.</p>
+      <div class="testimony-source">Composite profile, illustrative only</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Bit by Bit Pedagogy</div>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cfactor/">MCAT</a></li>
+      <li><a href="/">Step 1</a></li>
+      <li><a href="/archetypes/">Archetypes</a></li>
+      <li><a href="/triage/">Tools</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('revealed'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.section').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

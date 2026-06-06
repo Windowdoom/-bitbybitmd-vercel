@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exam Schedule Builder | Bit by Bit Pedagogy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D1B2E;
+    --gold: #F5A623;
+    --teal: #00E5A0;
+    --cream: #e8dfc8;
+    --border: rgba(248,245,235,.1);
+    --bg-card: rgba(255,255,255,.04);
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 400;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+    padding: 0 2rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(13,27,46,.96);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--cream);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 300;
+    font-size: 0.75rem;
+    color: rgba(232,223,200,.6);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+  }
+
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  .page-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 2.6rem;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .page-header p {
+    font-size: 1.15rem;
+    color: rgba(232,223,200,.65);
+    font-weight: 300;
+    max-width: 600px;
+  }
+
+  /* Form */
+  .form-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.5rem;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-group.full-width {
+    grid-column: 1 / -1;
+  }
+
+  label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(232,223,200,.5);
+  }
+
+  .label-optional {
+    font-style: italic;
+    font-size: 0.65rem;
+    color: rgba(232,223,200,.35);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-left: 0.4rem;
+  }
+
+  input[type="date"],
+  input[type="number"],
+  select {
+    background: rgba(255,255,255,.05);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--cream);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    font-weight: 300;
+    padding: 0.75rem 1rem;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  input[type="date"]:focus,
+  input[type="number"]:focus,
+  select:focus {
+    border-color: rgba(245,166,35,.4);
+  }
+
+  select option {
+    background: #1a2d47;
+    color: var(--cream);
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.7);
+    cursor: pointer;
+  }
+
+  .btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.9rem 2rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: #0D1B2E;
+  }
+
+  .btn-primary:hover {
+    background: #f0b84e;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover {
+    border-color: rgba(232,223,200,.3);
+    background: var(--bg-card);
+  }
+
+  .btn-teal {
+    background: transparent;
+    color: var(--teal);
+    border: 1px solid rgba(0,229,160,.3);
+  }
+
+  .btn-teal:hover {
+    background: rgba(0,229,160,.08);
+  }
+
+  .form-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .error-msg {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: #ff6b6b;
+    margin-top: 0.25rem;
+  }
+
+  /* Output */
+  #output { display: none; }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(232,223,200,.45);
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(232,223,200,.4);
+    margin-top: 0.3rem;
+  }
+
+  .section-heading {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(232,223,200,.45);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Weight bars */
+  .weights-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .weight-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 0.6rem 0.9rem;
+  }
+
+  .weight-row.boosted {
+    border-color: rgba(245,166,35,.3);
+  }
+
+  .weight-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 400;
+    color: rgba(232,223,200,.7);
+    min-width: 160px;
+    flex-shrink: 0;
+  }
+
+  .weight-bar-track {
+    flex: 1;
+    height: 3px;
+    background: rgba(255,255,255,.06);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .weight-bar-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  .weight-row.boosted .weight-bar-fill {
+    background: var(--teal);
+  }
+
+  .weight-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: rgba(232,223,200,.5);
+    min-width: 36px;
+    text-align: right;
+  }
+
+  .boost-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--teal);
+    margin-left: 0.25rem;
+  }
+
+  /* Schedule table */
+  .schedule-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .schedule-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(232,223,200,.4);
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .schedule-table td {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: rgba(232,223,200,.75);
+    padding: 0.75rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .schedule-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .schedule-table tr:hover td {
+    background: rgba(255,255,255,.02);
+  }
+
+  .week-label {
+    font-weight: 500;
+    color: var(--gold);
+  }
+
+  .final-week {
+    background: rgba(245,166,35,.04);
+  }
+
+  .final-week .week-label {
+    color: var(--teal);
+  }
+
+  .system-tag {
+    display: inline-block;
+    background: rgba(245,166,35,.1);
+    border: 1px solid rgba(245,166,35,.2);
+    color: var(--gold);
+    font-size: 0.62rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  .daily-items {
+    font-size: 0.7rem;
+    color: rgba(232,223,200,.5);
+    margin-top: 0.3rem;
+    line-height: 1.5;
+  }
+
+  .done-cell {
+    text-align: center;
+  }
+
+  .done-cell input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    accent-color: var(--gold);
+    cursor: pointer;
+  }
+
+  /* Phase headers for long schedules */
+  .phase-header td {
+    background: rgba(245,166,35,.06);
+    border: 1px solid rgba(245,166,35,.15);
+    color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    padding: 0.6rem 0.9rem;
+  }
+
+  /* Day-by-day for short schedules */
+  .day-entry {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.5rem;
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .day-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: rgba(232,223,200,.5);
+  }
+
+  .day-content h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--cream);
+    margin-bottom: 0.2rem;
+  }
+
+  .day-content p {
+    font-size: 0.8rem;
+    color: rgba(232,223,200,.55);
+  }
+
+  /* Output actions */
+  .output-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+
+  .triage-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: rgba(232,223,200,.45);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+    margin-top: 2rem;
+  }
+
+  .triage-link:hover { color: var(--gold); }
+  .triage-link span { font-size: 0.8rem; }
+
+  @media (max-width: 640px) {
+    nav { padding: 1rem; }
+    .nav-links { gap: 1.25rem; }
+    .nav-links a { font-size: 0.65rem; }
+    main { padding: 2rem 1rem 4rem; }
+    .page-header h1 { font-size: 1.9rem; }
+    .form-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr; }
+    .weights-grid { grid-template-columns: 1fr; }
+    .weight-name { min-width: 120px; font-size: 0.62rem; }
+    .schedule-table { font-size: 0.7rem; }
+  }
+
+  @media print {
+    nav, .output-actions, .form-actions { display: none; }
+    body { background: white; color: black; }
+    .schedule-table th, .schedule-table td { color: black; }
+  }
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
+.footer-inner{max-width:760px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:.95rem;color:rgba(232,223,200,.4)}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+.footer-links a{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:300;letter-spacing:.09em;text-transform:uppercase;color:rgba(232,223,200,.35);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand">Bit by Bit Pedagogy</a>
+  <ul class="nav-links">
+    <li><a href="/cfactor/">MCAT</a></li>
+    <li><a href="/">Step 1</a></li>
+    <li><a href="/triage/">Find your pattern</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="page-header">
+    <h1>Build your <em>exam schedule</em></h1>
+    <p>Enter your exam date and a few details. The tool weights your time by NBME content distribution and adjusts for your weakest system.</p>
+  </div>
+
+  <!-- FORM -->
+  <div id="form-section">
+    <div class="form-card">
+      <form id="schedule-form" novalidate>
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="exam-date">Exam date</label>
+            <input type="date" id="exam-date" required>
+            <div class="error-msg" id="err-date"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="hours-per-day">Study hours per day</label>
+            <input type="number" id="hours-per-day" min="2" max="14" placeholder="8" required>
+            <div class="error-msg" id="err-hours"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="nbme-pct">Current NBME / UWorld % correct</label>
+            <input type="number" id="nbme-pct" min="0" max="100" placeholder="55" required>
+            <div class="error-msg" id="err-nbme"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="weak-system">Weakest system</label>
+            <select id="weak-system" required>
+              <option value="">Select a system</option>
+              <option value="Cardiovascular">Cardiovascular</option>
+              <option value="Pulmonary">Pulmonary</option>
+              <option value="Renal">Renal</option>
+              <option value="Gastrointestinal">Gastrointestinal</option>
+              <option value="Endocrine">Endocrine</option>
+              <option value="Reproductive">Reproductive</option>
+              <option value="Musculoskeletal/Rheum">Musculoskeletal</option>
+              <option value="Neurology/Special Senses">Neurology</option>
+              <option value="Hematology/Oncology">Hematology</option>
+              <option value="Psychiatry/Behavioral">Psychiatry</option>
+              <option value="Microbiology/Immunology">Microbiology / Immunology</option>
+              <option value="Pharmacology">Pharmacology</option>
+            </select>
+            <div class="error-msg" id="err-system"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="fa-pct">First Aid completion %<span class="label-optional">optional</span></label>
+            <input type="number" id="fa-pct" min="0" max="100" placeholder="40">
+          </div>
+
+          <div class="form-group">
+            <label for="uworld-done">UWorld questions completed<span class="label-optional">optional</span></label>
+            <input type="number" id="uworld-done" min="0" placeholder="0">
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Build my schedule</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- OUTPUT -->
+  <div id="output">
+    <div class="stats-row" id="stats-row"></div>
+
+    <div class="weights-section">
+      <div class="section-heading">Content weight allocation</div>
+      <div class="weights-grid" id="weights-grid"></div>
+    </div>
+
+    <div class="schedule-section">
+      <div class="section-heading" id="schedule-heading">Study schedule</div>
+      <div id="schedule-body"></div>
+    </div>
+
+    <div class="output-actions">
+      <button class="btn btn-primary" id="btn-ics">Download as calendar (.ics)</button>
+      <button class="btn btn-secondary" id="btn-reset">Start over</button>
+    </div>
+
+    <a href="/triage/" class="triage-link">
+      Find your study pattern <span>&#8594;</span>
+    </a>
+  </div>
+
+</main>
+
+<script>
+(function() {
+
+  // ---- Data ----
+  const BASE_WEIGHTS = [
+    { key: 'Cardiovascular',         label: 'Cardiovascular',           pct: 10 },
+    { key: 'Pulmonary',              label: 'Pulmonary',                pct: 10 },
+    { key: 'Gastrointestinal',       label: 'Gastrointestinal',         pct: 10 },
+    { key: 'Renal',                  label: 'Renal',                    pct: 7  },
+    { key: 'Endocrine',              label: 'Endocrine',                pct: 7  },
+    { key: 'Reproductive',           label: 'Reproductive',             pct: 6  },
+    { key: 'Musculoskeletal/Rheum',  label: 'Musculoskeletal / Rheum',  pct: 6  },
+    { key: 'Neurology/Special Senses', label: 'Neurology / Special Senses', pct: 12 },
+    { key: 'Hematology/Oncology',    label: 'Hematology / Oncology',    pct: 9  },
+    { key: 'Psychiatry/Behavioral',  label: 'Psychiatry / Behavioral',  pct: 9  },
+    { key: 'Microbiology/Immunology',label: 'Micro / Immuno (Multisystem)', pct: 14 },
+    { key: 'Pharmacology',           label: 'Pharmacology (integrated)', pct: 10 },
+  ];
+
+  const DAILY_TASKS = {
+    'Cardiovascular':          'Cardiology pathophys + First Aid cards + UWorld block',
+    'Pulmonary':               'Pulmonary mechanics + PFTs + clinical vignettes',
+    'Gastrointestinal':        'GI pathology + liver + UWorld GI block',
+    'Renal':                   'Nephron physiology + acid-base + UWorld renal',
+    'Endocrine':               'Hormonal axes + diabetes + UWorld endocrine',
+    'Reproductive':            'Reproductive phys + OB/GYN pathology + UWorld',
+    'Musculoskeletal/Rheum':   'MSK anatomy + rheum diseases + UWorld block',
+    'Neurology/Special Senses':'Neuro-anatomy + localizing lesions + UWorld neuro',
+    'Hematology/Oncology':     'CBC interpretation + oncology + UWorld heme',
+    'Psychiatry/Behavioral':   'DSM criteria review + pharm + UWorld psych',
+    'Microbiology/Immunology': 'Bug-drug-host review + immunology + UWorld micro',
+    'Pharmacology':            'Mechanism flashcards + drug classes + UWorld pharm',
+  };
+
+  // ---- Helpers ----
+  function today() {
+    const d = new Date(); d.setHours(0,0,0,0); return d;
+  }
+
+  function addDays(d, n) {
+    const r = new Date(d); r.setDate(r.getDate() + n); return r;
+  }
+
+  function fmtDate(d) {
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+
+  function icsDate(d) {
+    const y = d.getFullYear();
+    const m = String(d.getMonth()+1).padStart(2,'0');
+    const day = String(d.getDate()).padStart(2,'0');
+    return `${y}${m}${day}`;
+  }
+
+  function fmtShortDate(d) {
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+
+  // ---- Compute weights with boost ----
+  function computeWeights(weakSystem) {
+    const weights = BASE_WEIGHTS.map(w => ({ ...w }));
+    const weakIdx = weights.findIndex(w => w.key === weakSystem);
+    if (weakIdx >= 0) {
+      weights[weakIdx].pct += 3;
+      weights[weakIdx].boosted = true;
+      // Reduce from two other systems (-1.5 each)
+      const others = weights
+        .map((w,i) => ({ i, pct: w.pct }))
+        .filter(x => x.i !== weakIdx)
+        .sort((a,b) => b.pct - a.pct);
+      if (others.length >= 2) {
+        weights[others[0].i].pct -= 1.5;
+        weights[others[1].i].pct -= 1.5;
+      }
+    }
+    return weights;
+  }
+
+  // ---- Build schedule events ----
+  function buildSchedule(examDate, hoursPerDay, weights, totalDays) {
+    const events = [];
+    const systemOrder = [...weights].sort((a,b) => b.pct - a.pct);
+    const totalPct = systemOrder.reduce((s,w) => s+w.pct, 0);
+
+    // Allocate days to systems (proportional, minus last 7 days for final review)
+    const studyDays = Math.max(totalDays - 7, 1);
+    const allocations = systemOrder.map(w => ({
+      system: w.label,
+      key: w.key,
+      days: Math.max(1, Math.round((w.pct / totalPct) * studyDays)),
+    }));
+
+    // Build day-by-day array
+    const startDate = today();
+    let cursor = new Date(startDate);
+
+    allocations.forEach(alloc => {
+      for (let d = 0; d < alloc.days; d++) {
+        if (cursor < examDate) {
+          events.push({
+            date: new Date(cursor),
+            system: alloc.system,
+            key: alloc.key,
+            description: DAILY_TASKS[alloc.key] || alloc.system,
+            hours: hoursPerDay,
+          });
+          cursor = addDays(cursor, 1);
+        }
+      }
+    });
+
+    // Final week
+    const finalLabel = 'Final Review + NBMEs';
+    while (cursor < examDate) {
+      events.push({
+        date: new Date(cursor),
+        system: finalLabel,
+        key: 'final',
+        description: 'Full-length NBME + weak system review + wrong answer analysis',
+        hours: hoursPerDay,
+        isFinal: true,
+      });
+      cursor = addDays(cursor, 1);
+    }
+
+    return events;
+  }
+
+  // ---- Group into weeks ----
+  function groupByWeek(events) {
+    const weeks = [];
+    let i = 0;
+    let wn = 1;
+    while (i < events.length) {
+      const chunk = events.slice(i, i+7);
+      weeks.push({ weekNum: wn++, events: chunk });
+      i += 7;
+    }
+    return weeks;
+  }
+
+  // ---- Group into phases ----
+  function groupByPhase(events) {
+    const n = events.length;
+    const phases = [
+      { name: 'Foundation', start: 0,             end: Math.floor(n * 0.35) },
+      { name: 'Integration', start: Math.floor(n * 0.35), end: Math.floor(n * 0.65) },
+      { name: 'Practice',   start: Math.floor(n * 0.65), end: Math.floor(n * 0.85) },
+      { name: 'Final Review', start: Math.floor(n * 0.85), end: n },
+    ];
+    return phases.map(p => ({
+      name: p.name,
+      events: events.slice(p.start, p.end),
+      weeks: groupByWeek(events.slice(p.start, p.end)),
+    }));
+  }
+
+  // ---- Render weights grid ----
+  function renderWeights(weights) {
+    const grid = document.getElementById('weights-grid');
+    grid.innerHTML = '';
+    const maxPct = Math.max(...weights.map(w => w.pct));
+    weights.forEach(w => {
+      const row = document.createElement('div');
+      row.className = 'weight-row' + (w.boosted ? ' boosted' : '');
+      row.innerHTML = `
+        <span class="weight-name">${w.label}${w.boosted ? '<span class="boost-badge">+boost</span>' : ''}</span>
+        <div class="weight-bar-track">
+          <div class="weight-bar-fill" style="width:${(w.pct/maxPct*100).toFixed(1)}%"></div>
+        </div>
+        <span class="weight-pct">${w.pct.toFixed(1)}%</span>
+      `;
+      grid.appendChild(row);
+    });
+  }
+
+  // ---- Render schedule ----
+  function renderSchedule(events, totalDays, hoursPerDay) {
+    const body = document.getElementById('schedule-body');
+    const heading = document.getElementById('schedule-heading');
+    body.innerHTML = '';
+
+    const STORAGE_KEY = 'bbb_schedule_progress';
+    let progress = {};
+    try { progress = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) {}
+
+    function saveProgress() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)); } catch(e) {}
+    }
+
+    if (totalDays < 42) {
+      // Day-by-day
+      heading.textContent = 'Day-by-day schedule';
+      events.forEach((evt, idx) => {
+        const key = icsDate(evt.date);
+        const div = document.createElement('div');
+        div.className = 'day-entry';
+        div.innerHTML = `
+          <div class="day-date">${fmtShortDate(evt.date)}</div>
+          <div class="day-content">
+            <h4>${evt.system}</h4>
+            <p>${evt.description}</p>
+          </div>
+          <div class="done-cell">
+            <input type="checkbox" aria-label="Mark done" id="chk-${key}" ${progress[key] ? 'checked' : ''}>
+          </div>
+        `;
+        body.appendChild(div);
+        div.querySelector('input').addEventListener('change', function() {
+          progress[key] = this.checked;
+          saveProgress();
+        });
+      });
+
+    } else if (totalDays < 84) {
+      // Week-by-week
+      heading.textContent = 'Week-by-week schedule';
+      const weeks = groupByWeek(events);
+      const table = document.createElement('table');
+      table.className = 'schedule-table';
+      table.innerHTML = `<thead><tr>
+        <th>Week</th><th>Dates</th><th>Primary focus</th><th>Daily target</th><th>UWorld</th><th>Done</th>
+      </tr></thead>`;
+      const tbody = document.createElement('tbody');
+
+      weeks.forEach((wk, wi) => {
+        const first = wk.events[0];
+        const last = wk.events[wk.events.length-1];
+        const primarySystem = wk.events[0].system;
+        const isFinal = wk.events.some(e => e.isFinal);
+        const key = `week_${wi}`;
+        const uw = Math.round(hoursPerDay * 7 * 3.5);
+
+        const tr = document.createElement('tr');
+        if (isFinal) tr.className = 'final-week';
+        tr.innerHTML = `
+          <td class="week-label">Wk ${wk.weekNum}</td>
+          <td><span style="font-size:0.68rem">${fmtShortDate(first.date)} - ${fmtShortDate(last.date)}</span></td>
+          <td><span class="system-tag">${primarySystem}</span></td>
+          <td><div class="daily-items">${DAILY_TASKS[first.key] || first.description}</div></td>
+          <td><span style="color:rgba(232,223,200,.5);font-size:0.7rem">${isFinal ? 'NBMEs only' : uw + ' Qs'}</span></td>
+          <td class="done-cell"><input type="checkbox" aria-label="Mark week done" ${progress[key] ? 'checked' : ''}></td>
+        `;
+        tbody.appendChild(tr);
+        tr.querySelector('input').addEventListener('change', function() {
+          progress[key] = this.checked;
+          saveProgress();
+        });
+      });
+
+      table.appendChild(tbody);
+      body.appendChild(table);
+
+    } else {
+      // Phase breakdown for 12+ weeks
+      heading.textContent = 'Phase-based schedule (12+ weeks)';
+      const phases = groupByPhase(events);
+      const table = document.createElement('table');
+      table.className = 'schedule-table';
+      table.innerHTML = `<thead><tr>
+        <th>Week</th><th>Dates</th><th>Focus system</th><th>Daily target</th><th>UWorld / wk</th><th>Done</th>
+      </tr></thead>`;
+      const tbody = document.createElement('tbody');
+
+      let globalWeekNum = 1;
+      phases.forEach(phase => {
+        // Phase header row
+        const headerTr = document.createElement('tr');
+        headerTr.className = 'phase-header';
+        headerTr.innerHTML = `<td colspan="6">${phase.name}</td>`;
+        tbody.appendChild(headerTr);
+
+        phase.weeks.forEach((wk, wi) => {
+          const first = wk.events[0];
+          const last = wk.events[wk.events.length-1];
+          const isFinal = wk.events.some(e => e.isFinal);
+          const key = `wk_${globalWeekNum}`;
+          const uw = Math.round(hoursPerDay * 7 * 3.5);
+          const tr = document.createElement('tr');
+          if (isFinal) tr.className = 'final-week';
+          tr.innerHTML = `
+            <td class="week-label">Wk ${globalWeekNum}</td>
+            <td><span style="font-size:0.68rem">${fmtShortDate(first.date)} - ${fmtShortDate(last.date)}</span></td>
+            <td><span class="system-tag">${first.system}</span></td>
+            <td><div class="daily-items">${DAILY_TASKS[first.key] || first.description}</div></td>
+            <td><span style="color:rgba(232,223,200,.5);font-size:0.7rem">${isFinal ? 'NBMEs only' : uw + ' Qs'}</span></td>
+            <td class="done-cell"><input type="checkbox" aria-label="Mark week done" ${progress[key] ? 'checked' : ''}></td>
+          `;
+          tbody.appendChild(tr);
+          tr.querySelector('input').addEventListener('change', function() {
+            progress[key] = this.checked;
+            saveProgress();
+          });
+          globalWeekNum++;
+        });
+      });
+
+      table.appendChild(tbody);
+      body.appendChild(table);
+    }
+  }
+
+  // ---- ICS generator ----
+  function generateICS(events) {
+    let ics = 'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//BBB Step 1//EN\nCALSCALE:GREGORIAN\n';
+    events.forEach(evt => {
+      const endHour = String(9 + evt.hours).padStart(2,'0');
+      ics += 'BEGIN:VEVENT\n';
+      ics += `DTSTART:${icsDate(evt.date)}T090000\n`;
+      ics += `DTEND:${icsDate(evt.date)}T${endHour}0000\n`;
+      ics += `SUMMARY:Step 1 Study: ${evt.system}\n`;
+      ics += `DESCRIPTION:${evt.description}\n`;
+      ics += `UID:bbb-${icsDate(evt.date)}-step1\n`;
+      ics += 'END:VEVENT\n';
+    });
+    ics += 'END:VCALENDAR';
+    const blob = new Blob([ics], { type: 'text/calendar' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'step1-schedule.ics'; a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  // ---- State ----
+  let lastEvents = [];
+
+  // ---- Form submission ----
+  document.getElementById('schedule-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Validate
+    let valid = true;
+    const examVal = document.getElementById('exam-date').value;
+    const hoursVal = parseInt(document.getElementById('hours-per-day').value);
+    const nbmeVal = parseInt(document.getElementById('nbme-pct').value);
+    const weakVal = document.getElementById('weak-system').value;
+
+    document.getElementById('err-date').textContent = '';
+    document.getElementById('err-hours').textContent = '';
+    document.getElementById('err-nbme').textContent = '';
+    document.getElementById('err-system').textContent = '';
+
+    const examDate = examVal ? new Date(examVal + 'T00:00:00') : null;
+
+    if (!examDate || isNaN(examDate.getTime())) {
+      document.getElementById('err-date').textContent = 'Please enter a valid exam date.';
+      valid = false;
+    } else if (examDate <= today()) {
+      document.getElementById('err-date').textContent = 'Exam date must be in the future.';
+      valid = false;
+    }
+
+    if (!hoursVal || hoursVal < 2 || hoursVal > 14) {
+      document.getElementById('err-hours').textContent = 'Enter a number between 2 and 14.';
+      valid = false;
+    }
+
+    if (isNaN(nbmeVal) || nbmeVal < 0 || nbmeVal > 100) {
+      document.getElementById('err-nbme').textContent = 'Enter a percentage between 0 and 100.';
+      valid = false;
+    }
+
+    if (!weakVal) {
+      document.getElementById('err-system').textContent = 'Please select your weakest system.';
+      valid = false;
+    }
+
+    if (!valid) return;
+
+    // Compute
+    const diffMs = examDate - today();
+    const totalDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+    const totalHours = totalDays * hoursVal;
+
+    const weights = computeWeights(weakVal);
+    const events = buildSchedule(examDate, hoursVal, weights, totalDays);
+    lastEvents = events;
+
+    // Stats
+    const statsRow = document.getElementById('stats-row');
+    statsRow.innerHTML = `
+      <div class="stat-card">
+        <div class="stat-label">Days remaining</div>
+        <div class="stat-value">${totalDays}</div>
+        <div class="stat-sub">Until exam date</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total study hours</div>
+        <div class="stat-value">${totalHours.toLocaleString()}</div>
+        <div class="stat-sub">At ${hoursVal} hrs / day</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Systems to cover</div>
+        <div class="stat-value">12</div>
+        <div class="stat-sub">Current score: ${nbmeVal}%</div>
+      </div>
+    `;
+
+    renderWeights(weights);
+    renderSchedule(events, totalDays, hoursVal);
+
+    document.getElementById('form-section').style.display = 'none';
+    document.getElementById('output').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ---- ICS button ----
+  document.getElementById('btn-ics').addEventListener('click', function() {
+    if (lastEvents.length) generateICS(lastEvents);
+  });
+
+  // ---- Reset button ----
+  document.getElementById('btn-reset').addEventListener('click', function() {
+    document.getElementById('output').style.display = 'none';
+    document.getElementById('form-section').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+})();
+</script>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-brand">Bit by Bit Pedagogy</span>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cfactor/">MCAT</a></li>
+      <li><a href="/">Step 1</a></li>
+      <li><a href="/triage/">Find your pattern</a></li>
+      <li><a href="/archetypes/">Study profiles</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>
