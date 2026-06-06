@@ -255,14 +255,30 @@ body.nav-lock{overflow:hidden;}
 .btn-buy-lg:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(245, 166, 35, .3);}
 
 /* TOOLKIT TABS */
-.toolkit{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
-.tk-tabs{display:flex;flex-wrap:wrap;background:var(--bg-mid);border-bottom:1px solid var(--border);overflow-x:auto;}
-.tk-tab{flex:1;min-width:130px;padding:14px 18px;background:transparent;border:none;color:var(--text-muted);font-family:var(--mono);font-size:11.5px;font-weight:bold;letter-spacing:.6px;border-right:1px solid var(--border);transition:all .2s;text-align:center;white-space:nowrap;}
+.toolkit{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35);position:relative;}
+.toolkit::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(245,166,35,.4),transparent);pointer-events:none;}
+.tk-tabs{display:grid;grid-template-columns:repeat(3,1fr);background:rgba(0,0,0,.18);border-bottom:1px solid var(--border);overflow-x:auto;position:relative;}
+.tk-tab{position:relative;padding:1.25rem 1.1rem 1.15rem;background:transparent;border:none;color:var(--text-dim);font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:color .25s cubic-bezier(.22,1,.36,1),background .25s,transform .25s;text-align:center;white-space:nowrap;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;line-height:1.3;border-right:1px solid var(--border);}
 .tk-tab:last-child{border-right:none;}
-.tk-tab:hover{color:var(--text);background:rgba(255, 255, 255, .02);}
-.tk-tab.on{background:var(--bg);color:var(--teal);box-shadow:inset 0 -2px 0 var(--teal);}
-.tk-pane{display:none;padding:0;}
+.tk-tab::before{content:attr(data-num);font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:400;font-size:13px;color:var(--text-dim,rgba(232,223,200,.4));letter-spacing:.02em;text-transform:none;opacity:.7;display:block;margin-bottom:.05rem;}
+.tk-tab:hover{color:var(--text);background:rgba(255,255,255,.025);}
+.tk-tab:hover::before{color:var(--gold);opacity:1;}
+.tk-tab.on{color:var(--text);background:linear-gradient(180deg,rgba(245,166,35,.06),transparent);box-shadow:inset 0 -2px 0 var(--gold);}
+.tk-tab.on::before{color:var(--gold);opacity:1;}
+.tk-tab:active{transform:translateY(1px);}
+.tk-pane{display:none;padding:0;animation:tkFadeUp .35s cubic-bezier(.22,1,.36,1);}
 .tk-pane.on{display:block;}
+@keyframes tkFadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:560px){
+  .tk-tabs{grid-template-columns:1fr;}
+  .tk-tab{border-right:none;border-bottom:1px solid var(--border);padding:.95rem 1rem;flex-direction:row;justify-content:flex-start;text-align:left;}
+  .tk-tab::before{margin-bottom:0;}
+  .tk-tab.on{box-shadow:inset 3px 0 0 var(--gold);}
+}
+.tid-mode-btn{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:.55rem 1rem;border:1px solid var(--border);background:transparent;color:var(--text-dim);border-radius:99px;cursor:pointer;transition:color .2s,border-color .2s,background .2s,transform .2s cubic-bezier(.22,1,.36,1);}
+.tid-mode-btn:hover{color:var(--text);border-color:rgba(245,166,35,.4);}
+.tid-mode-btn:active{transform:translateY(1px) scale(.985);}
+.tid-mode-btn.on{color:var(--gold);border-color:var(--gold);background:rgba(245,166,35,.06);}
 
 /* INTAKE */
 .intake-wrap{padding:2.5rem 2rem;max-width:740px;margin:0 auto;}
@@ -525,7 +541,7 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
   <a href="#stuck" class="track-card tc-usmle">
    <div class="tc-top"><span class="tc-kicker">USMLE</span><span class="tc-tag">Step 1 · CBSE · COMLEX</span></div>
    <div class="tc-title">The Step 1 reasoning engine</div>
-   <div class="tc-list">150-question NBME-style exam · 280+ rapid pearls · full Free 120 breakdown</div>
+   <div class="tc-list">150-question NBME-style exam · 700+ rapid pearls · full Free 120 breakdown</div>
    <div class="tc-cta">Find where you are stuck <span>→</span></div>
   </a>
  </div>
@@ -694,9 +710,9 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
   </a>
 
   <a href="#toolkit" onclick="goToolkit('tidbits')" style="background:var(--bg-card);border:1px solid var(--border);border-top:3px solid #2ED573;border-radius:var(--r);padding:1.5rem;transition:all .25s;text-decoration:none;display:block;cursor:pointer;" onmouseover="this.style.borderColor='#2ED573';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform=''">
-   <div style="font-family:var(--mono);font-size:10px;color:#2ED573;letter-spacing:1.5px;margin-bottom:8px;">DATABASE · 280+</div>
+   <div style="font-family:var(--mono);font-size:10px;color:#2ED573;letter-spacing:1.5px;margin-bottom:8px;">DATABASE · 700+</div>
    <h4 style="font-family:var(--mono);font-size:15px;color:var(--text);margin-bottom:8px;">Tidbits Database</h4>
-   <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">280+ rapid-review pearls. Searchable. The high-yield one-liners you'd write on the back of your hand if NBME allowed it.</p>
+   <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">700+ rapid-review pearls. Searchable. The high-yield one-liners you'd write on the back of your hand if NBME allowed it.</p>
   </a>
 
 
@@ -714,7 +730,7 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
 <div class="stats-row">
  <div class="stat rev"><div class="stat-n">14</div><div class="stat-l">Subject Guides</div></div>
  <div class="stat rev"><div class="stat-n">150</div><div class="stat-l">NBME-Style Questions</div></div>
- <div class="stat rev"><div class="stat-n">280+</div><div class="stat-l">Rapid-Review Pearls</div></div>
+ <div class="stat rev"><div class="stat-n">700+</div><div class="stat-l">Rapid-Review Pearls</div></div>
  <div class="stat rev"><div class="stat-n">$30</div><div class="stat-l">Founding Coaching Rate</div></div>
 </div>
 
@@ -1009,9 +1025,9 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
 
  <div class="toolkit">
  <div class="tk-tabs">
- <button class="tk-tab on" data-pane="intake" onclick="setTab('intake')">🎯 FIND MY GAP</button>
- <button class="tk-tab" data-pane="exam" onclick="setTab('exam')">📝 BIT 150 EXAM</button>
- <button class="tk-tab" data-pane="tidbits" onclick="setTab('tidbits')">⚡ TIDBITS DATABASE</button>
+ <button class="tk-tab on" data-pane="intake" data-num="I." onclick="setTab('intake')">FIND MY GAP</button>
+ <button class="tk-tab" data-pane="exam" data-num="II." onclick="setTab('exam')">BIT 150 EXAM</button>
+ <button class="tk-tab" data-pane="tidbits" data-num="III." onclick="setTab('tidbits')">TIDBITS DATABASE</button>
  </div>
 
  <!-- INTAKE PANE -->
@@ -1084,12 +1100,12 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <div class="tid-wrap">
  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1rem;flex-wrap:wrap;gap:1rem;">
  <div>
- <div style="font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:1.5px;">⚡ RAPID DATABASE</div>
- <h3 style="font-family:var(--mono);font-size:18px;color:var(--text);margin-top:6px;">High-yield Tidbits</h3>
+ <div style="font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:1.5px;">RAPID DATABASE</div>
+ <h3 style="font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:400;font-size:26px;color:var(--text);margin-top:6px;letter-spacing:.01em;">High-yield Tidbits</h3>
  </div>
- <div style="display:flex;gap:8px;">
- <button class="tk-tab" id="tidModeMaster" style="border:1px solid var(--teal);color:var(--teal);background:var(--teal-soft);border-radius:99px;padding:6px 14px;font-size:10.5px;" onclick="tidSwitch('master')">CORE 280+</button>
- <button class="tk-tab" id="tidModePharma" style="border:1px solid var(--border);color:var(--text-muted);background:transparent;border-radius:99px;padding:6px 14px;font-size:10.5px;" onclick="tidSwitch('pharma')">PHARM / MICRO / BIOCHEM</button>
+ <div style="display:flex;gap:8px;flex-wrap:wrap;">
+ <button class="tid-mode-btn on" id="tidModeMaster" onclick="tidSwitch('master')">Core 700+</button>
+ <button class="tid-mode-btn" id="tidModePharma" onclick="tidSwitch('pharma')">Pharm / Micro / Biochem</button>
  </div>
  </div>
  <div class="tid-ctrls">
@@ -1976,6 +1992,421 @@ const FACTS = [
 ["PHARM", "GLP-1 RAs (semaglutide, liraglutide): ↓ CV events + weight loss in T2DM. Tirzepatide = dual GIP/GLP-1 agonist"],
 ["PHARM", "Metformin: first-line T2DM. Stop at GFR <30 (lactic acidosis risk). ↓ hepatic gluconeogenesis. Weight neutral, no hypoglycemia"],
 ["PHARM", "TMP-SMX: covers PCP prophylaxis (CD4 <200) AND Toxoplasmosis prophylaxis (CD4 <100). At CD4 <50: add azithromycin weekly for MAC prophylaxis"],
+["DERM", "Basal cell carcinoma: pearly papule + telangiectasias + central ulcer + rolled borders. Palisading nuclei. Locally invasive, rarely metastasizes. PTCH1 mutation. Mohs surgery for face"],
+["DERM", "Squamous cell carcinoma: ulcerated scaly nodule on sun-exposed skin. Keratin pearls on histology. Risk: actinic keratosis, immunosuppression, HPV, arsenic, Marjolin ulcer (chronic scar)"],
+["DERM", "Actinic keratosis: scaly erythematous papules from chronic UV exposure. Precursor to SCC. Topical 5-FU or imiquimod, cryotherapy"],
+["DERM", "Seborrheic keratosis: stuck-on waxy plaques in elderly, benign. Leser-Trelat sign = sudden eruption of many = GI adenocarcinoma paraneoplastic marker"],
+["DERM", "Atopic dermatitis (eczema): type 1 hypersensitivity. Filaggrin mutation. Flexural surfaces in older kids. Atopic triad: eczema + asthma + allergic rhinitis"],
+["DERM", "Acne vulgaris: Cutibacterium acnes + sebum + keratin plug + androgens. Topical retinoids + benzoyl peroxide first-line. Isotretinoin for severe (teratogenic; monitor LFTs and lipids)"],
+["DERM", "Lichen planus: pruritic Purple Polygonal Planar Papules and Plaques (6 Ps). Wickham striae. HCV association. Oral lacy whitish reticular pattern"],
+["DERM", "Erythema multiforme: target lesions on extremities. HSV most common trigger. Also Mycoplasma. Drugs: sulfa, penicillin, phenytoin"],
+["DERM", "Erythema nodosum: tender erythematous nodules on shins. Reactive panniculitis. Triggers: strep, sarcoidosis, IBD, TB, Coccidioides, OCPs, pregnancy"],
+["DERM", "Tinea (dermatophyte): annular scaly plaque with central clearing. KOH prep shows hyphae. Topical azole or oral terbinafine for tinea capitis/onychomycosis"],
+["DERM", "Verruca (warts): HPV. Types 1, 2, 4 in common warts; 6 and 11 in genital. E6 degrades p53, E7 degrades Rb. Cryotherapy or salicylic acid"],
+["DERM", "Dermatitis herpetiformis: celiac association. Pruritic vesicles on extensors and buttocks. IgA at dermal papillae tips. Dapsone + gluten-free diet"],
+["DERM", "Vitiligo: autoimmune melanocyte destruction. Symmetric depigmented patches. Associations: type 1 DM, Hashimoto, Addison, pernicious anemia, alopecia areata"],
+["DERM", "Albinism: tyrosinase deficiency (oculocutaneous). Pink-white skin and hair + photophobia + nystagmus. High skin cancer risk. Ocular albinism is X-linked"],
+["DERM", "Hidradenitis suppurativa: chronic apocrine gland inflammation. Axilla, groin, perianal. Recurrent painful nodules → sinus tracts → scarring. Adalimumab for moderate-severe"],
+["DERM", "Rosacea: facial erythema + telangiectasias + pustules + rhinophyma. Triggers: alcohol, heat, sun, spicy foods. Avoid steroids. Treat metronidazole, ivermectin"],
+["DERM", "Pityriasis rosea: herald patch then smaller lesions in Christmas tree pattern. Self-limited weeks. HHV-6/7 association"],
+["DERM", "Kaposi sarcoma: HHV-8. Purple plaques and nodules. Three groups: classic (elderly Mediterranean), endemic African, AIDS-associated. Endothelial cell origin"],
+["ENDO", "Primary hyperaldosteronism (Conn): adrenal adenoma or bilateral hyperplasia. ↑aldo + ↓renin. Aldo/renin ratio >20 screens. HTN + hypokalemia + metabolic alkalosis. CT + adrenal vein sampling. Eplerenone or surgery"],
+["ENDO", "Secondary hyperaldosteronism: renin-driven. Renal artery stenosis, CHF, cirrhosis, diuretic use. Both renin and aldo high"],
+["ENDO", "Acromegaly: somatotrope adenoma → GH excess in adults. Coarse features, organomegaly, ring/glove/shoe size increasing. ↑IGF-1 screens; oral glucose suppression confirms. Treat transsphenoidal surgery, octreotide, pegvisomant"],
+["ENDO", "Prolactinoma: most common pituitary adenoma. Galactorrhea + amenorrhea + infertility in women; ↓libido + ED in men. Cabergoline first-line (preferred over bromocriptine)"],
+["ENDO", "Primary hyperparathyroidism: adenoma in 80%. ↑Ca + ↓PO4 + ↑PTH. Stones, bones, abdominal groans, psychiatric overtones. Parathyroidectomy"],
+["ENDO", "Secondary hyperparathyroidism: CKD. ↓Ca + ↑PO4 + ↑PTH. Treat with PO4 binders, calcitriol, cinacalcet"],
+["ENDO", "Tertiary hyperparathyroidism: chronic secondary becomes autonomous. ↑Ca + ↑PTH after kidney transplant"],
+["ENDO", "Hypoparathyroidism: post-thyroidectomy most common. ↓Ca + ↑PO4. Chvostek + Trousseau. Tetany, paresthesias, prolonged QT, seizures. Calcium + calcitriol replacement"],
+["ENDO", "Central DI: ADH deficiency. Head trauma, surgery, autoimmune. Polyuria + dilute urine. Water deprivation test: urine concentrates after desmopressin. Treat desmopressin"],
+["ENDO", "Nephrogenic DI: ADH resistance. Lithium most common cause; also hypercalcemia, AVPR2 mutation. No response to desmopressin. Thiazide diuretic + low-salt diet + NSAIDs"],
+["ENDO", "Thyroid cancer papillary: most common (80%). Lymphatic spread. Orphan Annie eye nuclei + psammoma bodies. RET/PTC or BRAF mutations. Excellent prognosis"],
+["ENDO", "Thyroid cancer follicular: hematogenous spread (bone, lung). Vascular and capsular invasion required for diagnosis. RAS mutation. Hurthle cell variant"],
+["ENDO", "Thyroid cancer medullary: parafollicular C-cells → calcitonin. MEN2A and MEN2B (RET). Amyloid stroma. Pheochromocytoma must be ruled out before surgery"],
+["ENDO", "Thyroid cancer anaplastic: undifferentiated, elderly, rapidly fatal. p53 mutations"],
+["ENDO", "Carcinoid syndrome: enterochromaffin tumor → serotonin. Flushing + diarrhea + bronchospasm + right-sided valve disease (TR, pulmonic stenosis). 5-HIAA in urine. Niacin deficiency (pellagra) from tryptophan diversion. Octreotide"],
+["ENDO", "Insulinoma: β-cell tumor. Whipple triad. ↑insulin + ↑C-peptide (vs exogenous insulin: low C-peptide). Hypoglycemia despite fasting"],
+["ENDO", "Gastrinoma (Zollinger-Ellison): MEN1 association. Multiple or refractory peptic ulcers, often jejunal + diarrhea (acid inactivates lipase). ↑fasting gastrin + positive secretin stimulation (paradoxical gastrin rise). PPI + surgery"],
+["ENDO", "Glucagonoma: necrolytic migratory erythema + diabetes + DVT + depression + diarrhea (4D rash). ↑glucagon. Octreotide"],
+["ENDO", "VIPoma: WDHA (Watery Diarrhea + Hypokalemia + Achlorhydria). ↑VIP. Octreotide"],
+["ENDO", "CAH 21-hydroxylase (most common, 95%): ↓cortisol + ↓aldo + ↑androgens. Female virilization, male precocious puberty. Salt-wasting in severe. ↑17-OH-progesterone. Newborn screening"],
+["ENDO", "CAH 11β-hydroxylase: ↓cortisol + ↑11-deoxycorticosterone (mineralocorticoid effect) + ↑androgens. HTN + hypokalemia + virilization"],
+["ENDO", "CAH 17α-hydroxylase: ↓cortisol + ↓androgens + ↑mineralocorticoids. HTN + hypokalemia + female phenotype + delayed/absent puberty"],
+["RENAL", "Alport syndrome: X-linked dominant. Type IV collagen α5 chain defect. Hereditary glomerulonephritis + sensorineural hearing loss + ocular abnormalities (anterior lenticonus). Basket-weave GBM on EM"],
+["RENAL", "RTA type 1 (distal): impaired distal H+ secretion. Urine pH >5.5 despite acidemia. Hypokalemia + calcium phosphate stones. Causes: Sjogren, SLE, amphotericin B, lithium, ifosfamide"],
+["RENAL", "RTA type 2 (proximal): impaired proximal HCO3 reabsorption. Hypokalemia + hypophosphatemia + rickets/osteomalacia. Fanconi syndrome (generalized proximal defect). Multiple myeloma, Wilson, lead, tenofovir"],
+["RENAL", "RTA type 4 (hyperkalemic): hypoaldosteronism or aldosterone resistance. Hyperkalemia + mild metabolic acidosis. Diabetic nephropathy most common cause. Also ACEi, ARBs, spironolactone, NSAIDs"],
+["RENAL", "Calcium oxalate stones: most common kidney stone. Radiopaque. Hypercalciuria. Envelope or dumbbell crystals. Thiazide reduces urinary Ca"],
+["RENAL", "Struvite stones: urease-positive UTI (Proteus, Klebsiella, Staphylococcus saprophyticus). Mg ammonium phosphate. Staghorn calculus. Alkaline urine. Coffin-lid crystals"],
+["RENAL", "Uric acid stones: radiolucent. Acidic urine. Hyperuricemia (gout, tumor lysis, hot dry climate). Rhomboid crystals. Treat with allopurinol + urine alkalinization (potassium citrate)"],
+["RENAL", "Cystine stones: autosomal recessive cystinuria (children/young adults). Hexagonal crystals. Faintly radiopaque. Treat hydration + urine alkalinization + tiopronin"],
+["RENAL", "Renal cell carcinoma: clear cells from proximal tubule. VHL gene loss on chromosome 3. Paraneoplastic: EPO (polycythemia), PTHrP (hypercalcemia), renin (HTN), ACTH (Cushing). Smoking risk. Spreads via renal vein → IVC"],
+["RENAL", "Wilms tumor (nephroblastoma): WT1 mutation. Most common pediatric renal cancer. Unilateral painless flank mass. Associations: WAGR (Wilms + Aniridia + GU + Retardation), Beckwith-Wiedemann, Denys-Drash"],
+["RENAL", "Transitional cell (urothelial) carcinoma: painless hematuria. Risk: smoking, aniline dyes, cyclophosphamide, phenacetin. Multifocal field defect. Bladder most common site"],
+["RENAL", "IgA nephropathy (Berger): recurrent gross hematuria within days of URI or exercise. Most common GN worldwide. Mesangial IgA deposits. Henoch-Schonlein is systemic variant"],
+["RENAL", "Membranoproliferative GN: tram-track basement membrane on PAS. Type 1 immune complex (HCV common) vs Type 2 dense deposit (C3 nephritic factor). Low complement. Mixed nephritic and nephrotic"],
+["RENAL", "Renal artery stenosis: HTN refractory to multiple meds + ↑Cr after starting ACEi/ARB. Atherosclerosis in older men; fibromuscular dysplasia in young women (string-of-beads angiography). Doppler US screens"],
+["CV", "Atrial fibrillation: irregularly irregular + no discernible P waves. Risk: age, HTN, valvular disease, hyperthyroid, alcohol. CHA2DS2-VASc → anticoagulation. Rate vs rhythm control similar outcomes long-term"],
+["CV", "Atrial flutter: sawtooth flutter waves at 250-350 bpm. Often 2:1 conduction. Similar management to AF. Ablation curative"],
+["CV", "WPW syndrome: accessory pathway (bundle of Kent) bypasses AV node. Delta wave + short PR. Risk SVT, AF with rapid conduction. Procainamide acute. Avoid AV nodal blockers in AF with WPW. Ablation curative"],
+["CV", "Heart blocks: 1st = PR >200 ms; 2nd Mobitz I (Wenckebach) = progressive PR lengthening then dropped beat; 2nd Mobitz II = constant PR with random drops (higher progression risk); 3rd = complete AV dissociation. Pacemaker for Mobitz II and 3rd"],
+["CV", "Long QT: congenital (Romano-Ward AD; Jervell-Lange-Nielsen AR with deafness) or acquired (anti-arrhythmics, macrolides, antipsychotics, methadone, ondansetron, hypokalemia, hypomagnesemia). Risk torsades de pointes. Mg first-line"],
+["CV", "Brugada syndrome: SCN5A sodium channel mutation. Pseudo-RBBB + coved ST elevation V1-V3. Sudden cardiac death in young males. ICD"],
+["CV", "Hypertrophic cardiomyopathy: AD, β-myosin heavy chain or myosin-binding protein C mutations. Asymmetric septal hypertrophy. Outflow obstruction worsens with ↓preload (Valsalva, standing) or ↑contractility. Sudden death in young athletes. β-blocker first-line"],
+["CV", "Restrictive cardiomyopathy: ↑stiffness, ↓compliance. Amyloid (apple-green birefringence with Congo red), sarcoidosis, hemochromatosis, endomyocardial fibrosis (Loffler eosinophilic), radiation"],
+["CV", "Cardiac tamponade: pulsus paradoxus + Beck triad (hypotension + muffled heart sounds + JVD). Equalized diastolic pressures across chambers. Echo shows RV collapse in diastole. Emergent pericardiocentesis"],
+["CV", "Aortic dissection: sudden tearing chest/back pain + widened mediastinum + unequal BP between arms. Stanford A (ascending) = surgical; B (descending) = medical BP control. Risk: HTN, Marfan, bicuspid AV, cocaine, syphilis"],
+["CV", "Infective endocarditis: fever + new murmur + Janeway lesions (painless palms/soles) + Osler nodes (painful pulp) + splinter hemorrhages + Roth spots. S. aureus IVDU → tricuspid; viridans strep dental → mitral; S. bovis → colon cancer. HACEK culture-negative. Modified Duke criteria"],
+["CV", "Rheumatic fever: 2-4 weeks post Group A Strep pharyngitis. Molecular mimicry against M protein. JONES (Joints migratory + Carditis O + Nodules subq + Erythema marginatum + Sydenham chorea). Mitral valve scarred long-term"],
+["CV", "Constrictive pericarditis: fibrotic pericardium. Kussmaul sign (paradoxical JVP rise with inspiration). Pericardial knock. TB, prior surgery, radiation"],
+["CV", "Dressler syndrome: autoimmune pericarditis 2-10 weeks post-MI. Fever + pleuropericardial pain + ↑ESR. Aspirin or colchicine"],
+["CV", "Acute MI complications by time: papillary muscle rupture 2-7 days (mitral regurg); ventricular free wall rupture 3-7 days (tamponade); septal rupture 3-5 days (new VSD); ventricular aneurysm 2+ weeks; mural thrombus; Dressler weeks to months"],
+["GI", "Achalasia: LES fails to relax + loss of esophageal peristalsis. Bird beak on barium swallow. Dysphagia to solids AND liquids. Manometry confirms. Treat pneumatic dilation, Heller myotomy, or botox"],
+["GI", "Diffuse esophageal spasm: corkscrew esophagus on barium. Chest pain + dysphagia. CCB or nitrates"],
+["GI", "Eosinophilic esophagitis: atopy + food allergens. Trachealization with rings on endoscopy. >15 eos/HPF. PPI trial + topical steroids (swallowed budesonide) + elimination diet"],
+["GI", "Boerhaave syndrome: full-thickness esophageal rupture from forceful vomiting. Pneumomediastinum + Hamman crunch + subcutaneous emphysema. Surgical emergency"],
+["GI", "Mallory-Weiss: partial-thickness mucosal tear at GE junction from retching. Self-limited hematemesis. Alcoholics, bulimics"],
+["GI", "Zenker diverticulum: false diverticulum at cricopharyngeus (Killian triangle). Halitosis + regurgitation of undigested food + dysphagia in elderly. Surgical repair"],
+["GI", "GERD complications: erosive esophagitis → Barrett esophagus (intestinal metaplasia with goblet cells) → dysplasia → adenocarcinoma. Strictures. PPI mainstay"],
+["GI", "Celiac disease: gluten triggers. Anti-tTG + anti-endomysial + anti-deamidated gliadin. Villous atrophy + crypt hyperplasia + intraepithelial lymphocytes on biopsy. HLA-DQ2/DQ8. Dermatitis herpetiformis. Risk enteropathy-associated T-cell lymphoma"],
+["GI", "Whipple disease: Tropheryma whipplei. PAS-positive foamy macrophages in lamina propria. Arthralgias + diarrhea + weight loss + neurologic symptoms (oculomasticatory myorhythmia is pathognomonic). Ceftriaxone then TMP-SMX"],
+["GI", "Crohn disease: transmural + skip lesions + non-caseating granulomas + terminal ileum + cobblestone + creeping fat + fistulas + perianal disease. Smoking worsens. B12 deficiency. Bile salt diarrhea"],
+["GI", "Ulcerative colitis: mucosal + continuous starting at rectum + crypt abscesses + lead-pipe colon. PSC association. Toxic megacolon risk. Smoking somewhat protective. Colon cancer screening earlier"],
+["GI", "Diverticulosis: outpouchings of mucosa/submucosa at vasa recta penetration. Sigmoid most common. Low-fiber diet. Painless hematochezia (most common cause of LGI bleed in elderly)"],
+["GI", "Diverticulitis: inflamed/microperforated diverticulum. LLQ pain + fever + leukocytosis. CT for diagnosis. Antibiotics; surgery if perforated, abscessed, or recurrent"],
+["GI", "Pancreatic adenocarcinoma: head most common. Painless jaundice + Courvoisier sign (palpable nontender gallbladder) + Trousseau (migratory thrombophlebitis). CA 19-9. Smoking. Poor prognosis. Whipple procedure if resectable"],
+["GI", "Hemochromatosis: HFE C282Y mutation on chromosome 6. ↑duodenal iron absorption. Bronze diabetes + cirrhosis + cardiomyopathy + arthropathy + hypogonadism. ↑risk HCC. Phlebotomy"],
+["GI", "Wilson disease: ATP7B mutation on chromosome 13. Copper accumulation. Kayser-Fleischer rings (Descemet membrane) + hepatitis + neuropsychiatric symptoms + hemolytic anemia. ↓ceruloplasmin + ↑urinary copper. D-penicillamine, trientine, zinc"],
+["GI", "Primary biliary cholangitis: anti-mitochondrial antibodies. Middle-aged women. Pruritus + fatigue + jaundice + xanthomas + osteoporosis. Ursodeoxycholic acid"],
+["GI", "Primary sclerosing cholangitis: onion-skin fibrosis of bile ducts. p-ANCA. Ulcerative colitis association in 80%. ERCP/MRCP shows beaded ducts. Risk cholangiocarcinoma"],
+["PSYCH", "Persistent depressive disorder (dysthymia): depressed mood most days ≥2 years in adults (1 year in children). Less severe than MDD but more chronic"],
+["PSYCH", "Cyclothymic disorder: ≥2 years of fluctuating hypomanic and depressive symptoms not meeting full criteria for either bipolar or MDD"],
+["PSYCH", "Disruptive mood dysregulation disorder: chronic irritability + severe outbursts. Ages 6-18 with onset before 10. Created to prevent over-diagnosis of pediatric bipolar"],
+["PSYCH", "Premenstrual dysphoric disorder: mood symptoms confined to luteal phase. Resolve with menses. SSRI continuous or luteal phase only"],
+["PSYCH", "Postpartum disorders: baby blues (50-85% of women, days, self-limited); postpartum depression (10-15%, weeks-months, SSRI); postpartum psychosis (rare, emergency, hospitalize, infanticide risk)"],
+["PSYCH", "Conversion disorder: neurologic symptoms inconsistent with anatomy. Preceded by stressor. Not feigned. La belle indifference may be present"],
+["PSYCH", "Somatic symptom disorder: somatic symptoms + excessive thoughts/feelings/behaviors about them ≥6 months. Symptoms may be medically explained or not"],
+["PSYCH", "Illness anxiety disorder: preoccupation with having serious illness despite minimal somatic symptoms. CBT first-line"],
+["PSYCH", "Factitious disorder: intentional production of symptoms for sick role (no external reward). Munchausen by proxy = imposed on another (child abuse)"],
+["PSYCH", "Malingering: intentional false symptoms for external gain (money, drugs, avoiding work/jail)"],
+["PSYCH", "Schizoid PD: voluntary social withdrawal + restricted affect. Not psychotic, not distressed by isolation"],
+["PSYCH", "Schizotypal PD: eccentric + magical thinking + odd beliefs + brief psychotic-like experiences. Cluster A"],
+["PSYCH", "Borderline PD: unstable relationships + unstable identity + unstable affect + impulsivity + self-harm + abandonment fears + splitting. DBT first-line"],
+["PSYCH", "Narcissistic PD: grandiosity + need for admiration + lack of empathy + entitlement"],
+["PSYCH", "Avoidant PD: hypersensitivity to rejection + social inhibition + feelings of inadequacy. Wants relationships but avoids them (vs schizoid who does not want them)"],
+["PSYCH", "Obsessive-compulsive PD: preoccupation with order + perfectionism + control. Egosyntonic (vs OCD egodystonic)"],
+["PSYCH", "Anorexia restricting vs binge-purge subtype. Refeeding syndrome: ↓PO4, ↓K, ↓Mg, thiamine deficiency on rapid carb refeed. Refeed slowly"],
+["PSYCH", "Bulimia nervosa: binge then compensatory (purge, laxatives, exercise). Dental erosion + parotid swelling + Russell sign (dorsal hand calluses) + hypokalemic alkalosis. Avoid bupropion (seizure)"],
+["PSYCH", "Binge eating disorder: binges without compensatory behavior. Normal-to-high BMI. SSRI or lisdexamfetamine"],
+["PSYCH", "Tourette syndrome: motor + vocal tics > 1 year, before age 18. Often comorbid OCD + ADHD. Tetrabenazine, α2 agonists, antipsychotics"],
+["PSYCH", "Serotonin syndrome: SSRI + MAOI/tramadol/triptan/linezolid. Clonus + hyperreflexia + agitation + hyperthermia + diarrhea + autonomic instability. Cyproheptadine"],
+["PSYCH", "Neuroleptic malignant syndrome: antipsychotic exposure. Lead-pipe rigidity + altered mental status + hyperthermia + autonomic instability + ↑CK. Dantrolene + bromocriptine + supportive care"],
+["REPRO", "Endometriosis: ectopic endometrial tissue. Cyclic pelvic pain + dysmenorrhea + dyspareunia + infertility. Chocolate cysts on ovaries. Powder-burn lesions. Diagnosis at laparoscopy. NSAIDs, OCPs, GnRH agonists, surgery"],
+["REPRO", "Adenomyosis: endometrial tissue within myometrium. Enlarged tender boggy uterus. Dysmenorrhea + heavy menstrual bleeding. Definitive: hysterectomy"],
+["REPRO", "Leiomyoma (fibroid): benign smooth muscle tumor. Estrogen-sensitive (grow in pregnancy, regress at menopause). Heavy menses, pressure symptoms. Whorled appearance"],
+["REPRO", "PCOS: Rotterdam criteria 2 of 3 (oligo-anovulation + hyperandrogenism + polycystic ovaries on US). Insulin resistance + obesity. ↑LH:FSH ratio + ↑testosterone. Risk endometrial hyperplasia, type 2 DM. Metformin, OCP, weight loss; letrozole for fertility"],
+["REPRO", "Cervical cancer: HPV 16/18 most oncogenic (E6 degrades p53; E7 degrades Rb). Squamous cell most common. Pap screening. HPV 9-valent vaccine prevention"],
+["REPRO", "Endometrial adenocarcinoma: most common gynecologic cancer in US. Unopposed estrogen exposure (nulliparity, late menopause, obesity, PCOS, tamoxifen). Postmenopausal bleeding. Type 1 estrogen-driven vs Type 2 serous (p53, worse)"],
+["REPRO", "Ovarian epithelial cancer: serous adenocarcinoma most common. BRCA1/2 risk. CA-125. Often late-stage. Psammoma bodies in serous"],
+["REPRO", "Ovarian germ cell tumors: young women. Dysgerminoma (seminoma equivalent, radiosensitive, ↑LDH). Yolk sac (endodermal sinus, ↑AFP, Schiller-Duval bodies). Teratoma (mature benign, immature malignant, struma ovarii thyroid tissue). Choriocarcinoma (↑hCG)"],
+["REPRO", "Ovarian sex cord-stromal: granulosa cell (↑estrogen, Call-Exner bodies, postmenopausal bleeding); Sertoli-Leydig (↑androgens, virilization); fibroma (Meigs syndrome: ovarian fibroma + ascites + pleural effusion)"],
+["REPRO", "Preeclampsia: HTN + proteinuria after 20 weeks. Risk: nulliparity, twins, chronic HTN, prior preeclampsia, DM, AMA. Mg for seizure prophylaxis. Definitive: delivery"],
+["REPRO", "HELLP: Hemolysis + Elevated Liver enzymes + Low Platelets. Preeclampsia variant. Schistocytes. Deliver"],
+["REPRO", "Eclampsia: preeclampsia + seizures. Emergency. Mg + delivery"],
+["REPRO", "Placenta previa: placenta covers internal os. Painless bright red bleeding in 3rd trimester. Cesarean delivery. Prior C-section is risk"],
+["REPRO", "Placental abruption: premature placental separation. Painful dark red bleeding + tetanic woody uterus + fetal distress. Risk: HTN, cocaine, trauma, smoking"],
+["REPRO", "Ectopic pregnancy: ampulla most common. Risk: prior PID, IUD, prior ectopic, tubal surgery. β-hCG plateaus (vs doubling intrauterine). Methotrexate if unruptured/small/stable; surgery otherwise"],
+["REPRO", "BPH: transition zone hyperplasia. Obstructive urinary symptoms (hesitancy, weak stream, nocturia). α1-blockers (terazosin, tamsulosin) + 5α-reductase inhibitors (finasteride, dutasteride)"],
+["REPRO", "Prostate cancer: peripheral zone adenocarcinoma. PSA. Osteoblastic bone metastases + ↑ALP. Gleason grading. Surveillance, surgery, radiation, androgen deprivation"],
+["REPRO", "Testicular seminoma: radiosensitive. ↑placental ALP. Older age group within testicular cancer. Excellent prognosis"],
+["REPRO", "Testicular non-seminoma: yolk sac (↑AFP, Schiller-Duval), choriocarcinoma (↑hCG, hematogenous, gynecomastia), embryonal carcinoma, teratoma (in adult males may be malignant)"],
+["REPRO", "Cryptorchidism: undescended testis. ↑risk seminoma in both undescended AND contralateral descended testis. Orchiopexy by 1 year of age"],
+["NEURO", "Lacunar infarcts: small vessel disease from chronic HTN/diabetes. Pure motor (posterior limb internal capsule), pure sensory (thalamus VPL), ataxic hemiparesis (pons), dysarthria-clumsy hand (genu of internal capsule)"],
+["NEURO", "Watershed infarcts: hypoperfusion in border zones. Man-in-a-barrel syndrome with proximal weakness"],
+["NEURO", "Lateral medullary (Wallenberg): PICA occlusion. Ipsilateral facial sensory loss + Horner + ataxia + dysphagia + hoarseness + nystagmus; contralateral body pain/temp loss"],
+["NEURO", "Medial medullary: anterior spinal artery occlusion. Contralateral hemiparesis + tongue deviation TOWARD lesion (CN XII LMN) + contralateral medial lemniscus sensory loss"],
+["NEURO", "SAH from berry aneurysm rupture: worst headache of life + meningismus + photophobia. CT first, then LP if negative (xanthochromia). Risk: ADPKD, Ehlers-Danlos, smoking, HTN. Most at anterior communicating artery"],
+["NEURO", "Subdural hematoma: bridging vein tear. Crescent-shaped, crosses sutures. Elderly + alcoholics + anticoagulated. Slower progression than epidural"],
+["NEURO", "Epidural hematoma: middle meningeal artery (often pterion fracture). Lens-shaped, does NOT cross sutures. Lucid interval. Rapid deterioration. Surgical emergency"],
+["NEURO", "Multiple sclerosis: autoimmune demyelination. Relapsing-remitting most common type. Periventricular plaques (Dawson fingers) + oligoclonal bands in CSF. Treat IFN-β, glatiramer, ocrelizumab, natalizumab"],
+["NEURO", "Guillain-Barre: post-infectious (Campylobacter classic; also CMV, EBV, HIV, COVID, flu vaccine rare). Ascending paralysis + areflexia + autonomic instability. Albumino-cytologic dissociation in CSF (↑protein, normal cells). IVIG or plasmapheresis. Monitor for respiratory failure"],
+["NEURO", "Myasthenia gravis: anti-AChR (85%) or anti-MuSK antibodies. Fatigable proximal weakness + ptosis + diplopia. Worse with exertion and end of day. Thymoma in 10-15%. Pyridostigmine + steroids + IVIG/plasmapheresis acute + thymectomy"],
+["NEURO", "Lambert-Eaton: anti-voltage-gated Ca channel antibodies (presynaptic). Improves with exertion (vs MG worsens). Small cell lung cancer paraneoplastic in 60%"],
+["NEURO", "ALS: both UMN and LMN signs without sensory or autonomic involvement. SOD1 mutation in some familial. Riluzole modestly extends survival. Death from respiratory failure"],
+["NEURO", "Parkinson disease: α-synuclein Lewy bodies. Substantia nigra dopaminergic neuron loss. TRAP (Tremor at rest pill-rolling, Rigidity cogwheel, Akinesia/bradykinesia, Postural instability). L-dopa/carbidopa + MAO-B inhibitors + dopamine agonists"],
+["NEURO", "Huntington disease: AD, CAG trinucleotide repeat in HTT (chromosome 4). Anticipation. Caudate atrophy. Chorea + dementia + psychiatric symptoms. Death 15-20 years from onset. Tetrabenazine for chorea"],
+["NEURO", "Alzheimer disease: β-amyloid plaques (extracellular) + tau neurofibrillary tangles (intracellular). Cortical and hippocampal atrophy. ApoE4 risk; ApoE2 protective. Cholinesterase inhibitors (donepezil) + memantine"],
+["NEURO", "Frontotemporal dementia: ubiquitin-positive tau or TDP-43 inclusions. Pick bodies. Behavioral or language symptoms predominate. Younger onset than AD"],
+["NEURO", "Lewy body dementia: visual hallucinations + fluctuating cognition + parkinsonism + REM sleep behavior disorder. Antipsychotic sensitivity (avoid haloperidol, use quetiapine if needed)"],
+["NEURO", "Cluster headache: unilateral periorbital + autonomic features (ptosis, miosis, lacrimation, rhinorrhea) + restlessness. Men > women. Acute: 100% oxygen + sumatriptan. Prophylaxis: verapamil"],
+["NEURO", "Migraine: unilateral throbbing + photophobia + phonophobia + nausea + may have aura. Triptans acute (avoid in vascular disease). Prophylaxis: β-blocker, TCA, topiramate, CGRP antagonists"],
+["PULM", "ARDS: diffuse alveolar damage. PaO2/FiO2 < 300 + bilateral infiltrates + no left atrial hypertension (PCWP < 18). Triggers: sepsis, pneumonia, aspiration, transfusion (TRALI), pancreatitis. Low tidal volume ventilation (6 mL/kg)"],
+["PULM", "Idiopathic pulmonary fibrosis: usual interstitial pneumonia pattern. Honeycombing + traction bronchiectasis on HRCT. Restrictive PFTs + low DLCO. Nintedanib or pirfenidone slow progression"],
+["PULM", "Hypersensitivity pneumonitis: repeated antigen exposure (bird, mold, farm). Upper-lobe infiltrates + non-caseating granulomas. Remove the antigen. Acute, subacute, chronic phases"],
+["PULM", "Mesothelioma: asbestos exposure decades prior. Pleural plaques and thickening. Calretinin + cytokeratin positive. Poor prognosis"],
+["PULM", "Obstructive sleep apnea: upper airway collapse during sleep. Obesity + large neck + retrognathia. AHI > 5/hr on polysomnography. CPAP first-line. Complications: HTN, AF, stroke, pulmonary HTN, motor vehicle accidents"],
+["PULM", "Pulmonary hypertension: mean PAP > 20 mmHg at rest. Groups 1 (idiopathic, drugs, connective tissue, HIV, portal HTN, congenital heart) treated with endothelin antagonists, PDE5 inhibitors, prostacyclins. RV hypertrophy"],
+["PULM", "Bronchiectasis: permanent dilation of airways from chronic infection/obstruction. Tram-track on CXR + signet ring on CT. CF, Kartagener, ABPA, post-infectious, immunodeficiency. Chronic cough + copious purulent sputum"],
+["PULM", "Pneumothorax: spontaneous in tall thin young males (apical blebs). Tension PTX = mediastinal shift + hypotension + tracheal deviation; needle decompression 2nd intercostal space midclavicular line"],
+["PULM", "Pleural effusion: transudate (low protein/LDH) from CHF, cirrhosis, nephrotic. Exudate (high protein/LDH) from infection, malignancy, PE. Light criteria distinguish"],
+["MSK", "Polymyalgia rheumatica: bilateral shoulder + hip girdle stiffness in elderly. ↑ESR. Rapid response to low-dose prednisone. Giant cell arteritis comorbidity in 15%"],
+["MSK", "Giant cell (temporal) arteritis: ↑ESR + jaw claudication + new headache + scalp tenderness + vision loss. Temporal artery biopsy. Start high-dose steroids BEFORE biopsy to prevent blindness"],
+["MSK", "Takayasu arteritis: young Asian women. Large vessel granulomatous vasculitis affecting aorta and branches. Pulseless disease, arm BP discrepancy. ↑ESR. Steroids"],
+["MSK", "Polyarteritis nodosa: medium vessel necrotizing vasculitis. HBV association. Spares lungs. Renal + GI + neurologic + skin involvement. String-of-pearls microaneurysms on angiography"],
+["MSK", "Buerger disease (thromboangiitis obliterans): heavy male smokers. Distal extremity ischemia + ulcers + Raynaud + migratory thrombophlebitis. Smoking cessation is the treatment"],
+["MSK", "Henoch-Schonlein purpura (IgA vasculitis): palpable purpura on lower extremities + arthralgias + abdominal pain + IgA nephropathy. Post-URI in children. Self-limited"],
+["MSK", "Polymyositis: symmetric proximal muscle weakness + ↑CK + anti-Jo1 (anti-synthetase). Endomysial CD8 T-cell infiltrate"],
+["MSK", "Dermatomyositis: polymyositis features + heliotrope rash + Gottron papules + shawl sign + mechanic's hands. Perimysial CD4. Paraneoplastic in adults (ovarian, lung, GI). Anti-Mi-2"],
+["MSK", "Fibromyalgia: chronic widespread pain + tender points + sleep disturbance + fatigue + cognitive symptoms. No inflammation, normal labs. SNRI (duloxetine, milnacipran), pregabalin, amitriptyline"],
+["MSK", "Compartment syndrome: 5 Ps (Pain out of proportion to exam, Pallor, Paresthesia, Paralysis, Pulselessness late). Trauma, crush, burn, reperfusion. Measure compartment pressure > 30 mmHg. Emergent fasciotomy"],
+["HEME", "Multiple myeloma: plasma cell malignancy. CRAB (hyperCalcemia, Renal, Anemia, Bone lytic lesions). Monoclonal M-spike on SPEP/UPEP. Bence Jones light chains in urine. Rouleaux on smear. Punched-out bone lesions"],
+["HEME", "MGUS: monoclonal gammopathy of undetermined significance. M-spike + < 10% plasma cells + no end-organ damage. 1% per year progresses to myeloma"],
+["HEME", "Waldenstrom macroglobulinemia: IgM monoclonal → hyperviscosity (headache, blurred vision, mucosal bleeding, retinal hemorrhages). No CRAB. Plasmapheresis for acute hyperviscosity"],
+["HEME", "CML: Philadelphia chromosome t(9;22) → BCR-ABL fusion. ↑mature myeloid cells with basophilia. ↓LAP score (vs leukemoid reaction ↑LAP). Imatinib + other tyrosine kinase inhibitors. Blast crisis transformation"],
+["HEME", "CLL: elderly. Mature B-cells CD5+ CD19/20+. Smudge cells on smear. Lymphadenopathy + splenomegaly. Hypogammaglobulinemia + AIHA. Often watch-and-wait if asymptomatic"],
+["HEME", "ALL: most common childhood cancer. Lymphoblasts TdT+ CD10+. t(12;21) better prognosis in kids; t(9;22) worse prognosis in adults. CNS prophylaxis with intrathecal methotrexate"],
+["HEME", "AML: adults. Myeloblasts MPO+. Auer rods. APL = t(15;17) PML-RARA, ATRA-responsive, DIC risk. t(8;21) and inv(16) better prognosis"],
+["HEME", "Hairy cell leukemia: B-cell with TRAP-positive cytoplasmic projections. Dry tap on marrow aspirate. Pancytopenia + splenomegaly. Cladribine"],
+["HEME", "Hodgkin lymphoma: Reed-Sternberg cells (CD15+ CD30+). Contiguous nodal spread. Bimodal age distribution. B symptoms. Nodular sclerosing most common subtype. EBV association in some"],
+["HEME", "Burkitt lymphoma: t(8;14) c-myc translocation. Starry sky histology. Endemic form has EBV and jaw mass in African children. Sporadic form often abdominal. HIV-related variant. Aggressive but curable"],
+["HEME", "Follicular lymphoma: t(14;18) BCL-2 (anti-apoptosis). Indolent + recurrent. Watch-and-wait often"],
+["HEME", "Mantle cell lymphoma: t(11;14) cyclin D1. CD5+. Aggressive"],
+["HEME", "DLBCL: most common adult non-Hodgkin lymphoma. Aggressive but curable with R-CHOP"],
+["HEME", "MALT lymphoma: chronic inflammation drives (H. pylori → gastric, Sjogren → parotid, Hashimoto → thyroid). Often regresses with treating the underlying trigger"],
+["HEME", "Polycythemia vera: JAK2 V617F mutation. ↑RBC + ↑WBC + ↑platelets. ↑viscosity → thrombosis risk. Aquagenic pruritus (after warm bath, mast cell release). Erythromelalgia. Phlebotomy + hydroxyurea + low-dose aspirin"],
+["HEME", "Essential thrombocythemia: JAK2, CALR, or MPL mutations. Isolated ↑platelets. Thrombosis + bleeding risk. Hydroxyurea or anagrelide"],
+["HEME", "Primary myelofibrosis: JAK2 or other driver. Teardrop RBCs + leukoerythroblastic smear. Bone marrow fibrosis with extramedullary hematopoiesis. Massive splenomegaly. Ruxolitinib"],
+["HEME", "Antiphospholipid syndrome: anticardiolipin + lupus anticoagulant + anti-β2-GPI antibodies. Recurrent arterial/venous thrombosis + recurrent pregnancy loss. Paradoxically prolonged PTT in vitro. Warfarin (or DOAC) anticoagulation"],
+["HEME", "Factor V Leiden: most common inherited thrombophilia (5% of European descent heterozygous). Activated protein C resistance. Recurrent DVT"],
+["HEME", "Protein C/S deficiency: ↓anticoagulants. Warfarin skin necrosis risk if started without heparin bridge (short PC half-life causes transient hypercoagulable state)"],
+["HEME", "DIC: consumption coagulopathy from sepsis, malignancy, OB complications (abruption, amniotic fluid embolism), trauma. ↓platelets + ↑PT/PTT + ↑D-dimer + ↓fibrinogen + schistocytes. Treat underlying cause + FFP + cryoprecipitate + platelets"],
+["IMMUNO", "DiGeorge syndrome: 22q11.2 microdeletion. Thymic aplasia → T-cell deficiency. Hypocalcemia (parathyroid aplasia). Conotruncal cardiac defects (TOF, truncus arteriosus, interrupted aortic arch). CATCH-22 mnemonic"],
+["IMMUNO", "Hyper-IgM syndrome: CD40L defect (X-linked recessive most common). Failed class-switching. Recurrent pyogenic infections + Pneumocystis + Cryptosporidium. ↑IgM + ↓IgG/IgA/IgE"],
+["IMMUNO", "Wiskott-Aldrich syndrome: X-linked recessive. WAS gene → cytoskeleton defect. WATER mnemonic (Wiskott-Aldrich, Thrombocytopenia with small platelets, Eczema, Recurrent infections). ↑IgA/IgE, ↓IgM. Lymphoma risk"],
+["IMMUNO", "Chronic granulomatous disease: NADPH oxidase defect. Recurrent infections with catalase-positive organisms (S. aureus, Aspergillus, Burkholderia, Serratia, Nocardia). Negative DHR or NBT test. TMP-SMX + itraconazole prophylaxis. IFN-γ"],
+["IMMUNO", "Chediak-Higashi syndrome: LYST mutation → defective microtubule polymerization. Partial albinism + recurrent pyogenic infections + peripheral neuropathy + giant cytoplasmic granules in leukocytes. Lymphoma risk"],
+["IMMUNO", "Leukocyte adhesion deficiency type 1: CD18 (β2-integrin) defect. Recurrent skin/mucosal infections WITHOUT pus + delayed umbilical cord separation + ↑circulating neutrophils. Negative immunostaining"],
+["PHARM", "Heparin (unfractionated): activates antithrombin → inhibits thrombin (IIa) + Xa. Monitor aPTT. Reversal: protamine sulfate. HIT in 1-3% (anti-PF4/heparin Ab → paradoxical thrombosis); use argatroban or bivalirudin"],
+["PHARM", "LMWH (enoxaparin, dalteparin): preferentially inhibits Xa over IIa. No aPTT monitoring. Renal clearance, accumulates in CKD. Partial protamine reversal"],
+["PHARM", "Warfarin: inhibits vitamin K epoxide reductase → ↓functional II, VII, IX, X + protein C/S. Monitor PT/INR. Slow onset. Reversal: vitamin K + 4-factor PCC (urgent) or FFP. Skin necrosis if protein C deficient. Teratogenic"],
+["PHARM", "Direct thrombin inhibitors: argatroban, bivalirudin, dabigatran. Used in HIT. Dabigatran reversed with idarucizumab"],
+["PHARM", "Direct Xa inhibitors: rivaroxaban, apixaban, edoxaban. No INR monitoring. Reversal: andexanet alfa"],
+["PHARM", "tPA (alteplase): converts plasminogen to plasmin. Used in acute ischemic stroke within 4.5 hours; STEMI when PCI unavailable; massive PE. Contraindicated in active bleeding, recent stroke, recent surgery. Reverse with aminocaproic acid or tranexamic acid"],
+["PHARM", "Aspirin: irreversibly acetylates COX-1 and COX-2. Low-dose: ↓TXA2 → antiplatelet for cardiovascular prevention. Higher doses: anti-inflammatory. Reye syndrome in kids with viral illness"],
+["PHARM", "Clopidogrel, prasugrel, ticagrelor: P2Y12 ADP receptor antagonists. Prevent platelet aggregation. Clopidogrel needs CYP2C19 activation (poor metabolizers reduced efficacy)"],
+["PHARM", "Sildenafil, tadalafil, vardenafil: PDE5 inhibitors → ↑cGMP → smooth muscle relaxation. Erectile dysfunction + pulmonary HTN. Contraindicated with nitrates (severe hypotension)"],
+["PHARM", "Opioids: μ-receptor agonists → ↓Ca influx + ↑K efflux → ↓neurotransmitter release. Naloxone reversal (short half-life, may need repeat doses). Methadone (long half-life, QT prolongation); buprenorphine (partial agonist, ceiling effect)"],
+["PHARM", "Benzodiazepines: ↑frequency of GABA-A Cl- channel opening. Anxiolysis, sedation, anticonvulsant. Tolerance and dependence. Reverse with flumazenil (risk withdrawal seizures)"],
+["PHARM", "Barbiturates: ↑duration of GABA-A Cl- channel opening. Phenobarbital. No ceiling effect, more dangerous than benzodiazepines. CYP450 inducer"],
+["PHARM", "Propofol: GABA-A potentiation; rapid onset/offset; risk hypotension, propofol infusion syndrome (metabolic acidosis, rhabdomyolysis) with prolonged high-dose use"],
+["PHARM", "Ketamine: NMDA receptor antagonist. Dissociative anesthesia. ↑BP and HR (sympathomimetic). Useful in trauma and asthma"],
+["PHARM", "Inhaled anesthetics: ↓MAC with age, opioids, alcohol, hypothermia. Malignant hyperthermia with succinylcholine in genetically predisposed (RYR1 mutation). Treat with dantrolene"],
+["PHARM", "Local anesthetics: -caine. Amide (lidocaine, bupivacaine: 2 i's in name) hepatic metabolism vs ester (procaine, tetracaine) plasma esterase. Inflammation (low pH) reduces efficacy. Order of nerve fiber blockade: small/myelinated > small/unmyelinated > large/myelinated > large/unmyelinated"],
+["PHARM", "Succinylcholine: depolarizing neuromuscular blocker. Phase I no antidote; Phase II reversed by cholinesterase inhibitors. Risks: hyperkalemia (burns, crush, denervation), malignant hyperthermia, prolonged paralysis with pseudocholinesterase deficiency"],
+["PHARM", "Non-depolarizing NMBs: tubocurarine, rocuronium, vecuronium. Competitive ACh receptor antagonists. Reverse with neostigmine + glycopyrrolate (or sugammadex for rocuronium/vecuronium)"],
+["PHARM", "Ondansetron: 5-HT3 antagonist. Antiemetic for chemo-induced nausea. Side effects: QT prolongation, constipation, headache"],
+["PHARM", "Metoclopramide: D2 antagonist + 5-HT4 agonist. Prokinetic for gastroparesis. Risk: tardive dyskinesia, parkinsonism"],
+["PHARM", "Sumatriptan: 5-HT1B/1D agonist → vasoconstriction. Acute migraine and cluster. Contraindicated in CAD, prinzmetal angina, pregnancy. Do not combine with ergots"],
+["PHARM", "Methotrexate: dihydrofolate reductase inhibitor → ↓THF → ↓DNA synthesis. Used in RA, psoriasis, ectopic, chemotherapy. Rescue with leucovorin. Teratogenic. Hepatotoxic, pulmonary fibrosis, marrow suppression"],
+["PHARM", "Cyclophosphamide: alkylating agent. Hemorrhagic cystitis from acrolein metabolite (prevent with mesna). SIADH. Bladder cancer, leukemia risk"],
+["PHARM", "Vincristine: microtubule inhibitor. Peripheral neuropathy. No marrow toxicity (vs vinblastine)"],
+["PHARM", "Paclitaxel/docetaxel: microtubule stabilizers. Peripheral neuropathy, marrow suppression, hypersensitivity (premedicate)"],
+["PHARM", "Doxorubicin: anthracycline, intercalates DNA + free radicals + topoisomerase II inhibition. Cardiotoxicity (cumulative, dose-dependent, dilated cardiomyopathy). Prevent with dexrazoxane"],
+["PHARM", "Bleomycin: induces DNA strand breaks via free radicals. Pulmonary fibrosis. Used in Hodgkin"],
+["PHARM", "Cisplatin: cross-links DNA. Nephrotoxicity (give amifostine), ototoxicity, peripheral neuropathy. No marrow suppression. Use with hydration"],
+["PHARM", "Tamoxifen: SERM. Antagonist at breast, agonist at endometrium and bone. Adjuvant in ER+ breast cancer. Risk endometrial cancer + DVT. Hot flashes"],
+["PHARM", "Trastuzumab (Herceptin): anti-HER2 monoclonal. HER2+ breast cancer. Cardiotoxicity (reversible)"],
+["PHARM", "Rituximab: anti-CD20. B-cell lymphomas, RA, ITP, vasculitis. Risk PML in JC virus reactivation, infusion reactions"],
+["PHARM", "Imatinib: BCR-ABL tyrosine kinase inhibitor. CML and GIST (c-Kit). Dramatic response in CML chronic phase"],
+["PHARM", "Bevacizumab: anti-VEGF. Colorectal, NSCLC, glioblastoma. Risk hypertension, impaired wound healing, GI perforation, thromboembolism"],
+["PHARM", "Cyclosporine: calcineurin inhibitor → ↓IL-2 production. Transplant immunosuppression. Nephrotoxicity, HTN, hirsutism, gum hyperplasia"],
+["PHARM", "Tacrolimus: calcineurin inhibitor. Transplant immunosuppression. Similar SEs to cyclosporine plus more nephrotoxicity, neurotoxicity, diabetes"],
+["PHARM", "Sirolimus: mTOR inhibitor. Transplant immunosuppression. No nephrotoxicity. Risk pancytopenia, hyperlipidemia, mouth ulcers"],
+["PHARM", "Mycophenolate: inosine monophosphate dehydrogenase inhibitor → ↓de novo purine synthesis in lymphocytes. Transplant, lupus nephritis. GI side effects"],
+["PHARM", "Azathioprine: prodrug → 6-mercaptopurine → inhibits purine synthesis. Crohn, RA, transplant. Reduce dose with allopurinol (xanthine oxidase inhibitor blocks 6-MP metabolism). TPMT deficiency increases toxicity"],
+["PHARM", "TNF-α inhibitors: infliximab, adalimumab, etanercept. RA, IBD, psoriasis, ankylosing spondylitis. Screen for latent TB before starting. Reactivation of TB and HBV. Lymphoma risk"],
+["PHARM", "JAK inhibitors: tofacitinib, baricitinib. RA, alopecia, atopic dermatitis. Black box for thrombosis, malignancy, MACE, infection"],
+["PHARM", "Glucocorticoids: bind glucocorticoid receptor → modulate transcription. Adverse: osteoporosis, hyperglycemia, immunosuppression, weight gain, HPA suppression, cataracts, glaucoma, mood changes. Taper to prevent crisis"],
+["IMMUNO", "MHC class I (HLA-A, B, C): on all nucleated cells. Presents endogenous (cytosolic) peptides to CD8+ T cells. β2-microglobulin"],
+["IMMUNO", "MHC class II (HLA-DR, DP, DQ): on APCs (dendritic, macrophage, B cell). Presents exogenous peptides to CD4+ T cells. Invariant chain"],
+["IMMUNO", "Th1: IL-12 induced, secretes IFN-γ + IL-2. Activates macrophages and CD8 T cells. Intracellular pathogens"],
+["IMMUNO", "Th2: IL-4 induced, secretes IL-4 + IL-5 + IL-13. Helps B cells make IgE, activates eosinophils. Helminths, allergy"],
+["IMMUNO", "Th17: IL-6 + TGF-β induced, secretes IL-17. Recruits neutrophils. Extracellular pathogens and fungi. Implicated in autoimmunity"],
+["IMMUNO", "Treg: IL-2 + TGF-β induced, FoxP3 transcription factor. Secrete IL-10 + TGF-β. Suppress immune response, maintain tolerance. Defect → IPEX syndrome"],
+["IMMUNO", "Complement classical pathway: IgM or IgG immune complex → C1q. C2 + C4 cleaved"],
+["IMMUNO", "Complement alternative pathway: spontaneous on microbial surfaces. C3b binds factor B"],
+["IMMUNO", "Complement lectin pathway: mannose-binding lectin on microbial surface"],
+["IMMUNO", "Complement MAC (C5b-9): membrane attack complex. Lyses gram-negative bacteria including Neisseria. Deficiency → recurrent Neisseria infections"],
+["IMMUNO", "C1 esterase inhibitor deficiency: hereditary angioedema. Recurrent swelling without urticaria. ↑bradykinin. Treat with C1-INH concentrate, icatibant (bradykinin receptor antagonist), or FFP. ACE inhibitors contraindicated"],
+["IMMUNO", "C3 deficiency: severe recurrent pyogenic sinus and respiratory infections. ↑susceptibility to type III hypersensitivity"],
+["IMMUNO", "DAF (CD55) and CD59 deficiency: paroxysmal nocturnal hemoglobinuria. PIGA mutation → GPI anchor defect. RBCs lysed by complement. Treat eculizumab (anti-C5)"],
+["IMMUNO", "Hypersensitivity I (immediate): IgE-mediated mast cell degranulation. Anaphylaxis, atopy"],
+["IMMUNO", "Hypersensitivity II (cytotoxic): IgG/IgM against cell surface antigens. AIHA, Goodpasture, Graves, MG, rheumatic fever"],
+["IMMUNO", "Hypersensitivity III (immune complex): antigen-antibody complexes deposit. SLE, post-strep GN, serum sickness, Arthus reaction"],
+["IMMUNO", "Hypersensitivity IV (delayed/cell-mediated): T-cell mediated. PPD, contact dermatitis (poison ivy, nickel), MS, type 1 DM, granulomatous diseases"],
+["IMMUNO", "Transplant rejection: hyperacute (preformed Abs, minutes); acute (T-cell mediated, weeks); chronic (months-years, intimal proliferation, fibrosis); GVHD (donor T cells attack recipient)"],
+["NEURO", "Cranial nerve reflexes: pupillary light (CN II afferent, CN III efferent); corneal (CN V afferent, CN VII efferent); gag (CN IX afferent, CN X efferent); jaw jerk (CN V both)"],
+["NEURO", "Brainstem cranial nerve nuclei: midbrain (III, IV); pons (V, VI, VII, VIII); medulla (IX, X, XI, XII). XII is the only nucleus medial in medulla"],
+["NEURO", "Trigeminal neuralgia: sudden severe lancinating facial pain, often unilateral V2 or V3. Triggered by chewing, talking, brushing teeth. Carbamazepine first-line. Demyelinating disease in young patient (think MS)"],
+["NEURO", "Bell palsy: idiopathic CN VII LMN palsy (entire half of face including forehead). HSV-1 reactivation hypothesis. Steroids + acyclovir if early. Most recover. Lyme, sarcoid, HIV are causes if bilateral or recurrent"],
+["NEURO", "Acoustic neuroma (vestibular schwannoma): CN VIII Schwann cell tumor at cerebellopontine angle. Hearing loss + tinnitus + balance issues. Bilateral in NF2"],
+["NEURO", "Glioblastoma multiforme: WHO grade IV astrocytoma. Most common primary adult brain tumor. Crosses corpus callosum (butterfly). Pseudopalisading necrosis. GFAP positive. Poor prognosis"],
+["NEURO", "Meningioma: arachnoid cap cells. Second most common adult primary. Women > men. Spindle cells + psammoma bodies. Surgical removal often curative"],
+["NEURO", "Schwannoma: Schwann cell origin. S-100 positive. Vestibular nerve most common. NF2 (bilateral acoustic)"],
+["NEURO", "Oligodendroglioma: fried egg cells + chicken wire capillaries + 1p/19q codeletion. Calcifications. Frontal lobe. Better prognosis than astrocytoma"],
+["NEURO", "Pilocytic astrocytoma: most common pediatric brain tumor. Posterior fossa (cerebellum). Cystic + mural nodule. Rosenthal fibers. GFAP positive. Good prognosis"],
+["NEURO", "Medulloblastoma: pediatric posterior fossa. Cerebellum. Homer Wright rosettes. Drop metastases through CSF. Highly malignant but radiosensitive"],
+["NEURO", "Ependymoma: 4th ventricle in children. Perivascular pseudorosettes. Risk hydrocephalus"],
+["NEURO", "Craniopharyngioma: Rathke pouch remnant. Children. Bitemporal hemianopia + endocrine deficits. Tooth-like calcifications. Cholesterol crystals (motor oil) on aspirate"],
+["NEURO", "Pituitary adenoma: bitemporal hemianopia from optic chiasm compression. Prolactinoma most common. Acromegaly from somatotrope adenoma"],
+["NEURO", "Brown-Sequard syndrome: hemisection of spinal cord. Ipsilateral motor + dorsal column loss (proprioception, vibration); contralateral pain and temperature loss (spinothalamic crosses immediately)"],
+["NEURO", "Anterior spinal artery syndrome: anterior 2/3 of cord. Bilateral motor loss + pain/temperature loss; dorsal columns preserved"],
+["NEURO", "Syringomyelia: central cord cavitation. Bilateral pain and temperature loss in cape distribution (crossing spinothalamic fibers affected). Arnold-Chiari association"],
+["NEURO", "Tabes dorsalis: tertiary syphilis. Dorsal column degeneration. Sensory ataxia (loss of proprioception) + Argyll Robertson pupils (accommodate but do not react to light) + Charcot joints"],
+["NEURO", "Subacute combined degeneration: B12 deficiency. Dorsal columns + lateral corticospinal + spinocerebellar tracts. Sensory ataxia + UMN signs + neuropathy. ↑MMA + ↑homocysteine"],
+["NEURO", "Friedreich ataxia: GAA repeat in frataxin gene. AR. Cerebellar ataxia + dysarthria + diabetes + hypertrophic cardiomyopathy. Death usually from cardiac"],
+["GENE", "Tay-Sachs disease: hexosaminidase A deficiency → GM2 ganglioside accumulation. Ashkenazi Jews. Cherry-red spot on macula + hyperreflexia + neurodegeneration. NO hepatosplenomegaly (vs Niemann-Pick)"],
+["GENE", "Niemann-Pick disease: sphingomyelinase deficiency. Cherry-red spot + hepatosplenomegaly + foamy macrophages"],
+["GENE", "Gaucher disease: glucocerebrosidase deficiency. Most common lysosomal storage disease. Hepatosplenomegaly + pancytopenia + bone pain (avascular necrosis). Gaucher cells (crumpled tissue paper macrophages). Treat enzyme replacement"],
+["GENE", "Fabry disease: X-linked. α-galactosidase A deficiency → ceramide trihexoside accumulation. Angiokeratomas + neuropathic pain + renal failure + cardiac disease + stroke"],
+["GENE", "Hurler syndrome: α-L-iduronidase deficiency. Mucopolysaccharidosis I. Coarse facies + corneal clouding + developmental delay + hepatosplenomegaly + airway issues"],
+["GENE", "Hunter syndrome: iduronate sulfatase deficiency. Mucopolysaccharidosis II. X-linked. Similar to Hurler but no corneal clouding + aggressive behavior"],
+["GENE", "Krabbe disease: galactocerebrosidase deficiency. AR. Globoid cells + optic atrophy + peripheral neuropathy + developmental delay"],
+["GENE", "Metachromatic leukodystrophy: arylsulfatase A deficiency. Demyelination. Ataxia + dementia + peripheral neuropathy"],
+["GENE", "Pompe disease: lysosomal α-1,4-glucosidase (acid maltase) deficiency. Glycogen accumulates in lysosomes. Cardiomegaly + hypotonia + early death (infantile form)"],
+["GENE", "von Gierke disease (GSD I): glucose-6-phosphatase deficiency. Severe fasting hypoglycemia + hepatomegaly + lactic acidosis + hyperuricemia + hyperlipidemia. Doll-like face"],
+["GENE", "McArdle disease (GSD V): muscle phosphorylase deficiency. Exercise intolerance + muscle cramps + myoglobinuria. Second wind phenomenon"],
+["GENE", "Cori disease (GSD III): debranching enzyme deficiency. Hypoglycemia + hepatomegaly. Milder than von Gierke (gluconeogenesis intact)"],
+["GENE", "Andersen disease (GSD IV): branching enzyme deficiency. Cirrhosis + cardiomyopathy"],
+["CANCER", "Tumor marker AFP: hepatocellular carcinoma, yolk sac tumor, mixed germ cell. Also in neural tube defects (open spine)"],
+["CANCER", "Tumor marker CEA: colorectal, pancreatic, gastric (also smokers). Used for surveillance, not screening"],
+["CANCER", "Tumor marker CA 19-9: pancreatic adenocarcinoma. Also cholangiocarcinoma"],
+["CANCER", "Tumor marker CA 15-3 / CA 27-29: breast cancer"],
+["CANCER", "Tumor marker CA 125: ovarian (epithelial). Also endometriosis, fibroids, peritonitis"],
+["CANCER", "Tumor marker β-hCG: choriocarcinoma, hydatidiform mole, testicular non-seminoma (mixed germ cell with syncytiotrophoblasts)"],
+["CANCER", "Tumor marker chromogranin: neuroendocrine tumors (carcinoid, pheochromocytoma)"],
+["CANCER", "Tumor marker calcitonin: medullary thyroid carcinoma"],
+["CANCER", "Tumor marker PSA: prostate cancer. Also BPH, prostatitis"],
+["CANCER", "Tumor marker S-100: melanoma, schwannoma, Langerhans cell histiocytosis"],
+["CANCER", "Tumor marker TRAP: hairy cell leukemia"],
+["CANCER", "Paraneoplastic ACTH: small cell lung cancer → Cushing"],
+["CANCER", "Paraneoplastic ADH: small cell lung cancer → SIADH"],
+["CANCER", "Paraneoplastic PTHrP: squamous cell lung, renal, bladder, breast, ovarian → hypercalcemia"],
+["CANCER", "Paraneoplastic calcitriol: lymphoma → hypercalcemia"],
+["CANCER", "Paraneoplastic EPO: renal cell carcinoma, HCC, pheochromocytoma, hemangioblastoma → polycythemia"],
+["CANCER", "Paraneoplastic anti-Hu: small cell lung → cerebellar degeneration, encephalomyelitis"],
+["CANCER", "Paraneoplastic anti-Yo: gynecologic and breast → cerebellar degeneration"],
+["CANCER", "Paraneoplastic anti-NMDA receptor encephalitis: ovarian teratoma. Young women. Psychiatric symptoms + seizures + dyskinesias + autonomic instability. Reversible with tumor removal"],
+["CANCER", "Paraneoplastic Lambert-Eaton: small cell lung. Anti-VGCC. Improves with exertion"],
+["CANCER", "Trousseau syndrome: migratory superficial thrombophlebitis. Pancreatic adenocarcinoma classic. Hypercoagulable state"],
+["AB", "Anti-mitochondrial: primary biliary cholangitis"],
+["AB", "Anti-smooth muscle: autoimmune hepatitis type 1"],
+["AB", "Anti-LKM1 (liver-kidney microsomal): autoimmune hepatitis type 2 (children)"],
+["AB", "Anti-microsomal / anti-thyroid peroxidase (TPO): Hashimoto thyroiditis"],
+["AB", "Anti-thyroglobulin: Hashimoto"],
+["AB", "TSH receptor antibody (TSI): Graves disease"],
+["AB", "Anti-21-hydroxylase: Addison disease (autoimmune)"],
+["AB", "Anti-islet cell, anti-GAD65, anti-IA-2: type 1 diabetes"],
+["AB", "Anti-intrinsic factor + anti-parietal cell: pernicious anemia → B12 deficiency"],
+["AB", "Anti-tTG, anti-endomysial, anti-deamidated gliadin: celiac disease"],
+["AB", "Anti-Saccharomyces cerevisiae (ASCA): Crohn disease"],
+["AB", "p-ANCA: ulcerative colitis, microscopic polyangiitis, EGPA, PSC"],
+["AB", "c-ANCA (PR3): granulomatosis with polyangiitis (Wegener)"],
+["AB", "Anti-PLA2R: primary membranous nephropathy"],
+["AB", "Anti-GBM: Goodpasture"],
+["AB", "Anti-desmoglein 1/3: pemphigus vulgaris"],
+["AB", "Anti-hemidesmosome (BP180/230): bullous pemphigoid"],
+["AB", "Anti-Jo1 / anti-synthetase: polymyositis, antisynthetase syndrome (myositis + interstitial lung + arthritis + Raynaud + mechanic's hands)"],
+["AB", "Anti-Mi-2: dermatomyositis"],
+["AB", "Anti-SRP: necrotizing myopathy (statin-induced rare)"],
+["PULM", "Pulmonary edema cardiogenic: ↑LV filling pressures. Wet on auscultation, bat-wing infiltrates, Kerley B lines, BNP elevated. Treat preload reduction (loop diuretic, nitrate, sit upright)"],
+["PULM", "Acute eosinophilic pneumonia: rapid onset, fever, dyspnea, BAL >25% eos. Often drug-induced (NSAIDs, daptomycin). Responds to steroids"],
+["PULM", "Loffler syndrome: transient pulmonary eosinophilic infiltrates from helminth migration (Ascaris, Strongyloides, hookworm)"],
+["PULM", "Allergic bronchopulmonary aspergillosis (ABPA): hypersensitivity to Aspergillus in asthmatics and CF. Central bronchiectasis + ↑IgE + ↑eosinophils. Treat oral steroids + itraconazole"],
+["PULM", "Cor pulmonale: right heart failure secondary to lung disease. JVD, peripheral edema, hepatomegaly, no pulmonary edema (LV preserved). Treat underlying lung disease"],
+["PULM", "Silicosis: silica dust (sandblasting, mining). Eggshell calcification of hilar nodes. Upper lobe nodules. ↑risk TB (silica impairs macrophages)"],
+["PULM", "Coal workers pneumoconiosis: simple (anthracosis benign) vs complicated (progressive massive fibrosis). Upper lobe nodules"],
+["PULM", "Berylliosis: aerospace, electronics. Non-caseating granulomas (looks like sarcoidosis). Upper lobe"],
+["PULM", "Squamous cell lung cancer central + cavitating + PTHrP → hypercalcemia. Smokers"],
+["PULM", "Adenocarcinoma lung peripheral + most common in non-smokers + women. Bronchioloalveolar variant (now lepidic adenocarcinoma) grows along alveolar walls"],
+["PULM", "Small cell lung cancer central + paraneoplastic (SIADH, ACTH, Lambert-Eaton, anti-Hu) + neuroendocrine + chromogranin/synaptophysin positive + no surgery, chemo-responsive"],
+["PULM", "Large cell lung cancer peripheral + undifferentiated + poor prognosis"],
+["PULM", "Bronchial carcinoid: low-grade neuroendocrine tumor. Chromogranin + synaptophysin + neuron-specific enolase positive. Carcinoid syndrome rare unless hepatic metastases"],
+["MSK", "Achondroplasia: AD (sporadic in most). FGFR3 gain-of-function. Disordered chondrocyte proliferation. Short limbs + normal trunk + large head with midface hypoplasia. Normal intelligence and lifespan"],
+["MSK", "Osteogenesis imperfecta: AD. Type I collagen defect (COL1A1, COL1A2). Multiple fractures + blue sclerae + hearing loss + dental abnormalities. Type II most severe"],
+["MSK", "Ehlers-Danlos syndrome: collagen defect. Hyperextensible joints + stretchy skin + easy bruising. Vascular type (COL3A1) most dangerous: arterial/uterine rupture"],
+["MSK", "Marfan syndrome: AD. Fibrillin-1 (FBN1) mutation → ↑TGF-β signaling. Tall + arachnodactyly + pectus + lens dislocation (UP and out) + aortic root dilation + MVP. Risk aortic dissection"],
+["MSK", "Duchenne muscular dystrophy: X-linked. Frameshift deletion in dystrophin. Onset before age 5. Calf pseudohypertrophy + Gower maneuver + ↑CK. Death from respiratory or cardiac failure"],
+["MSK", "Becker muscular dystrophy: X-linked. Non-frameshift dystrophin mutation. Milder, later onset. Adolescents"],
+["MSK", "Myotonic dystrophy type 1: AD. CTG trinucleotide repeat in DMPK gene. Anticipation. Myotonia (delayed relaxation) + muscle weakness + cataracts + balding + testicular atrophy + arrhythmias"],
+["MSK", "Rotator cuff (SItS): Supraspinatus (abduction, most commonly injured), Infraspinatus (external rotation), teres minor (external rotation), Subscapularis (internal rotation, lift-off test)"],
+["MSK", "Carpal tunnel: median nerve compression. Thenar atrophy + lateral 3.5 digit numbness/tingling + Tinel + Phalen. Risk: pregnancy, hypothyroid, RA, diabetes, dialysis, acromegaly"],
+["MSK", "Cubital tunnel: ulnar nerve compression at elbow. Hypothenar atrophy + medial 1.5 digit involvement + claw hand"],
+["MSK", "Radial nerve palsy: Saturday night palsy from compression in spiral groove. Wrist drop + sensory loss back of hand"],
+["MSK", "Klumpke palsy: lower brachial plexus (C8, T1) injury. Claw hand. Pancoast tumor association"],
+["MSK", "Erb palsy: upper brachial plexus (C5, C6) injury. Birth trauma. Waiter's tip"],
+["ENDO", "Subacute (De Quervain) thyroiditis: post-viral. Painful tender thyroid + transient hyperthyroidism then hypothyroidism then recovery. ↑ESR. Treat NSAIDs"],
+["ENDO", "Riedel thyroiditis: fibrosis replaces thyroid parenchyma. Hard rock-like painless goiter. IgG4-related disease association"],
+["ENDO", "Hashimoto thyroiditis: anti-TPO + anti-thyroglobulin. Lymphocytic infiltration with germinal centers + Hurthle cells. Painless goiter then hypothyroidism. ↑risk B-cell lymphoma"],
+["ENDO", "Sheehan syndrome: postpartum pituitary necrosis from blood loss + hypoperfusion of hypertrophied gland. Anterior pituitary insufficiency. Failure to lactate first sign"],
+["ENDO", "Pituitary apoplexy: hemorrhage into pituitary adenoma. Sudden headache + visual loss + ophthalmoplegia + adrenal crisis"],
+["ENDO", "Adrenal crisis: severe stress + undiagnosed insufficiency or abrupt steroid withdrawal. Hypotension + hypoglycemia + hyponatremia + hyperkalemia + nausea. Treat IV hydrocortisone + saline + glucose"],
+["GI", "Intussusception: telescoping of bowel into adjacent segment. Children: lead point can be Meckel diverticulum, polyps, or post-viral lymphoid hyperplasia (after rotavirus). Currant jelly stool + sausage-shaped mass + episodic crampy abdominal pain. Air enema diagnostic and therapeutic"],
+["GI", "Meckel diverticulum: rule of 2s (2% of population, 2 inches long, 2 feet from ileocecal valve, 2 years old, 2 tissue types). True diverticulum from persistent vitelline duct. Painless lower GI bleed. Technetium-99 scan for ectopic gastric mucosa"],
+["GI", "Hirschsprung disease: failure of neural crest migration → aganglionic distal colon (rectum and sigmoid). No meconium passage in 48 hr + abdominal distension + bilious vomiting in newborn. Down syndrome association. Rectal suction biopsy diagnostic"],
+["GI", "Pyloric stenosis: hypertrophy of pyloric muscle. First-born males 2-8 weeks old. Non-bilious projectile vomiting + olive-like mass + visible peristalsis + hypokalemic hypochloremic metabolic alkalosis. Pyloromyotomy"],
+["GI", "Volvulus: twisting of bowel around mesentery. Sigmoid in elderly (coffee bean sign). Cecal in younger. Midgut malrotation in infants. Risk ischemia"],
+["GI", "Toxic megacolon: severe inflammation → loss of muscle tone → dilation. Ulcerative colitis, C. diff, Crohn. >6 cm diameter on imaging. Risk perforation. NPO + IV steroids + antibiotics + surgery if perforating"],
+["GI", "Gilbert syndrome: AR. UGT1A1 mutation → mild conjugation defect. Mild unconjugated hyperbilirubinemia during fasting, stress, illness. Benign, no treatment"],
+["GI", "Crigler-Najjar type 1: complete UGT1A1 deficiency. Severe unconjugated hyperbilirubinemia + kernicterus. Liver transplant"],
+["GI", "Crigler-Najjar type 2: partial UGT1A1 deficiency. Less severe. Responds to phenobarbital"],
+["GI", "Dubin-Johnson syndrome: conjugated hyperbilirubinemia. Defect in canalicular MRP2 transport. Black liver on biopsy. Benign"],
+["GI", "Rotor syndrome: conjugated hyperbilirubinemia. Milder than Dubin-Johnson. Liver appears normal"],
+["GI", "Hepatic encephalopathy: ↑ammonia in cirrhosis. Confusion + asterixis. Triggers: GI bleed, infection, constipation, electrolyte imbalance. Treat lactulose (acidifies and traps NH4+) + rifaximin"],
+["GI", "Hepatorenal syndrome: renal failure in advanced cirrhosis without intrinsic renal disease. Splanchnic vasodilation → ↓effective circulating volume → renal vasoconstriction. Poor prognosis"],
+["GI", "Spontaneous bacterial peritonitis: cirrhosis + ascites + neutrophil count >250 in ascitic fluid. E. coli most common. Empiric ceftriaxone"],
+["REPRO", "Sheehan-related Asherman syndrome: intrauterine adhesions after D&C or infection. Amenorrhea + infertility"],
+["REPRO", "Mittelschmerz: ovulatory pain mid-cycle from follicle rupture and peritoneal irritation"],
+["REPRO", "Polyhydramnios (AFI > 24 cm or single deepest pocket > 8 cm): fetal swallowing impairment (esophageal/duodenal atresia, anencephaly) or maternal diabetes"],
+["REPRO", "Oligohydramnios (AFI < 5 cm or SDP < 2 cm): fetal renal abnormalities (Potter sequence: bilateral renal agenesis → oligohydramnios → pulmonary hypoplasia + limb deformities + flattened facies), placental insufficiency, post-term"],
+["REPRO", "Rh isoimmunization: Rh-negative mother + Rh-positive baby (from prior pregnancy). Anti-D Ig crosses placenta in subsequent pregnancies → hemolytic disease of newborn. Prevent with anti-D immunoglobulin (RhoGAM) at 28 weeks + within 72 hours of delivery"],
+["REPRO", "Gestational diabetes: insulin resistance from placental hormones. Screen 24-28 weeks with 50-g OGTT. Macrosomia, neonatal hypoglycemia, RDS, shoulder dystocia risks. Treat diet, insulin, metformin"],
+["REPRO", "Group B strep colonization: screen at 35-37 weeks. If positive, intrapartum prophylaxis with penicillin to prevent neonatal sepsis/meningitis"],
+["REPRO", "TORCH infections congenital: Toxoplasma (cat litter; intracranial calcifications), Other (syphilis, Zika, VZV, parvovirus B19), Rubella (PDA, deafness, cataracts), CMV (periventricular calcifications, sensorineural hearing loss most common), HSV"],
+["REPRO", "Fetal alcohol syndrome: smooth philtrum + thin vermillion + short palpebral fissures + microcephaly + ID + cardiac defects. Most common preventable ID cause"],
+["CV", "Hypertensive emergency: BP > 180/120 + end-organ damage (encephalopathy, MI, aortic dissection, pulmonary edema, AKI). Lower MAP by 10-20% in first hour. IV nicardipine, labetalol, nitroprusside, esmolol"],
+["CV", "Hypertensive urgency: severe BP without end-organ damage. Lower over 24-48 hours with oral agents"],
+["CV", "Coarctation of the aorta: postductal in adults. Upper extremity HTN + diminished femoral pulses + rib notching (collateral intercostals erode ribs) + cardiomegaly. Bicuspid aortic valve and Turner syndrome associations"],
+["CV", "PDA: continuous machine-like murmur. Wide pulse pressure + bounding pulses. Maintain with PGE1 if ductal-dependent lesion; close with indomethacin (preterm) or surgery"],
+["CV", "Tetralogy of Fallot: 4 features (pulmonary stenosis + RVH + overriding aorta + VSD). Boot-shaped heart. Cyanotic spells (tet spells) relieved by squatting (↑SVR → ↓R-to-L shunt)"],
+["CV", "Transposition of great arteries: parallel circuits. Requires shunt (PDA, ASD, VSD) for mixing. Egg-on-a-string. Maintain PGE1. Arterial switch procedure"],
+["CV", "Tricuspid atresia: RV hypoplasia. Cyanosis. Requires ASD/VSD. Single-ventricle palliation (Fontan)"],
+["CV", "Truncus arteriosus: single great vessel. Cyanosis. Failure of conotruncal septation (neural crest). DiGeorge association"],
+["CV", "Ebstein anomaly: apically displaced tricuspid valve. Atrialized RV. Tricuspid regurgitation + RA enlargement. Lithium exposure in utero risk"],
+["CV", "Eisenmenger syndrome: long-standing L-to-R shunt → pulmonary hypertension → shunt reverses to R-to-L → cyanosis. Late complication of unrepaired VSD/ASD/PDA"],
+["HEME", "Hereditary spherocytosis: AD. Defect in spectrin, ankyrin, band 3, or protein 4.2 → spherical RBCs. Splenomegaly + jaundice + gallstones + aplastic crisis with parvovirus B19. ↑MCHC. Treat splenectomy"],
+["HEME", "Sickle cell disease: HbS β6 glu→val. AR. Sickling under hypoxia/acidosis/dehydration → vaso-occlusive crises (pain), acute chest, stroke, autosplenectomy (↑risk encapsulated organisms), Salmonella osteomyelitis, priapism. Hydroxyurea ↑HbF"],
+["HEME", "α-thalassemia: deletions on chromosome 16. 1 deletion silent; 2 deletions α-thal trait (microcytic); 3 deletions HbH (β4 tetramers, hemolytic); 4 deletions hydrops fetalis (Hb Barts, fatal)"],
+["HEME", "β-thalassemia: point mutations chromosome 11. Minor (microcytic, ↑HbA2); intermedia; major (severe transfusion-dependent, ↑↑HbF, crew-cut skull, chipmunk facies, hepatosplenomegaly, iron overload)"],
+["HEME", "G6PD deficiency: X-linked recessive. ↓NADPH → oxidative stress damages RBCs. Triggers: fava beans, sulfa, antimalarials, infection. Heinz bodies + bite cells. Self-limited unless ongoing trigger"],
+["HEME", "Pyruvate kinase deficiency: AR. ↓ATP in RBCs → hemolysis. Chronic non-spherocytic hemolytic anemia. Echinocytes (burr cells)"],
+["HEME", "AIHA warm: IgG-mediated. SLE, CLL, lymphoma, methyldopa, penicillin. Positive Coombs. Spherocytes. Treat steroids, splenectomy, rituximab"],
+["HEME", "AIHA cold: IgM-mediated. Mycoplasma, mono, lymphoma. Agglutinates in cold (acrocyanosis, Raynaud-like). Avoid cold, treat underlying"],
+["HEME", "Paroxysmal nocturnal hemoglobinuria: PIGA mutation → ↓DAF/CD59 on RBCs → complement-mediated hemolysis. Pancytopenia + hemolysis + thrombosis (Budd-Chiari classic). Treat eculizumab"],
+["HEME", "Microangiopathic hemolytic anemia: schistocytes from RBC shearing in small vessels. TTP, HUS, DIC, malignant HTN, mechanical heart valves, scleroderma renal crisis, HELLP"],
+["IMMUNO", "SCID: T-cell + B-cell deficiency. Most common is X-linked γc chain mutation. ARA-A (adenosine deaminase deficiency) also causes SCID. Recurrent severe infections from birth. Treat HSCT, gene therapy"],
+["IMMUNO", "Ataxia-telangiectasia: ATM gene mutation → defective DNA repair. Cerebellar ataxia + ocular telangiectasias + ↑IgA deficiency + ↑risk lymphoma and leukemia + ↑AFP"],
+["IMMUNO", "X-linked agammaglobulinemia (Bruton): BTK mutation → no mature B cells. Recurrent encapsulated bacterial infections after maternal IgG wanes (~6 months). Absent germinal centers, ↓all Ig classes. Treat IVIG"],
+["IMMUNO", "Common variable immunodeficiency: hypogammaglobulinemia in adulthood. Recurrent sinopulmonary infections. ↑risk autoimmunity, lymphoma, GI lymphoid hyperplasia"],
+["IMMUNO", "Selective IgA deficiency: most common primary immunodeficiency. Most asymptomatic. Anaphylaxis to blood products with IgA. ↑sinopulmonary and GI infections. Atopy and autoimmunity associations"],
+["IMMUNO", "IPEX syndrome: FoxP3 mutation → Treg defect. Immune dysregulation + Polyendocrinopathy + Enteropathy + X-linked. Diabetes + thyroiditis + diarrhea + eczema in infants"],
+["PATH", "Acute rejection: T-cell mediated. Weeks to months. Treat with steroids + increased immunosuppression"],
+["PATH", "Chronic rejection: vascular intimal proliferation + interstitial fibrosis. Months to years. Often irreversible"],
+["PATH", "GVHD: donor T cells attack recipient. Skin rash + diarrhea + cholestatic liver dysfunction. Allogeneic stem cell or solid organ with lymphoid content"],
+["PATH", "Amyloidosis AL: light chain (κ or λ) deposition. Multiple myeloma, MGUS. Restrictive cardiomyopathy + nephrotic + hepatomegaly + macroglossia. Congo red apple-green birefringence"],
+["PATH", "Amyloidosis AA: serum amyloid A (acute phase reactant). Chronic inflammation (RA, IBD, chronic infections, FMF)"],
+["PATH", "Familial Mediterranean fever: AR. Mediterranean ancestry. Recurrent fever + serositis (abdominal, chest, joint pain). Treat colchicine. AA amyloidosis risk"],
+["PATH", "Hereditary hemorrhagic telangiectasia (Osler-Weber-Rendu): AD. Telangiectasias + epistaxis + AVMs + GI bleeding"],
 ];
 
 const DATA = {
@@ -2299,12 +2730,8 @@ function initTidbits(){
 }
 function tidSwitch(mode){
  tidMode = mode;
- document.getElementById('tidModeMaster').style.background = mode==='master'?'var(--teal-soft)':'transparent';
- document.getElementById('tidModeMaster').style.color = mode==='master'?'var(--teal)':'var(--text-muted)';
- document.getElementById('tidModeMaster').style.borderColor = mode==='master'?'var(--teal)':'var(--border)';
- document.getElementById('tidModePharma').style.background = mode==='pharma'?'var(--teal-soft)':'transparent';
- document.getElementById('tidModePharma').style.color = mode==='pharma'?'var(--teal)':'var(--text-muted)';
- document.getElementById('tidModePharma').style.borderColor = mode==='pharma'?'var(--teal)':'var(--border)';
+ document.getElementById('tidModeMaster').classList.toggle('on', mode==='master');
+ document.getElementById('tidModePharma').classList.toggle('on', mode==='pharma');
  populateCats();
  renderTidbits();
 }
