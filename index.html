@@ -131,6 +131,14 @@ body.nav-lock{overflow:hidden;}
 .h-trust{display:flex;gap:1.2rem;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--text-dim);margin-top:.5rem;}
 .h-trust span{display:flex;align-items:center;gap:6px;}
 .h-trust span::before{content:'✓';color:var(--teal);}
+/* Support / coffee link, used in hero and elsewhere */
+.support-strip{display:inline-flex;align-items:center;gap:.7rem;padding:.55rem .9rem .55rem .8rem;border:1px solid rgba(245,166,35,.32);background:rgba(245,166,35,.05);border-radius:99px;text-decoration:none;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:rgba(232,223,200,.78);transition:background .2s,border-color .2s,transform .25s cubic-bezier(.22,1,.36,1),color .2s;margin-top:1rem;will-change:transform;}
+.support-strip:hover{background:rgba(245,166,35,.1);border-color:rgba(245,166,35,.55);color:var(--cream);transform:translateY(-1px);}
+.support-strip:active{transform:translateY(0) scale(.985);}
+.support-strip .ssym{font-size:14px;line-height:1;}
+.support-strip b{font-weight:500;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;}
+.support-strip i{font-style:italic;font-family:var(--serif),Georgia,serif;font-size:13px;font-weight:300;color:var(--cream-dim,rgba(232,223,200,.65));letter-spacing:0;}
+.support-strip .sarr{color:var(--gold);font-family:var(--mono);}
 
 .mascot-wrap{position:relative;width:175px;flex-shrink:0;text-align:center;}
 .mascot-svg{position:relative;z-index:1;height:215px;margin:0 auto;}
@@ -583,6 +591,12 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
    <div class="tc-cta">Find where you are stuck <span>→</span></div>
   </a>
  </div>
+ <a href="https://dannyabbas.gumroad.com/coffee" target="_blank" rel="noopener" class="support-strip">
+  <span class="ssym">☕</span>
+  <b>Support this site</b>
+  <i>It is free, no email. Keep it that way.</i>
+  <span class="sarr">→</span>
+ </a>
  <div class="h-trust">
  <span>IMG built</span>
  <span>No login, no email</span>
