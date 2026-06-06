@@ -38,10 +38,15 @@ window.fmtFormula = (function(){
 
   // Operator and symbol map. Applied in order; each replacement is a
   // straightforward token substitution.
+  // These run AFTER escHtml so we match the escaped forms for comparison
+  // operators (&lt; instead of <). The literal +/-, !=, etc. survive escHtml
+  // unchanged.
   var SYMBOLS = [
-    [' dot ',  ' · '],   // explicit "dot" product spelled out
-    [' cross ',' × '],   // explicit "cross" product spelled out
-    ['<=',    '≤'],
+    [' dot ',  ' · '],
+    [' cross ',' × '],
+    ['&lt;=', '≤'],
+    ['&gt;=', '≥'],
+    ['<=',    '≤'],   // pre-escape variants kept as defense
     ['>=',    '≥'],
     ['!=',    '≠'],
     ['+/-',   '±'],
@@ -69,38 +74,64 @@ window.fmtFormula = (function(){
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 
-  // Convert v0, v1, F_net, mu_s, x^2, e^(-x) and friends.
+  // Convert multi-char superscript groups like "10^-19" or "10^40"
+  // into Unicode superscript digits (or fallback <sup>).
+  function unicodeSup(str){
+    var out = '';
+    for (var i = 0; i < str.length; i++) {
+      var c = str.charAt(i);
+      if (SUP[c]) out += SUP[c];
+      else return null; // bail to <sup>
+    }
+    return out;
+  }
+  function unicodeSub(str){
+    var out = '';
+    for (var i = 0; i < str.length; i++) {
+      var c = str.charAt(i);
+      if (SUB[c]) out += SUB[c];
+      else return null;
+    }
+    return out;
+  }
+
+  // Convert v0, v1, F_net, mu_s, x^2, e^(-x), 10^-19, 10^40, and friends.
   function applySubSup(s){
     // a^(...) groups: wrap the parenthesized content in <sup>
     s = s.replace(/\^\(([^()]+)\)/g, function(_, g){
       return '<sup>' + g + '</sup>';
     });
-    // a^n where n is a single 0-9, n, i, +, -, or a single letter
-    s = s.replace(/\^([0-9nNiI\-\+])/g, function(_, c){
-      return SUP[c.toLowerCase()] || ('<sup>' + c + '</sup>');
+    // Multi-char numeric exponents with optional sign: 10^-19, 2^32, x^-3
+    s = s.replace(/\^(-?\d+)/g, function(_, num){
+      var u = unicodeSup(num);
+      return u !== null ? u : ('<sup>' + num + '</sup>');
     });
-    s = s.replace(/\^([A-Za-z])/g, function(_, c){
-      return '<sup>' + c + '</sup>';
+    // a^n single char (letters, +)
+    s = s.replace(/\^([A-Za-z\+])/g, function(_, c){
+      return SUP[c] || ('<sup>' + c + '</sup>');
     });
 
     // a_(...) groups
     s = s.replace(/_\(([^()]+)\)/g, function(_, g){
       return '<sub>' + g + '</sub>';
     });
-    // a_n where n is a single 0-9
-    s = s.replace(/_([0-9])/g, function(_, c){
-      return SUB[c] || ('<sub>' + c + '</sub>');
-    });
     // a_word (multi-char identifier like F_net, mu_s, v_max)
     s = s.replace(/_([A-Za-z][A-Za-z0-9]*)/g, function(_, w){
       return '<sub>' + w + '</sub>';
     });
+    // a_(multi-digit)
+    s = s.replace(/_(\d+)/g, function(_, num){
+      var u = unicodeSub(num);
+      return u !== null ? u : ('<sub>' + num + '</sub>');
+    });
 
-    // Implicit subscripts on common variables followed by a digit:
-    // v0 -> v<sub>0</sub>, x1 -> x<sub>1</sub>, etc.
-    // Only triggered when the variable is one of these letters AND the
-    // pattern stands alone (preceded by word boundary).
-    s = s.replace(/\b([vxytuawpfqrnk])([0-9])\b/g, function(_, v, d){
+    // Implicit subscripts on common single-letter variables followed by a
+    // single digit, when standing as a token: v0, m1, q2 etc.
+    // Whitelist of variables that commonly take numeric subscripts in
+    // physics, chemistry, and biology: position/velocity/time, mass, energy,
+    // charge, distance, etc. Excludes letters that commonly stand alone in
+    // prose (a, e, g, i, o, u).
+    s = s.replace(/\b([vxytmnqphlcswfrk])([0-9])\b/g, function(_, v, d){
       return v + (SUB[d] || ('<sub>' + d + '</sub>'));
     });
 
@@ -108,12 +139,22 @@ window.fmtFormula = (function(){
   }
 
   // Replace " * " between operands with the multiplication dot.
-  // Do this AFTER subscript handling so we do not touch v0 etc.
+  // Run BEFORE subscript handling so we can rely on \w on both sides.
+  // Use a lookahead for the right operand so chained multiplications
+  // (a*b*c) all convert in a single pass.
+  // Greek letters (already substituted at this point) sit outside \w,
+  // so we add Unicode \p{L} (letter category) to the operand classes.
   function applyMultiplication(s){
-    // " * " becomes " · "
     s = s.replace(/\s\*\s/g, ' · ');
-    // Tight "*" without spaces: a*b -> a·b (but not at start)
-    s = s.replace(/(\w)\*(\w)/g, '$1·$2');
+    s = s.replace(/([\p{L}\w\)\]\|])\*(?=[\p{L}\w\(\[\|])/gu, '$1·');
+    return s;
+  }
+
+  // Scientific-notation multiplication: "9 x 10^9", "1.6 x 10^-19".
+  // Only convert " x " when both sides are digits / closing-paren on left
+  // and digit on right. The character "x" is otherwise common in prose.
+  function applyTimesSign(s){
+    s = s.replace(/(\d)\s+x\s+(\d)/g, '$1 × $2');
     return s;
   }
 
@@ -122,17 +163,24 @@ window.fmtFormula = (function(){
     return s.replace(/\bsqrt\(([^()]+)\)/g, '√($1)');
   }
 
-  // Word-boundary replace for an array of [from, to] pairs.
+  // Boundary replace for an array of [from, to] pairs.
   // Each "from" is treated as a literal token (no regex meta).
+  // For pure-letter tokens we use a custom boundary that treats letters as
+  // the only "inside" character. This means epsilon_0 matches (the "_" is
+  // treated as outside), but the "epsilon" inside "encepsilonal" would not.
   function applyTokens(s, pairs){
     for (var i = 0; i < pairs.length; i++) {
       var from = pairs[i][0];
       var to   = pairs[i][1];
-      // Escape regex metacharacters in the "from" string.
       var safe = from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      // For pure-letter tokens, require word boundaries on both sides so
-      // we do not split inside variable names.
-      var pattern = /^[A-Za-z]+$/.test(from) ? '\\b' + safe + '\\b' : safe;
+      var pattern;
+      if (/^[A-Za-z]+$/.test(from)) {
+        // (?<![A-Za-z]) before and (?![A-Za-z]) after lets underscore,
+        // digit, punctuation, or whitespace bound the match.
+        pattern = '(?<![A-Za-z])' + safe + '(?![A-Za-z])';
+      } else {
+        pattern = safe;
+      }
       s = s.replace(new RegExp(pattern, 'g'), to);
     }
     return s;
@@ -145,8 +193,12 @@ window.fmtFormula = (function(){
     s = applyTokens(s, GREEK);   // theta -> θ etc.
     s = applyTokens(s, SYMBOLS); // <=, >=, dot, cross, etc.
     s = applySqrt(s);
-    s = applySubSup(s);          // v0, F_net, x^2 etc.
-    s = applyMultiplication(s);  // * -> ·
+    // Multiplication BEFORE subscripts so m1*m2 cleanly becomes m₁·m₂
+    // (subscript Unicode chars are not in \w so * detection breaks if we
+    // subscripted first).
+    s = applyMultiplication(s);
+    s = applySubSup(s);          // v0, F_net, x^2, 10^-19 etc.
+    s = applyTimesSign(s);       // 9 x 10^9 -> 9 × 10⁹
     return s;
   };
 })();

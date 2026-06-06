@@ -307,14 +307,17 @@ function filterNav(q){
 
 /* ---------- BLOCK RENDERERS ---------- */
 function renderBlock(b){
- if(b.t==='p')   return '<p>'+esc(b.x).replace(/\n\n/g,'</p><p>')+'</p>';
- if(b.t==='ul')  return '<ul>'+(b.items||[]).map(function(i){return '<li>'+esc(i)+'</li>';}).join('')+'</ul>';
+ var fmt = window.fmtFormula ? function(x){return window.fmtFormula(x==null?'':x);} : esc;
+ 
+ if(b.t==='p')   return '<p>'+fmt(b.x).replace(/\n\n/g,'</p><p>')+'</p>';
+ if(b.t==='list') return '<ul>'+(Array.isArray(b.x)?b.x:[]).map(function(i){return '<li>'+fmt(i)+'</li>';}).join('')+'</ul>';
+ if(b.t==='ul')  return '<ul>'+(b.items||[]).map(function(i){return '<li>'+fmt(i)+'</li>';}).join('')+'</ul>';
  if(b.t==='formula') return '<div class="formula">'+(window.fmtFormula?window.fmtFormula(b.x):esc(b.x))+(b.note?'<span class="fnote">'+esc(b.note)+'</span>':'')+'</div>';
  if(b.t==='vbox') return '<div class="vbox"><div class="vhead">'+esc(b.head||'')+'</div>'+(b.html||'')+'</div>';
- if(b.t==='scaffold') return '<div class="scaffold"><div class="scl">▸ COURSE SCAFFOLD · IN PROGRESS</div><p>'+esc(b.x)+'</p></div>';
+ if(b.t==='scaffold') return '<div class="scaffold"><div class="scl">▸ COURSE SCAFFOLD · IN PROGRESS</div><p>'+fmt(b.x)+'</p></div>';
  if(b.t==='box'){
   var k=b.kind==='disc'?'box-disc':(b.kind==='bridge'?'box-why':'box-hy');
-  var body=b.items?'<ul style="margin:0;padding:0;list-style:none">'+b.items.map(function(i){return '<li style="font-size:13.5px;color:var(--text-muted);line-height:1.65;padding-left:1.2rem;position:relative;margin-bottom:6px"><span style="position:absolute;left:0;color:var(--green)">▸</span>'+esc(i)+'</li>';}).join('')+'</ul>':'<p>'+esc(b.x||'')+'</p>';
+  var body=b.items?'<ul style="margin:0;padding:0;list-style:none">'+b.items.map(function(i){return '<li style="font-size:13.5px;color:var(--text-muted);line-height:1.65;padding-left:1.2rem;position:relative;margin-bottom:6px"><span style="position:absolute;left:0;color:var(--green)">▸</span>'+fmt(i)+'</li>';}).join('')+'</ul>':'<p>'+fmt(b.x||'')+'</p>';
   var title=b.title?'<div class="box-title">'+esc(b.title)+'</div>':'';
   return '<div class="box '+k+'"><div class="box-label">'+esc(b.label||'')+'</div>'+title+body+'</div>';
  }
