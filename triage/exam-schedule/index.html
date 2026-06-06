@@ -204,6 +204,18 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
           <div class="error-msg" id="err-type"></div>
         </div>
 
+        <div class="form-group full" id="category-group" style="display:none">
+          <label>Your category</label>
+          <div class="radio-row" id="category-row">
+            <button type="button" class="radio-btn" data-cat="usmd">US MD</button>
+            <button type="button" class="radio-btn" data-cat="usdo">US DO</button>
+            <button type="button" class="radio-btn" data-cat="usimg">US-IMG</button>
+            <button type="button" class="radio-btn" data-cat="fmg">FMG / non-US IMG</button>
+          </div>
+          <input type="hidden" id="category">
+          <span class="hint">This is used to calibrate the recommendation, not to predict your outcome. Historical first-attempt rates differ across categories, and the language adjusts accordingly.</span>
+        </div>
+
         <div class="form-group">
           <label for="exam-date">Exam date</label>
           <input type="date" id="exam-date" required>
@@ -238,6 +250,17 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
           <input type="hidden" id="baseline-done">
         </div>
 
+        <div class="form-group full">
+          <label>Do you struggle with sustained focus or have ADHD</label>
+          <div class="radio-row" id="focus-row">
+            <button type="button" class="radio-btn" data-focus="no">No</button>
+            <button type="button" class="radio-btn" data-focus="some">Sometimes</button>
+            <button type="button" class="radio-btn" data-focus="yes">Yes / diagnosed</button>
+          </div>
+          <input type="hidden" id="focus-issue">
+          <span class="hint">This is not a label. It changes the daily floor, block lengths, and how the cycle days are structured.</span>
+        </div>
+
         <div class="form-group full" id="scores-group" style="display:none">
           <label id="scores-label">Last 1 to 3 practice scores (oldest first)</label>
           <div class="score-row">
@@ -245,7 +268,18 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
             <input type="number" id="score2" placeholder="63" min="0" max="528">
             <input type="number" id="score3" placeholder="66" min="0" max="528">
           </div>
-          <span class="hint" id="scores-hint">NBME forms are 0 to 100. Older forms are less predictive — recent ones first.</span>
+          <span class="hint" id="scores-hint">NBME forms are 0 to 100. Older forms are less predictive. Recent ones first.</span>
+        </div>
+
+        <div class="form-group full" id="spacing-group" style="display:none">
+          <label>Was there meaningful content review time between your last two forms</label>
+          <div class="radio-row" id="spacing-row">
+            <button type="button" class="radio-btn" data-spacing="yes">Yes (a few days or more)</button>
+            <button type="button" class="radio-btn" data-spacing="no">No (back-to-back)</button>
+            <button type="button" class="radio-btn" data-spacing="unsure">Not sure</button>
+          </div>
+          <input type="hidden" id="spacing">
+          <span class="hint">If your last two forms were taken back-to-back with no review in between, the trend between them is not reliable. The recommendation softens accordingly.</span>
         </div>
 
         <div class="submit-row">
@@ -301,6 +335,13 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
       <button class="btn btn-primary" id="btn-ics">Download as calendar (.ics)</button>
       <button class="btn btn-secondary" id="btn-print">Print this plan</button>
       <button class="btn btn-ghost" id="btn-restart">Start over</button>
+    </div>
+
+    <div class="consult-card" style="margin-top:2.5rem;padding:1.75rem 2rem;border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:6px;background:var(--bg-card)">
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--teal);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.7rem">Beyond the foundation</div>
+      <h3 style="font-family:var(--serif);font-style:italic;font-weight:300;font-size:1.4rem;color:var(--cream);margin-bottom:.75rem;line-height:1.3">This tool is a starting point, not a coach.</h3>
+      <p style="font-size:.98rem;font-weight:300;color:var(--cream-dim);line-height:1.7;margin-bottom:1.25rem">It will not know your specific weak chapter, your school's CBSE cutoff, the politics around your reschedule conversation, or which UWorld system you should triage first. For any of that, work with the resources you have or talk to someone who knows your situation. A short consultation is faster than another month of guesswork.</p>
+      <a href="/plan.html" class="btn btn-secondary" style="display:inline-block;text-decoration:none;font-size:.7rem">Book a personalized blueprint →</a>
     </div>
 
   </section>
@@ -361,6 +402,8 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
       document.getElementById('exam-type').value = t;
       populateSystems(t);
       updateLabels(t);
+      // Show category only for Step 1 / CBSE (MCAT category framing is different)
+      document.getElementById('category-group').style.display = (t === 'step1' || t === 'cbse') ? 'flex' : 'none';
       // Clear stale scores when exam type changes (scoring scales differ)
       ['score1','score2','score3'].forEach(id => document.getElementById(id).value = '');
     });
@@ -374,6 +417,37 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
       state.baselineDone = v;
       document.getElementById('baseline-done').value = v;
       document.getElementById('scores-group').style.display = v==='yes' ? 'flex' : 'none';
+      document.getElementById('spacing-group').style.display = v==='yes' ? 'flex' : 'none';
+    });
+  });
+
+  document.querySelectorAll('#spacing-row .radio-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('#spacing-row .radio-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      const v = btn.dataset.spacing;
+      state.spacing = v;
+      document.getElementById('spacing').value = v;
+    });
+  });
+
+  document.querySelectorAll('#focus-row .radio-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('#focus-row .radio-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      const v = btn.dataset.focus;
+      state.focusIssue = v;
+      document.getElementById('focus-issue').value = v;
+    });
+  });
+
+  document.querySelectorAll('#category-row .radio-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('#category-row .radio-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      const v = btn.dataset.cat;
+      state.category = v;
+      document.getElementById('category').value = v;
     });
   });
 
@@ -528,56 +602,130 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
     const scores = (input.scores || []).filter(s => s != null && !isNaN(s) && s > 0);
     const weeks = input.weeksRemaining;
     const type = input.examType;
+    const isMcat = type === 'mcat';
+
+    // Category-aware baseline urgency
+    // Historical first-attempt pass rates (FSMB / NBME / AAMC published data) differ across categories.
+    // USMD/USDO baseline trajectories are more predictable from school performance, so a no-baseline
+    // student in those categories has more inferred runway. US-IMG and FMG have wider variance and
+    // historically lower first-attempt rates, so an early baseline is more time-critical.
+    const cat = input.category || (isMcat ? 'mcat' : 'unknown');
 
     if (input.baselineDone === 'no' || scores.length === 0) {
-      return { state:'baseline_needed',
-        title:'Take a baseline this week before anything else',
-        body:`Without at least one full practice form, every recommendation here is partly guesswork. Use ${type==='step1'?'NBME Form 26':type==='cbse'?'NBME Form 24':'AAMC FL1'} as your baseline. It is information, not judgment. Knowing the gap is what makes closing it possible.`
-      };
+      const firstForm = type==='step1'?'NBME Form 26' : type==='cbse'?'NBME Form 24' : 'AAMC FL1';
+      let body;
+      if (cat === 'usmd' || cat === 'usdo') {
+        body = `Without at least one full practice form, every recommendation here is partly guesswork. Use ${firstForm} as your baseline this week. School performance tends to track baseline reasonably well for US graduates, but the actual number changes the cycle calibration. It is information, not judgment.`;
+      } else if (cat === 'usimg') {
+        body = `Use ${firstForm} as your baseline this week. US-IMG trajectories vary widely with school resources and clinical exposure. Baseline early — what you find guides whether to optimize content review or jump into the form cycle.`;
+      } else if (cat === 'fmg') {
+        body = `Baseline this week. ${firstForm} first, then come back here. Without it, weeks of work could be mis-targeted. The FMG first-attempt pass rate is meaningfully lower than the US graduate rate, and the single highest-leverage intervention is knowing where you actually are.`;
+      } else {
+        body = `Without at least one full practice form, every recommendation here is partly guesswork. Use ${firstForm} as your baseline. It is information, not judgment.`;
+      }
+      return { state:'baseline_needed', title:'Take a baseline this week before anything else', body, _reason:'no-baseline', _category:cat };
     }
 
-    const avg = scores.reduce((a,b)=>a+b,0) / scores.length;
-    const slope = scores.length >= 2 ? (scores[scores.length-1] - scores[0]) / (scores.length - 1) : 0;
+    // Primary signal: weighted toward the most recent score (latest > middle > oldest)
+    // Reason: oldest scores reflect an older you. Recent ones predict the actual exam.
+    let primary;
+    if (scores.length === 1) primary = scores[0];
+    else if (scores.length === 2) primary = scores[1] * 0.65 + scores[0] * 0.35;
+    else primary = scores[2] * 0.55 + scores[1] * 0.3 + scores[0] * 0.15;
 
-    // Internal thresholds — NOT shown
+    // Recent slope: difference between the latest two forms only.
+    // This is what actually informs a reschedule conversation — not a 3-form trend that
+    // may include an old baseline. With one score, no slope information.
+    const slopeRecent = scores.length >= 2 ? (scores[scores.length-1] - scores[scores.length-2]) : 0;
+    const latest = scores[scores.length - 1];
+
+    // Spacing gate: was there content review time between the last two forms?
+    // If "no" (back-to-back), the trend is not informative — slope signal is suppressed.
+    // If "unsure", slope informs but cannot escalate all the way to reschedule.
+    const spacing = input.spacing || 'unsure';
+    const trustSlope = spacing === 'yes';
+    const suppressSlope = spacing === 'no';
+
+    // Thresholds (scaled per exam)
+    const T = isMcat
+      ? { strong:515, ok:510, marginal:505, weak:500 }
+      : { strong:70,  ok:65,  marginal:60,  weak:55 };
+    const negSlope = isMcat ? -3 : -2;   // dropping this much per form = trajectory warning
+    const posSlope = isMcat ?  4 :  3;   // climbing this much per form = trajectory rescue
+
+    // Base state from primary (recent-weighted)
     let st;
-    if (type === 'mcat') {
-      if (avg >= 515)      st = slope >= 0 ? 'on_track' : 'on_track_watch';
-      else if (avg >= 510) st = (weeks >= 4 || slope > 1) ? 'tighten_content' : 'borderline';
-      else if (avg >= 505) st = (weeks >= 6 && slope > 1) ? 'tighten_content' : 'borderline';
-      else if (avg >= 500) st = (weeks >= 8 && slope > 2) ? 'tighten_content' : 'borderline';
-      else                 st = weeks >= 10 ? 'tighten_content' : 'reschedule';
-    } else {
-      if (avg >= 70)       st = slope >= 0 ? 'on_track' : 'on_track_watch';
-      else if (avg >= 65)  st = (weeks >= 4 || slope > 1) ? 'tighten_content' : 'borderline';
-      else if (avg >= 60)  st = (weeks >= 6 && slope > 2) ? 'tighten_content' : (weeks <= 2 ? 'reschedule' : 'borderline');
-      else                 st = weeks >= 8 ? 'tighten_content' : 'reschedule';
+    if (primary >= T.strong)        st = 'on_track';
+    else if (primary >= T.ok)       st = 'tighten_content';
+    else if (primary >= T.marginal) st = 'borderline';
+    else if (primary >= T.weak)     st = 'borderline';
+    else                            st = 'reschedule';
+
+    // Track which signal dominated for honest copy
+    let reason = 'primary';
+
+    // Slope downgrade — a real drop matters regardless of average, but only when the trend
+    // is informative. Back-to-back forms (no review between them) do not produce a real trend.
+    const downgrade = { on_track:'on_track_watch', on_track_watch:'tighten_content', tighten_content:'borderline', borderline:'reschedule', reschedule:'reschedule' };
+    const upgrade   = { reschedule:'borderline', borderline:'tighten_content', tighten_content:'on_track_watch', on_track_watch:'on_track', on_track:'on_track' };
+
+    if (!suppressSlope && slopeRecent <= negSlope && scores.length >= 2) {
+      st = downgrade[st]; reason = 'falling';
+      // If spacing is "unsure", do not let slope alone push all the way to reschedule.
+      // Information is incomplete — soften to borderline instead.
+      if (!trustSlope && st === 'reschedule') { st = 'borderline'; reason = 'falling-unconfirmed'; }
     }
 
+    // Slope rescue — strong recent climb with limited runway should not be auto-rescheduled
+    if (!suppressSlope && slopeRecent >= posSlope && scores.length >= 2 && weeks <= 4 && latest >= T.marginal) {
+      st = upgrade[st]; reason = 'climbing';
+    }
+
+    // Short runway tightener — borderline at 2 weeks with no upward trajectory = reschedule signal
+    // Only escalate when we have at least 2 scores AND the trend is informative
+    if (weeks <= 2 && scores.length >= 2 && (st === 'tighten_content' || st === 'borderline') && slopeRecent < posSlope && !suppressSlope) {
+      // Only fully escalate when slope is trusted. Otherwise soften to borderline.
+      if (trustSlope) { st = 'reschedule'; reason = 'no-runway'; }
+      else if (st === 'tighten_content') { st = 'borderline'; reason = 'no-runway-unconfirmed'; }
+    }
+
+    // Long runway softener — extreme runway means a "reschedule" call is premature
+    if (weeks >= 12 && st === 'reschedule') { st = 'tighten_content'; reason = 'early-runway'; }
+
+    const examLabel = isMcat ? 'MCAT' : type === 'cbse' ? 'CBSE' : 'Step 1';
     const COPY = {
       on_track: {
         title:'On track. Protect what you have.',
-        body:'Recent scores sit above the safety threshold. The work between now and exam day is not more content. It is sleep, timing on long blocks, test-day logistics, and one full day off per week. New resources at this point cost more than they return.'
+        body:`Your recent ${isMcat?'AAMC FL':'NBME'} scores point above the safety threshold. The work between now and exam day is not more content. It is sleep, timing on long blocks, test-day logistics, and one full day off per week. New resources at this point cost more than they return.`
       },
-      on_track_watch: {
+      on_track_watch: reason === 'climbing' ? {
+        title:'Climbing fast. Latest score is what counts.',
+        body:`Your earliest score in this set is well below your latest. Treat the most recent form as the truer signal. Keep the consolidation cycle running, do not abandon the things that produced the climb, and protect sleep.`
+      } : {
         title:'On track, but the trend is drifting.',
-        body:'Scores are strong but moving down across recent forms. That is almost always fatigue, not content. Do not add new material. Sleep, hydration, and a real rest day are the interventions here. The score recovers when the body does.'
+        body:'Scores are strong on average but moving down across recent forms. That is almost always fatigue, not content. Do not add new material. Sleep, hydration, and a real rest day are the interventions here. The score recovers when the body does.'
       },
       tighten_content: {
         title:'Recent scores show content gaps. Prioritize review.',
-        body:'You have runway, and the scores point to specific weak systems. Until the next form, prioritize NBME wrong-answer review and weak-system content over new question volume. The questions you got wrong are the curriculum now.'
+        body:`Your most recent ${isMcat?'FL':'NBME'} sits in the range where targeted weak-system work will move the next score. Until the next form, prioritize wrong-answer review and weak-system content over new question volume. The questions you got wrong are the curriculum now.`
       },
       borderline: {
         title:'At the pass borderline. Forms over content from here.',
-        body:'Scores are close to the line and runway is shrinking. Extract every lesson from each form rather than chasing breadth. The wrong answers from the last two forms outweigh any new content review. Do not skip the consolidation day in each cycle.'
+        body:'Recent scores are close to the line and runway is shrinking. Extract every lesson from each form rather than chasing breadth. The wrong answers from the last two forms outweigh any new content review. Do not skip the consolidation day in each cycle.'
       },
-      reschedule: {
+      reschedule: reason === 'falling' ? {
+        title:'The trajectory is the warning, not the average.',
+        body:`Your latest score has dropped meaningfully from your earlier ones. Even if the average still looks acceptable, the trend is the predictor. Step back to identify whether this is fatigue or a content regression. If it is fatigue: a real rest day, then re-test. If it is content: a reschedule conversation is appropriate.`
+      } : reason === 'no-runway' ? {
+        title:'Limited runway and no upward trajectory.',
+        body:`Scores are at the pass borderline with under two weeks remaining and no strong climb. A reschedule conversation is appropriate. Passing ${examLabel} once matters more than passing it on schedule. Talk to your advisor or program director.`
+      } : {
         title:'A reschedule conversation is appropriate.',
-        body:'Recent scores are below the safety threshold with limited runway. This is not a verdict, but it is a signal. Talk to your advisor or program director. Passing once matters more than passing on schedule. If a reschedule is not possible, the schedule below shifts to highest-yield forms and consolidation only — accept that breadth is not on the table.'
+        body:`Recent scores fall below the safety threshold with limited runway. This is not a verdict. It is a signal. Talk to your advisor. Passing ${examLabel} once matters more than passing it on schedule. If a reschedule is not possible, the schedule below shifts to highest-yield forms and consolidation only.`
       },
     };
 
-    return { state:st, title:COPY[st].title, body:COPY[st].body, _avg:avg, _slope:slope };
+    return { state:st, title:COPY[st].title, body:COPY[st].body, _primary:primary, _slope:slopeRecent, _reason:reason, _category:cat };
   }
 
   // ===========================================
@@ -630,10 +778,10 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
     });
 
     // cycle reference
-    renderCycleRef(sched.cycleLength, input.examType);
+    renderCycleRef(sched.cycleLength, input.examType, input.focusIssue);
 
     // daily list
-    renderDaily(input.examType);
+    renderDaily(input.examType, input.focusIssue);
 
     // show result
     document.getElementById('form-section').style.display = 'none';
@@ -642,7 +790,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
     setTimeout(()=>res.scrollIntoView({behavior:'smooth', block:'start'}), 50);
   }
 
-  function renderCycleRef(cycleLength, examType){
+  function renderCycleRef(cycleLength, examType, focusIssue){
     const REF = {
       3: [
         ['Day 1','<strong>Form day.</strong> Full test conditions. No questions afterward, just a brief evening debrief.'],
@@ -665,26 +813,54 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
     };
     const days = REF[cycleLength];
     const ref = document.getElementById('cycle-ref');
-    ref.innerHTML = days.map(([label, text]) =>
+    let html = days.map(([label, text]) =>
       `<div class="cycle-ref-day"><div class="cycle-ref-label">${label}</div><div class="cycle-ref-text">${text}</div></div>`
     ).join('');
+    if (focusIssue === 'yes' || focusIssue === 'some') {
+      const focusText = focusIssue === 'yes'
+        ? 'Block structure inside each day: <strong>45 minute focus block + 10 minute break</strong>, repeating. Hard stop time at the end of the day (set it, write it, hold it). Single resource per block (no tab-switching). Phone in another room.'
+        : 'Block structure inside each day: <strong>50 minute focus block + 10 minute break</strong>, repeating. Set a hard stop time and hold it. One resource per block.';
+      html += `<div class="cycle-ref-day"><div class="cycle-ref-label" style="color:var(--teal)">Focus</div><div class="cycle-ref-text">${focusText}</div></div>`;
+    }
+    ref.innerHTML = html;
   }
 
-  function renderDaily(examType){
+  function renderDaily(examType, focusIssue){
+    // ADHD / focus adjustment: lower question floor, quality over volume
+    const qbankRange = focusIssue === 'yes'    ? '40 to 80 questions'
+                    : focusIssue === 'some'   ? '50 to 100 questions'
+                    : '60 to 120 questions';
+    const qbankBody = focusIssue === 'yes'
+      ? 'When sustained focus is hard, quality of review beats volume. Forty in 45-minute blocks with full mechanism review beats one hundred half-attended questions. Less than 30 only on form days.'
+      : focusIssue === 'some'
+      ? 'Aim for fifty in your most-focused window of the day. Less than 40 only on form days.'
+      : (examType === 'mcat'
+        ? 'AAMC Section Bank or Q-Pack. 60 is the floor, 120 the ceiling. Less than 40 questions only on full-length days.'
+        : 'UWorld or AMBOSS. 60 is the floor, 120 the ceiling. Less than 40 only on form days.');
+
     const items = examType === 'mcat'
       ? [
-        ['60 to 120 questions', 'AAMC Section Bank or Q-Pack. 60 is the floor, 120 the ceiling. Less than 40 questions only on full-length days.', false],
+        [qbankRange, qbankBody, false],
         ['Section review', 'Even when not on a section bank block, ten to twenty minutes of section-specific review (CARS passage, P/S concept, B/B mechanism). Pattern recognition compounds.', false],
-        ['Sleep, 7+ hours', 'Working memory is the single most fragile component on the MCAT. Cognitive performance after a single sub-six-hour night drops measurably.', true],
+        ['Sleep, 7 to 9 hours', 'Working memory is the single most fragile component on the MCAT. Cognitive performance after a single sub-six-hour night drops measurably.', true],
         ['One full day off per week', 'Not optional. The brain consolidates on rest days. Skipping rest days hurts scores.', true],
       ]
       : [
-        ['60 to 120 questions', 'UWorld or AMBOSS. 60 is the floor, 120 the ceiling. Less than 40 only on form days.', false],
+        [qbankRange, qbankBody, false],
         ['Mehlman HY Arrows', 'Highest leverage-per-hour resource for Step 1 / CBSE pattern recognition. Twenty to thirty arrows daily. If you have not started, this week is reasonable.', false],
         ['Wrong-answer notes', 'Every UWorld or AMBOSS question you miss or guess on goes into a running notes document. Reviewed on consolidation days, not in the moment.', false],
-        ['Sleep, 7+ hours', 'Sleep is the most under-leveraged study tool. Cognitive performance after a single sub-six-hour night drops measurably.', true],
+        ['Sleep, 7 to 9 hours', 'Sleep is the most under-leveraged study tool. Cognitive performance after a single sub-six-hour night drops measurably.', true],
         ['One full day off per week', 'Not optional. The brain consolidates on rest days. Skipping rest days hurts scores.', true],
       ];
+
+    if (focusIssue === 'yes' || focusIssue === 'some') {
+      items.splice(1, 0, [
+        'Hard stop time',
+        'Pick the time studying ends each day before you start. Write it down. Hold it. Open-ended days are how focus difficulty turns into twelve-hour low-yield days. The cycle does not get better by staying longer at the desk.',
+        false
+      ]);
+    }
+
     const list = document.getElementById('daily-list');
     list.innerHTML = items.map(([title, body, optional]) =>
       `<li class="${optional?'optional':''}"><div><strong>${title}.</strong> ${body}</div></li>`
@@ -724,10 +900,13 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
       parseFloat(document.getElementById('score3').value),
     ];
     const weeks = Math.round((startOfDay(new Date(examDate)) - startOfDay(new Date())) / 86400000) / 7;
+    const focusIssue = document.getElementById('focus-issue').value || 'no';
+    const category = document.getElementById('category').value || null;
+    const spacing = document.getElementById('spacing').value || 'unsure';
 
     render({
       examType, examDate, hoursPerDay:hours, qbankPct:qbank, weakSystem,
-      baselineDone, scores, weeksRemaining:weeks,
+      baselineDone, scores, weeksRemaining:weeks, focusIssue, category, spacing,
     });
   });
 
@@ -739,8 +918,10 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
     document.getElementById('form-section').style.display = 'block';
     document.getElementById('schedule-form').reset();
     document.querySelectorAll('.radio-btn').forEach(b=>b.classList.remove('selected'));
-    state = { examType:null, baselineDone:null, lastSchedule:null };
+    state = { examType:null, baselineDone:null, focusIssue:null, category:null, spacing:null, lastSchedule:null };
     document.getElementById('scores-group').style.display = 'none';
+    document.getElementById('spacing-group').style.display = 'none';
+    document.getElementById('category-group').style.display = 'none';
     // Reset the systems dropdown so a different exam type can repopulate it
     document.getElementById('weak-system').innerHTML = '<option value="">Select one</option>';
     ['err-type','err-date','err-hours'].forEach(id => document.getElementById(id).textContent = '');
