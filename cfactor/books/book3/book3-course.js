@@ -324,10 +324,84 @@ function filterNav(q){
 }
 
 /* ---------- BLOCK RENDERERS ---------- */
+
+function fmtFormula(raw){
+ // HTML-safe first, then transform notation into proper symbols/markup
+ var s = raw
+  .replace(/&/g,'&amp;')
+  .replace(/</g,'&lt;')
+  .replace(/>/g,'&gt;');
+ // delta- prefix -> uppercase Delta (changes / differences)
+ s = s.replace(/\bdelta-/gi,'Δ');
+ // Standard-state suffixes
+ s = s.replace(/-naught\b/g,'°').replace(/-standard\b/g,'°');
+ // Greek letters (standalone words only)
+ s = s.replace(/\btheta\b/gi,'θ');
+ s = s.replace(/\bomega\b/gi,'ω');
+ s = s.replace(/\bmu\b/gi,'μ');
+ s = s.replace(/\balpha\b/gi,'α');
+ s = s.replace(/\bbeta\b/gi,'β');
+ s = s.replace(/\bgamma\b/gi,'γ');
+ s = s.replace(/\bepsilon\b/gi,'ε');
+ s = s.replace(/\blambda\b/gi,'λ');
+ s = s.replace(/\bsigma\b/gi,'σ');
+ s = s.replace(/\bphi\b/gi,'φ');
+ s = s.replace(/\bkappa\b/gi,'κ');
+ s = s.replace(/\bnu\b/gi,'ν');
+ s = s.replace(/\brho\b/gi,'ρ');
+ s = s.replace(/\bpi\b/g,'π');
+ // sqrt(expr) -> √(expr)
+ s = s.replace(/sqrt\(([^)]+)\)/g,'√($1)');
+ // Superscripts: ^(expr)  ^-N  ^N  ^letter
+ s = s.replace(/\^\(([^)]+)\)/g,'<sup>$1</sup>');
+ s = s.replace(/\^(-?\d+(?:\.\d+)?)/g,'<sup>$1</sup>');
+ s = s.replace(/\^([a-zA-Z])\b/g,'<sup>$1</sup>');
+ // Ion charge superscripts: Ca2+ Fe3+ Cl- Na+ NAD+ etc.
+ s = s.replace(/([A-Z][a-z]?)(\d+)([+-])/g,'$1<sup>$2$3</sup>');
+ s = s.replace(/([A-Z]{2,})([+-])(?!\d)/g,'$1<sup>$2</sup>');
+ s = s.replace(/([A-Z][a-z]?)([+-])(?=[^a-zA-Z\d])/g,'$1<sup>$2</sup>');
+ // Underscore subscripts: F_net, mu_s, v_0, a_c, etc. (Physics notation)
+ s = s.replace(/_([a-zA-Z0-9]+)/g,'<sub>$1</sub>');
+ // Dash-suffix subscripts for chemistry variable names (no spaces = not subtraction)
+ // Handles: H-f, G-rxn, n-gas, delta-H-f (after delta-> Δ step) etc.
+ s = s.replace(/([A-Za-zΔαβγδεζηθικλμνξπρστυφχψω°])-(f|rxn|gas|atm|vap|fus|sub|crit|tot|total|eq|avg|rms|eff|net|max|min|cat|p|v|n|e|prod|react|sys|surr|univ|ox|red|cell|half|std|acid|base|soln|mix|form|fwd|rev|initial|final)\b/g,'$1<sub>$2</sub>');
+ // Known biochemistry/chemistry constants
+ s = s.replace(/\bVmax\b/g,'V<sub>max</sub>');
+ s = s.replace(/\bKm\b/g,'K<sub>m</sub>');
+ s = s.replace(/\bkcat\b/g,'k<sub>cat</sub>');
+ s = s.replace(/\bpKa\b/g,'pK<sub>a</sub>');
+ s = s.replace(/\bpKb\b/g,'pK<sub>b</sub>');
+ s = s.replace(/\bKsp\b/g,'K<sub>sp</sub>');
+ s = s.replace(/\bKeq\b/g,'K<sub>eq</sub>');
+ s = s.replace(/\bKa\b/g,'K<sub>a</sub>');
+ s = s.replace(/\bKb\b/g,'K<sub>b</sub>');
+ s = s.replace(/\bKw\b/g,'K<sub>w</sub>');
+ s = s.replace(/\bKc\b/g,'K<sub>c</sub>');
+ s = s.replace(/\bKp\b/g,'K<sub>p</sub>');
+ // Chemical formula subscripts: H2O, CO2, CaF2, FADH2, etc.
+ // Uppercase element symbol optionally followed by lowercase, then digit, then non-digit
+ s = s.replace(/([A-Z][a-z]?)(\d)(?=[A-Za-z,\s;.()\[\]+\-]|$)/g,'$1<sub>$2</sub>');
+ // Single-letter lowercase variable + digit: v0, r0, etc. (physics initial conditions)
+ s = s.replace(/\b([a-z])(\d)\b/g,'$1<sub>$2</sub>');
+ // Arrows (already HTML-escaped, so -> is ->  and < became &lt;)
+ s = s.replace(/&lt;-&gt;/g,'⇌');
+ s = s.replace(/&lt;=&gt;/g,'⇌');
+ s = s.replace(/&lt;->/g,'⇌');
+ s = s.replace(/-&gt;/g,'→');
+ s = s.replace(/&lt;-(?!&gt;)/g,'←');
+ s = s.replace(/->/g,'→');
+ // Multiplication and operators
+ s = s.replace(/ x /g,' × ');
+ s = s.replace(/\*/g,'·');
+ s = s.replace(/\+\/-/g,'±');
+ // Approximately
+ s = s.replace(/\s*~\s*/g,' ≈ ');
+ return s;
+}
 function renderBlock(b){
  if(b.t==='p')   return '<p>'+esc(b.x).replace(/\n\n/g,'</p><p>')+'</p>';
  if(b.t==='ul')  return '<ul>'+(b.items||[]).map(function(i){return '<li>'+esc(i)+'</li>';}).join('')+'</ul>';
- if(b.t==='formula') return '<div class="formula">'+esc(b.x)+(b.note?'<span class="fnote">'+esc(b.note)+'</span>':'')+'</div>';
+ if(b.t==='formula') return '<div class="formula">'+fmtFormula(b.x)+(b.note?'<span class="fnote">'+fmtFormula(b.note)+'</span>':'')+'</div>';
  if(b.t==='vbox') return '<div class="vbox"><div class="vhead">'+esc(b.head||'')+'</div>'+(b.html||'')+'</div>';
  if(b.t==='scaffold') return '<div class="scaffold"><div class="scl">▸ COURSE SCAFFOLD · IN PROGRESS</div><p>'+esc(b.x)+'</p></div>';
  if(b.t==='box'){
