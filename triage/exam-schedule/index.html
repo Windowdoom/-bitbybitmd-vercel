@@ -361,6 +361,8 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
       document.getElementById('exam-type').value = t;
       populateSystems(t);
       updateLabels(t);
+      // Clear stale scores when exam type changes (scoring scales differ)
+      ['score1','score2','score3'].forEach(id => document.getElementById(id).value = '');
     });
   });
 
@@ -739,6 +741,9 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
     document.querySelectorAll('.radio-btn').forEach(b=>b.classList.remove('selected'));
     state = { examType:null, baselineDone:null, lastSchedule:null };
     document.getElementById('scores-group').style.display = 'none';
+    // Reset the systems dropdown so a different exam type can repopulate it
+    document.getElementById('weak-system').innerHTML = '<option value="">Select one</option>';
+    ['err-type','err-date','err-hours'].forEach(id => document.getElementById(id).textContent = '');
     window.scrollTo({top:0, behavior:'smooth'});
   });
 
