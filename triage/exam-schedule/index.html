@@ -992,12 +992,26 @@ function buildSchedule(result){
   const pool = FORM_POOLS[state.examType].slice();
   const baseline = result.adjusted || 60;
 
+  // Section 15D: subtract already-taken forms from the pool so they are not re-scheduled
+  const takenIds = new Set((state.assessments || []).map(a => a.formId));
+
   // Reserve final
   let finalForm;
   if (state.examType === "step1" && state.examFormat === "new_2026") finalForm = "Free 120 (2026)";
   else if (state.examType === "step1") finalForm = "Free 120 (2024)";
   else if (state.examType === "mcat") finalForm = "FL5";
   else finalForm = "Form 33";
+  // If the reserved final form has already been taken, fall back to the next-most-predictive untaken form
+  if (takenIds.has(finalForm)) {
+    const fallbacks = {
+      step1: ["Free 120 (2026)","Free 120 (2024)","Form 33","Form 32","Form 31","Form 30"],
+      cbse:  ["Form 33","Form 32","Form 31","Form 30","Form 29"],
+      mcat:  ["FL5","FL4","FL3","FL2","FL1"],
+    };
+    for (const f of (fallbacks[state.examType] || [])) {
+      if (!takenIds.has(f)) { finalForm = f; break; }
+    }
+  }
 
   const cur = new Date(today);
   cur.setDate(cur.getDate() + 7); // first form ~ a week out
@@ -1017,14 +1031,28 @@ function buildSchedule(result){
     order = ["Form 28","Form 29","Form 30","Form 31","Form 32","Form 33"];
   }
 
+  // Section 15D: remove already-taken forms from the rotation
+  order = order.filter(f => !takenIds.has(f) && f !== finalForm);
+
   // Free 120 (2026) early calibration
   let usedFormat = false;
-  if (state.examType === "step1" && state.examFormat === "new_2026" && result.weeks >= 5){
+  if (state.examType === "step1" && state.examFormat === "new_2026" && result.weeks >= 5 && !takenIds.has("Free 120 (2026)")){
     order.unshift("Free 120 (2026)");
     usedFormat = true;
   }
 
+  // If runway emptied the order (every form taken), fall back to a single most-predictive untaken form
+  if (order.length === 0) {
+    const fallbackOrder = state.examType === "mcat"
+      ? ["FL3","FL2","FL1","Sample"]
+      : state.examType === "cbse"
+        ? ["Form 30","Form 29","Form 28","Form 27","Form 26"]
+        : ["Form 32","Form 31","Form 30","Form 29","Form 28","Form 27"];
+    for (const f of fallbackOrder) { if (!takenIds.has(f) && f !== finalForm) { order.push(f); break; } }
+  }
+
   slots.forEach((d, i) => {
+    if (order.length === 0) return; // no untaken forms left to schedule
     const f = order[i % order.length];
     rows.push({ date: d.toISOString().slice(0,10), form: f, note: `Take form. Review every wrong answer same day. Use the next ${cycle-1} days for targeted content in ${labelSystem(state.weakSystem)}.` });
   });
