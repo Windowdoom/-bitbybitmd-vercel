@@ -131,6 +131,23 @@ body.nav-lock{overflow:hidden;}
 .h-trust span{display:flex;align-items:center;gap:6px;}
 .h-trust span::before{content:'✓';color:var(--teal);}
 
+.track-pick{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:1.7rem 0 1.5rem;max-width:600px;}
+.track-card{--tc:var(--teal);position:relative;display:block;padding:1.15rem 1.25rem 1.05rem;border-radius:14px;background:var(--bg-card);border:1px solid var(--border);overflow:hidden;transition:transform .2s cubic-bezier(.4,0,.2,1),border-color .2s,box-shadow .2s;text-decoration:none;}
+.track-card::before{content:'';position:absolute;inset:0;background:radial-gradient(130% 90% at 0% 0%,rgba(255,255,255,.04),transparent 55%);pointer-events:none;}
+.track-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--tc);opacity:.85;}
+.track-card:hover{transform:translateY(-4px);border-color:var(--tc);box-shadow:0 14px 34px rgba(0,0,0,.4);}
+.tc-mcat{--tc:var(--gold);}
+.tc-usmle{--tc:var(--teal);}
+.tc-top{display:flex;align-items:center;gap:9px;margin-bottom:.6rem;}
+.tc-kicker{font-family:var(--mono);font-size:11px;font-weight:bold;letter-spacing:1.2px;color:var(--bg);background:var(--tc);padding:3px 9px;border-radius:6px;}
+.tc-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.6px;color:var(--text-dim);}
+.tc-title{font-family:var(--mono);font-size:15.5px;font-weight:bold;color:var(--text);line-height:1.25;margin-bottom:.45rem;}
+.tc-list{font-size:12px;color:var(--text-muted);line-height:1.6;margin-bottom:.9rem;}
+.tc-cta{font-family:var(--mono);font-size:11.5px;font-weight:bold;letter-spacing:.5px;color:var(--tc);display:flex;align-items:center;gap:7px;}
+.tc-cta span{transition:transform .2s;display:inline-block;}
+.track-card:hover .tc-cta span{transform:translateX(4px);}
+@media(max-width:560px){.track-pick{grid-template-columns:1fr;}}
+
 .mascot-wrap{position:relative;width:175px;flex-shrink:0;text-align:center;}
 .mascot-svg{position:relative;z-index:1;height:215px;margin:0 auto;}
 .mascot-glow{position:absolute;top:40%;left:50%;transform:translate(-50%, -50%);width:160px;height:160px;border-radius:50%;background:radial-gradient(circle, rgba(0, 229, 160, .15) 0%, transparent 70%);animation:gpulse 4s infinite ease-in-out;}
@@ -488,18 +505,27 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
 
 <div id="home" class="hero rev">
  <div>
- <div class="h-badge">FOR US-IMG, FMG &amp; US MD STUDENTS</div>
+ <div class="h-badge">MECHANISM-FIRST PREP · MCAT &amp; USMLE</div>
  <h1 class="h-title">Stop memorizing.<br>Start <em>seeing the pattern.</em></h1>
- <p class="h-sub">Mechanism-first Step 1, CBSE, and COMLEX prep, built by a US-IMG who lived the gauntlet. Master Pivots over buzzwords. Discriminators over disconnected facts. <b>The framework UWorld does not teach you.</b></p>
+ <p class="h-sub">Mechanism-first prep for the <b>MCAT</b> and <b>USMLE Step 1</b>, built by a US-IMG who lived the gauntlet. Master Pivots over buzzwords, discriminators over disconnected facts. <b>The reasoning frameworks the big question banks never teach.</b></p>
  <p class="h-sub" style="margin-top:-.6rem;color:var(--gold);font-family:var(--mono);font-size:13px;letter-spacing:.5px;">Everything below is free. No login, no email.</p>
- <div class="h-btns">
- <a href="#stuck" class="btn-gold" style="display:inline-block;text-decoration:none;">FIND WHERE YOU'RE STUCK · 60 SEC →</a>
- <a href="#free" class="btn-o" style="display:inline-block;text-decoration:none;">See everything free ↓</a>
+ <div class="track-pick">
+  <a href="/cfactor/" class="track-card tc-mcat">
+   <div class="tc-top"><span class="tc-kicker">MCAT</span><span class="tc-tag">The C-Factor Series</span></div>
+   <div class="tc-title">7 interactive books, free</div>
+   <div class="tc-list">Bio · Gen Chem · Orgo · Physics · Psych/Soc · Biochem · Final Review</div>
+   <div class="tc-cta">Start the free course <span>→</span></div>
+  </a>
+  <a href="#stuck" class="track-card tc-usmle">
+   <div class="tc-top"><span class="tc-kicker">USMLE</span><span class="tc-tag">Step 1 · CBSE · COMLEX</span></div>
+   <div class="tc-title">The Step 1 reasoning engine</div>
+   <div class="tc-list">150-question NBME-style exam · 280+ rapid pearls · full Free 120 breakdown</div>
+   <div class="tc-cta">Find where you are stuck <span>→</span></div>
+  </a>
  </div>
- <a href="/free-120/" style="display:inline-block;font-family:var(--mono);font-size:12px;color:var(--text-dim);letter-spacing:.4px;margin:-.4rem 0 1.2rem;">Already know what you need? Open the NBME Free 120 →</a>
  <div class="h-trust">
  <span>IMG built</span>
- <span>No subscription</span>
+ <span>No login, no email</span>
  <span>$30 flat coaching</span>
  </div>
  </div>
