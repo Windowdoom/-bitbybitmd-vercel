@@ -75,12 +75,18 @@
     .footer-links a{font-family:var(--mono);font-size:.68rem;font-weight:300;letter-spacing:.09em;text-transform:uppercase;color:rgba(232,223,200,.38);text-decoration:none;transition:color .2s}
     .footer-links a:hover{color:var(--gold)}
     @media(max-width:640px){nav{padding:0 1.25rem}.nav-links{gap:1rem}.nav-links li:nth-child(3){display:none}.hero,.breadcrumb{padding-left:1.25rem;padding-right:1.25rem}.content{padding-left:1.25rem;padding-right:1.25rem}.testimony{padding:1.5rem 1.25rem}.tools-grid{grid-template-columns:1fr}.contrast-box{grid-template-columns:1fr}}
+
+    .nav-brand-inner { display: flex; align-items: center; gap: 0.625rem; text-decoration: none; }
+    .nav-monogram { width: 28px; height: 28px; border: 1.5px solid var(--gold); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--gold); flex-shrink: 0; }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="/" class="nav-brand">Bit by Bit Pedagogy</a>
+  <a href="/" class="nav-brand nav-brand-inner">
+    <div class="nav-monogram">B&#179;</div>
+    <span>Bit by Bit Pedagogy</span>
+  </a>
   <ul class="nav-links">
     <li><a href="/cfactor/">MCAT</a></li>
     <li><a href="/">Step 1</a></li>

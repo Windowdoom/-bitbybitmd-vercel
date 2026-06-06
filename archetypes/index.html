@@ -97,12 +97,18 @@
 
     @media(max-width:860px){.cards-grid{grid-template-columns:1fr}.archetype-card.full-width{grid-column:auto}}
     @media(max-width:640px){nav{padding:0 1.25rem}.nav-links{gap:1rem}.nav-links li:nth-child(3){display:none}.hero{padding:3.5rem 1.25rem 3rem}.cards-section{padding:3rem 1.25rem}.cta-inner{padding:3.5rem 1.25rem}.breadcrumb{padding:1rem 1.25rem}.archetype-card{padding:1.75rem}}
+
+    .nav-brand-inner { display: flex; align-items: center; gap: 0.625rem; text-decoration: none; }
+    .nav-monogram { width: 28px; height: 28px; border: 1.5px solid var(--gold); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--gold); flex-shrink: 0; }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="/" class="nav-brand">Bit by Bit Pedagogy</a>
+  <a href="/" class="nav-brand nav-brand-inner">
+    <div class="nav-monogram">B&#179;</div>
+    <span>Bit by Bit Pedagogy</span>
+  </a>
   <ul class="nav-links">
     <li><a href="/cfactor/">MCAT</a></li>
     <li><a href="/">Step 1</a></li>
