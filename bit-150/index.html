@@ -3,20 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bit 150 Exam - Bit by Bit Pedagogy</title>
-<meta name="description" content="The Bit 150 mechanism-first practice exam. 150 NBME-style questions across 8 blocks. Choose timed mode for exam simulation or tutor mode for instant Master Pivot explanations.">
+<title>Bit 150 — Free 150-Question NBME-Style Practice Exam with Exam Mode | Bit by Bit Pedagogy</title>
+<meta name="description" content="The Bit 150: a free 150-question NBME-style practice exam in 8 blocks. Tutor mode for instant Master Pivot explanations, timed mode with 30-min NBME pacing, and an opt-in Exam Mode that locks the browser into full-screen and tracks focus breaks. No login. No email.">
+<meta name="keywords" content="USMLE Step 1 practice exam, NBME-style questions, free USMLE practice test, mechanism-first questions, Master Pivot, Bit 150, exam mode, lockdown browser practice">
 <link rel="canonical" href="https://bitbybitmd.com/bit-150/">
-<meta property="og:title" content="Bit 150 Exam - Bit by Bit Pedagogy">
-<meta property="og:description" content="The Bit 150 mechanism-first practice exam. 150 NBME-style questions across 8 blocks. Choose timed mode for exam simulation or tutor mode for instant Master Pivot explanations.">
+<meta property="og:title" content="Bit 150 — Free 150-Question NBME-Style Practice Exam | Bit by Bit Pedagogy">
+<meta property="og:description" content="Free 150-question NBME-style practice exam in 8 blocks. Tutor mode for instant Master Pivot explanations, timed mode with 30-min pacing, lockdown Exam Mode. No login.">
 <meta property="og:url" content="https://bitbybitmd.com/bit-150/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Bit by Bit Pedagogy">
 <meta property="og:image" content="https://bitbybitmd.com/bit-mascot.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Bit 150 Exam - Bit by Bit Pedagogy">
-<meta name="twitter:description" content="The Bit 150 mechanism-first practice exam. 150 NBME-style questions across 8 blocks. Choose timed mode for exam simulation or tutor mode for instant Master Pivot explanations.">
+<meta name="twitter:title" content="Bit 150 — Free 150-Question NBME-Style Practice Exam | Bit by Bit Pedagogy">
+<meta name="twitter:description" content="Free 150-question NBME-style practice exam in 8 blocks. Tutor or timed mode, lockdown Exam Mode, Master Pivot explanations. No login.">
 <meta name="twitter:image" content="https://bitbybitmd.com/bit-mascot.png">
-<meta name="robots" content="noindex">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Quiz","name":"Bit 150 Practice Exam","about":"USMLE Step 1 / CBSE practice","educationalLevel":"undergraduate medical education","numberOfQuestions":150,"isAccessibleForFree":true,"learningResourceType":"Practice exam","publisher":{"@type":"Organization","name":"Bit by Bit Pedagogy"},"url":"https://bitbybitmd.com/bit-150/"}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -92,6 +93,10 @@ button{font-family:inherit;cursor:pointer;color:inherit;background:transparent;b
 .blockbtn{background:var(--bg-card);border:1px solid var(--border);color:var(--cream-dim);border-radius:10px;padding:.9rem .4rem .8rem;font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.03em;transition:all .2s cubic-bezier(.22,1,.36,1);position:relative;}
 .blockbtn:hover{border-color:var(--gold-line);color:var(--cream);transform:translateY(-1px);}
 .blockbtn.sel{background:linear-gradient(180deg,var(--gold-soft),transparent);color:var(--gold);border-color:var(--gold);font-weight:600;box-shadow:inset 0 -2px 0 var(--gold);}
+.blockbtn.done{border-color:rgba(0,229,160,.32);color:var(--teal);background:rgba(0,229,160,.03);}
+.blockbtn.done .bn{color:var(--teal);}
+.blockbtn.done.sel{background:linear-gradient(180deg,var(--gold-soft),transparent);color:var(--gold);border-color:var(--gold);}
+.blockbtn.done.sel .bn{color:var(--gold);}
 .blockbtn .bn{display:block;font-family:var(--serif);font-style:italic;font-weight:400;font-size:18px;line-height:1;margin-bottom:.25rem;color:var(--cream-dimmer);}
 .blockbtn:hover .bn{color:var(--cream);}
 .blockbtn.sel .bn{color:var(--gold);}
@@ -117,6 +122,16 @@ button{font-family:inherit;cursor:pointer;color:inherit;background:transparent;b
 .btn-p:disabled{opacity:.35;cursor:not-allowed;background:rgba(245,166,35,.18);color:var(--cream-dim);box-shadow:none;}
 .startrow{text-align:center;margin-bottom:3.5rem;margin-top:.8rem;}
 .startrow .hint{display:block;margin-top:.9rem;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-dimmer);}
+
+/* resume bar */
+.resume{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.1rem 1.3rem;border:1px solid var(--gold-line);background:linear-gradient(180deg,var(--gold-soft),transparent 80%);border-radius:12px;margin:0 0 1.5rem;flex-wrap:wrap;}
+.resume .rt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:.25rem;}
+.resume .rd{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--cream);font-weight:400;line-height:1.4;}
+.resume .rb{display:flex;gap:.5rem;flex-wrap:wrap;}
+.resume-btn{background:var(--gold);color:#1a0f00;border:none;padding:9px 18px;border-radius:99px;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:filter .2s,transform .2s;}
+.resume-btn:hover{filter:brightness(1.06);transform:translateY(-1px);}
+.resume-btn.alt{background:transparent;color:var(--cream-dim);border:1px solid var(--border-bright);}
+.resume-btn.alt:hover{color:var(--cream);border-color:var(--gold-line);}
 
 /* ===== exam runner ===== */
 .examtop{display:flex;justify-content:space-between;align-items:center;padding:14px 1.5rem;background:rgba(13,27,46,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;flex-wrap:wrap;gap:.8rem;position:sticky;top:0;z-index:40;}
@@ -247,6 +262,17 @@ body.exam-mode{cursor:default;}
    <p class="lede">Mechanism-first practice across 16 systems. Every explanation leads with the Master Pivot. Pick how you want to run it.</p>
   </div>
 
+  <div class="resume" id="resumeBar" style="display:none;">
+   <div class="rc">
+    <div class="rt">Pick up where you left off</div>
+    <div class="rd" id="resumeDesc">Block 1, question 5</div>
+   </div>
+   <div class="rb">
+    <button class="resume-btn" onclick="resumeSession()">Resume →</button>
+    <button class="resume-btn alt" onclick="discardSession()">Start fresh</button>
+   </div>
+  </div>
+
   <div class="modes">
    <button class="mode-card" id="mode-tutor" onclick="selectMode('tutor')">
     <div class="mc-num">I.</div>
@@ -347,7 +373,23 @@ const NUM_BLOCKS = Math.ceil(Q.length / BLOCK_SIZE);
 const LTR = ['A','B','C','D','E','F','G','H'];
 
 const ROMAN = ['','I.','II.','III.','IV.','V.','VI.','VII.','VIII.'];
-let S = { mode:null, block:0, idx:0, answers:{}, marks:{}, timerId:null, timeLeft:BLOCK_TIME, examMode:false, focusBreaks:0, examActive:false };
+const LSKEY = 'bbb-bit150-v1';
+let S = { mode:null, block:0, idx:0, answers:{}, marks:{}, timerId:null, timeLeft:BLOCK_TIME, examMode:false, focusBreaks:0, examActive:false, completedBlocks:{} };
+
+/* ---------- progress persistence ---------- */
+function saveProgress(){
+ try{
+  const snap = { block:S.block, idx:S.idx, mode:S.mode, answers:S.answers, marks:S.marks, examMode:S.examMode, completedBlocks:S.completedBlocks, focusBreaks:S.focusBreaks, lastTouched:Date.now() };
+  localStorage.setItem(LSKEY, JSON.stringify(snap));
+ }catch(e){}
+}
+function loadProgress(){
+ try{
+  const raw=localStorage.getItem(LSKEY); if(!raw) return null;
+  return JSON.parse(raw);
+ }catch(e){ return null; }
+}
+function clearProgress(){ try{ localStorage.removeItem(LSKEY); }catch(e){} }
 
 /* ---------- home / setup ---------- */
 function buildBlockGrid(){
@@ -357,8 +399,10 @@ function buildBlockGrid(){
   const start=b*BLOCK_SIZE;
   const count=Math.min(BLOCK_SIZE, Q.length-start);
   const btn=document.createElement('button');
-  btn.className='blockbtn'+(b===S.block?' sel':'');
-  btn.innerHTML=`<span class="bn">${ROMAN[b+1]||(b+1+'.')}</span><span>${count} Qs</span>`;
+  const cls='blockbtn'+(b===S.block?' sel':'')+(S.completedBlocks[b]?' done':'');
+  btn.className=cls;
+  const tag = S.completedBlocks[b] ? '✓ done' : count+' Qs';
+  btn.innerHTML=`<span class="bn">${ROMAN[b+1]||(b+1+'.')}</span><span>${tag}</span>`;
   btn.onclick=()=>{ S.block=b; buildBlockGrid(); if(S.mode) selectMode(S.mode); };
   g.appendChild(btn);
  }
@@ -501,11 +545,13 @@ function pick(i){
  const k=aKey(S.idx);
  const q=blockQs()[S.idx];
  S.answers[k]={pick:i, correct:i===q.a};
+ saveProgress();
  render(); // tutor reveals; timed just highlights selection
 }
 function toggleMark(){
  const k=aKey(S.idx);
  S.marks[k]=!S.marks[k];
+ saveProgress();
  render();
 }
 function paintPips(){
@@ -545,6 +591,8 @@ function endBlock(timeUp){
 
 /* ---------- review ---------- */
 function showReview(){
+ S.completedBlocks[S.block]=true;
+ saveProgress();
  const qs=blockQs();
  let correct=0, wTot=0, wCor=0;
  qs.forEach((q,i)=>{
@@ -604,8 +652,65 @@ function nextBlock(){
 }
 function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
+/* ---------- resume ---------- */
+function resumeSession(){
+ const snap = loadProgress(); if(!snap) return;
+ S.block = snap.block||0;
+ S.idx = snap.idx||0;
+ S.mode = snap.mode||null;
+ S.answers = snap.answers||{};
+ S.marks = snap.marks||{};
+ S.examMode = !!snap.examMode;
+ S.completedBlocks = snap.completedBlocks||{};
+ S.focusBreaks = snap.focusBreaks||0;
+ document.getElementById('examOpt').classList.toggle('on', S.examMode);
+ buildBlockGrid();
+ if(S.mode){ selectMode(S.mode); }
+ document.getElementById('resumeBar').style.display='none';
+ // jump back into runner if there is meaningful state
+ if(Object.keys(S.answers).length>0 && S.mode){
+  document.getElementById('tmr').style.display = (S.mode==='timed'?'flex':'none');
+  if(S.mode==='timed') startTimer();
+  showScreen('exam');
+  if(S.examMode) enterExamMode();
+  render();
+ }
+}
+function discardSession(){
+ clearProgress();
+ S = { mode:null, block:0, idx:0, answers:{}, marks:{}, timerId:null, timeLeft:BLOCK_TIME, examMode:false, focusBreaks:0, examActive:false, completedBlocks:{} };
+ document.getElementById('examOpt').classList.remove('on');
+ document.getElementById('startHint').style.display='none';
+ const btn=document.getElementById('startBtn');
+ btn.disabled=true; btn.textContent='Select a mode to start';
+ document.getElementById('resumeBar').style.display='none';
+ buildBlockGrid();
+}
+function maybeShowResume(){
+ const snap = loadProgress();
+ if(!snap || !snap.mode) return;
+ const answered = Object.keys(snap.answers||{}).length;
+ const completed = Object.keys(snap.completedBlocks||{}).length;
+ if(answered===0 && completed===0) return;
+ const desc = [];
+ if(completed>0) desc.push(`${completed} block${completed>1?'s':''} done`);
+ if(answered>0 && (!snap.completedBlocks || !snap.completedBlocks[snap.block])){
+  desc.push(`Block ${(snap.block||0)+1}, question ${(snap.idx||0)+1}`);
+ }
+ document.getElementById('resumeDesc').textContent = desc.join(' · ') || 'Last saved a moment ago';
+ document.getElementById('resumeBar').style.display='flex';
+}
+
 /* ---------- init ---------- */
-buildBlockGrid();
+(function init(){
+ const snap = loadProgress();
+ if(snap){
+  if(snap.completedBlocks) S.completedBlocks = snap.completedBlocks;
+  if(typeof snap.block==='number') S.block = snap.block;
+ }
+ buildBlockGrid();
+ maybeShowResume();
+})();
 </script>
 
 <div style="max-width:760px;margin:2.5rem auto 1rem;padding:0 1.25rem;text-align:center;">

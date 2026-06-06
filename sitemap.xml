@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://bitbybitmd.com/bit-150/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bitbybitmd.com/archetypes/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://bitbybitmd.com/bit-150/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://bitbybitmd.com/bits/acute-coronary-syndromes.html</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://bitbybitmd.com/bits/aki-types.html</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://bitbybitmd.com/bits/aml-all-cml-cll.html</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
@@ -80,10 +81,10 @@
   <url><loc>https://bitbybitmd.com/cfactor/pivot/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://bitbybitmd.com/cfactor/schedule/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://bitbybitmd.com/cfactor/syllabus/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://bitbybitmd.com/differentiators.html</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bitbybitmd.com/differentiators.html</loc><lastmod>2026-06-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://bitbybitmd.com/free-120/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://bitbybitmd.com/habit-reset.html</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://bitbybitmd.com/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://bitbybitmd.com/habit-reset.html</loc><lastmod>2026-06-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bitbybitmd.com/index.html</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://bitbybitmd.com/method/48-hour-revisit.html</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://bitbybitmd.com/method/cgw-triage.html</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://bitbybitmd.com/method/concept-anchor.html</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
@@ -94,9 +95,24 @@
   <url><loc>https://bitbybitmd.com/method/phased-roadmap.html</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://bitbybitmd.com/method/pivot-word.html</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://bitbybitmd.com/method/two-daily-systems.html</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://bitbybitmd.com/nbme-traps.html</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://bitbybitmd.com/pivot-sheet/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bitbybitmd.com/nbme-traps.html</loc><lastmod>2026-06-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bitbybitmd.com/pivot-sheet/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://bitbybitmd.com/plan.html</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://bitbybitmd.com/terms/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://bitbybitmd.com/triage/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bitbybitmd.com/schedule/</loc><lastmod>2026-06-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bitbybitmd.com/terms/</loc><lastmod>2026-06-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bitbybitmd.com/the-coaster/</loc><lastmod>2026-06-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bitbybitmd.com/the-collector/</loc><lastmod>2026-06-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bitbybitmd.com/the-drowner/</loc><lastmod>2026-06-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bitbybitmd.com/the-memorizer/</loc><lastmod>2026-06-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bitbybitmd.com/the-perfectionist/</loc><lastmod>2026-06-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bitbybitmd.com/tools/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://bitbybitmd.com/triage/24hr-reset/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://bitbybitmd.com/triage/catastrophe-audit/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://bitbybitmd.com/triage/exam-schedule/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://bitbybitmd.com/triage/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://bitbybitmd.com/triage/pivot-pair-finder/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://bitbybitmd.com/triage/pre-sleep-download/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://bitbybitmd.com/triage/recall-sprint/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://bitbybitmd.com/triage/spiral-stop/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://bitbybitmd.com/triage/stack-recommender/</loc><lastmod>2026-06-06</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
 </urlset>
