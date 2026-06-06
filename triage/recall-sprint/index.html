@@ -1,0 +1,2016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recall Sprint | Bit by Bit Pedagogy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D1B2E;
+    --gold: #F5A623;
+    --teal: #00E5A0;
+    --cream: #e8dfc8;
+    --border: rgba(248,245,235,.1);
+    --bg-card: rgba(255,255,255,.04);
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 400;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+    padding: 0 2rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(13,27,46,.96);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--cream);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 300;
+    font-size: 0.75rem;
+    color: rgba(232,223,200,.6);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+  }
+
+  /* ---- Banners ---- */
+  .banner {
+    background: rgba(245,166,35,.06);
+    border: 1px solid rgba(245,166,35,.2);
+    border-radius: 4px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .banner-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: var(--gold);
+  }
+
+  .banner-actions {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  /* ---- System Selector ---- */
+  #screen-selector { display: block; }
+  #screen-sprint { display: none; }
+  #screen-reveal { display: none; }
+  #screen-wrap { display: none; }
+
+  .page-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .page-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 2.6rem;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .page-header p {
+    font-size: 1.15rem;
+    color: rgba(232,223,200,.65);
+    font-weight: 300;
+    max-width: 580px;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(232,223,200,.4);
+    margin-bottom: 1rem;
+  }
+
+  .systems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .system-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--cream);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 300;
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.15s, background 0.15s;
+    line-height: 1.4;
+  }
+
+  .system-btn:hover {
+    border-color: rgba(245,166,35,.35);
+    background: rgba(245,166,35,.05);
+    color: var(--gold);
+  }
+
+  .system-btn.active {
+    border-color: var(--gold);
+    background: rgba(245,166,35,.08);
+    color: var(--gold);
+  }
+
+  .surprise-btn {
+    border: 1px dashed rgba(0,229,160,.35);
+    background: rgba(0,229,160,.04);
+    color: var(--teal);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 400;
+    padding: 0.8rem 1.5rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.15s;
+    margin-bottom: 2rem;
+  }
+
+  .surprise-btn:hover {
+    background: rgba(0,229,160,.08);
+  }
+
+  /* ---- Sprint screen ---- */
+  .sprint-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .sprint-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .topic-system-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(232,223,200,.4);
+    background: rgba(255,255,255,.04);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+  }
+
+  .timer-display {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    transition: color 0.3s;
+  }
+
+  .timer-display.danger { color: #ff6b6b; }
+  .timer-display.paused { opacity: 0.5; }
+
+  .sprint-topic {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .sprint-stem {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: rgba(232,223,200,.6);
+    margin-bottom: 1.5rem;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 200px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--cream);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 300;
+    padding: 1rem 1.25rem;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+    line-height: 1.7;
+  }
+
+  textarea:focus { border-color: rgba(245,166,35,.3); }
+  textarea::placeholder { color: rgba(232,223,200,.2); font-style: italic; }
+
+  .sprint-controls {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.7rem 1.4rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: #0D1B2E;
+  }
+
+  .btn-primary:hover { background: #f0b84e; }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover { background: var(--bg-card); border-color: rgba(232,223,200,.25); }
+
+  .btn-teal {
+    background: transparent;
+    color: var(--teal);
+    border: 1px solid rgba(0,229,160,.3);
+  }
+
+  .btn-teal:hover { background: rgba(0,229,160,.06); }
+
+  .timer-ended-note {
+    display: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: rgba(232,223,200,.5);
+    margin-top: 0.75rem;
+  }
+
+  /* ---- Reveal screen ---- */
+  .reveal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .reveal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: var(--cream);
+  }
+
+  .time-used-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: rgba(232,223,200,.5);
+  }
+
+  .reveal-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .reveal-col h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(232,223,200,.4);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .student-notes {
+    background: rgba(255,255,255,.03);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1.25rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(232,223,200,.8);
+    white-space: pre-wrap;
+    min-height: 200px;
+  }
+
+  .student-notes.empty {
+    color: rgba(232,223,200,.25);
+    font-style: italic;
+  }
+
+  .model-answer {
+    background: rgba(245,166,35,.04);
+    border: 1px solid rgba(245,166,35,.12);
+    border-radius: 3px;
+    padding: 1.25rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(232,223,200,.85);
+  }
+
+  .model-answer h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 1rem 0 0.4rem;
+  }
+
+  .model-answer h4:first-child { margin-top: 0; }
+
+  .model-answer ul {
+    padding-left: 1.1rem;
+    margin: 0;
+  }
+
+  .model-answer li {
+    margin-bottom: 0.25rem;
+    font-size: 0.95rem;
+  }
+
+  /* ---- Self grade ---- */
+  .grade-section {
+    margin-bottom: 2rem;
+  }
+
+  .grade-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(232,223,200,.4);
+    margin-bottom: 0.75rem;
+  }
+
+  .grade-buttons {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .grade-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 400;
+    padding: 0.6rem 1.1rem;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: rgba(232,223,200,.65);
+    transition: all 0.15s;
+  }
+
+  .grade-btn:hover { border-color: rgba(232,223,200,.3); color: var(--cream); }
+  .grade-btn.selected-nailed { border-color: var(--teal); background: rgba(0,229,160,.08); color: var(--teal); }
+  .grade-btn.selected-mostly { border-color: var(--gold); background: rgba(245,166,35,.08); color: var(--gold); }
+  .grade-btn.selected-missed { border-color: rgba(255,166,100,.6); background: rgba(255,166,100,.06); color: #ffb366; }
+  .grade-btn.selected-blank  { border-color: rgba(255,100,100,.5); background: rgba(255,100,100,.05); color: #ff8080; }
+
+  /* ---- Session wrap ---- */
+  .wrap-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .wrap-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 2rem;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+
+  .wrap-title em { color: var(--gold); font-style: italic; }
+
+  .wrap-subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: rgba(232,223,200,.45);
+    margin-bottom: 2rem;
+  }
+
+  .grade-breakdown {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .grade-chip {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(255,255,255,.04);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    min-width: 80px;
+  }
+
+  .grade-chip-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(232,223,200,.4);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .grade-chip-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--cream);
+  }
+
+  .struggled-panel {
+    background: rgba(255,100,100,.04);
+    border: 1px solid rgba(255,100,100,.12);
+    border-radius: 3px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .struggled-panel h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,160,100,.7);
+    margin-bottom: 0.75rem;
+  }
+
+  .struggled-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .struggled-list li {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: rgba(232,223,200,.7);
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,100,100,.15);
+    padding: 0.3rem 0.7rem;
+    border-radius: 2px;
+  }
+
+  .covered-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .covered-list li {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: rgba(232,223,200,.6);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .covered-list li::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+
+  .triage-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: rgba(232,223,200,.4);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+    margin-top: 1.5rem;
+  }
+
+  .triage-link:hover { color: var(--gold); }
+
+  @media (max-width: 680px) {
+    nav { padding: 1rem; }
+    .nav-links { gap: 1.25rem; }
+    .nav-links a { font-size: 0.65rem; }
+    main { padding: 2rem 1rem 4rem; }
+    .page-header h1 { font-size: 1.9rem; }
+    .reveal-columns { grid-template-columns: 1fr; }
+    .systems-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+    .sprint-topic { font-size: 1.4rem; }
+  }
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
+.footer-inner{max-width:760px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:.95rem;color:rgba(232,223,200,.4)}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+.footer-links a{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:300;letter-spacing:.09em;text-transform:uppercase;color:rgba(232,223,200,.35);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--gold)}
+
+.nav-brand-inner { display: flex; align-items: center; gap: 0.625rem; text-decoration: none; }
+.nav-monogram { width: 28px; height: 28px; border: 1.5px solid var(--gold); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; color: var(--gold); flex-shrink: 0; }
+
+/* unified animations */
+@keyframes bbbFadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.btn, button:not(.chip){will-change:transform;transition:transform 200ms cubic-bezier(0.22, 1, 0.36, 1), background 200ms ease, border-color 200ms ease, color 200ms ease, opacity 200ms ease}
+.btn:active, button:not(.chip):active{transform:translateY(1px) scale(.985)}
+.chip{transition:transform 180ms cubic-bezier(0.22, 1, 0.36, 1), border-color 200ms ease, background 200ms ease, color 200ms ease}
+.chip:active{transform:scale(.96)}
+.option-btn{transition:transform 200ms cubic-bezier(0.22, 1, 0.36, 1), border-color 200ms ease, background 200ms ease, color 200ms ease}
+.option-btn:active{transform:scale(.99)}
+
+.bbb-disclaimer{margin:2rem 0 0;padding:1.25rem 1.5rem;border:1px solid var(--border);border-left:3px solid var(--cream-faint, rgba(232,223,200,.4));border-radius:6px;background:var(--bg-card);font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:.95rem;line-height:1.65;color:rgba(232,223,200,.6)}
+.bbb-disclaimer strong{font-weight:600;font-style:italic;color:rgba(232,223,200,.78)}
+.bbb-disclaimer a{color:var(--gold, #F5A623);text-decoration:none;border-bottom:1px dotted rgba(245,166,35,.35);transition:border-color .2s}
+.bbb-disclaimer a:hover{border-bottom-color:var(--gold, #F5A623)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand nav-brand-inner">
+    <div class="nav-monogram">B&#179;</div>
+    <span>Bit by Bit Pedagogy</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/cfactor/">MCAT</a></li>
+    <li><a href="/">Step 1</a></li>
+    <li><a href="/triage/">Find your pattern</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div id="resurface-banner" style="display:none" class="banner">
+    <span class="banner-text" id="resurface-text"></span>
+    <div class="banner-actions">
+      <button class="btn btn-primary" id="btn-resurface-yes">Review flagged topics first</button>
+      <button class="btn btn-secondary" id="btn-resurface-no">Start fresh</button>
+    </div>
+  </div>
+
+  <!-- SELECTOR SCREEN -->
+  <div id="screen-selector">
+    <div class="page-header">
+      <h1>Recall <em>sprint</em></h1>
+      <p>Pick a system. Type everything you know in 60 seconds. Then compare against the model answer. No scoring algorithm, just honest self-assessment.</p>
+    </div>
+
+    <div class="section-label">Choose a system</div>
+    <div class="systems-grid" id="systems-grid"></div>
+    <button class="surprise-btn" id="btn-surprise">Surprise me (random topic)</button>
+  </div>
+
+  <!-- SPRINT SCREEN -->
+  <div id="screen-sprint">
+    <div class="sprint-card">
+      <div class="sprint-meta">
+        <span class="topic-system-tag" id="sprint-system-tag"></span>
+        <div class="timer-display" id="timer-display">1:00</div>
+      </div>
+      <div class="sprint-topic" id="sprint-topic"></div>
+      <div class="sprint-stem">Tell me everything you know about this topic.</div>
+      <textarea id="sprint-textarea" placeholder="Start typing. No editing, no backspace anxiety - just write what comes to mind..."></textarea>
+      <div class="timer-ended-note" id="timer-ended-note">Time is up. When ready, compare your notes to the model answer.</div>
+      <div class="sprint-controls">
+        <button class="btn btn-primary" id="btn-reveal" style="display:none">Reveal model answer</button>
+        <button class="btn btn-secondary" id="btn-pause">Pause</button>
+        <button class="btn btn-secondary" id="btn-skip">Skip topic</button>
+        <button class="btn btn-secondary" id="btn-back-selector">Back to systems</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- REVEAL SCREEN -->
+  <div id="screen-reveal">
+    <div class="reveal-header">
+      <div class="reveal-title" id="reveal-title"></div>
+      <div class="time-used-badge" id="time-used-badge"></div>
+    </div>
+
+    <div class="reveal-columns">
+      <div class="reveal-col">
+        <h3>Your notes</h3>
+        <div class="student-notes" id="student-notes-display"></div>
+      </div>
+      <div class="reveal-col">
+        <h3>Model answer</h3>
+        <div class="model-answer" id="model-answer-display"></div>
+      </div>
+    </div>
+
+    <div class="grade-section">
+      <div class="grade-label">How did you do?</div>
+      <div class="grade-buttons">
+        <button class="grade-btn" data-grade="nailed">Nailed it</button>
+        <button class="grade-btn" data-grade="mostly">Mostly there</button>
+        <button class="grade-btn" data-grade="missed">Missed key points</button>
+        <button class="grade-btn" data-grade="blank">Blank</button>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:0.75rem;flex-wrap:wrap">
+      <button class="btn btn-primary" id="btn-next-same">Next topic (same system)</button>
+      <button class="btn btn-secondary" id="btn-next-random">Random topic</button>
+      <button class="btn btn-secondary" id="btn-change-system">Change system</button>
+    </div>
+  </div>
+
+  <!-- WRAP SCREEN -->
+  <div id="screen-wrap">
+    <div class="wrap-card">
+      <div class="wrap-title">Session <em>wrap-up</em></div>
+      <div class="wrap-subtitle" id="wrap-subtitle"></div>
+
+      <div class="grade-breakdown" id="wrap-grade-breakdown"></div>
+
+      <div class="section-label">Topics covered this session</div>
+      <ul class="covered-list" id="covered-list"></ul>
+
+      <div class="struggled-panel" id="struggled-panel" style="display:none">
+        <h3>You struggled with these</h3>
+        <ul class="struggled-list" id="struggled-list"></ul>
+      </div>
+
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.5rem">
+        <button class="btn btn-primary" id="btn-tomorrow">Flag these for tomorrow</button>
+        <button class="btn btn-secondary" id="btn-keep-going">Keep going</button>
+        <button class="btn btn-secondary" id="btn-new-session">New session</button>
+      </div>
+    </div>
+
+    <a href="/triage/" class="triage-link">Find your study pattern <span>&#8594;</span></a>
+  </div>
+
+<aside class="bbb-disclaimer"><strong>Self-grading is honest data, not a verdict.</strong> A poor sprint on one topic is information about that topic, not about you. If sprint scores consistently undershoot how you feel on questions, talk to your advisor about whether you are testing recall when you should be testing reasoning.</aside>
+</main>
+
+<script>
+(function() {
+
+  // ---- Topic data ----
+  const TOPICS = [
+    // Cardiovascular
+    {
+      system: 'Cardiovascular', key: 'cv1',
+      title: 'Aortic stenosis',
+      answer: `<h4>Pathophysiology</h4><ul>
+        <li>Obstruction to LV outflow causes pressure overload</li>
+        <li>Concentric LV hypertrophy: increased wall thickness, maintained cavity size</li>
+        <li>Reduced compliance leads to diastolic dysfunction, then systolic failure late</li>
+        <li>Classic triad of late disease: angina, syncope, heart failure (each adds ~2 years median survival)</li>
+      </ul><h4>Murmur</h4><ul>
+        <li>Crescendo-decrescendo systolic ejection murmur at RUSB</li>
+        <li>Radiates to carotids. Pulsus parvus et tardus (weak, slow carotid upstroke)</li>
+        <li>S4 from stiff LV. S2 soft or paradoxically split</li>
+        <li>Murmur louder with squatting and leg raise (increased preload)</li>
+      </ul><h4>Management ladder</h4><ul>
+        <li>Mild/moderate: surveillance echo q3-5y; exercise restriction if symptomatic</li>
+        <li>Severe asymptomatic: monitor, surgery when symptoms appear or EF drops</li>
+        <li>Severe symptomatic: AVR (surgical) or TAVR (transcatheter for high surgical risk)</li>
+        <li>No medical therapy delays disease; diuretics cautiously for CHF symptoms only</li>
+      </ul>`,
+    },
+    {
+      system: 'Cardiovascular', key: 'cv2',
+      title: 'Heart failure with reduced EF',
+      answer: `<h4>Mechanism</h4><ul>
+        <li>Reduced LVEF (under 40%): impaired systolic function, eccentric hypertrophy</li>
+        <li>Decreased CO triggers neurohormonal activation: RAAS, SNS, ADH</li>
+        <li>Leads to Na/water retention, vasoconstriction, maladaptive remodeling</li>
+      </ul><h4>Compensatory mechanisms</h4><ul>
+        <li>Starling response: increased EDV increases stroke volume (short-term helpful)</li>
+        <li>Sympathetic activation: tachycardia and vasoconstriction (short-term helpful, long-term harmful)</li>
+        <li>RAAS: volume expansion (harmful long-term: fibrosis, further remodeling)</li>
+      </ul><h4>Drug classes and targets</h4><ul>
+        <li>ACEi / ARB: block RAAS, reduce afterload and remodeling - proven mortality benefit</li>
+        <li>Beta-blockers (carvedilol, metoprolol succinate): block SNS, improve EF - proven mortality benefit</li>
+        <li>Aldosterone antagonists (spironolactone): block mineralocorticoid effects</li>
+        <li>SGLT2 inhibitors (dapagliflozin, empagliflozin): newest mortality benefit agents</li>
+        <li>Loop diuretics: symptom relief only; do not improve mortality</li>
+        <li>Hydralazine + nitrates: alternative if ACEi/ARB not tolerated (especially in Black patients)</li>
+      </ul>`,
+    },
+    {
+      system: 'Cardiovascular', key: 'cv3',
+      title: 'Atrial fibrillation',
+      answer: `<h4>Mechanism</h4><ul>
+        <li>Chaotic atrial depolarization from multiple micro-reentry circuits</li>
+        <li>Loss of organized P waves; irregularly irregular rhythm</li>
+        <li>AV node filters most impulses; ventricular response rate 100-160 bpm if uncontrolled</li>
+        <li>Loss of atrial kick reduces CO by ~15-20%; poorly tolerated with diastolic dysfunction</li>
+      </ul><h4>Rate vs rhythm control</h4><ul>
+        <li>Rate control: beta-blockers, CCBs (diltiazem), digoxin - first line for most</li>
+        <li>Rhythm control: cardioversion (electrical or pharmacologic), antiarrhythmics (amiodarone, flecainide)</li>
+        <li>AFFIRM trial: rate = rhythm control for mortality; rhythm preferred if symptomatic or young</li>
+      </ul><h4>Anticoagulation - CHA2DS2-VASc</h4><ul>
+        <li>C: CHF, H: HTN, A: age 75+ (2pts), D: DM, S: Stroke/TIA (2pts), V: vascular disease, A: age 65-74, Sc: sex category female</li>
+        <li>Men: anticoagulate if score 2+; Women: score 3+</li>
+        <li>DOACs preferred over warfarin (except valvular AF / CrCl under 15)</li>
+      </ul>`,
+    },
+    {
+      system: 'Cardiovascular', key: 'cv4',
+      title: 'Hypertrophic cardiomyopathy',
+      answer: `<h4>Genetics</h4><ul>
+        <li>Autosomal dominant; sarcomere protein mutations (beta-myosin heavy chain most common, myosin-binding protein C)</li>
+        <li>Most common genetic cardiomyopathy; leading cause of sudden death in young athletes</li>
+      </ul><h4>Hemodynamics</h4><ul>
+        <li>Asymmetric septal hypertrophy causes dynamic LVOT obstruction</li>
+        <li>SAM (systolic anterior motion) of mitral valve worsens obstruction</li>
+        <li>Obstruction worsened by: decreased preload, decreased afterload, increased contractility</li>
+      </ul><h4>Murmur behavior with maneuvers</h4><ul>
+        <li>Crescendo-decrescendo systolic murmur at LLSB</li>
+        <li>Louder with standing, Valsalva (decreased preload = more obstruction)</li>
+        <li>Softer with squatting, leg raise (increased preload = less obstruction)</li>
+        <li>Opposite of aortic stenosis and most other murmurs</li>
+        <li>Rx: beta-blockers, CCBs; avoid vasodilators, digoxin, diuretics</li>
+      </ul>`,
+    },
+    // Pulmonary
+    {
+      system: 'Pulmonary', key: 'pul1',
+      title: 'ARDS',
+      answer: `<h4>Berlin criteria (2012)</h4><ul>
+        <li>Onset within 1 week of known insult or new/worsening respiratory symptoms</li>
+        <li>Bilateral opacities on CXR/CT not fully explained by effusion/collapse</li>
+        <li>Respiratory failure not fully explained by cardiac failure / fluid overload</li>
+        <li>PaO2/FiO2 ratio: mild 200-300, moderate 100-200, severe under 100 (all on PEEP 5+)</li>
+      </ul><h4>PCWP distinction</h4><ul>
+        <li>PCWP under 18 mmHg (or no clinical evidence of elevated LAP) = ARDS not cardiogenic pulmonary edema</li>
+        <li>ARDS = increased permeability edema (protein-rich fluid); cardiogenic = hydrostatic edema (low protein)</li>
+      </ul><h4>Ventilator principles (ARDSNet)</h4><ul>
+        <li>Low tidal volume: 6 mL/kg IBW (prevents volutrauma)</li>
+        <li>Plateau pressure under 30 cmH2O (prevents barotrauma)</li>
+        <li>Permissive hypercapnia: accept higher CO2 to protect lungs</li>
+        <li>PEEP to prevent alveolar collapse (atelectrauma)</li>
+        <li>Prone positioning for severe ARDS: improves V/Q, survival benefit</li>
+      </ul>`,
+    },
+    {
+      system: 'Pulmonary', key: 'pul2',
+      title: 'Obstructive vs restrictive PFTs',
+      answer: `<h4>Obstructive pattern</h4><ul>
+        <li>FEV1/FVC under 0.7 (reduced ratio) - hallmark</li>
+        <li>FEV1 reduced; FVC normal or mildly reduced</li>
+        <li>TLC normal or increased (air trapping)</li>
+        <li>Examples: COPD, asthma, bronchiectasis, cystic fibrosis</li>
+        <li>Bronchodilator response (12% FEV1 improvement): suggests asthma</li>
+      </ul><h4>Restrictive pattern</h4><ul>
+        <li>FEV1/FVC normal or increased (over 0.7)</li>
+        <li>FVC reduced; FEV1 proportionally reduced</li>
+        <li>TLC reduced - key differentiator</li>
+        <li>Intrinsic: IPF, sarcoidosis, pneumoconioses, hypersensitivity pneumonitis</li>
+        <li>Extrinsic: obesity, kyphoscoliosis, neuromuscular (ALS, myasthenia)</li>
+      </ul>`,
+    },
+    {
+      system: 'Pulmonary', key: 'pul3',
+      title: 'Pulmonary embolism',
+      answer: `<h4>Wells criteria (simplified)</h4><ul>
+        <li>DVT signs/symptoms: 3 pts; no alternate diagnosis: 3 pts; HR over 100: 1.5 pts</li>
+        <li>Immobilization/surgery in last 4 wks: 1.5 pts; prior DVT/PE: 1.5 pts</li>
+        <li>Hemoptysis: 1 pt; malignancy: 1 pt</li>
+        <li>Score over 4 = high probability; 2-4 = moderate; under 2 = low</li>
+      </ul><h4>D-dimer utility</h4><ul>
+        <li>High sensitivity (95%), low specificity - use in low/moderate pre-test probability</li>
+        <li>If negative in low-probability: effectively rules out PE (PERC rule first)</li>
+        <li>Elevated in: PE, DVT, pregnancy, infection, malignancy, post-surgery - not diagnostic</li>
+      </ul><h4>Treatment algorithm</h4><ul>
+        <li>Hemodynamically unstable: systemic thrombolytics (tPA) or catheter-directed therapy</li>
+        <li>Submassive (RV strain, normal BP): consider thrombolytics; anticoagulate</li>
+        <li>Low-risk: anticoagulation; DOACs preferred (rivaroxaban, apixaban) over LMWH/warfarin</li>
+        <li>Duration: provoked 3 months; unprovoked 3-6+ months; recurrent or cancer: indefinite</li>
+      </ul>`,
+    },
+    // Renal
+    {
+      system: 'Renal', key: 'ren1',
+      title: 'Nephrotic syndrome',
+      answer: `<h4>Protein loss consequences</h4><ul>
+        <li>Massive proteinuria (over 3.5 g/day) causes hypoalbuminemia</li>
+        <li>Reduced oncotic pressure causes peripheral edema, ascites, pleural effusions</li>
+        <li>Loss of antithrombin III: hypercoagulability (especially renal vein thrombosis)</li>
+        <li>Loss of immunoglobulins: susceptibility to encapsulated organisms</li>
+        <li>Hyperlipidemia: liver compensates for low oncotic pressure by making more proteins including lipoproteins</li>
+      </ul><h4>Causes by age</h4><ul>
+        <li>Children: minimal change disease (MCD) - primary; responds to steroids</li>
+        <li>Adults: focal segmental glomerulosclerosis (FSGS), membranous nephropathy, diabetic nephropathy</li>
+        <li>Membranous: associated with hep B, SLE, solid tumors, NSAIDs</li>
+        <li>FSGS: HIV, heroin, obesity, sickle cell</li>
+      </ul><h4>Edema mechanism</h4><ul>
+        <li>Low albumin reduces plasma oncotic pressure</li>
+        <li>Fluid shifts to interstitium (starling forces); low circulating volume activates RAAS</li>
+        <li>Salt and water retention worsens edema despite low intravascular oncotic pressure</li>
+      </ul>`,
+    },
+    {
+      system: 'Renal', key: 'ren2',
+      title: 'Acute kidney injury',
+      answer: `<h4>Prerenal labs</h4><ul>
+        <li>BUN:Cr ratio over 20 (avid urea reabsorption in volume-depleted state)</li>
+        <li>FENa under 1% (kidney conserves Na to preserve volume)</li>
+        <li>Urine Na under 20 mEq/L; urine osm over 500 mOsm/kg</li>
+        <li>Causes: hypovolemia, heart failure, cirrhosis, NSAID use (efferent dilation lost)</li>
+      </ul><h4>Intrinsic (ATN) labs</h4><ul>
+        <li>FENa over 2% (tubular cells cannot reabsorb Na)</li>
+        <li>BUN:Cr ratio 10-15; urine Na over 40 mEq/L</li>
+        <li>Granular "muddy brown" casts in urine sediment</li>
+        <li>Causes: ischemia (shock), nephrotoxins (aminoglycosides, contrast, cisplatin, myoglobin)</li>
+      </ul><h4>Postrenal labs</h4><ul>
+        <li>Variable FENa; variable BUN:Cr</li>
+        <li>Hydronephrosis on ultrasound</li>
+        <li>Causes: BPH, bilateral ureteral obstruction, bladder neck obstruction</li>
+        <li>FEUrea under 35% useful when FENa unreliable (diuretic use)</li>
+      </ul>`,
+    },
+    {
+      system: 'Renal', key: 'ren3',
+      title: 'Metabolic acidosis',
+      answer: `<h4>Anion gap acidosis (AG over 12)</h4><ul>
+        <li>Mnemonic MUDPILES: Methanol, Uremia, DKA, Propylene glycol, Isoniazid/Iron, Lactic acidosis, Ethylene glycol, Salicylates</li>
+        <li>AG = Na - (Cl + HCO3); normal 8-12 mEq/L</li>
+        <li>Elevated because unmeasured anions accumulate</li>
+      </ul><h4>Non-anion gap (hyperchloremic) acidosis</h4><ul>
+        <li>Mnemonic HARDASS: Hyperalimentation, Addison's, RTA, Diarrhea, Acetazolamide, Spironolactone/Saline</li>
+        <li>HCO3 lost (diarrhea) or H+ cannot be excreted (RTA)</li>
+        <li>Chloride rises to maintain electroneutrality</li>
+      </ul><h4>Respiratory compensation formula</h4><ul>
+        <li>Winter's formula: expected pCO2 = (1.5 x HCO3) + 8 +/- 2</li>
+        <li>If pCO2 higher than expected: concurrent respiratory acidosis</li>
+        <li>If pCO2 lower than expected: concurrent respiratory alkalosis</li>
+        <li>Delta-delta ratio: distinguishes simple vs mixed AG acidosis</li>
+      </ul>`,
+    },
+    // GI
+    {
+      system: 'Gastrointestinal', key: 'gi1',
+      title: 'Crohn vs UC',
+      answer: `<h4>Location and depth</h4><ul>
+        <li>Crohn: anywhere mouth to anus; skip lesions; transmural inflammation</li>
+        <li>UC: rectum to cecum, continuous; mucosal/submucosal only</li>
+      </ul><h4>Histology</h4><ul>
+        <li>Crohn: noncaseating granulomas, cobblestone mucosa, creeping fat, fistulas, strictures</li>
+        <li>UC: crypt abscesses, pseudopolyps, loss of haustra (lead-pipe colon)</li>
+      </ul><h4>Complications</h4><ul>
+        <li>Crohn: fistulas (enteroenteric, enterovesical, enterocutaneous), obstruction, abscess, B12/fat malabsorption (terminal ileum involvement), short bowel syndrome</li>
+        <li>UC: toxic megacolon, perforation, colorectal cancer (risk proportional to disease extent and duration)</li>
+      </ul><h4>Extraintestinal manifestations (both)</h4><ul>
+        <li>Eyes: uveitis, episcleritis</li>
+        <li>Joints: peripheral arthritis (parallels bowel activity), ankylosing spondylitis (independent, HLA-B27)</li>
+        <li>Skin: erythema nodosum (parallels bowel), pyoderma gangrenosum (independent)</li>
+        <li>Liver: PSC (primarily UC), cholangiocarcinoma risk</li>
+      </ul>`,
+    },
+    {
+      system: 'Gastrointestinal', key: 'gi2',
+      title: 'Hepatitis B serology',
+      answer: `<h4>Surface antigen / antibody</h4><ul>
+        <li>HBsAg: active infection (acute or chronic); first to appear</li>
+        <li>Anti-HBs: immunity; appears after clearance or vaccination</li>
+        <li>Window period: both negative; only IgM anti-HBc positive</li>
+      </ul><h4>Core antibody</h4><ul>
+        <li>IgM anti-HBc: acute infection (including window period)</li>
+        <li>IgG anti-HBc: past or chronic infection; persists lifelong</li>
+        <li>Anti-HBc alone positive: past infection, occult infection, or window period</li>
+      </ul><h4>E antigen / antibody</h4><ul>
+        <li>HBeAg: active viral replication, high infectivity</li>
+        <li>Anti-HBe: seroconversion, lower replication (but pre-core mutants: HBeAg neg, still replicating)</li>
+      </ul><h4>Key states summary</h4><ul>
+        <li>Acute: HBsAg+, IgM anti-HBc+, HBeAg+ (usually)</li>
+        <li>Chronic: HBsAg+ (over 6 months), IgG anti-HBc+</li>
+        <li>Immune (natural): anti-HBs+, IgG anti-HBc+, HBsAg-</li>
+        <li>Immune (vaccine): anti-HBs+ only</li>
+      </ul>`,
+    },
+    {
+      system: 'Gastrointestinal', key: 'gi3',
+      title: 'Cirrhosis complications',
+      answer: `<h4>Portal hypertension mechanism</h4><ul>
+        <li>Fibrosis increases intrahepatic resistance; NO deficiency causes splanchnic vasodilation</li>
+        <li>Portal pressure over 10 mmHg: varices form; over 12 mmHg: risk of bleeding</li>
+        <li>Splenomegaly, varices (esophageal, gastric), caput medusae, hemorrhoids</li>
+      </ul><h4>Ascites</h4><ul>
+        <li>SAAG (serum albumin - ascites albumin) over 1.1 = portal hypertension</li>
+        <li>Manage: Na restriction, spironolactone + furosemide (100:40 ratio), paracentesis for large volume</li>
+        <li>Albumin infusion with large-volume paracentesis (over 5L) prevents paracentesis-induced circulatory dysfunction</li>
+      </ul><h4>SBP, HRS, HE</h4><ul>
+        <li>SBP: PMN count over 250/mm3 in ascites; empiric cefotaxime; norfloxacin prophylaxis; albumin reduces HRS</li>
+        <li>HRS: functional renal failure; SAAG over 1.1, FENa under 1%, no response to fluids; treat with terlipressin + albumin</li>
+        <li>Hepatic encephalopathy: ammonia accumulation; precipitants (GI bleed, infection, constipation, sedatives); lactulose + rifaximin</li>
+      </ul>`,
+    },
+    // Endocrine
+    {
+      system: 'Endocrine', key: 'end1',
+      title: 'DKA',
+      answer: `<h4>Precipitants</h4><ul>
+        <li>The 5 I's: Insulin deficiency/noncompliance, Infection (most common), Infarction, Intoxication, Iatrogenic</li>
+        <li>Type 1 DM primarily; type 2 with severe stress</li>
+      </ul><h4>Pathophysiology</h4><ul>
+        <li>No insulin: lipolysis unleashed, FFAs to ketone bodies (beta-hydroxybutyrate, acetoacetate)</li>
+        <li>Anion gap metabolic acidosis; osmotic diuresis causes volume and electrolyte losses</li>
+        <li>Total body K+ depleted (osmotic diuresis) but serum K+ may be normal or elevated (acidosis shifts K out)</li>
+      </ul><h4>Management sequence</h4><ul>
+        <li>1. IV fluids: NS 1L bolus (correct volume depletion)</li>
+        <li>2. Potassium: replace if K+ under 3.5 BEFORE insulin; if 3.5-5: add KCl to fluids</li>
+        <li>3. Insulin infusion: start only after K+ 3.5+; drip until gap closes (not just glucose normalization)</li>
+        <li>4. Dextrose: add when glucose under 250 to continue insulin until ketoacidosis resolves</li>
+        <li>5. Transition to subcutaneous insulin with overlap to prevent rebound ketosis</li>
+      </ul><h4>Complications to watch</h4><ul>
+        <li>Cerebral edema (especially in children with rapid fluid correction)</li>
+        <li>Hypokalemia after insulin started (K+ shifts intracellularly)</li>
+        <li>Hypoglycemia with overzealous insulin</li>
+      </ul>`,
+    },
+    {
+      system: 'Endocrine', key: 'end2',
+      title: 'Hypothyroidism',
+      answer: `<h4>Causes</h4><ul>
+        <li>Hashimoto's thyroiditis: most common in iodine-sufficient regions; anti-TPO antibodies; lymphocytic infiltration</li>
+        <li>Iodine deficiency: most common worldwide</li>
+        <li>Post-ablation (RAI or surgery), postpartum thyroiditis, medications (amiodarone, lithium)</li>
+        <li>Central (secondary): pituitary or hypothalamic disease - low TSH AND low T4</li>
+      </ul><h4>TSH / T4 patterns</h4><ul>
+        <li>Primary hypothyroidism: elevated TSH, low free T4</li>
+        <li>Subclinical: elevated TSH, normal free T4</li>
+        <li>Central (2nd/3rd): low TSH, low free T4</li>
+      </ul><h4>Myxedema coma</h4><ul>
+        <li>Severe, life-threatening hypothyroidism; precipitated by cold, infection, sedatives, surgery</li>
+        <li>Features: altered mental status, hypothermia, bradycardia, hypoventilation, hyponatremia, hypoglycemia</li>
+        <li>Treatment: IV T4 (levothyroxine) with or without T3; IV corticosteroids before thyroid hormone (prevent adrenal crisis); supportive care</li>
+      </ul>`,
+    },
+    {
+      system: 'Endocrine', key: 'end3',
+      title: 'Adrenal insufficiency',
+      answer: `<h4>Primary vs secondary lab differences</h4><ul>
+        <li>Primary (Addison's): adrenal gland failure; low cortisol, HIGH ACTH (no feedback inhibition)</li>
+        <li>Secondary: pituitary ACTH deficiency; low cortisol, low ACTH</li>
+        <li>Primary only: aldosterone deficiency causes hyperkalemia, hyponatremia, volume depletion, metabolic acidosis</li>
+        <li>Secondary only: no aldosterone deficiency (renin-angiotensin still intact)</li>
+        <li>Primary only: hyperpigmentation (ACTH/MSH precursor POMC elevated)</li>
+      </ul><h4>Crisis management</h4><ul>
+        <li>Adrenal crisis = medical emergency: hypotension, nausea/vomiting, fever, AMS</li>
+        <li>Do NOT wait for labs; treat empirically if suspected</li>
+        <li>IV hydrocortisone 100 mg bolus then q6-8h (or dexamethasone if cortisol levels needed first)</li>
+        <li>Aggressive IV saline resuscitation for volume/electrolyte correction</li>
+        <li>Identify and treat precipitating cause (usually infection or physiologic stress in noncompliant patient)</li>
+      </ul>`,
+    },
+    {
+      system: 'Endocrine', key: 'end4',
+      title: 'Diabetes insipidus',
+      answer: `<h4>Central vs nephrogenic</h4><ul>
+        <li>Central DI: absent or reduced ADH production (posterior pituitary); causes: trauma, surgery, craniopharyngioma, sarcoidosis</li>
+        <li>Nephrogenic DI: ADH present but collecting duct unresponsive; causes: lithium, demeclocycline, hypercalcemia, hypokalemia, congenital (V2 receptor mutation)</li>
+      </ul><h4>Urine / serum osm patterns</h4><ul>
+        <li>Both types: serum osm elevated (over 295), serum Na elevated (hypernatremia)</li>
+        <li>Both types: dilute urine (osm under 300 mOsm/kg, specific gravity under 1.010)</li>
+        <li>Large-volume polyuria (3-20 L/day)</li>
+      </ul><h4>Water deprivation test</h4><ul>
+        <li>Withhold water until serum osm over 295 or weight loss 5%</li>
+        <li>Urine stays dilute despite dehydration in DI (normal: urine concentrates)</li>
+        <li>Then give exogenous ADH (desmopressin):</li>
+        <li>Central DI: urine osm increases greater than 50% (responds to ADH)</li>
+        <li>Nephrogenic DI: little or no response to ADH</li>
+        <li>Partial forms: intermediate responses</li>
+      </ul>`,
+    },
+    // Hematology
+    {
+      system: 'Hematology', key: 'hem1',
+      title: 'Iron deficiency vs anemia of chronic disease',
+      answer: `<h4>CBC findings (both)</h4><ul>
+        <li>Iron deficiency: microcytic, hypochromic; low MCV; high RDW (anisocytosis)</li>
+        <li>Anemia of chronic disease (ACD): normocytic usually; can be microcytic in severe cases</li>
+      </ul><h4>Iron studies</h4><ul>
+        <li>Iron deficiency: low serum iron, HIGH TIBC (transferrin upregulated), low transferrin saturation (under 15%)</li>
+        <li>ACD: low serum iron, LOW TIBC (inflammation suppresses transferrin), low transferrin saturation</li>
+        <li>Key differentiator: TIBC (high in IDA, low/normal in ACD)</li>
+      </ul><h4>Ferritin</h4><ul>
+        <li>Iron deficiency: LOW ferritin (under 12 mcg/L) - most specific finding</li>
+        <li>ACD: NORMAL or HIGH ferritin (ferritin is an acute-phase reactant; elevated in inflammation)</li>
+        <li>Ferritin under 30 with concurrent inflammation: may still indicate iron deficiency</li>
+        <li>Soluble transferrin receptor: elevated in IDA, normal in ACD - useful in ambiguous cases</li>
+      </ul>`,
+    },
+    {
+      system: 'Hematology', key: 'hem2',
+      title: 'Sickle cell crises',
+      answer: `<h4>Vaso-occlusive crisis</h4><ul>
+        <li>Most common type; polymerization of HbS causes RBC sickling under low O2, cold, dehydration, infection</li>
+        <li>Painful crises: bone (dactylitis in children), chest, abdomen, joints</li>
+        <li>Acute chest syndrome: new pulmonary infiltrate + chest pain + fever; leading cause of death</li>
+        <li>Management: hydration, analgesia (opioids), O2, incentive spirometry; exchange transfusion for ACS</li>
+      </ul><h4>Aplastic crisis</h4><ul>
+        <li>Parvovirus B19 infects RBC precursors; transient cessation of RBC production</li>
+        <li>Severe anemia (Hgb drops precipitously), reticulocytopenia</li>
+        <li>Usually self-limited (1-2 weeks); may need transfusion</li>
+      </ul><h4>Splenic sequestration crisis</h4><ul>
+        <li>Acute pooling of blood in spleen; occurs in children before autosplenectomy</li>
+        <li>Sudden splenomegaly, hypovolemia, precipitous Hgb drop, thrombocytopenia</li>
+        <li>Medical emergency; fluid resuscitation and transfusion; splenectomy after recurrence</li>
+        <li>Hydroxyurea: increases HbF, reduces crisis frequency; pneumococcal vaccination essential</li>
+      </ul>`,
+    },
+    {
+      system: 'Hematology', key: 'hem3',
+      title: 'DIC',
+      answer: `<h4>Trigger and pathophysiology</h4><ul>
+        <li>Widespread activation of coagulation cascade overwhelms natural anticoagulants</li>
+        <li>Triggers: sepsis, trauma, obstetric emergencies (abruption, amniotic fluid embolism), malignancy (especially APL), transfusion reactions</li>
+        <li>Thrombin generated systemically: clots form in microvasculature (end-organ ischemia)</li>
+        <li>Clotting factors and platelets consumed: simultaneous bleeding from multiple sites</li>
+      </ul><h4>Lab pattern</h4><ul>
+        <li>PT prolonged (extrinsic pathway consumed)</li>
+        <li>PTT prolonged (intrinsic pathway consumed)</li>
+        <li>Fibrinogen LOW (consumed) - important differentiator from liver disease</li>
+        <li>D-dimer HIGH (fibrin degradation products elevated)</li>
+        <li>Platelets LOW (consumed)</li>
+        <li>Schistocytes on smear (microangiopathic hemolysis from fibrin strands)</li>
+      </ul><h4>Treatment</h4><ul>
+        <li>Treat underlying cause (most important)</li>
+        <li>Replace: FFP (factors), cryoprecipitate (fibrinogen), platelets</li>
+        <li>Heparin: controversial; may use in thrombosis-predominant DIC (APL-related)</li>
+      </ul>`,
+    },
+    // Micro/Immuno
+    {
+      system: 'Micro/Immuno', key: 'mic1',
+      title: 'HIV: CD4 thresholds and infections',
+      answer: `<h4>CD4 count thresholds</h4><ul>
+        <li>Under 500: begin antiretroviral therapy (ART); Kaposi's sarcoma, thrush, oral hairy leukoplakia</li>
+        <li>Under 200: Pneumocystis jiroveci pneumonia (PCP) prophylaxis (TMP-SMX); toxoplasmosis risk</li>
+        <li>Under 100: MAC prophylaxis (azithromycin); Cryptosporidium; Microsporidium; Bartonella</li>
+        <li>Under 50: CMV retinitis; primary CNS lymphoma (EBV-associated); HIV encephalopathy</li>
+      </ul><h4>Opportunistic infections summary</h4><ul>
+        <li>PCP: diffuse bilateral interstitial infiltrates; LDH elevated; beta-glucan positive; treat TMP-SMX + steroids if PaO2 under 70</li>
+        <li>Toxoplasmosis: ring-enhancing lesions; multiple; responds to empiric pyrimethamine + sulfadiazine</li>
+        <li>Cryptococcal meningitis: india ink; cryptococcal antigen; fluconazole maintenance after liposomal amphotericin induction</li>
+        <li>CMV retinitis: cotton-wool spots; treat ganciclovir; risk of retinal detachment</li>
+      </ul><h4>HAART classes</h4><ul>
+        <li>NRTIs (backbone): tenofovir, emtricitabine, abacavir, lamivudine</li>
+        <li>NNRTIs: efavirenz, rilpivirine - block RT without phosphorylation</li>
+        <li>PIs: ritonavir-boosted; atazanavir, darunavir - block protease</li>
+        <li>INSTIs (preferred): raltegravir, dolutegravir - block integrase</li>
+        <li>CCR5 antagonist: maraviroc (need tropism testing)</li>
+      </ul>`,
+    },
+    {
+      system: 'Micro/Immuno', key: 'mic2',
+      title: 'Meningitis CSF profiles',
+      answer: `<h4>Bacterial meningitis</h4><ul>
+        <li>Opening pressure: elevated (over 200 mmH2O)</li>
+        <li>WBC: 1000-10000 cells/mm3; predominantly PMNs (neutrophils)</li>
+        <li>Glucose: LOW (under 45 mg/dL or CSF:serum ratio under 0.6); bacteria consume glucose</li>
+        <li>Protein: HIGH (over 100 mg/dL)</li>
+        <li>Organisms by age: Listeria (neonates/elderly), GBS (neonates), N. meningitidis (young adults), S. pneumoniae (all ages)</li>
+      </ul><h4>Viral (aseptic) meningitis</h4><ul>
+        <li>WBC: 10-1000 cells/mm3; predominantly lymphocytes</li>
+        <li>Glucose: normal</li>
+        <li>Protein: normal or mildly elevated</li>
+        <li>Enteroviruses most common; HSV-2 for genital herpes associated; treat HSV with acyclovir</li>
+      </ul><h4>Fungal (Cryptococcus) / TB</h4><ul>
+        <li>Cryptococcus: lymphocytic pleocytosis; low glucose; india ink; cryptococcal antigen (most sensitive)</li>
+        <li>TB: lymphocytic; very low glucose; very high protein; AFB smear low sensitivity; ADA elevated</li>
+      </ul>`,
+    },
+    {
+      system: 'Micro/Immuno', key: 'mic3',
+      title: 'Sepsis and SIRS',
+      answer: `<h4>SIRS criteria (2 of 4)</h4><ul>
+        <li>Temperature over 38 or under 36 C</li>
+        <li>HR over 90 bpm</li>
+        <li>RR over 20 or PaCO2 under 32 mmHg</li>
+        <li>WBC over 12,000 or under 4,000 or over 10% bands</li>
+        <li>Sepsis = SIRS + suspected infection; septic shock = sepsis + vasopressors needed + lactate over 2</li>
+      </ul><h4>Management bundle (Surviving Sepsis, hour-1)</h4><ul>
+        <li>1. Measure lactate (remeasure if over 2 mmol/L)</li>
+        <li>2. Blood cultures x2 (before antibiotics)</li>
+        <li>3. Broad-spectrum antibiotics within 1 hour</li>
+        <li>4. 30 mL/kg crystalloid bolus for hypotension or lactate over 4</li>
+        <li>5. Vasopressors for persistent hypotension (norepinephrine first-line, target MAP over 65)</li>
+      </ul><h4>Vasopressors</h4><ul>
+        <li>Norepinephrine: first-line; alpha-1 and beta-1 agonist; vasoconstriction + inotropy</li>
+        <li>Vasopressin: add-on for catecholamine-sparing; V1 receptor agonist</li>
+        <li>Dopamine: second-line; arrhythmia risk</li>
+      </ul>`,
+    },
+    {
+      system: 'Micro/Immuno', key: 'mic4',
+      title: 'Hypersensitivity types I-IV',
+      answer: `<h4>Type I - Immediate / Anaphylactic</h4><ul>
+        <li>Mechanism: antigen cross-links IgE on mast cells/basophils; degranulation releases histamine, leukotrienes</li>
+        <li>Cell type: mast cells, basophils, IgE</li>
+        <li>Examples: allergic rhinitis, anaphylaxis, asthma (atopic), urticaria, food allergy</li>
+        <li>Time: minutes</li>
+      </ul><h4>Type II - Cytotoxic</h4><ul>
+        <li>Mechanism: IgG/IgM binds cell surface antigen; complement activation or ADCC destroys cell</li>
+        <li>Examples: hemolytic disease of newborn, autoimmune hemolytic anemia, Goodpasture's, myasthenia gravis, Graves' disease, HITT</li>
+      </ul><h4>Type III - Immune Complex</h4><ul>
+        <li>Mechanism: antigen-antibody complexes deposit in tissues; complement activation, neutrophil infiltration</li>
+        <li>Examples: SLE, post-strep GN, serum sickness, Arthus reaction, vasculitis</li>
+        <li>Time: hours to days</li>
+      </ul><h4>Type IV - Delayed / Cell-mediated</h4><ul>
+        <li>Mechanism: sensitized Th1 cells release cytokines; macrophage activation; NO antibodies involved</li>
+        <li>Examples: contact dermatitis (poison ivy, nickel), PPD/TB test, transplant rejection (chronic), granuloma formation</li>
+        <li>Time: 48-72 hours</li>
+      </ul>`,
+    },
+    // Neurology
+    {
+      system: 'Neurology', key: 'neu1',
+      title: 'Stroke territory syndromes',
+      answer: `<h4>MCA stroke</h4><ul>
+        <li>Most common; contralateral face and arm weakness/sensory loss greater than leg</li>
+        <li>Dominant hemisphere: aphasia (Broca's if anterior, Wernicke's if posterior, global if large)</li>
+        <li>Non-dominant: hemispatial neglect, anosognosia</li>
+        <li>Hemianopia (lateral gaze deviation toward lesion)</li>
+      </ul><h4>PCA stroke</h4><ul>
+        <li>Contralateral homonymous hemianopia (macular sparing)</li>
+        <li>Alexia without agraphia (dominant): can write but not read</li>
+        <li>Visual agnosia, prosopagnosia</li>
+      </ul><h4>Basilar artery / brainstem</h4><ul>
+        <li>Locked-in syndrome: basilar artery occlusion; quadriplegia, anarthria, preserved vertical eye movements and blinking</li>
+        <li>Lateral medullary (Wallenberg): PICA occlusion; ipsilateral face + contralateral body loss (crossed pattern), Horner's, dysphagia, vertigo</li>
+      </ul><h4>Lacunar strokes</h4><ul>
+        <li>Pure motor hemiparesis (internal capsule), pure sensory (thalamus), ataxic hemiparesis, dysarthria-clumsy hand</li>
+        <li>tPA criteria: within 4.5 hours, no hemorrhage on CT, BP under 185/110, no recent surgery/bleeding</li>
+      </ul>`,
+    },
+    {
+      system: 'Neurology', key: 'neu2',
+      title: 'Seizure classification and drugs',
+      answer: `<h4>Focal seizures</h4><ul>
+        <li>Focal aware (simple partial): consciousness preserved; motor, sensory, autonomic, or psychic symptoms</li>
+        <li>Focal impaired awareness (complex partial): impaired consciousness; automatisms; post-ictal confusion</li>
+        <li>Temporal lobe most common origin</li>
+        <li>Drugs of choice: carbamazepine, lamotrigine, levetiracetam, oxcarbazepine</li>
+      </ul><h4>Generalized seizures</h4><ul>
+        <li>Absence: staring spells, 3 Hz spike-wave on EEG; no post-ictal state; children</li>
+        <li>Drug of choice: ethosuximide (absence), valproate (if concurrent tonic-clonic)</li>
+        <li>Tonic-clonic (grand mal): loss of consciousness, tonic then clonic phases, post-ictal state</li>
+        <li>Drugs: valproate, levetiracetam, lamotrigine, phenytoin (second-line)</li>
+        <li>Myoclonic: brief jerks; juvenile myoclonic epilepsy; morning jerks; valproate, levetiracetam</li>
+        <li>Status epilepticus: lorazepam first; then fosphenytoin/levalbuterol; then propofol/phenobarbital</li>
+      </ul>`,
+    },
+    {
+      system: 'Neurology', key: 'neu3',
+      title: 'Dementia distinguishing features',
+      answer: `<h4>Alzheimer's disease</h4><ul>
+        <li>Most common; insidious onset; short-term memory first; temporal and parietal involvement</li>
+        <li>Amyloid plaques (beta-amyloid, AP-P processing) + neurofibrillary tangles (tau)</li>
+        <li>Rx: donepezil (AChEI), memantine (NMDA antagonist) for moderate-severe</li>
+      </ul><h4>Lewy body dementia</h4><ul>
+        <li>Parkinsonism + dementia within 1 year; visual hallucinations; REM sleep behavior disorder</li>
+        <li>Fluctuating cognition; extreme sensitivity to antipsychotics (can be fatal)</li>
+        <li>Lewy bodies (alpha-synuclein) in cortex</li>
+      </ul><h4>Frontotemporal dementia (Pick's disease)</h4><ul>
+        <li>Personality and behavioral changes first; relatively preserved memory early</li>
+        <li>Disinhibition, apathy, impulsivity; Klüver-Bucy features</li>
+        <li>Pick bodies (tau inclusions) in frontal/temporal lobes</li>
+      </ul><h4>Vascular dementia</h4><ul>
+        <li>Stepwise decline; focal neurological deficits; MRI shows white matter changes or infarcts</li>
+        <li>Risk factors overlap with stroke: HTN, DM, hyperlipidemia, AFib</li>
+      </ul>`,
+    },
+    {
+      system: 'Neurology', key: 'neu4',
+      title: 'Multiple sclerosis',
+      answer: `<h4>McDonald criteria</h4><ul>
+        <li>Dissemination in space (DIS): lesions in 2+ CNS locations</li>
+        <li>Dissemination in time (DIT): lesions of different ages (gadolinium-enhancing + non-enhancing on same MRI)</li>
+        <li>CSF: oligoclonal bands, elevated IgG index</li>
+        <li>Periventricular, juxtacortical, infratentorial, spinal cord plaques</li>
+      </ul><h4>Types</h4><ul>
+        <li>Relapsing-remitting (RRMS): most common (85%); discrete attacks with full or partial recovery</li>
+        <li>Secondary progressive (SPMS): RRMS converting to steady decline</li>
+        <li>Primary progressive (PPMS): continuous decline from onset; harder to treat</li>
+        <li>Clinically isolated syndrome (CIS): first demyelinating event, not yet meeting McDonald criteria</li>
+      </ul><h4>DMTs and symptom management</h4><ul>
+        <li>First-line: interferons (beta-1a, beta-1b), glatiramer acetate, dimethyl fumarate</li>
+        <li>High-efficacy: natalizumab (anti-VLA-4), ocrelizumab (anti-CD20, also for PPMS), alemtuzumab</li>
+        <li>Acute relapse: IV methylprednisolone (speeds recovery, not disease course)</li>
+        <li>Symptom management: baclofen (spasticity), amantadine (fatigue), oxybutynin (bladder), gabapentin (pain)</li>
+      </ul>`,
+    },
+    // Psychiatry
+    {
+      system: 'Psychiatry', key: 'psy1',
+      title: 'Schizophrenia',
+      answer: `<h4>Positive vs negative symptoms</h4><ul>
+        <li>Positive (excess/distortion): hallucinations (auditory most common), delusions, disorganized speech, disorganized behavior</li>
+        <li>Negative (deficit): flat affect, alogia (poverty of speech), avolition, anhedonia, asociality</li>
+        <li>Diagnosis: 2+ symptoms for 1+ month; total duration 6+ months including prodrome</li>
+      </ul><h4>Dopamine hypothesis</h4><ul>
+        <li>Mesolimbic pathway hyperactivity: positive symptoms</li>
+        <li>Mesocortical pathway hypoactivity: negative symptoms and cognitive deficits</li>
+        <li>All antipsychotics block D2 receptors; effectiveness correlates with D2 occupancy</li>
+      </ul><h4>Antipsychotic side effects</h4><ul>
+        <li>Typical (haloperidol, fluphenazine): high EPS risk - akathisia, acute dystonia, parkinsonism, tardive dyskinesia</li>
+        <li>NMS: hyperthermia, rigidity, altered MS, autonomic instability; treat with dantrolene, bromocriptine</li>
+        <li>Atypical: less EPS; metabolic syndrome (weight gain, diabetes, hyperlipidemia)</li>
+        <li>Clozapine: most effective; risk of agranulocytosis (ANC monitoring required); QT prolongation</li>
+        <li>Risperidone/haloperidol: highest prolactin elevation (gynecomastia, amenorrhea, galactorrhea)</li>
+      </ul>`,
+    },
+    {
+      system: 'Psychiatry', key: 'psy2',
+      title: 'Bipolar disorder',
+      answer: `<h4>Mania criteria</h4><ul>
+        <li>Duration: 7+ days (or any duration if hospitalization needed or psychotic features)</li>
+        <li>DIGFAST: Distractibility, Impulsivity/recklessness, Grandiosity, Flight of ideas, Activity increase, Sleep decreased, Talkativeness (pressured speech)</li>
+        <li>3+ criteria (4+ if mood is irritable only); marked impairment or hospitalization</li>
+        <li>Hypomania: same criteria but 4+ days, no hospitalization, no psychosis</li>
+      </ul><h4>Mood stabilizers</h4><ul>
+        <li>Lithium: first-line for Bipolar I; reduces suicide risk; narrow therapeutic index (0.6-1.2 mEq/L)</li>
+        <li>Valproate: effective for rapid cycling, mixed features; teratogenic (neural tube defects)</li>
+        <li>Lamotrigine: effective for bipolar depression and maintenance; NOT acute mania; risk of SJS</li>
+        <li>Atypical antipsychotics: quetiapine, olanzapine for acute mania</li>
+      </ul><h4>Lithium toxicity</h4><ul>
+        <li>Early (1.5-2.5): nausea, tremor, diarrhea, polyuria, polydipsia</li>
+        <li>Moderate/severe (over 2.5): confusion, coarse tremor, hyperreflexia, seizures, arrhythmias, coma</li>
+        <li>NSAIDs, thiazides, ACEi raise lithium levels (reduce clearance)</li>
+        <li>Treatment: hold lithium, hydrate; hemodialysis for severe toxicity</li>
+      </ul>`,
+    },
+    {
+      system: 'Psychiatry', key: 'psy3',
+      title: 'Major depressive disorder',
+      answer: `<h4>Diagnostic criteria</h4><ul>
+        <li>SIGECAPS: Sleep, Interest (anhedonia), Guilt, Energy, Concentration, Appetite, Psychomotor, Suicidality</li>
+        <li>5+ symptoms for 2+ weeks; must include depressed mood or anhedonia; not bipolar or due to substance/medical</li>
+      </ul><h4>First-line treatment</h4><ul>
+        <li>Mild-moderate: psychotherapy (CBT) alone or combined with medications</li>
+        <li>Moderate-severe: antidepressant + psychotherapy; SSRIs first-line (fluoxetine, sertraline, escitalopram)</li>
+        <li>Try 4-6 weeks at therapeutic dose before switching</li>
+        <li>Continue 6-12 months after remission; 2+ episodes: consider indefinite maintenance</li>
+      </ul><h4>SSRI vs SNRI vs augmentation</h4><ul>
+        <li>SSRI: serotonin reuptake inhibitor; first-line; SE: sexual dysfunction, GI upset, initial anxiety, QTc (citalopram)</li>
+        <li>SNRI (venlafaxine, duloxetine): also for anxiety, pain (fibromyalgia, neuropathy); HTN at higher doses</li>
+        <li>When to augment: partial response to SSRI; add aripiprazole, bupropion, lithium, or switch class</li>
+        <li>Bupropion: norepinephrine/dopamine; no sexual SE; lowers seizure threshold; avoids in eating disorders</li>
+        <li>Mirtazapine: sedating, increases appetite; good for elderly with insomnia and weight loss</li>
+      </ul>`,
+    },
+    // Musculoskeletal
+    {
+      system: 'Musculoskeletal', key: 'msk1',
+      title: 'Rheumatoid arthritis',
+      answer: `<h4>Pathophysiology</h4><ul>
+        <li>Synovial inflammation driven by Th1/Th17 cells and macrophages; cytokines TNF-alpha, IL-1, IL-6</li>
+        <li>Pannus formation: invasive synovial tissue erodes cartilage and bone</li>
+        <li>Symmetric polyarthritis of small joints (MCPs, PIPs, wrists); spares DIPs</li>
+        <li>Morning stiffness greater than 1 hour; ulnar deviation, swan neck, boutonniere deformities</li>
+      </ul><h4>Lab findings</h4><ul>
+        <li>RF (IgM anti-IgG): positive in 70-80%; not specific (also in SLE, Sjogrens, infections)</li>
+        <li>Anti-CCP: more specific (95%); indicates erosive disease likely</li>
+        <li>Elevated ESR, CRP, anemia of chronic disease</li>
+        <li>X-ray: periarticular osteopenia, joint space narrowing, marginal erosions</li>
+      </ul><h4>DMARDs and biologic targets</h4><ul>
+        <li>Methotrexate: anchor DMARD; folic acid supplementation required; monitor LFTs</li>
+        <li>Hydroxychloroquine: mild disease; eye monitoring required; safer in pregnancy</li>
+        <li>Sulfasalazine, leflunomide: alternatives</li>
+        <li>TNF inhibitors (etanercept, adalimumab, infliximab): first biologic; screen for TB first</li>
+        <li>Abatacept (CTLA4-Ig): blocks T cell co-stimulation; IL-6 receptor (tocilizumab); JAK inhibitors (tofacitinib)</li>
+      </ul>`,
+    },
+    {
+      system: 'Musculoskeletal', key: 'msk2',
+      title: 'Gout',
+      answer: `<h4>Urate crystal formation</h4><ul>
+        <li>Hyperuricemia (over 6.8 mg/dL): urate supersaturation leads to monosodium urate crystal deposition</li>
+        <li>Crystals in joints trigger IL-1 mediated neutrophil influx; acute inflammation</li>
+        <li>Needle-shaped crystals; negatively birefringent (yellow when parallel to slow wave in polarized light)</li>
+        <li>Predilection: first MTP joint (podagra), ankles, knees; later tophi in soft tissues</li>
+      </ul><h4>Triggers</h4><ul>
+        <li>Dietary: purines (red meat, shellfish, organ meats), alcohol (especially beer and spirits), fructose-rich foods</li>
+        <li>Drugs: thiazides, loop diuretics, low-dose aspirin, cyclosporine (raise uric acid)</li>
+        <li>Physiologic: dehydration, surgery, illness, trauma (renal under-excretion)</li>
+      </ul><h4>Acute vs chronic management</h4><ul>
+        <li>Acute attack: NSAIDs (indomethacin), colchicine, or corticosteroids; NO allopurinol acutely</li>
+        <li>Colchicine mechanism: inhibits tubulin polymerization, blocking neutrophil migration</li>
+        <li>Urate-lowering therapy (ULT): start after acute resolves; allopurinol (XO inhibitor), febuxostat</li>
+        <li>Indications for ULT: 2+ attacks/year, tophi, uric acid nephropathy, chronic kidney disease</li>
+        <li>Pegloticase: recombinant uricase for refractory gout; degrades urate to allantoin</li>
+      </ul>`,
+    },
+    {
+      system: 'Musculoskeletal', key: 'msk3',
+      title: 'Osteoporosis',
+      answer: `<h4>DEXA interpretation</h4><ul>
+        <li>BMD measured at spine and hip; results expressed as T-score and Z-score</li>
+        <li>T-score: comparison to young normal adult peak bone mass</li>
+        <li>Z-score: comparison to age-matched population (use in premenopausal women and men under 50)</li>
+      </ul><h4>T-score thresholds</h4><ul>
+        <li>Normal: T-score -1 or higher</li>
+        <li>Osteopenia: T-score -1.0 to -2.5</li>
+        <li>Osteoporosis: T-score -2.5 or lower</li>
+        <li>FRAX tool: 10-year fracture probability; guides treatment decisions</li>
+        <li>Treat if: T-score -2.5 or below; or osteopenia + FRAX hip fracture over 3% or major fracture over 20%</li>
+      </ul><h4>Bisphosphonate mechanism</h4><ul>
+        <li>Inhibit osteoclast farnesyl pyrophosphate synthase (mevalonate pathway); impair osteoclast function</li>
+        <li>Alendronate, risedronate (oral); zoledronic acid (IV annual infusion)</li>
+        <li>Side effects: esophagitis (take upright, with water), osteonecrosis of jaw (rare), atypical femur fractures (long-term use)</li>
+        <li>Alternatives: denosumab (anti-RANKL), teriparatide (PTH analog, anabolic), raloxifene (SERM)</li>
+      </ul>`,
+    },
+    // Pharmacology
+    {
+      system: 'Pharmacology', key: 'ph1',
+      title: 'Beta-blockers',
+      answer: `<h4>Cardioselective vs non-selective</h4><ul>
+        <li>Cardioselective (beta-1): metoprolol, atenolol, bisoprolol; relative selectivity at therapeutic doses</li>
+        <li>Non-selective (beta-1 and beta-2): propranolol, carvedilol (also alpha-1), labetalol</li>
+        <li>Beta-2 blockade: bronchoconstriction, decreased glycogenolysis (can mask hypoglycemia symptoms)</li>
+      </ul><h4>Indications</h4><ul>
+        <li>Heart failure with reduced EF: proven mortality benefit (carvedilol, metoprolol succinate, bisoprolol)</li>
+        <li>Post-MI: reduce reinfarction and sudden death</li>
+        <li>Angina: reduce myocardial O2 demand</li>
+        <li>Hypertension, SVTs (rate control), AFib, essential tremor, migraine prophylaxis, thyroid storm, pheochromocytoma (after alpha-block)</li>
+        <li>Portal hypertension / varices: propranolol, nadolol</li>
+      </ul><h4>Contraindications and side effects</h4><ul>
+        <li>Contraindicated: reactive airway disease (non-selective), severe bradycardia/heart block, cardiogenic shock, decompensated HF (relative)</li>
+        <li>Side effects: fatigue, sexual dysfunction, bradycardia, hypotension, cold extremities</li>
+        <li>Do NOT abruptly discontinue (rebound tachycardia, angina, MI risk)</li>
+      </ul>`,
+    },
+    {
+      system: 'Pharmacology', key: 'ph2',
+      title: 'ACE inhibitors',
+      answer: `<h4>Mechanism</h4><ul>
+        <li>Block conversion of angiotensin I to angiotensin II by ACE</li>
+        <li>Reduce vasoconstriction and aldosterone secretion: decreased afterload + decreased volume</li>
+        <li>Increased bradykinin (ACE also degrades bradykinin): vasodilation + cough</li>
+        <li>Efferent arteriole dilation reduces intraglomerular pressure: renoprotective in diabetic nephropathy</li>
+      </ul><h4>Indications</h4><ul>
+        <li>Heart failure with reduced EF: proven mortality benefit</li>
+        <li>Post-MI: reduce remodeling and mortality</li>
+        <li>Hypertension; diabetic nephropathy and proteinuria</li>
+        <li>CKD with proteinuria; scleroderma renal crisis</li>
+      </ul><h4>Side effects and contraindications</h4><ul>
+        <li>Cough: bradykinin-mediated; class effect; switch to ARB if intolerable</li>
+        <li>Angioedema: bradykinin-mediated; potentially life-threatening; absolute contraindication to ARBs too (relative)</li>
+        <li>Hyperkalemia: aldosterone suppression (monitor K+ in renal impairment)</li>
+        <li>Acute kidney injury: in bilateral RAS or single kidney; reduce efferent dilation removes protective pressure</li>
+        <li>Contraindicated: pregnancy (teratogen, renal agenesis), bilateral RAS, prior angioedema</li>
+      </ul>`,
+    },
+    {
+      system: 'Pharmacology', key: 'ph3',
+      title: 'Statins',
+      answer: `<h4>Mechanism</h4><ul>
+        <li>Inhibit HMG-CoA reductase (rate-limiting step in cholesterol synthesis)</li>
+        <li>Hepatocytes upregulate LDL receptors: increased LDL clearance from blood</li>
+        <li>Primarily reduce LDL-C; modest increase in HDL, modest decrease in TG</li>
+        <li>Pleiotropic effects: anti-inflammatory, plaque stabilization (reduce CV events beyond lipid lowering)</li>
+      </ul><h4>Adverse effects - myopathy</h4><ul>
+        <li>Spectrum: myalgia (most common) - myositis (CK elevation) - rhabdomyolysis (CK over 10x ULN, myoglobinuria)</li>
+        <li>Risk factors: high dose, renal impairment, hypothyroidism, drugs that inhibit CYP3A4 or P-glycoprotein</li>
+        <li>Dose-dependent; rosuvastatin and pravastatin lower myopathy risk (not CYP3A4 metabolized)</li>
+      </ul><h4>Monitoring and drug interactions</h4><ul>
+        <li>Baseline LFTs; repeat if symptomatic (routine monitoring no longer recommended)</li>
+        <li>CK only if symptomatic</li>
+        <li>Drug interactions: fibrates (gemfibrozil increases myopathy risk - avoid combination); cyclosporine; azole antifungals; macrolides; amiodarone; niacin</li>
+        <li>Grapefruit juice inhibits CYP3A4: increases lovastatin/simvastatin/atorvastatin levels</li>
+      </ul>`,
+    },
+    // Reproductive
+    {
+      system: 'Reproductive', key: 'rep1',
+      title: 'Preeclampsia',
+      answer: `<h4>Criteria</h4><ul>
+        <li>Hypertension: BP 140/90+ on 2 occasions at 4 hours apart, onset after 20 weeks gestation</li>
+        <li>With severe features: BP 160/110+, thrombocytopenia (under 100k), creatinine over 1.1, LFTs 2x normal, pulmonary edema, new headache/visual changes</li>
+      </ul><h4>HELLP distinction</h4><ul>
+        <li>Hemolytic anemia (microangiopathic), Elevated Liver enzymes, Low Platelets</li>
+        <li>Subset of severe preeclampsia; can occur without hypertension or proteinuria in 15-20%</li>
+        <li>Schistocytes on smear; elevated indirect bilirubin, LDH; epigastric pain from hepatic edema</li>
+      </ul><h4>Management and delivery timing</h4><ul>
+        <li>Antihypertensives: IV labetalol or hydralazine for acute BP 160/110+; oral nifedipine or labetalol maintenance</li>
+        <li>Magnesium sulfate: prevent/treat seizures (eclampsia); NOT for BP control</li>
+        <li>Mg toxicity: loss of DTRs (first sign), respiratory arrest; treat with calcium gluconate</li>
+        <li>Delivery timing: 37 weeks without severe features; 34 weeks with severe features; immediate for eclampsia or HELLP with deterioration</li>
+        <li>Definitive treatment: delivery of fetus and placenta</li>
+      </ul>`,
+    },
+    {
+      system: 'Reproductive', key: 'rep2',
+      title: 'Contraceptive mechanisms',
+      answer: `<h4>Combined OCP (estrogen + progestin)</h4><ul>
+        <li>Primary: suppresses LH surge (prevents ovulation)</li>
+        <li>Secondary: thickens cervical mucus, thins endometrium</li>
+        <li>Contraindications: smoking + age 35+, VTE/stroke history, migraine with aura, uncontrolled HTN, active liver disease, breast cancer</li>
+      </ul><h4>Mini-pill (progestin-only)</h4><ul>
+        <li>Cervical mucus thickening (primary); may inhibit ovulation inconsistently</li>
+        <li>Take same time daily (3-hour window); safe in breastfeeding and those with estrogen contraindications</li>
+      </ul><h4>IUD</h4><ul>
+        <li>Copper IUD: copper ions impair sperm motility and fertilization; also effective emergency contraception (most effective EC, within 5 days); hormone-free; increases menstrual bleeding</li>
+        <li>Hormonal IUD (levonorgestrel): thickens cervical mucus + thins endometrium; local effect; reduces bleeding</li>
+      </ul><h4>Nexplanon (etonogestrel implant)</h4><ul>
+        <li>Subdermal implant, effective 3 years; most effective reversible contraceptive</li>
+        <li>Inhibits ovulation + thickens cervical mucus</li>
+        <li>Common SE: irregular bleeding; no impact on fertility after removal</li>
+      </ul>`,
+    },
+    {
+      system: 'Reproductive', key: 'rep3',
+      title: 'Testicular cancer',
+      answer: `<h4>Seminoma vs non-seminoma</h4><ul>
+        <li>Seminoma: 50%; peak age 30s; uniform cells, lymphocytic stroma; radiosensitive; excellent prognosis</li>
+        <li>Non-seminoma (NSGCT): yolk sac (children), embryonal, choriocarcinoma, teratoma; mixed most common</li>
+        <li>Choriocarcinoma: hematogenous spread; highest beta-hCG; worst prognosis in NSGCT</li>
+        <li>Differentiate: AFP cannot be elevated in pure seminoma (elevation = NSGCT component)</li>
+      </ul><h4>Tumor markers</h4><ul>
+        <li>AFP (alpha-fetoprotein): elevated in yolk sac tumor and embryonal; NEVER in pure seminoma</li>
+        <li>Beta-hCG: elevated in choriocarcinoma; modestly in some seminomas and embryonal</li>
+        <li>LDH: nonspecific; reflects tumor burden and metabolic activity</li>
+        <li>Markers used for staging, response monitoring, and surveillance</li>
+      </ul><h4>Management</h4><ul>
+        <li>Radical orchiectomy via inguinal approach (never transscrotal - disrupts lymphatic drainage)</li>
+        <li>Seminoma stage I: surveillance or adjuvant carboplatin or XRT to para-aortic nodes</li>
+        <li>NSGCT: retroperitoneal lymph node dissection (RPLND) or bleomycin + etoposide + cisplatin (BEP)</li>
+        <li>Bleomycin toxicity: pulmonary fibrosis (dose-limiting)</li>
+      </ul>`,
+    },
+    // Pathology
+    {
+      system: 'Pathology', key: 'path1',
+      title: 'Neoplasia basics',
+      answer: `<h4>Oncogenes (gain of function)</h4><ul>
+        <li>RAS: most commonly mutated oncogene; GTP-binding signaling; codon 12 point mutation locks active; KRAS in pancreatic, lung, colon</li>
+        <li>MYC: transcription factor; Burkitt's (t(8;14)); amplification in neuroblastoma (N-MYC)</li>
+        <li>HER2/neu (ERBB2): receptor tyrosine kinase; amplified in breast cancer; trastuzumab target</li>
+        <li>BCR-ABL: t(9;22) Philadelphia chromosome; CML and ALL; imatinib target</li>
+        <li>RET: MEN2A and MEN2B; papillary thyroid carcinoma</li>
+      </ul><h4>Tumor suppressors (loss of function)</h4><ul>
+        <li>RB1: retinoblastoma, osteosarcoma; controls G1/S checkpoint</li>
+        <li>TP53 (p53): most commonly mutated in human cancers; "guardian of genome"; Li-Fraumeni syndrome</li>
+        <li>APC: colorectal cancer; FAP; Wnt signaling regulation</li>
+        <li>BRCA1/2: hereditary breast/ovarian cancer; DNA repair (homologous recombination)</li>
+        <li>VHL: clear cell renal carcinoma; von Hippel-Lindau syndrome; HIF regulation</li>
+      </ul><h4>Knudson two-hit hypothesis</h4><ul>
+        <li>Both alleles of a tumor suppressor must be inactivated for tumor suppression to be lost</li>
+        <li>Hereditary tumors: first hit germline (inherited), second hit somatic; earlier onset, bilateral/multifocal</li>
+        <li>Sporadic tumors: both hits somatic; later onset, unilateral</li>
+      </ul>`,
+    },
+    {
+      system: 'Pathology', key: 'path2',
+      title: 'Cell injury',
+      answer: `<h4>Reversible vs irreversible markers</h4><ul>
+        <li>Reversible: cellular swelling (Na/K ATPase fails), ER dilation, mitochondrial swelling, chromatin clumping; cell can recover if insult stops</li>
+        <li>Irreversible: nuclear changes (pyknosis-condensation, karyorrhexis-fragmentation, karyolysis-dissolution); plasma membrane rupture; Ca2+ influx into mitochondria</li>
+        <li>Point of no return: membrane rupture + mitochondrial Ca2+ overload + loss of oxidative phosphorylation</li>
+        <li>Serum markers: troponin (myocytes), ALT/AST (hepatocytes), LDH (widespread); indicate cell membrane rupture</li>
+      </ul><h4>Free radical injury mechanism</h4><ul>
+        <li>Sources: reperfusion (mitochondrial ROS), ionizing radiation, drug metabolism (CCl4 to CCl3 radical), neutrophil oxidative burst</li>
+        <li>Damage: lipid peroxidation (membrane destruction), protein cross-linking (enzyme inactivation), DNA damage (strand breaks, mutations)</li>
+        <li>Defense mechanisms: superoxide dismutase (SOD), catalase, glutathione peroxidase; vitamins C and E; ferritin/transferrin (limit free iron)</li>
+        <li>Reperfusion injury: O2 reintroduction generates ROS; xanthine oxidase-dependent in some tissues</li>
+      </ul>`,
+    },
+    {
+      system: 'Pathology', key: 'path3',
+      title: 'Inflammation',
+      answer: `<h4>Acute vs chronic cells</h4><ul>
+        <li>Acute: neutrophils (PMNs); predominate in first 24-48 hours; phagocytosis, oxidative burst</li>
+        <li>Chronic: mononuclear cells - lymphocytes, macrophages, plasma cells; weeks to months</li>
+        <li>Eosinophils: parasites, allergic reactions, drug reactions, certain cancers</li>
+      </ul><h4>Cardinal signs of inflammation</h4><ul>
+        <li>Rubor (redness): arteriolar dilation, increased blood flow</li>
+        <li>Calor (heat): increased blood flow + cellular metabolism</li>
+        <li>Tumor (swelling): increased vascular permeability, exudate formation</li>
+        <li>Dolor (pain): bradykinin, prostaglandins stimulate nociceptors</li>
+        <li>Functio laesa (loss of function): Virchow's fifth sign</li>
+      </ul><h4>Granuloma types</h4><ul>
+        <li>Caseating: TB (central necrosis), sarcoidosis (non-caseating but can be confused), histoplasma, coccidioides</li>
+        <li>Non-caseating: sarcoidosis (hallmark), Crohn's disease, berylliosis, syphilis (gumma = caseating in tertiary)</li>
+        <li>Foreign body: giant cells engulf indigestible material; sutures, talc, uric acid</li>
+        <li>Granuloma = collection of activated macrophages (epithelioid histiocytes) + multinucleated giant cells + lymphocytes; indicates T-cell mediated response to persistent antigen</li>
+      </ul>`,
+    },
+    // Special topics
+    {
+      system: 'Special topics', key: 'sp1',
+      title: 'Acid-base: all four disorders',
+      answer: `<h4>Primary disorders and identification</h4><ul>
+        <li>Step 1: pH - acidemia (under 7.4) or alkalemia (over 7.4)</li>
+        <li>Step 2: primary disorder - CO2 vs HCO3 direction</li>
+        <li>Step 3: calculate compensation - is it appropriate?</li>
+      </ul><h4>Compensation equations</h4><ul>
+        <li>Metabolic acidosis: expected pCO2 = (1.5 x HCO3) + 8 +/- 2 (Winter's formula)</li>
+        <li>Metabolic alkalosis: expected pCO2 = (0.7 x HCO3) + 21 +/- 2</li>
+        <li>Respiratory acidosis (acute): HCO3 rises 1 mEq/L per 10 mmHg CO2 rise</li>
+        <li>Respiratory acidosis (chronic): HCO3 rises 3.5 mEq/L per 10 mmHg CO2 rise</li>
+        <li>Respiratory alkalosis (acute): HCO3 falls 2 mEq/L per 10 mmHg CO2 fall</li>
+        <li>Respiratory alkalosis (chronic): HCO3 falls 5 mEq/L per 10 mmHg CO2 fall</li>
+      </ul><h4>Mixed disorders</h4><ul>
+        <li>If compensation is inappropriately high or low: mixed disorder present</li>
+        <li>Delta-delta ratio: (AG - 12) / (24 - HCO3); under 1 suggests concurrent non-AG acidosis; over 2 suggests concurrent metabolic alkalosis</li>
+      </ul>`,
+    },
+    {
+      system: 'Special topics', key: 'sp2',
+      title: 'Biostatistics: 2x2 table',
+      answer: `<h4>2x2 table structure</h4><ul>
+        <li>Rows: test positive / test negative; Columns: disease present / disease absent</li>
+        <li>TP = test+, disease+; FP = test+, disease-; FN = test-, disease+; TN = test-, disease-</li>
+      </ul><h4>Sensitivity and specificity</h4><ul>
+        <li>Sensitivity = TP / (TP + FN) = true positive rate; ability to detect disease</li>
+        <li>High sensitivity: good for ruling OUT (negative test reliable); SNOUT</li>
+        <li>Specificity = TN / (TN + FP) = true negative rate; ability to rule out non-disease</li>
+        <li>High specificity: good for ruling IN (positive test reliable); SPIN</li>
+      </ul><h4>PPV and NPV relationships</h4><ul>
+        <li>PPV = TP / (TP + FP): probability disease present if test positive; depends on prevalence</li>
+        <li>NPV = TN / (TN + FN): probability disease absent if test negative; depends on prevalence</li>
+        <li>When prevalence rises: PPV rises, NPV falls</li>
+        <li>When prevalence falls: PPV falls, NPV rises</li>
+        <li>Sensitivity and specificity are properties of the test (prevalence-independent); PPV/NPV vary with population</li>
+        <li>Likelihood ratio: does not depend on prevalence; LR+ = sens/(1-spec); LR- = (1-sens)/spec</li>
+      </ul>`,
+    },
+    {
+      system: 'Special topics', key: 'sp3',
+      title: 'Pharmacokinetics',
+      answer: `<h4>Volume of distribution (Vd)</h4><ul>
+        <li>Vd = dose / plasma concentration; apparent volume in which drug is distributed</li>
+        <li>Low Vd (under 5L): drug stays in plasma; large, charged, protein-bound molecules (heparin, warfarin)</li>
+        <li>High Vd: drug distributes to tissues; lipophilic drugs (chloroquine, amiodarone, digoxin)</li>
+        <li>Loading dose = Vd x target concentration / bioavailability</li>
+      </ul><h4>Clearance and half-life</h4><ul>
+        <li>Clearance (Cl): volume of plasma cleared per unit time; determines maintenance dose</li>
+        <li>Maintenance dose = Cl x target Css / bioavailability</li>
+        <li>Half-life (t1/2) = 0.693 x Vd / Cl</li>
+        <li>Steady state reached in ~4-5 half-lives; elimination complete in ~4-5 half-lives</li>
+      </ul><h4>Zero vs first order</h4><ul>
+        <li>First order: rate proportional to concentration; constant fraction eliminated per unit time; most drugs</li>
+        <li>Zero order (saturation kinetics): rate constant regardless of concentration; enzyme saturated</li>
+        <li>Zero-order drugs: phenytoin, warfarin, ethanol, aspirin (high dose); small dose change = large concentration change</li>
+        <li>Bioavailability (F): fraction reaching systemic circulation; affected by first-pass metabolism</li>
+      </ul>`,
+    },
+  ];
+
+  const SYSTEMS = [...new Set(TOPICS.map(t => t.system))];
+
+  // ---- Storage keys ----
+  const KEYS = {
+    session: 'bbb_sprint_session',
+    last5: 'bbb_sprint_last5',
+    date: 'bbb_sprint_date',
+    resurface: 'bbb_sprint_resurface',
+  };
+
+  // ---- State ----
+  let currentSystem = null;
+  let currentTopic = null;
+  let timerInterval = null;
+  let timeRemaining = 60;
+  let timePaused = false;
+  let timeUsed = 0;
+  let selectedGrade = null;
+  let sessionResults = [];
+  let resurfaceTopics = [];
+
+  // ---- Load storage ----
+  function loadSession() {
+    try {
+      const d = localStorage.getItem(KEYS.date);
+      const today = new Date().toDateString();
+      if (d === today) {
+        sessionResults = JSON.parse(localStorage.getItem(KEYS.session) || '[]');
+      } else {
+        sessionResults = [];
+      }
+    } catch(e) { sessionResults = []; }
+    try {
+      resurfaceTopics = JSON.parse(localStorage.getItem(KEYS.resurface) || '[]');
+    } catch(e) { resurfaceTopics = []; }
+  }
+
+  function saveSession() {
+    try {
+      localStorage.setItem(KEYS.session, JSON.stringify(sessionResults));
+      localStorage.setItem(KEYS.date, new Date().toDateString());
+    } catch(e) {}
+  }
+
+  // ---- Resurface banner ----
+  function checkResurface() {
+    if (resurfaceTopics.length > 0) {
+      document.getElementById('resurface-banner').style.display = 'flex';
+      document.getElementById('resurface-text').textContent =
+        `You flagged ${resurfaceTopics.length} topic${resurfaceTopics.length > 1 ? 's' : ''} to review. Start with those?`;
+    }
+  }
+
+  document.getElementById('btn-resurface-yes').addEventListener('click', function() {
+    document.getElementById('resurface-banner').style.display = 'none';
+    // Start with first resurface topic
+    const topicKey = resurfaceTopics[0];
+    const topic = TOPICS.find(t => t.key === topicKey);
+    if (topic) startSprint(topic);
+    else showSelector();
+  });
+
+  document.getElementById('btn-resurface-no').addEventListener('click', function() {
+    document.getElementById('resurface-banner').style.display = 'none';
+  });
+
+  // ---- Build system selector ----
+  function buildSelector() {
+    const grid = document.getElementById('systems-grid');
+    grid.innerHTML = '';
+    SYSTEMS.forEach(sys => {
+      const count = TOPICS.filter(t => t.system === sys).length;
+      const btn = document.createElement('button');
+      btn.className = 'system-btn';
+      btn.setAttribute('data-system', sys);
+      btn.textContent = `${sys} (${count})`;
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.system-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        startSystemSprint(sys);
+      });
+      grid.appendChild(btn);
+    });
+  }
+
+  document.getElementById('btn-surprise').addEventListener('click', () => {
+    const topic = TOPICS[Math.floor(Math.random() * TOPICS.length)];
+    startSprint(topic);
+  });
+
+  // ---- Screens ----
+  function showScreen(id) {
+    ['screen-selector','screen-sprint','screen-reveal','screen-wrap'].forEach(s => {
+      document.getElementById(s).style.display = 'none';
+    });
+    document.getElementById(id).style.display = 'block';
+  }
+
+  function showSelector() {
+    stopTimer();
+    showScreen('screen-selector');
+  }
+
+  // ---- Sprint ----
+  function startSystemSprint(system) {
+    currentSystem = system;
+    const systemTopics = TOPICS.filter(t => t.system === system);
+    const topic = systemTopics[Math.floor(Math.random() * systemTopics.length)];
+    startSprint(topic);
+  }
+
+  function startSprint(topic) {
+    currentTopic = topic;
+    currentSystem = topic.system;
+    selectedGrade = null;
+    stopTimer();
+    timeRemaining = 60;
+    timePaused = false;
+    timeUsed = 0;
+
+    document.getElementById('sprint-system-tag').textContent = topic.system;
+    document.getElementById('sprint-topic').textContent = topic.title;
+    document.getElementById('sprint-textarea').value = '';
+    document.getElementById('sprint-textarea').disabled = false;
+
+    const timerEl = document.getElementById('timer-display');
+    timerEl.textContent = '1:00';
+    timerEl.className = 'timer-display';
+
+    document.getElementById('btn-reveal').style.display = 'none';
+    document.getElementById('timer-ended-note').style.display = 'none';
+    document.getElementById('btn-pause').textContent = 'Pause';
+
+    showScreen('screen-sprint');
+    document.getElementById('sprint-textarea').focus();
+    startTimer();
+  }
+
+  function startTimer() {
+    timerInterval = setInterval(() => {
+      if (timePaused) return;
+      timeRemaining--;
+      timeUsed++;
+      updateTimerDisplay();
+      if (timeRemaining <= 0) {
+        clearInterval(timerInterval);
+        onTimerEnd();
+      }
+    }, 1000);
+  }
+
+  function stopTimer() {
+    if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+  }
+
+  function updateTimerDisplay() {
+    const el = document.getElementById('timer-display');
+    const mins = Math.floor(timeRemaining / 60);
+    const secs = String(timeRemaining % 60).padStart(2,'0');
+    el.textContent = `${mins}:${secs}`;
+    el.className = 'timer-display' + (timeRemaining <= 10 ? ' danger' : '') + (timePaused ? ' paused' : '');
+  }
+
+  function onTimerEnd() {
+    timeUsed = 60;
+    document.getElementById('timer-display').textContent = '0:00';
+    document.getElementById('timer-display').className = 'timer-display danger';
+    document.getElementById('sprint-textarea').disabled = true;
+    document.getElementById('btn-reveal').style.display = 'inline-block';
+    document.getElementById('timer-ended-note').style.display = 'block';
+  }
+
+  document.getElementById('btn-pause').addEventListener('click', function() {
+    if (timeRemaining <= 0) return;
+    timePaused = !timePaused;
+    this.textContent = timePaused ? 'Resume' : 'Pause';
+    updateTimerDisplay();
+  });
+
+  document.getElementById('btn-skip').addEventListener('click', function() {
+    stopTimer();
+    timeUsed = 60 - timeRemaining;
+    showReveal();
+  });
+
+  document.getElementById('btn-back-selector').addEventListener('click', showSelector);
+
+  document.getElementById('btn-reveal').addEventListener('click', showReveal);
+
+  // ---- Reveal ----
+  function showReveal() {
+    stopTimer();
+    const used = Math.min(timeUsed, 60);
+    document.getElementById('reveal-title').textContent = currentTopic.title;
+    document.getElementById('time-used-badge').textContent = `You used ${used} of 60 seconds`;
+
+    const notes = document.getElementById('sprint-textarea').value.trim();
+    const notesEl = document.getElementById('student-notes-display');
+    if (notes) {
+      notesEl.textContent = notes;
+      notesEl.className = 'student-notes';
+    } else {
+      notesEl.textContent = '(no notes written)';
+      notesEl.className = 'student-notes empty';
+    }
+
+    document.getElementById('model-answer-display').innerHTML = currentTopic.answer;
+
+    // Reset grade buttons
+    document.querySelectorAll('.grade-btn').forEach(b => b.className = 'grade-btn');
+    selectedGrade = null;
+
+    showScreen('screen-reveal');
+  }
+
+  // Grade buttons
+  document.querySelectorAll('.grade-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const grade = this.getAttribute('data-grade');
+      selectedGrade = grade;
+      document.querySelectorAll('.grade-btn').forEach(b => b.className = 'grade-btn');
+      this.className = `grade-btn selected-${grade}`;
+
+      // Save to session
+      sessionResults.push({
+        topicKey: currentTopic.key,
+        topicTitle: currentTopic.title,
+        system: currentTopic.system,
+        grade: grade,
+        timestamp: Date.now(),
+      });
+      saveSession();
+    });
+  });
+
+  // Next topic buttons
+  document.getElementById('btn-next-same').addEventListener('click', () => {
+    maybeShowWrap();
+  });
+
+  document.getElementById('btn-next-random').addEventListener('click', () => {
+    const topic = TOPICS[Math.floor(Math.random() * TOPICS.length)];
+    startSprint(topic);
+    maybeShowWrapOrContinue(topic);
+  });
+
+  document.getElementById('btn-change-system').addEventListener('click', showSelector);
+
+  function maybeShowWrap() {
+    if (sessionResults.length >= 5) {
+      showWrap(false, currentSystem);
+    } else {
+      startSystemSprint(currentSystem);
+    }
+  }
+
+  function maybeShowWrapOrContinue(topic) {
+    if (sessionResults.length >= 5) {
+      showWrap(false, null);
+    } else {
+      startSprint(topic);
+    }
+  }
+
+  // ---- Session wrap ----
+  function showWrap(forceShow, system) {
+    const grades = { nailed: 0, mostly: 0, missed: 0, blank: 0 };
+    const struggled = [];
+    sessionResults.forEach(r => {
+      if (grades[r.grade] !== undefined) grades[r.grade]++;
+      if (r.grade === 'missed' || r.grade === 'blank') struggled.push(r);
+    });
+
+    document.getElementById('wrap-subtitle').textContent =
+      `${sessionResults.length} topics covered this session`;
+
+    // Grade breakdown
+    const breakdown = document.getElementById('wrap-grade-breakdown');
+    const labels = { nailed: 'Nailed it', mostly: 'Mostly there', missed: 'Missed key points', blank: 'Blank' };
+    breakdown.innerHTML = Object.entries(grades).map(([k,v]) => `
+      <div class="grade-chip">
+        <span class="grade-chip-label">${labels[k]}</span>
+        <span class="grade-chip-val">${v}</span>
+      </div>
+    `).join('');
+
+    // Covered list
+    const covered = document.getElementById('covered-list');
+    covered.innerHTML = sessionResults.map(r => `
+      <li>${r.topicTitle} <span style="color:rgba(232,223,200,.35);font-size:0.65rem">(${r.system})</span></li>
+    `).join('');
+
+    // Struggled panel
+    if (struggled.length > 0) {
+      document.getElementById('struggled-panel').style.display = 'block';
+      document.getElementById('struggled-list').innerHTML = struggled.map(r => `
+        <li>${r.topicTitle}</li>
+      `).join('');
+    } else {
+      document.getElementById('struggled-panel').style.display = 'none';
+    }
+
+    showScreen('screen-wrap');
+  }
+
+  document.getElementById('btn-tomorrow').addEventListener('click', function() {
+    const struggled = sessionResults
+      .filter(r => r.grade === 'missed' || r.grade === 'blank')
+      .map(r => r.topicKey);
+    try { localStorage.setItem(KEYS.resurface, JSON.stringify(struggled)); } catch(e) {}
+    this.textContent = 'Flagged for tomorrow';
+    this.disabled = true;
+  });
+
+  document.getElementById('btn-keep-going').addEventListener('click', () => {
+    showSelector();
+  });
+
+  document.getElementById('btn-new-session').addEventListener('click', () => {
+    sessionResults = [];
+    saveSession();
+    showSelector();
+  });
+
+  // ---- Init ----
+  loadSession();
+  buildSelector();
+  checkResurface();
+  showSelector();
+
+})();
+</script>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-brand">Bit by Bit Pedagogy</span>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cfactor/">MCAT</a></li>
+      <li><a href="/">Step 1</a></li>
+      <li><a href="/triage/">Find your pattern</a></li>
+      <li><a href="/archetypes/">Study profiles</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

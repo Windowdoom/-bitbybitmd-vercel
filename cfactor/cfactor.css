@@ -149,3 +149,23 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  .btn-p,.btn-o,.btn-gold{width:100%;}
  footer{flex-direction:column;text-align:center;}
 }
+
+/* ========== MATH NOTATION (shared across all courses) ========== */
+/* Tighten inline sub/sup so they read cleanly in body prose AND in boxes.
+   The .formula container has its own (slightly looser) variant defined in
+   each book HTML. */
+p sub, p sup, .box p sub, .box p sup, .box li sub, .box li sup, li sub, li sup {
+  font-size: .72em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  font-weight: 500;
+}
+p sub, .box p sub, .box li sub, li sub { bottom: -0.35em; }
+p sup, .box p sup, .box li sup, li sup { top: -0.45em; }
+
+/* Subtle highlight on math-y characters: Greek letters and operators get a
+   slightly warmer tone so the eye picks them out from prose. Implemented as
+   a contained class the formatter could opt into; for now we just lift the
+   default sub/sup color so the reader does not lose them. */
+sub, sup { color: var(--text); opacity: 0.95; }

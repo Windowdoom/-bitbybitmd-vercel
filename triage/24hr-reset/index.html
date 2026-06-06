@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>24-Hour Reset | Bit by Bit Pedagogy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D1B2E;
+    --gold: #F5A623;
+    --teal: #00E5A0;
+    --cream: #e8dfc8;
+    --border: rgba(248,245,235,.1);
+    --bg-card: rgba(255,255,255,.04);
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 400;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+    padding: 0 2rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(13,27,46,.96);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--cream);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 300;
+    font-size: 0.75rem;
+    color: rgba(232,223,200,.6);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+  }
+
+  /* ---- Banner ---- */
+  .banner {
+    background: rgba(245,166,35,.06);
+    border: 1px solid rgba(245,166,35,.2);
+    border-radius: 4px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .banner-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: var(--gold);
+  }
+
+  /* ---- Intro ---- */
+  .page-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .page-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 2.6rem;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .page-header p {
+    font-size: 1.15rem;
+    color: rgba(232,223,200,.65);
+    font-weight: 300;
+    max-width: 580px;
+  }
+
+  /* ---- Progress bar ---- */
+  .progress-container {
+    margin-bottom: 2.5rem;
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .progress-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(232,223,200,.4);
+  }
+
+  .progress-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: rgba(232,223,200,.35);
+  }
+
+  .progress-track {
+    height: 3px;
+    background: rgba(255,255,255,.06);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  /* ---- Question card ---- */
+  .question-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem 2.5rem 2.5rem;
+    animation: fadeSlideIn 0.25s ease;
+  }
+
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .q-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(232,223,200,.35);
+    margin-bottom: 1rem;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.3;
+    margin-bottom: 1.75rem;
+  }
+
+  /* ---- Option buttons ---- */
+  .options-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .option-btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    background: rgba(255,255,255,.03);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 0.85rem 1.1rem;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.15s, background 0.15s;
+    width: 100%;
+  }
+
+  .option-btn:hover {
+    border-color: rgba(245,166,35,.35);
+    background: rgba(245,166,35,.04);
+  }
+
+  .option-btn.selected {
+    border-color: var(--gold);
+    background: rgba(245,166,35,.08);
+  }
+
+  .option-letter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--gold);
+    min-width: 18px;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  .option-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: rgba(232,223,200,.8);
+    line-height: 1.4;
+  }
+
+  .option-btn.selected .option-text {
+    color: var(--cream);
+  }
+
+  /* ---- Multi-select chips ---- */
+  .chips-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 300;
+    padding: 0.55rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: rgba(255,255,255,.03);
+    color: rgba(232,223,200,.7);
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+
+  .chip:hover {
+    border-color: rgba(245,166,35,.35);
+    color: var(--cream);
+  }
+
+  .chip.selected {
+    border-color: var(--gold);
+    background: rgba(245,166,35,.08);
+    color: var(--gold);
+  }
+
+  .chip-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(232,223,200,.3);
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  /* ---- Time inputs ---- */
+  .time-input-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  input[type="time"] {
+    background: rgba(255,255,255,.05);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--cream);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 300;
+    padding: 0.75rem 1rem;
+    width: 100%;
+    max-width: 220px;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  input[type="time"]:focus { border-color: rgba(245,166,35,.4); }
+  input[type="time"]::-webkit-calendar-picker-indicator { filter: invert(0.7); cursor: pointer; }
+
+  input[type="number"] {
+    background: rgba(255,255,255,.05);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--cream);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 300;
+    padding: 0.75rem 1rem;
+    width: 100%;
+    max-width: 160px;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  input[type="number"]:focus { border-color: rgba(245,166,35,.4); }
+
+  /* ---- Nav buttons ---- */
+  .q-nav {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    align-items: center;
+  }
+
+  .btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.7rem 1.4rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: #0D1B2E;
+  }
+
+  .btn-primary:hover { background: #f0b84e; }
+  .btn-primary:disabled { opacity: 0.4; cursor: default; }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover { background: var(--bg-card); border-color: rgba(232,223,200,.25); }
+
+  .btn-ghost {
+    background: transparent;
+    color: rgba(232,223,200,.4);
+    border: none;
+    padding: 0.7rem 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .btn-ghost:hover { color: rgba(232,223,200,.7); }
+
+  /* ---- Output / Discharge plan ---- */
+  #screen-output { display: none; }
+
+  .triage-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 1.1rem;
+    border-radius: 3px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .triage-badge.critical {
+    background: rgba(255,80,80,.1);
+    border: 1px solid rgba(255,80,80,.3);
+    color: #ff8080;
+  }
+
+  .triage-badge.moderate {
+    background: rgba(245,166,35,.1);
+    border: 1px solid rgba(245,166,35,.3);
+    color: var(--gold);
+  }
+
+  .triage-badge.stable {
+    background: rgba(0,229,160,.06);
+    border: 1px solid rgba(0,229,160,.25);
+    color: var(--teal);
+  }
+
+  .triage-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .critical .triage-dot { background: #ff8080; }
+  .moderate .triage-dot { background: var(--gold); }
+  .stable .triage-dot { background: var(--teal); }
+
+  .discharge-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 2.2rem;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .discharge-heading em { font-style: italic; color: var(--gold); }
+
+  .discharge-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: rgba(232,223,200,.45);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    max-width: 520px;
+  }
+
+  /* Plan blocks */
+  .plan-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+  }
+
+  .plan-block-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .plan-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--gold);
+    min-width: 70px;
+    flex-shrink: 0;
+  }
+
+  .plan-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(232,223,200,.5);
+  }
+
+  .plan-block-body {
+    padding: 1rem 1.25rem;
+  }
+
+  .plan-instruction {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: rgba(232,223,200,.85);
+    line-height: 1.6;
+    margin-bottom: 0.4rem;
+  }
+
+  .plan-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: rgba(232,223,200,.4);
+    line-height: 1.5;
+  }
+
+  /* Principle statement (for critical plan) */
+  .principle-statement {
+    background: rgba(255,80,80,.04);
+    border: 1px solid rgba(255,80,80,.1);
+    border-radius: 3px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: rgba(232,223,200,.7);
+    line-height: 1.6;
+  }
+
+  .principle-statement.moderate {
+    background: rgba(245,166,35,.04);
+    border-color: rgba(245,166,35,.1);
+  }
+
+  .principle-statement.stable {
+    background: rgba(0,229,160,.04);
+    border-color: rgba(0,229,160,.1);
+  }
+
+  /* Output actions */
+  .output-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+  }
+
+  .triage-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: rgba(232,223,200,.4);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+    margin-top: 1rem;
+  }
+
+  .triage-link:hover { color: var(--gold); }
+
+  /* ---- Check-in (V2 day 2) ---- */
+  .checkin-card {
+    background: rgba(0,229,160,.04);
+    border: 1px solid rgba(0,229,160,.15);
+    border-radius: 4px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .checkin-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--teal);
+    margin-bottom: 0.5rem;
+  }
+
+  .checkin-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: rgba(232,223,200,.4);
+    margin-bottom: 1.5rem;
+  }
+
+  /* Print styles */
+  @media print {
+    nav, .output-actions, #screen-questions, .banner { display: none; }
+    body { background: white; color: black; }
+    .plan-instruction, .plan-note, .discharge-sub { color: black; }
+    .plan-time, .plan-label { color: #333; }
+    .triage-badge { border: 1px solid #ccc; }
+    .plan-block { border: 1px solid #ddd; }
+    .principle-statement { border: 1px solid #ddd; background: #f9f9f9; }
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 1rem; }
+    .nav-links { gap: 1.25rem; }
+    .nav-links a { font-size: 0.65rem; }
+    main { padding: 2rem 1rem 4rem; }
+    .page-header h1 { font-size: 1.9rem; }
+    .question-card { padding: 1.5rem; }
+    .q-text { font-size: 1.3rem; }
+    .discharge-heading { font-size: 1.7rem; }
+  }
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
+.footer-inner{max-width:760px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:.95rem;color:rgba(232,223,200,.4)}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+.footer-links a{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:300;letter-spacing:.09em;text-transform:uppercase;color:rgba(232,223,200,.35);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--gold)}
+
+.nav-brand-inner { display: flex; align-items: center; gap: 0.625rem; text-decoration: none; }
+.nav-monogram { width: 28px; height: 28px; border: 1.5px solid var(--gold); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; color: var(--gold); flex-shrink: 0; }
+
+/* unified animations */
+@keyframes bbbFadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.btn, button:not(.chip){will-change:transform;transition:transform 200ms cubic-bezier(0.22, 1, 0.36, 1), background 200ms ease, border-color 200ms ease, color 200ms ease, opacity 200ms ease}
+.btn:active, button:not(.chip):active{transform:translateY(1px) scale(.985)}
+.chip{transition:transform 180ms cubic-bezier(0.22, 1, 0.36, 1), border-color 200ms ease, background 200ms ease, color 200ms ease}
+.chip:active{transform:scale(.96)}
+.option-btn{transition:transform 200ms cubic-bezier(0.22, 1, 0.36, 1), border-color 200ms ease, background 200ms ease, color 200ms ease}
+.option-btn:active{transform:scale(.99)}
+
+.bbb-disclaimer{margin:2rem 0 0;padding:1.25rem 1.5rem;border:1px solid var(--border);border-left:3px solid var(--cream-faint, rgba(232,223,200,.4));border-radius:6px;background:var(--bg-card);font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:.95rem;line-height:1.65;color:rgba(232,223,200,.6)}
+.bbb-disclaimer strong{font-weight:600;font-style:italic;color:rgba(232,223,200,.78)}
+.bbb-disclaimer a{color:var(--gold, #F5A623);text-decoration:none;border-bottom:1px dotted rgba(245,166,35,.35);transition:border-color .2s}
+.bbb-disclaimer a:hover{border-bottom-color:var(--gold, #F5A623)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand nav-brand-inner">
+    <div class="nav-monogram">B&#179;</div>
+    <span>Bit by Bit Pedagogy</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/cfactor/">MCAT</a></li>
+    <li><a href="/">Step 1</a></li>
+    <li><a href="/triage/">Find your pattern</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- Day-2 check-in banner (shown conditionally) -->
+  <div id="checkin-banner" class="banner" style="display:none">
+    <span class="banner-text" id="checkin-banner-text">You ran a reset yesterday. How did it go?</span>
+    <div>
+      <button class="btn btn-primary" id="btn-open-checkin">Quick check-in</button>
+    </div>
+  </div>
+
+  <!-- QUESTION FLOW -->
+  <div id="screen-questions">
+    <div class="page-header">
+      <h1><em>24-hour</em> reset</h1>
+      <p>Eight questions. Two minutes. A single-day plan calibrated to where you actually are.</p>
+    </div>
+
+    <div class="progress-container">
+      <div class="progress-meta">
+        <span class="progress-label">Assessment</span>
+        <span class="progress-count" id="progress-count">Question 1 of 8</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div id="question-area"></div>
+  </div>
+
+  <!-- OUTPUT -->
+  <div id="screen-output">
+    <div id="checkin-flow" style="display:none">
+      <div class="checkin-card">
+        <div class="checkin-title">Yesterday's check-in</div>
+        <div class="checkin-sub">Five quick questions about how the day went.</div>
+        <div id="checkin-area"></div>
+      </div>
+    </div>
+
+    <div id="discharge-plan-area"></div>
+  </div>
+
+<aside class="bbb-disclaimer"><strong>This is a starting point.</strong> One day at a time is one tool, not a substitute for a real conversation with your advisor when the days keep going wrong. If the same pattern shows up three days in a row, the next step is a phone call.</aside>
+</main>
+
+<script>
+(function() {
+
+  // ---- Questions definition ----
+  const QUESTIONS = [
+    {
+      id: 'q1',
+      text: 'How many weeks until your exam?',
+      type: 'single',
+      options: [
+        { key: 'a', text: '10 or more weeks' },
+        { key: 'b', text: '6 to 10 weeks' },
+        { key: 'c', text: '3 to 6 weeks' },
+        { key: 'd', text: 'Under 3 weeks' },
+        { key: 'e', text: 'Under 1 week' },
+      ]
+    },
+    {
+      id: 'q2',
+      text: 'How many hours are you realistically able to study today?',
+      type: 'single',
+      options: [
+        { key: 'a', text: '1 to 3 hours' },
+        { key: 'b', text: '4 to 6 hours' },
+        { key: 'c', text: '7 to 9 hours' },
+        { key: 'd', text: '10 or more hours' },
+      ]
+    },
+    {
+      id: 'q3',
+      text: 'What is your current UWorld % correct (tutor mode)?',
+      type: 'single',
+      options: [
+        { key: 'a', text: 'Under 40%' },
+        { key: 'b', text: '40 to 50%' },
+        { key: 'c', text: '50 to 60%' },
+        { key: 'd', text: '60 to 70%' },
+        { key: 'e', text: 'Over 70%' },
+      ]
+    },
+    {
+      id: 'q4',
+      text: 'Compared to 2 weeks ago, your practice scores are:',
+      type: 'single',
+      options: [
+        { key: 'a', text: 'Going up' },
+        { key: 'b', text: 'Stable' },
+        { key: 'c', text: 'Fluctuating unpredictably' },
+        { key: 'd', text: 'Going down' },
+        { key: 'e', text: 'No practice exam yet' },
+      ]
+    },
+    {
+      id: 'q5',
+      text: 'What time do you plan to wake up today?',
+      type: 'time',
+      placeholder: 'Wake up time',
+    },
+    {
+      id: 'q6',
+      text: 'What time do you need to stop studying?',
+      type: 'time',
+      placeholder: 'Stop time',
+    },
+    {
+      id: 'q7',
+      text: 'Which of these describes today?',
+      type: 'multi',
+      note: 'Select all that apply',
+      options: [
+        { key: 'anxious',   text: 'Feeling anxious about the exam' },
+        { key: 'exhausted', text: 'Feeling physically exhausted' },
+        { key: 'avoiding',  text: 'Been avoiding UWorld' },
+        { key: 'stuck',     text: 'Feeling stuck on one system' },
+        { key: 'noreview',  text: 'Have not reviewed wrong answers recently' },
+        { key: 'behind',    text: 'Feeling like I am falling further behind' },
+        { key: 'nobreak',   text: 'Studying 10 or more days without a break' },
+      ]
+    },
+    {
+      id: 'q8',
+      text: 'What do you most need from today?',
+      type: 'single',
+      options: [
+        { key: 'a', text: 'To make real progress on content' },
+        { key: 'b', text: 'To feel in control' },
+        { key: 'c', text: 'To see that the plan is working' },
+        { key: 'd', text: 'To recover and come back stronger' },
+      ]
+    },
+  ];
+
+  // ---- State ----
+  let answers = {};
+  let currentQ = 0;
+  let pendingCheckin = false;
+
+  const STORAGE_KEY = 'bbb_reset_last_plan';
+
+  // ---- Check for yesterday's plan ----
+  function checkYesterdayPlan() {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (!stored) return;
+      const data = JSON.parse(stored);
+      const elapsed = Date.now() - data.timestamp;
+      const hours = elapsed / (1000 * 60 * 60);
+      if (hours >= 18 && hours <= 42) {
+        document.getElementById('checkin-banner').style.display = 'flex';
+      }
+    } catch(e) {}
+  }
+
+  document.getElementById('btn-open-checkin').addEventListener('click', function() {
+    document.getElementById('checkin-banner').style.display = 'none';
+    pendingCheckin = true;
+    // Still show questions first, then check-in after
+    renderQuestion(currentQ);
+  });
+
+  // ---- Helpers ----
+  function formatTime(t) {
+    if (!t) return '';
+    const [h, m] = t.split(':');
+    const hr = parseInt(h);
+    const suffix = hr >= 12 ? 'pm' : 'am';
+    const hr12 = hr === 0 ? 12 : hr > 12 ? hr - 12 : hr;
+    return `${hr12}:${m} ${suffix}`;
+  }
+
+  function addMinutes(timeStr, mins) {
+    if (!timeStr) return '';
+    const [h, m] = timeStr.split(':').map(Number);
+    const total = h * 60 + m + mins;
+    const newH = Math.floor(total / 60) % 24;
+    const newM = total % 60;
+    return `${String(newH).padStart(2,'0')}:${String(newM).padStart(2,'0')}`;
+  }
+
+  // ---- Render a question ----
+  function renderQuestion(idx) {
+    const q = QUESTIONS[idx];
+    const area = document.getElementById('question-area');
+    const pct = (idx / QUESTIONS.length) * 100;
+
+    document.getElementById('progress-fill').style.width = `${pct}%`;
+    document.getElementById('progress-count').textContent = `Question ${idx + 1} of ${QUESTIONS.length}`;
+
+    // Build card
+    area.innerHTML = '';
+    const card = document.createElement('div');
+    card.className = 'question-card';
+
+    let innerHTML = `<div class="q-number">Q${idx + 1} / ${QUESTIONS.length}</div>
+      <div class="q-text">${q.text}</div>`;
+
+    if (q.type === 'single') {
+      innerHTML += `<ul class="options-list">` +
+        q.options.map(o => `
+          <li>
+            <button class="option-btn" data-key="${o.key}">
+              <span class="option-letter">${o.key.toUpperCase()}</span>
+              <span class="option-text">${o.text}</span>
+            </button>
+          </li>
+        `).join('') +
+        `</ul>`;
+    } else if (q.type === 'multi') {
+      innerHTML += `<div class="chip-note">${q.note}</div>
+        <div class="chips-grid">` +
+        q.options.map(o => `
+          <div class="chip" data-key="${o.key}">${o.text}</div>
+        `).join('') +
+        `</div>`;
+    } else if (q.type === 'time') {
+      innerHTML += `<div class="time-input-wrap">
+        <input type="time" id="time-input" value="${answers[q.id] || ''}" autocomplete="off">
+      </div>`;
+    }
+
+    innerHTML += `<div class="q-nav">`;
+
+    if (q.type === 'multi') {
+      innerHTML += `<button class="btn btn-primary" id="btn-continue">Continue</button>`;
+    } else if (q.type === 'time') {
+      innerHTML += `<button class="btn btn-primary" id="btn-continue">Continue</button>`;
+    }
+
+    if (idx > 0) {
+      innerHTML += `<button class="btn btn-ghost" id="btn-back">Back</button>`;
+    }
+
+    innerHTML += `</div>`;
+    card.innerHTML = innerHTML;
+    area.appendChild(card);
+
+    // Restore previously selected state
+    if (q.type === 'single' && answers[q.id]) {
+      const btns = card.querySelectorAll('.option-btn');
+      btns.forEach(b => {
+        if (b.getAttribute('data-key') === answers[q.id]) b.classList.add('selected');
+      });
+    }
+
+    if (q.type === 'multi' && answers[q.id]) {
+      const chips = card.querySelectorAll('.chip');
+      chips.forEach(c => {
+        if (answers[q.id].includes(c.getAttribute('data-key'))) c.classList.add('selected');
+      });
+    }
+
+    // Event handlers - single choice (auto-advance)
+    if (q.type === 'single') {
+      card.querySelectorAll('.option-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          card.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+          this.classList.add('selected');
+          answers[q.id] = this.getAttribute('data-key');
+          setTimeout(() => advance(), 280);
+        });
+      });
+    }
+
+    // Multi-select
+    if (q.type === 'multi') {
+      if (!answers[q.id]) answers[q.id] = [];
+      card.querySelectorAll('.chip').forEach(chip => {
+        chip.addEventListener('click', function() {
+          const key = this.getAttribute('data-key');
+          if (this.classList.contains('selected')) {
+            this.classList.remove('selected');
+            answers[q.id] = answers[q.id].filter(k => k !== key);
+          } else {
+            this.classList.add('selected');
+            answers[q.id] = [...(answers[q.id] || []), key];
+          }
+        });
+      });
+
+      card.querySelector('#btn-continue').addEventListener('click', advance);
+    }
+
+    // Time input
+    if (q.type === 'time') {
+      card.querySelector('#btn-continue').addEventListener('click', function() {
+        const val = document.getElementById('time-input').value;
+        answers[q.id] = val || null;
+        advance();
+      });
+    }
+
+    // Back
+    const backBtn = card.querySelector('#btn-back');
+    if (backBtn) {
+      backBtn.addEventListener('click', () => {
+        currentQ--;
+        renderQuestion(currentQ);
+      });
+    }
+  }
+
+  function advance() {
+    currentQ++;
+    if (currentQ >= QUESTIONS.length) {
+      document.getElementById('progress-fill').style.width = '100%';
+      document.getElementById('progress-count').textContent = 'Complete';
+      generateOutput();
+    } else {
+      renderQuestion(currentQ);
+    }
+  }
+
+  // ---- Triage scoring ----
+  function computeTriage() {
+    let score = 0;
+
+    // Weeks until exam
+    const q1 = answers['q1'];
+    if (q1 === 'e') score += 4; // under 1 week
+    else if (q1 === 'd') score += 3; // under 3 weeks
+    else if (q1 === 'c') score += 1;
+
+    // UWorld score
+    const q3 = answers['q3'];
+    if (q3 === 'a') score += 3; // under 40%
+    else if (q3 === 'b') score += 2;
+    else if (q3 === 'c') score += 1;
+    else if (q3 === 'd') score -= 1;
+    else if (q3 === 'e') score -= 2;
+
+    // Score trajectory
+    const q4 = answers['q4'];
+    if (q4 === 'd') score += 3; // going down
+    else if (q4 === 'c') score += 2; // fluctuating
+    else if (q4 === 'b') score += 0;
+    else if (q4 === 'a') score -= 1; // going up
+
+    // Symptoms
+    const symptoms = answers['q7'] || [];
+    score += symptoms.length;
+
+    // What they need
+    const q8 = answers['q8'];
+    if (q8 === 'd' || q8 === 'b') score += 1;
+
+    if (score >= 8) return 'critical';
+    if (score >= 4) return 'moderate';
+    return 'stable';
+  }
+
+  // ---- Time block builder ----
+  function buildTimeBlocks(wakeTime, stopTime) {
+    // Default fallbacks
+    const wake = wakeTime || '07:00';
+    const stop = stopTime || '22:00';
+    return { wake, stop };
+  }
+
+  function blockTimes(wake, offsets) {
+    // offsets = array of [startOffset, endOffset] in minutes from wake
+    return offsets.map(([s, e]) => ({
+      start: addMinutes(wake, s),
+      end: addMinutes(wake, e),
+    }));
+  }
+
+  // ---- Hours label ----
+  function hoursLabel(q2) {
+    if (q2 === 'a') return '1 to 3';
+    if (q2 === 'b') return '4 to 6';
+    if (q2 === 'c') return '7 to 9';
+    if (q2 === 'd') return '10 or more';
+    return 'your available';
+  }
+
+  // ---- Generate discharge plan ----
+  function generateOutput() {
+    document.getElementById('screen-questions').style.display = 'none';
+    document.getElementById('screen-output').style.display = 'block';
+
+    const triage = computeTriage();
+    const { wake, stop } = buildTimeBlocks(answers['q5'], answers['q6']);
+    const hoursAvail = hoursLabel(answers['q2']);
+
+    // Save plan timestamp
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ timestamp: Date.now(), triage }));
+    } catch(e) {}
+
+    // Show check-in if pending
+    if (pendingCheckin) {
+      renderCheckin();
+    }
+
+    renderPlan(triage, wake, stop, hoursAvail);
+  }
+
+  // ---- Render check-in ----
+  function renderCheckin() {
+    document.getElementById('checkin-flow').style.display = 'block';
+    const area = document.getElementById('checkin-area');
+
+    const checkinItems = [
+      { id: 'ci1', label: 'Did you follow the plan?', type: 'single3', options: ['Yes', 'Mostly', 'No'] },
+      { id: 'ci2', label: 'How do you feel today?', type: 'single3', options: ['Better', 'Same', 'Worse'] },
+      { id: 'ci3', label: 'Your study hours today', type: 'number' },
+      { id: 'ci4', label: 'Anything you avoided?', type: 'multi3', options: ['Wrong answer review', 'UWorld blocks', 'Content reading', 'Practice exams', 'Nothing avoided'] },
+      { id: 'ci5', label: 'Next step?', type: 'single3', options: ['Run a new reset', 'Keep yesterday\'s level'] },
+    ];
+
+    let html = '';
+    checkinItems.forEach(item => {
+      html += `<div style="margin-bottom:1.25rem">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:rgba(232,223,200,.45);margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.1em">${item.label}</div>`;
+
+      if (item.type === 'single3') {
+        html += `<div style="display:flex;gap:0.5rem;flex-wrap:wrap">` +
+          item.options.map(o => `<button class="chip ci-btn" data-field="${item.id}" data-val="${o}">${o}</button>`).join('') +
+          `</div>`;
+      } else if (item.type === 'number') {
+        html += `<input type="number" min="0" max="20" placeholder="0" id="ci3-input" style="background:rgba(255,255,255,.05);border:1px solid rgba(248,245,235,.1);border-radius:3px;color:var(--cream);font-family:'JetBrains Mono',monospace;font-size:0.9rem;padding:0.5rem 0.75rem;max-width:100px;outline:none">`;
+      } else if (item.type === 'multi3') {
+        html += `<div style="display:flex;gap:0.5rem;flex-wrap:wrap">` +
+          item.options.map(o => `<button class="chip ci-multi-btn" data-val="${o}">${o}</button>`).join('') +
+          `</div>`;
+      }
+
+      html += `</div>`;
+    });
+
+    html += `<button class="btn btn-primary" id="btn-submit-checkin" style="margin-top:0.5rem">Update my plan</button>`;
+    area.innerHTML = html;
+
+    // Chip toggles for single
+    area.querySelectorAll('.ci-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const field = this.getAttribute('data-field');
+        area.querySelectorAll(`.ci-btn[data-field="${field}"]`).forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+      });
+    });
+
+    // Chip toggles for multi
+    area.querySelectorAll('.ci-multi-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.classList.toggle('selected');
+      });
+    });
+
+    area.querySelector('#btn-submit-checkin').addEventListener('click', function() {
+      document.getElementById('checkin-flow').style.display = 'none';
+      // Check-in submitted - plan already rendered below
+    });
+  }
+
+  // ---- Render the actual plan ----
+  function renderPlan(triage, wake, stop, hoursAvail) {
+    const area = document.getElementById('discharge-plan-area');
+
+    // Badge
+    const badgeClass = triage;
+    const badgeLabels = {
+      critical: 'Critical',
+      moderate: 'Moderate',
+      stable: 'Stable',
+    };
+
+    let html = `<div class="triage-badge ${badgeClass}">
+      <span class="triage-dot"></span>
+      ${badgeLabels[triage]}
+    </div>`;
+
+    if (triage === 'critical') {
+      html += renderCriticalPlan(wake, stop, hoursAvail);
+    } else if (triage === 'moderate') {
+      html += renderModeratePlan(wake, stop, hoursAvail);
+    } else {
+      html += renderStablePlan(wake, stop, hoursAvail);
+    }
+
+    // Actions
+    html += `<div class="output-actions">
+      <button class="btn btn-secondary" onclick="window.print()">Print plan</button>
+      <button class="btn btn-secondary" id="btn-restart">Start over</button>
+    </div>
+    <a href="/triage/" class="triage-link">Find your study pattern <span>&#8594;</span></a>`;
+
+    area.innerHTML = html;
+
+    area.querySelector('#btn-restart').addEventListener('click', () => {
+      answers = {};
+      currentQ = 0;
+      pendingCheckin = false;
+      document.getElementById('screen-output').style.display = 'none';
+      document.getElementById('screen-questions').style.display = 'block';
+      renderQuestion(0);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  function planBlock(time, label, instruction, note) {
+    const timeDisplay = time ? `<span class="plan-time">${formatTime(time)}</span>` : '';
+    return `<div class="plan-block">
+      <div class="plan-block-header">
+        ${timeDisplay}
+        <span class="plan-label">${label}</span>
+      </div>
+      <div class="plan-block-body">
+        <div class="plan-instruction">${instruction}</div>
+        ${note ? `<div class="plan-note">${note}</div>` : ''}
+      </div>
+    </div>`;
+  }
+
+  function renderCriticalPlan(wake, stop, hoursAvail) {
+    const t = blockTimes(wake, [[0,0],[30,0],[120,0],[240,0],[330,0],[375,0]]);
+    const wakeDisplay = formatTime(wake);
+    const stopDisplay = formatTime(stop);
+    const m90 = formatTime(addMinutes(wake, 90));
+    const m150 = formatTime(addMinutes(wake, 150));
+    const m240 = formatTime(addMinutes(wake, 240));
+    const m285 = formatTime(addMinutes(wake, 285));
+    const m330 = formatTime(addMinutes(wake, 330));
+    const m375 = formatTime(addMinutes(wake, 375));
+    const m405 = formatTime(addMinutes(wake, 405));
+
+    return `
+      <div class="discharge-heading"><em>Critical:</em> structured recovery protocol</div>
+      <div class="discharge-sub">Based on your answers: under significant time pressure with declining performance indicators and multiple stressors active. Do not add new content today. This is a consolidation day.</div>
+      <div class="principle-statement">The goal is not progress on paper. The goal is closing the gap between what you have learned and what you can actually retrieve under pressure.</div>
+
+      ${planBlock(wake, 'Morning anchor', `Begin with ${hoursAvail} hours of structured work, not more. Make coffee or tea, sit down, and open your last 50 UWorld wrong answers only.`, `Do not start a new block. Do not open First Aid for new content.`)}
+      ${planBlock(addMinutes(wake, 30), '90-minute wrong answer review', 'Work through your most recent 50 wrong answers in UWorld. For each one: read the explanation, write the mechanism in one sentence, and move on. No rabbit holes.', `Target: 30 to 50 questions reviewed. Stop at ${m90} regardless.`)}
+      ${planBlock(m90, 'Break', 'Physical break. 30 minutes. Walk, eat, breathe. No studying.', 'This is part of the protocol, not optional.')}
+      ${planBlock(m150, 'Mechanism sketching', 'From the questions you missed most, choose 5 core mechanisms. Sketch them by hand from memory: pathways, drug targets, clinical consequences. No looking until you finish the sketch.', `Use blank paper. 45 minutes total. Stop at ${m240}.`)}
+      ${planBlock(m240, 'Focused content pass', 'One system only. The system where your wrong answers were most concentrated. Read the First Aid section for that system at a reading pace, not a memorizing pace. 45 minutes only.', `Stop at ${m285}. Do not go over.`)}
+      ${planBlock(m285, 'Break', 'Second break. Eat a full meal if you have not already. 30 to 45 minutes.', null)}
+      ${planBlock(m330, 'Timed UWorld block', 'Twenty questions. Timed mode. Tutor mode off. Treat it like the real exam. No pausing, no looking things up. Score it honestly.', `Stop at ${m375}.`)}
+      ${planBlock(m375, 'Answer review', 'Thirty minutes maximum. Review only the questions you got wrong. Note the pattern: is it the same system, the same type of reasoning, the same class of drug?', `Stop at ${m405} or at ${stopDisplay}, whichever comes first.`)}
+      ${planBlock(null, 'Tonight', `Before you sleep: write three sentences on paper. What the pattern was today. What you will do differently tomorrow. What you will look at first when you sit down.`, `Takes 5 minutes. Replaces the low-level anxiety of "trying to remember where you left off."`)}`
+  }
+
+  function renderModeratePlan(wake, stop, hoursAvail) {
+    const m60 = addMinutes(wake, 60);
+    const m120 = addMinutes(wake, 120);
+    const m150 = addMinutes(wake, 150);
+    const m270 = addMinutes(wake, 270);
+    const m330 = addMinutes(wake, 330);
+    const m360 = addMinutes(wake, 360);
+    const m420 = addMinutes(wake, 420);
+    const m450 = addMinutes(wake, 450);
+
+    return `
+      <div class="discharge-heading"><em>Moderate:</em> recalibration day</div>
+      <div class="discharge-sub">Mixed signals in your assessment: some momentum, but the system is disrupted. Today is about structure, not volume. 60% active learning, 40% review and reflection.</div>
+      <div class="principle-statement moderate">Recalibration means accepting that you cannot do everything today, and choosing what matters most so it actually gets done.</div>
+
+      ${planBlock(wake, 'Orientation', 'Before anything else, spend 10 minutes writing out what you are working on. Which systems, which concept gaps, which UWorld topics have been appearing repeatedly. No phone.', `Target: a written list of 3 to 5 priority areas for the week.`)}
+      ${planBlock(addMinutes(wake, 15), 'Wrong answer review', '45 minutes reviewing your most recent 30 to 40 UWorld wrong answers. Focus on questions you got wrong due to reasoning errors, not just content gaps.', `Stop at ${m60}. Write one corrected reasoning statement per question type.`)}
+      ${planBlock(m60, 'Active content block 1', 'Two hours on a high-yield system you are currently weak in. Read the First Aid section with annotations. Write margin summaries in your own words.', `Stop at ${m120}.`)}
+      ${planBlock(m120, 'Break', '30 minutes. Away from the desk.', null)}
+      ${planBlock(m150, 'UWorld practice block', '40 questions, timed, tutor mode off. One full block treated as a real exam. No interruptions.', `Stop at ${m270}.`)}
+      ${planBlock(m270, 'Score review + lunch', 'Review the block results over lunch. Mark the pattern of errors. Eat a real meal.', `45 minutes total. Stop at ${m330}.`)}
+      ${planBlock(m330, 'Active content block 2', 'Second content pass. Weaker of the two systems you identified at the start. Use a different format than morning: Anki deck, sketched diagrams, or verbal recall.', `30 to 60 minutes. Stop at ${m360} to ${m420} depending on your available hours.`)}
+      ${planBlock(m420, 'Wrap-up', 'Spend 15 minutes writing tomorrow\'s plan. What you covered, what remains, what you will open first.', `Stop by ${formatTime(stop)}.`)}`
+  }
+
+  function renderStablePlan(wake, stop, hoursAvail) {
+    const m90 = addMinutes(wake, 90);
+    const m120 = addMinutes(wake, 120);
+    const m150 = addMinutes(wake, 150);
+    const m270 = addMinutes(wake, 270);
+    const m300 = addMinutes(wake, 300);
+    const m360 = addMinutes(wake, 360);
+    const m420 = addMinutes(wake, 420);
+    const m450 = addMinutes(wake, 450);
+    const m480 = addMinutes(wake, 480);
+
+    return `
+      <div class="discharge-heading"><em>Stable:</em> optimization day</div>
+      <div class="discharge-sub">Your trajectory is positive. Today's job is to extend the gains, not to play it safe. Full structured day with new content, spaced review, and a real practice block.</div>
+      <div class="principle-statement stable">Stable does not mean comfortable. It means you have the platform to push harder without the risk of collapse. Use it.</div>
+
+      ${planBlock(wake, 'Spaced review', 'Open your Anki deck or First Aid margin notes from 3 to 5 days ago. Review only. 45 minutes. This consolidates what you covered earlier in the week before it fades.', `Stop at ${m90}.`)}
+      ${planBlock(m90, 'Break', '30 minutes. Move your body.', null)}
+      ${planBlock(m120, 'New content block 1', 'Two hours on the next system in your schedule. Read actively with a pen in hand. Write a one-page summary from memory at the end.', `Stop at ${m270}. Include a 15-minute break midway.`)}
+      ${planBlock(m270, 'Lunch break', 'Full meal, 30 minutes. No studying.', null)}
+      ${planBlock(m300, 'UWorld full block', '40 questions, timed, tutor mode off. Back-to-back. Score it without checking answers until the block is complete.', `Stop at ${m360}.`)}
+      ${planBlock(m360, 'Block review', '60 minutes. Work through every answer you missed. One sentence explanation of your reasoning error for each. Cross-reference First Aid for the high-yield ones.', `Stop at ${m420}.`)}
+      ${planBlock(m420, 'New content block 2', 'Second new content pass. A different system or a bridging topic (pharmacology integrated into a system you reviewed today). 45 to 60 minutes.', `Stop at ${m480}.`)}
+      ${planBlock(m480, 'Day close', 'Write tomorrow\'s priority list. Three items, ranked. Add any new weak points to your tracking list. Set up your workspace for the morning.', `Stop by ${formatTime(stop)}.`)}`
+  }
+
+  // ---- Init ----
+  checkYesterdayPlan();
+  renderQuestion(0);
+
+})();
+</script>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-brand">Bit by Bit Pedagogy</span>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cfactor/">MCAT</a></li>
+      <li><a href="/">Step 1</a></li>
+      <li><a href="/triage/">Find your pattern</a></li>
+      <li><a href="/archetypes/">Study profiles</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

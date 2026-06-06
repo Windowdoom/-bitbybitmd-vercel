@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pre-Sleep Download, 10-Minute Bedtime Wind-Down | Bit by Bit Pedagogy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0D1B2E;
+    --gold:#F5A623;
+    --teal:#00E5A0;
+    --cream:#e8dfc8;
+    --border:rgba(248,245,235,.1);
+    --bg-card:rgba(255,255,255,.04);
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --mono:'JetBrains Mono',monospace;
+    --transition:400ms cubic-bezier(0.22,1,0.36,1);
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--cream);font-family:var(--serif);font-weight:400;min-height:100vh;line-height:1.6}
+
+  nav{display:flex;justify-content:space-between;align-items:center;height:64px;padding:0 2rem;border-bottom:1px solid var(--border);background:rgba(13,27,46,.96);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100}
+  .nav-brand{font-family:var(--serif);font-weight:600;font-size:1.1rem;color:var(--cream);text-decoration:none;letter-spacing:.02em}
+  .nav-brand-inner{display:flex;align-items:center;gap:.625rem;text-decoration:none}
+  .nav-monogram{width:28px;height:28px;border:1.5px solid var(--gold);border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:500;color:var(--gold);flex-shrink:0}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{font-family:var(--mono);font-weight:300;font-size:.75rem;color:rgba(232,223,200,.6);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
+  .nav-links a:hover{color:var(--gold)}
+
+  main{max-width:680px;margin:0 auto;padding:3rem 2rem 6rem}
+  .screen{display:none;animation:fadeUp .45s cubic-bezier(0.22,1,0.36,1)}
+  .screen.active{display:block}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+  .page-header{margin-bottom:2.25rem}
+  .page-header h1{font-family:var(--serif);font-weight:300;font-size:2.3rem;color:var(--cream);line-height:1.2;margin-bottom:.75rem}
+  .page-header h1 em{font-style:italic;color:var(--teal)}
+  .page-header p{font-size:1.1rem;color:rgba(232,223,200,.65);font-weight:300;max-width:580px}
+
+  .loop-banner{background:rgba(0,229,160,.06);border:1px solid rgba(0,229,160,.2);border-radius:4px;padding:1.25rem 1.5rem;margin-bottom:2rem}
+  .loop-banner-text{font-family:var(--serif);font-size:1.05rem;font-weight:300;color:var(--cream);font-style:italic;margin-bottom:.85rem}
+  .loop-banner-text span{color:var(--teal)}
+  .loop-banner-actions{display:flex;gap:.6rem}
+
+  .segments{display:flex;gap:.5rem;margin-bottom:2rem}
+  .seg-dot{flex:1;height:3px;background:rgba(255,255,255,.06);border-radius:2px;transition:background var(--transition)}
+  .seg-dot.active{background:var(--teal)}
+  .seg-dot.done{background:rgba(0,229,160,.35)}
+
+  .question-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:2rem 2.5rem 2.5rem}
+  .seg-label{font-family:var(--mono);font-size:.7rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(232,223,200,.4);margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center}
+  .seg-timer{font-family:var(--mono);font-size:.78rem;color:var(--teal);letter-spacing:.05em}
+  .q-text{font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--cream);line-height:1.4;margin-bottom:1.5rem}
+
+  textarea{width:100%;background:rgba(0,0,0,.18);border:1px solid var(--border);color:var(--cream);font-family:var(--serif);font-size:1.15rem;font-weight:300;padding:1rem 1.1rem;border-radius:3px;resize:none;line-height:1.6;outline:none;transition:border-color .3s;overflow:hidden}
+  textarea:focus{border-color:rgba(0,229,160,.4)}
+  textarea.large{min-height:220px}
+  textarea.small{min-height:90px}
+
+  .q-actions{display:flex;justify-content:space-between;align-items:center;margin-top:1.75rem;gap:1rem;flex-wrap:wrap}
+  .btn{background:transparent;border:1px solid var(--border);color:var(--cream);font-family:var(--mono);font-size:.78rem;font-weight:400;letter-spacing:.08em;text-transform:uppercase;padding:.9rem 1.6rem;border-radius:3px;cursor:pointer;text-decoration:none;display:inline-block;will-change:transform;transition:transform 200ms cubic-bezier(0.22,1,0.36,1),background 300ms ease,border-color 300ms ease,color 300ms ease}
+  .btn:hover{border-color:var(--teal);color:var(--teal)}
+  .btn:active{transform:translateY(1px) scale(.985)}
+  .btn-primary{background:var(--teal);color:var(--bg);border-color:var(--teal)}
+  .btn-primary:hover{background:#33eab4;color:var(--bg)}
+
+  .skip-link{font-family:var(--mono);font-size:.66rem;color:rgba(232,223,200,.3);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;background:none;border-top:none;border-left:none;border-right:none;cursor:pointer}
+  .skip-link:hover{color:rgba(232,223,200,.55)}
+  .skip-row{text-align:center;margin-top:1.5rem}
+
+  /* Body scan */
+  .scan-stage{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1rem}
+  .scan-cue{font-family:var(--serif);font-weight:300;font-style:italic;font-size:1.9rem;color:var(--cream);line-height:1.4;max-width:560px;opacity:0;transition:opacity 1.2s ease}
+  .scan-cue.in{opacity:1}
+  .scan-progress{font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(232,223,200,.3);margin-top:3rem}
+
+  /* Wrap-up */
+  .wrap-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:2.5rem 2.5rem;text-align:center}
+  .wrap-heading{font-family:var(--serif);font-weight:300;font-size:2rem;color:var(--cream);line-height:1.3;margin-bottom:1.5rem;font-style:italic}
+  .wrap-label{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(232,223,200,.4);margin:2rem 0 .75rem}
+  .wrap-action{font-family:var(--serif);font-style:italic;font-size:1.4rem;color:var(--teal);line-height:1.4}
+
+  footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
+  .footer-inner{max-width:760px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem}
+  .footer-brand{font-family:var(--serif);font-weight:600;font-size:.95rem;color:rgba(232,223,200,.4)}
+  .footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+  .footer-links a{font-family:var(--mono);font-size:.65rem;font-weight:300;letter-spacing:.09em;text-transform:uppercase;color:rgba(232,223,200,.35);text-decoration:none;transition:color .2s}
+  .footer-links a:hover{color:var(--gold)}
+
+  @media(max-width:640px){
+    nav{padding:1rem}
+    .nav-links{gap:1.25rem}
+    .nav-links a{font-size:.65rem}
+    main{padding:2rem 1rem 4rem}
+    .page-header h1{font-size:1.75rem}
+    .question-card,.wrap-card{padding:1.5rem}
+    .q-text{font-size:1.25rem}
+    .scan-cue{font-size:1.4rem}
+    .wrap-heading{font-size:1.55rem}
+    .wrap-action{font-size:1.15rem}
+  }
+
+.bbb-disclaimer{margin:2rem 0 0;padding:1.25rem 1.5rem;border:1px solid var(--border);border-left:3px solid var(--cream-faint, rgba(232,223,200,.4));border-radius:6px;background:var(--bg-card);font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:.95rem;line-height:1.65;color:rgba(232,223,200,.6)}
+.bbb-disclaimer strong{font-weight:600;font-style:italic;color:rgba(232,223,200,.78)}
+.bbb-disclaimer a{color:var(--gold, #F5A623);text-decoration:none;border-bottom:1px dotted rgba(245,166,35,.35);transition:border-color .2s}
+.bbb-disclaimer a:hover{border-bottom-color:var(--gold, #F5A623)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand nav-brand-inner">
+    <div class="nav-monogram">B&#179;</div>
+    <span>Bit by Bit Pedagogy</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/cfactor/">MCAT</a></li>
+    <li><a href="/">Step 1</a></li>
+    <li><a href="/triage/">Find your pattern</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- INTRO + LOOP -->
+  <section id="screen-intro" class="screen active">
+    <div class="page-header">
+      <h1>Pre-sleep <em>download</em>.</h1>
+      <p>Ten minutes. Four segments. Sleep is the highest-leverage intervention for retention. The day ends here.</p>
+    </div>
+    <div id="loop-banner" class="loop-banner" style="display:none">
+      <div class="loop-banner-text" id="loop-banner-text"></div>
+      <div class="loop-banner-actions">
+        <button class="btn" onclick="closeLoop(true)">Yes</button>
+        <button class="btn" onclick="closeLoop(false)">No</button>
+      </div>
+    </div>
+    <div class="question-card">
+      <div class="seg-label">Tonight</div>
+      <div class="q-text">Phone face down. Lights low. Then begin.</div>
+      <div class="q-actions">
+        <span></span>
+        <button class="btn btn-primary" onclick="startSeg(1)">Begin the download</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEG 1: BRAIN DUMP -->
+  <section id="screen-seg1" class="screen">
+    <div class="segments"><div class="seg-dot active"></div><div class="seg-dot"></div><div class="seg-dot"></div><div class="seg-dot"></div></div>
+    <div class="question-card">
+      <div class="seg-label"><span>Segment 1, brain dump</span><span class="seg-timer" id="t1">3:00</span></div>
+      <div class="q-text">Type every worry that is in your head right now. One per line. No editing. No grammar. No priority. Just dump.</div>
+      <textarea id="dump" class="large" placeholder="One per line."></textarea>
+      <div class="q-actions">
+        <span></span>
+        <button class="btn btn-primary" onclick="endSeg(1)">Done dumping</button>
+      </div>
+    </div>
+    <div class="skip-row"><button class="skip-link" onclick="endSeg(1,true)">Skip this step</button></div>
+  </section>
+
+  <!-- SEG 2: CATCH -->
+  <section id="screen-seg2" class="screen">
+    <div class="segments"><div class="seg-dot done"></div><div class="seg-dot active"></div><div class="seg-dot"></div><div class="seg-dot"></div></div>
+    <div class="question-card">
+      <div class="seg-label"><span>Segment 2, today’s catch</span><span class="seg-timer" id="t2">2:00</span></div>
+      <div class="q-text">One thing you learned today. One. Not a list. Specific enough to teach to someone tomorrow.</div>
+      <textarea id="catch" class="small" placeholder="One sentence. Two at most."></textarea>
+      <div class="q-actions">
+        <span></span>
+        <button class="btn btn-primary" onclick="endSeg(2)">Got it</button>
+      </div>
+    </div>
+    <div class="skip-row"><button class="skip-link" onclick="endSeg(2,true)">Skip this step</button></div>
+  </section>
+
+  <!-- SEG 3: TOMORROW -->
+  <section id="screen-seg3" class="screen">
+    <div class="segments"><div class="seg-dot done"></div><div class="seg-dot done"></div><div class="seg-dot active"></div><div class="seg-dot"></div></div>
+    <div class="question-card">
+      <div class="seg-label"><span>Segment 3, tomorrow’s first action</span><span class="seg-timer" id="t3">2:00</span></div>
+      <div class="q-text">What is the single first thing you do tomorrow when you sit at the desk? Not the whole day. The first action. The opening move.</div>
+      <textarea id="tomorrow" class="small" placeholder="The opening move."></textarea>
+      <div class="q-actions">
+        <span></span>
+        <button class="btn btn-primary" onclick="endSeg(3)">Locked</button>
+      </div>
+    </div>
+    <div class="skip-row"><button class="skip-link" onclick="endSeg(3,true)">Skip this step</button></div>
+  </section>
+
+  <!-- SEG 4: BODY SCAN -->
+  <section id="screen-seg4" class="screen">
+    <div class="segments"><div class="seg-dot done"></div><div class="seg-dot done"></div><div class="seg-dot done"></div><div class="seg-dot active"></div></div>
+    <div class="question-card">
+      <div class="seg-label"><span>Segment 4, body scan</span><span class="seg-timer" id="t4">3:00</span></div>
+      <div class="q-text" id="scan-intro">Lie down. Phone face down. Eyes closed. The tool will guide you for three minutes.</div>
+      <div class="scan-stage" id="scan-stage" style="display:none">
+        <div class="scan-cue" id="scan-cue"></div>
+        <div class="scan-progress" id="scan-progress"></div>
+      </div>
+      <div class="q-actions" id="scan-actions">
+        <span></span>
+        <button class="btn btn-primary" onclick="startScan()">Begin scan</button>
+      </div>
+    </div>
+    <div class="skip-row"><button class="skip-link" onclick="finish(true)">Skip this step</button></div>
+  </section>
+
+  <!-- WRAP -->
+  <section id="screen-wrap" class="screen">
+    <div class="wrap-card">
+      <div class="wrap-heading">Phone in another room. Lights out. The work is done.</div>
+      <div class="wrap-label">Tomorrow you start with</div>
+      <div class="wrap-action" id="wrap-action">(no action recorded)</div>
+    </div>
+  </section>
+
+<aside class="bbb-disclaimer"><strong>This is a wind-down protocol, not sleep medicine.</strong> Persistent insomnia, early waking, or sleep that does not feel restorative for weeks at a time warrants medical evaluation. Sleep disorders are treatable, and exam prep is not the time to push through one.</aside>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-brand">Bit by Bit Pedagogy</span>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/tools/">All tools</a></li>
+      <li><a href="/triage/">Find your pattern</a></li>
+      <li><a href="/the-drowner/">The Drowner profile</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+const LOG_KEY='bbb_presleep_log';
+const sessionData={dump:'',catch:'',tomorrow:'',t:0};
+let segTimers={};
+
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+
+function fmt(s){const m=Math.floor(s/60),r=s%60;return m+':'+String(r).padStart(2,'0')}
+
+function autoGrow(el){el.style.height='auto';el.style.height=Math.max(el.scrollHeight,el.classList.contains('large')?220:90)+'px'}
+
+['dump','catch','tomorrow'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el)el.addEventListener('input',()=>autoGrow(el));
+});
+
+function startSegTimer(seg,secs){
+  const el=document.getElementById('t'+seg);
+  let s=secs;
+  el.textContent=fmt(s);
+  segTimers[seg]=setInterval(()=>{
+    s--;
+    if(s<=0){clearInterval(segTimers[seg]);el.textContent='0:00';el.style.color='rgba(232,223,200,.4)';return}
+    el.textContent=fmt(s);
+  },1000);
+}
+
+function startSeg(n){
+  show('screen-seg'+n);
+  const durations={1:180,2:120,3:120,4:180};
+  startSegTimer(n,durations[n]);
+  setTimeout(()=>{const ids={1:'dump',2:'catch',3:'tomorrow'};const t=document.getElementById(ids[n]);if(t)t.focus()},400);
+}
+
+function endSeg(n,skip){
+  if(segTimers[n]){clearInterval(segTimers[n]);delete segTimers[n]}
+  if(!skip){
+    if(n===1)sessionData.dump=document.getElementById('dump').value.trim();
+    if(n===2)sessionData.catch=document.getElementById('catch').value.trim();
+    if(n===3)sessionData.tomorrow=document.getElementById('tomorrow').value.trim();
+  }
+  if(n<4)startSeg(n+1);
+  else finish();
+}
+
+const scanCues=[
+  'Notice your feet. Let them go heavy.',
+  'Notice your calves. Let them go heavy.',
+  'Notice your thighs. Let them go.',
+  'Notice your hips and lower back. Let them sink.',
+  'Notice your stomach. Let the breath be shallow.',
+  'Notice your chest. Let it rise without effort.',
+  'Notice your shoulders. Let them drop away from your ears.',
+  'Notice your jaw. Let it unhinge.',
+  'Notice your forehead. Let it smooth.',
+  'Stay here until you sleep.'
+];
+let scanIdx=0,scanInterval=null;
+
+function startScan(){
+  document.getElementById('scan-intro').style.display='none';
+  document.getElementById('scan-actions').style.display='none';
+  document.getElementById('scan-stage').style.display='flex';
+  scanIdx=0;
+  showCue();
+  scanInterval=setInterval(()=>{
+    scanIdx++;
+    if(scanIdx>=scanCues.length){clearInterval(scanInterval);scanInterval=null;setTimeout(()=>finish(),3000);return}
+    showCue();
+  },18000);
+}
+
+function showCue(){
+  const el=document.getElementById('scan-cue');
+  const prog=document.getElementById('scan-progress');
+  el.classList.remove('in');
+  setTimeout(()=>{
+    el.textContent=scanCues[scanIdx];
+    prog.textContent='Cue '+(scanIdx+1)+' of '+scanCues.length;
+    el.classList.add('in');
+  },400);
+}
+
+function finish(skip){
+  if(segTimers[4]){clearInterval(segTimers[4]);delete segTimers[4]}
+  if(scanInterval){clearInterval(scanInterval);scanInterval=null}
+  sessionData.t=Date.now();
+  if(sessionData.dump||sessionData.catch||sessionData.tomorrow){
+    const log=JSON.parse(localStorage.getItem(LOG_KEY)||'[]');
+    log.push(sessionData);
+    localStorage.setItem(LOG_KEY,JSON.stringify(log));
+  }
+  document.getElementById('wrap-action').textContent=sessionData.tomorrow||'(no action recorded, the desk decides)';
+  show('screen-wrap');
+}
+
+/* Loop closer */
+function checkLoop(){
+  const log=JSON.parse(localStorage.getItem(LOG_KEY)||'[]');
+  if(!log.length)return;
+  const last=log[log.length-1];
+  if(!last.tomorrow)return;
+  if(last.loopClosed)return;
+  const hours=(Date.now()-last.t)/(1000*60*60);
+  if(hours<6||hours>72)return;
+  const banner=document.getElementById('loop-banner');
+  document.getElementById('loop-banner-text').innerHTML='Last night you logged, <span>'+last.tomorrow+'</span>. Did you do it?';
+  banner.style.display='block';
+}
+
+function closeLoop(did){
+  const log=JSON.parse(localStorage.getItem(LOG_KEY)||'[]');
+  if(log.length){log[log.length-1].loopClosed=true;log[log.length-1].didIt=did;localStorage.setItem(LOG_KEY,JSON.stringify(log))}
+  document.getElementById('loop-banner').style.display='none';
+}
+
+checkLoop();
+</script>
+</body>
+</html>

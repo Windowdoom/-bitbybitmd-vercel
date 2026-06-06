@@ -95,7 +95,7 @@ Two short paragraphs.
 ### Protocol Tips Built for Your Modality
 Five to seven bold-led bullets.
 ### On [Their Biggest Challenge]
-Diagnose. Name 2–3 root causes. Show how the plan addresses each.
+Diagnose. Name 2-3 root causes. Show how the plan addresses each.
 
 ---
 
@@ -143,7 +143,7 @@ Framing paragraph + bulleted list of forms with week + target.
 ## Section 7 - Your Personalised Resource Protocol
 For each resource they listed:
 ### [Resource] - [Its Role]
-- How to use (3–5 bullets) / Time cap / What to avoid
+- How to use (3-5 bullets) / Time cap / What to avoid
 End with the Concept Correction Log.
 
 ---
@@ -172,7 +172,7 @@ Built for [Name]. [Month Year].
 RULES:
 - No code fences. No HTML tags except &nbsp;.
 - Markdown only.
-- 2,500–4,000 words total.`;
+- 2,500-4,000 words total.`;
 
   const userMessage = `Build the blueprint. Here is what the student told us:
 

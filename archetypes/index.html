@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Pattern Profiles | Bit by Bit Pedagogy</title>
+  <meta name="description" content="Five diagnostic profiles of students who plateau on Step 1. Find your pattern, understand the loop, and use the tool built for it.">
+  <link rel="canonical" href="https://bitbybitpedagogy.com/archetypes/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "USMLE Step 1 Study Pattern Profiles",
+    "description": "Five diagnostic profiles of students who plateau on USMLE Step 1. Each profile identifies the pattern, the loop, and the intervention.",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "The Collector", "url": "https://bitbybitpedagogy.com/the-collector/"},
+      {"@type": "ListItem", "position": 2, "name": "The Memorizer", "url": "https://bitbybitpedagogy.com/the-memorizer/"},
+      {"@type": "ListItem", "position": 3, "name": "The Perfectionist", "url": "https://bitbybitpedagogy.com/the-perfectionist/"},
+      {"@type": "ListItem", "position": 4, "name": "The Coaster", "url": "https://bitbybitpedagogy.com/the-coaster/"},
+      {"@type": "ListItem", "position": 5, "name": "The Drowner", "url": "https://bitbybitpedagogy.com/the-drowner/"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://bitbybitpedagogy.com/"},{"@type":"ListItem","position":2,"name":"Archetypes","item":"https://bitbybitpedagogy.com/archetypes/"}]}
+  </script>
+  <style>
+    :root{--bg:#0D1B2E;--gold:#F5A623;--teal:#00E5A0;--cream:#e8dfc8;--border:rgba(248,245,235,.1);--bg-card:rgba(255,255,255,.04);--serif:'Cormorant Garamond',Georgia,serif;--mono:'JetBrains Mono',monospace}
+    @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--cream);font-family:var(--serif);font-size:1.125rem;line-height:1.8;min-height:100vh}
+
+    /* NAV */
+    nav{position:sticky;top:0;z-index:100;background:rgba(13,27,46,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between}
+    .nav-brand{font-family:var(--serif);font-weight:600;font-size:1.05rem;color:var(--cream);text-decoration:none;letter-spacing:.02em}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{font-family:var(--mono);font-size:.72rem;font-weight:400;color:rgba(232,223,200,.55);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
+    .nav-links a:hover{color:var(--gold)}
+
+    /* BREADCRUMB */
+    .breadcrumb{padding:1.25rem 2rem;max-width:1100px;margin:0 auto}
+    .breadcrumb ol{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem;font-family:var(--mono);font-size:.68rem;color:rgba(232,223,200,.38)}
+    .breadcrumb li+li::before{content:'/';margin-right:.4rem;color:rgba(232,223,200,.2)}
+    .breadcrumb a{color:rgba(232,223,200,.38);text-decoration:none;transition:color .2s}
+    .breadcrumb a:hover{color:var(--gold)}
+    .breadcrumb li:last-child{color:var(--gold)}
+
+    /* HERO */
+    .hero{max-width:1100px;margin:0 auto;padding:5rem 2rem 4rem;border-bottom:1px solid var(--border);text-align:center}
+    .hero-eyebrow{font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem}
+    .hero h1{font-family:var(--serif);font-size:clamp(3.5rem,8vw,6rem);font-weight:300;font-style:italic;color:var(--cream);line-height:1.05;margin-bottom:2rem}
+    .hero h1 span{display:block;font-size:clamp(2rem,5vw,3.5rem);color:rgba(232,223,200,.45);font-weight:300}
+    .hero-subhead{font-family:var(--serif);font-size:1.2rem;font-weight:300;color:rgba(232,223,200,.65);max-width:640px;margin:0 auto;line-height:1.75}
+
+    /* CARDS GRID */
+    .cards-section{max-width:1100px;margin:0 auto;padding:5rem 2rem}
+    .cards-section-label{font-family:var(--mono);font-size:.68rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:rgba(232,223,200,.3);margin-bottom:2.5rem}
+    .cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+    .archetype-card{background:var(--bg);padding:2.5rem;display:flex;flex-direction:column;gap:1.25rem;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+    .archetype-card.revealed{opacity:1;transform:translateY(0)}
+    .archetype-card:hover .card-name{color:var(--gold)}
+    .card-number{font-family:var(--mono);font-size:.62rem;font-weight:300;letter-spacing:.2em;color:rgba(232,223,200,.25);text-transform:uppercase}
+    .card-name{font-family:var(--mono);font-size:1.05rem;font-weight:500;color:var(--cream);letter-spacing:.05em;transition:color .2s}
+    .card-desc{font-family:var(--serif);font-size:1.1rem;font-weight:300;font-style:italic;color:rgba(232,223,200,.68);line-height:1.65;flex:1}
+    .card-ceiling{font-family:var(--mono);font-size:.65rem;font-weight:300;letter-spacing:.1em;color:rgba(232,223,200,.35)}
+    .card-quote{font-family:var(--serif);font-size:.98rem;font-style:italic;font-weight:300;color:rgba(232,223,200,.5);line-height:1.6;padding-top:.75rem;border-top:1px solid var(--border)}
+    .card-actions{display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap;padding-top:.5rem}
+    .card-link-primary{font-family:var(--mono);font-size:.7rem;font-weight:400;letter-spacing:.08em;color:var(--gold);text-decoration:none;transition:opacity .2s}
+    .card-link-primary:hover{opacity:.75}
+    .card-link-secondary{font-family:var(--mono);font-size:.68rem;font-weight:300;letter-spacing:.08em;color:rgba(232,223,200,.38);text-decoration:none;transition:color .2s}
+    .card-link-secondary:hover{color:rgba(232,223,200,.7)}
+    .card-divider{color:rgba(232,223,200,.18);font-family:var(--mono);font-size:.6rem}
+
+    /* FIFTH CARD SPANS FULL WIDTH */
+    .archetype-card.full-width{grid-column:1/-1}
+
+    /* CTA SECTION */
+    .cta-section{border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .cta-inner{max-width:1100px;margin:0 auto;padding:5rem 2rem;text-align:center}
+    .cta-label{font-family:var(--mono);font-size:.68rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:rgba(232,223,200,.3);margin-bottom:1.25rem}
+    .cta-heading{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;font-style:italic;color:var(--cream);line-height:1.25;margin-bottom:1.25rem}
+    .cta-desc{font-family:var(--serif);font-size:1.1rem;font-weight:300;color:rgba(232,223,200,.6);max-width:520px;margin:0 auto 2.5rem;line-height:1.7}
+    .cta-btn{display:inline-block;font-family:var(--mono);font-size:.8rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--bg);background:var(--gold);text-decoration:none;padding:.85rem 2.25rem;border-radius:2px;transition:opacity .2s}
+    .cta-btn:hover{opacity:.88}
+
+    /* FOOTER */
+    footer{padding:3rem 2rem}
+    .footer-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem}
+    .footer-brand{font-family:var(--serif);font-weight:600;font-size:.95rem;color:rgba(232,223,200,.45)}
+    .footer-links{display:flex;gap:1.75rem;list-style:none;flex-wrap:wrap}
+    .footer-links a{font-family:var(--mono);font-size:.68rem;font-weight:300;letter-spacing:.09em;text-transform:uppercase;color:rgba(232,223,200,.38);text-decoration:none;transition:color .2s}
+    .footer-links a:hover{color:var(--gold)}
+
+    @media(max-width:860px){.cards-grid{grid-template-columns:1fr}.archetype-card.full-width{grid-column:auto}}
+    @media(max-width:640px){nav{padding:0 1.25rem}.nav-links{gap:1rem}.nav-links li:nth-child(3){display:none}.hero{padding:3.5rem 1.25rem 3rem}.cards-section{padding:3rem 1.25rem}.cta-inner{padding:3.5rem 1.25rem}.breadcrumb{padding:1rem 1.25rem}.archetype-card{padding:1.75rem}}
+
+    .nav-brand-inner { display: flex; align-items: center; gap: 0.625rem; text-decoration: none; }
+    .nav-monogram { width: 28px; height: 28px; border: 1.5px solid var(--gold); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--gold); flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand nav-brand-inner">
+    <div class="nav-monogram">B&#179;</div>
+    <span>Bit by Bit Pedagogy</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/cfactor/">MCAT</a></li>
+    <li><a href="/">Step 1</a></li>
+    <li><a href="/triage/">Find your pattern</a></li>
+  </ul>
+</nav>
+
+<div class="breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li>Archetypes</li>
+  </ol>
+</div>
+
+<header class="hero">
+  <div class="hero-eyebrow">Step 1 Study Pattern Profiles</div>
+  <h1>Five patterns.
+    <span>One exam.</span>
+  </h1>
+  <p class="hero-subhead">Most students who plateau on Step 1 are not lacking knowledge. They are running a loop. These profiles describe the five most common ones.</p>
+</header>
+
+<section class="cards-section">
+  <div class="cards-section-label">The five profiles</div>
+  <div class="cards-grid">
+
+    <article class="archetype-card" id="card-collector">
+      <div class="card-number">Profile 01</div>
+      <div class="card-name">The Collector</div>
+      <p class="card-desc">Accumulates resources faster than they can be used. Every new source feels like a possible missing piece. The review sessions become impossible as the collection grows.</p>
+      <div class="card-ceiling">Typical ceiling: 215&ndash;225</div>
+      <p class="card-quote">"You have three Anki decks open right now, none of them finished."</p>
+      <div class="card-actions">
+        <a href="/the-collector/" class="card-link-primary">Read the full profile &rarr;</a>
+        <span class="card-divider">/</span>
+        <a href="/triage/" class="card-link-secondary">Go to tools &rarr;</a>
+      </div>
+    </article>
+
+    <article class="archetype-card" id="card-memorizer">
+      <div class="card-number">Profile 02</div>
+      <div class="card-name">The Memorizer</div>
+      <p class="card-desc">Retains isolated facts cleanly. Anki retention above 85 percent. Can recite mechanisms with precision. Still misses questions about all of them. The knowledge is there. The direction of retrieval is not.</p>
+      <div class="card-ceiling">Typical ceiling: 220&ndash;228</div>
+      <p class="card-quote">"Score on content quizzes: high. Score on NBMEs: does not match."</p>
+      <div class="card-actions">
+        <a href="/the-memorizer/" class="card-link-primary">Read the full profile &rarr;</a>
+        <span class="card-divider">/</span>
+        <a href="/triage/" class="card-link-secondary">Go to tools &rarr;</a>
+      </div>
+    </article>
+
+    <article class="archetype-card" id="card-perfectionist">
+      <div class="card-number">Profile 03</div>
+      <div class="card-name">The Perfectionist</div>
+      <p class="card-desc">Cardiovascular has been reviewed three times. The notes are immaculate. Moving on feels premature. The exam date is eight weeks out and four systems have not been opened. The standard being optimized for is not the standard the exam uses.</p>
+      <div class="card-ceiling">Actual exam ceiling: 205&ndash;215</div>
+      <p class="card-quote">"Cannot move to pulmonary because cardiovascular does not feel finished."</p>
+      <div class="card-actions">
+        <a href="/the-perfectionist/" class="card-link-primary">Read the full profile &rarr;</a>
+        <span class="card-divider">/</span>
+        <a href="/triage/" class="card-link-secondary">Go to tools &rarr;</a>
+      </div>
+    </article>
+
+    <article class="archetype-card" id="card-coaster">
+      <div class="card-number">Profile 04</div>
+      <div class="card-name">The Coaster</div>
+      <p class="card-desc">Strong shelf exams. Honors on clerkships. The first NBME came back at 207. The questions feel like a different exam from the one that produced those results, because they are. The old habits worked. They work for a different task than this one.</p>
+      <div class="card-ceiling">Typical ceiling with old methods: 215&ndash;225</div>
+      <p class="card-quote">"The knowledge is there. The format is not familiar."</p>
+      <div class="card-actions">
+        <a href="/the-coaster/" class="card-link-primary">Read the full profile &rarr;</a>
+        <span class="card-divider">/</span>
+        <a href="/triage/" class="card-link-secondary">Go to tools &rarr;</a>
+      </div>
+    </article>
+
+    <article class="archetype-card full-width" id="card-drowner">
+      <div class="card-number">Profile 05</div>
+      <div class="card-name">The Drowner</div>
+      <p class="card-desc">Sits down to study and reaches for the phone. Three hours later, retention is unclear. Opens a UWorld block and the spiral begins by question four. The content knowledge is often adequate. The cognitive load is not. The intervention is reduction, not addition, and it works faster than the alternatives.</p>
+      <div class="card-ceiling">Typical ceiling: 205&ndash;218</div>
+      <p class="card-quote">"Knows this is happening. Cannot stop it from inside the loop."</p>
+      <div class="card-actions">
+        <a href="/the-drowner/" class="card-link-primary">Read the full profile &rarr;</a>
+        <span class="card-divider">/</span>
+        <a href="/triage/" class="card-link-secondary">Go to tools &rarr;</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<div class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-label">Not sure which one fits</div>
+    <h2 class="cta-heading">Take the pattern finder</h2>
+    <p class="cta-desc">A short diagnostic that identifies which pattern describes your current study behavior and directs you to the tools built for it.</p>
+    <a href="/triage/" class="cta-btn">Find your pattern &rarr;</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Bit by Bit Pedagogy</div>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cfactor/">MCAT</a></li>
+      <li><a href="/">Step 1</a></li>
+      <li><a href="/archetypes/">Archetypes</a></li>
+      <li><a href="/triage/">Tools</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('revealed'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.archetype-card').forEach(c => observer.observe(c));
+</script>
+</body>
+</html>

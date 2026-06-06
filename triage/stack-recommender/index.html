@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stack Recommender | Bit by Bit Pedagogy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0D1B2E;
+  --gold: #F5A623;
+  --teal: #00E5A0;
+  --cream: #e8dfc8;
+  --border: rgba(248,245,235,.1);
+  --bg-card: rgba(255,255,255,.04);
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cream);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;line-height:1.6}
+nav{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 2rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(13,27,46,.96);backdrop-filter:blur(12px);z-index:100}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.1rem;color:var(--cream);text-decoration:none;letter-spacing:.02em}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:.72rem;color:rgba(232,223,200,.55);text-decoration:none;letter-spacing:.12em;text-transform:uppercase;transition:color .2s ease}
+.nav-links a:hover{color:var(--gold)}
+main{max-width:760px;margin:0 auto;padding:3rem 2rem 6rem}
+.page-header{margin-bottom:3rem}
+.page-header h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2rem,5vw,2.8rem);color:var(--cream);line-height:1.2;margin-bottom:.75rem;font-style:italic}
+.page-header p{font-size:1.05rem;font-weight:300;color:rgba(232,223,200,.65);max-width:520px}
+.progress-container{margin-bottom:2.5rem}
+.progress-label{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:400;color:rgba(232,223,200,.4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem}
+.progress-bar-track{height:2px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-bar-fill{height:100%;background:var(--gold);border-radius:2px;transition:width .4s cubic-bezier(.4,0,.2,1);width:0%}
+.question-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:2.5rem;animation:fadeUp .35s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.question-text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.25rem,3vw,1.6rem);font-weight:400;color:var(--cream);margin-bottom:2rem;line-height:1.35}
+.options-list{display:flex;flex-direction:column;gap:.75rem}
+.option-btn{background:transparent;border:1px solid var(--border);border-radius:3px;padding:1rem 1.25rem;color:rgba(232,223,200,.8);font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;text-align:left;cursor:pointer;transition:border-color .2s ease,background .2s ease,color .2s ease;display:flex;align-items:flex-start;gap:1rem}
+.option-btn:hover{border-color:var(--gold);background:rgba(245,166,35,.05);color:var(--cream)}
+.option-btn.selected{border-color:var(--gold);background:rgba(245,166,35,.08);color:var(--cream)}
+.option-key{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:500;color:var(--gold);letter-spacing:.05em;min-width:1.5rem;padding-top:.05rem}
+.next-btn{margin-top:1.75rem;background:var(--gold);color:var(--bg);border:none;padding:.85rem 2rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:opacity .2s ease;opacity:0;pointer-events:none}
+.next-btn.visible{opacity:1;pointer-events:auto}
+.next-btn:hover{opacity:.85}
+.result-screen{display:none;animation:fadeUp .4s ease both}
+.result-screen.visible{display:block}
+.result-stack-label{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:400;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.6rem}
+.result-stack-name{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2rem,6vw,3.2rem);color:var(--cream);font-style:italic;line-height:1.1;margin-bottom:1.5rem}
+.result-why{font-size:1.1rem;font-weight:300;color:rgba(232,223,200,.8);line-height:1.7;margin-bottom:2.5rem;max-width:600px;border-left:2px solid var(--gold);padding-left:1.25rem}
+.plan-heading{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:500;color:rgba(232,223,200,.4);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem}
+.plan-grid{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:2.5rem}
+.plan-day{display:grid;grid-template-columns:100px 1fr;border-bottom:1px solid var(--border);transition:background .2s ease}
+.plan-day:last-child{border-bottom:none}
+.plan-day:hover{background:var(--bg-card)}
+.plan-day-label{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:500;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;padding:1.1rem 1rem 1.1rem 1.5rem;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:.2rem}
+.plan-day-phase{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:300;color:rgba(232,223,200,.35);text-transform:uppercase;letter-spacing:.05em}
+.plan-day-content{padding:1.1rem 1.5rem;font-size:.95rem;font-weight:300;color:rgba(232,223,200,.75);line-height:1.55}
+.result-actions{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-bottom:2rem}
+.btn-restart{background:transparent;border:1px solid var(--border);color:rgba(232,223,200,.6);padding:.7rem 1.5rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:border-color .2s ease,color .2s ease}
+.btn-restart:hover{border-color:var(--gold);color:var(--gold)}
+.result-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.result-link{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:400;color:rgba(232,223,200,.45);text-decoration:none;letter-spacing:.08em;border-bottom:1px solid transparent;transition:color .2s ease,border-color .2s ease;padding-bottom:1px}
+.result-link:hover{color:var(--teal);border-color:var(--teal)}
+#question-area.hidden{display:none}
+@media(max-width:600px){
+  nav{padding:1rem 1.25rem}
+  main{padding:2rem 1.25rem 5rem}
+  .question-card{padding:1.5rem}
+  .plan-day{grid-template-columns:72px 1fr}
+  .plan-day-label{padding:.9rem .6rem .9rem .9rem}
+  .plan-day-content{padding:.9rem 1rem}
+  .nav-links{gap:1rem}
+}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
+.footer-inner{max-width:760px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:.95rem;color:rgba(232,223,200,.4)}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+.footer-links a{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:300;letter-spacing:.09em;text-transform:uppercase;color:rgba(232,223,200,.35);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--gold)}
+
+.nav-brand-inner { display: flex; align-items: center; gap: 0.625rem; text-decoration: none; }
+.nav-monogram { width: 28px; height: 28px; border: 1.5px solid var(--gold); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; color: var(--gold); flex-shrink: 0; }
+
+/* unified animations */
+@keyframes bbbFadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.btn, button:not(.chip){will-change:transform;transition:transform 200ms cubic-bezier(0.22, 1, 0.36, 1), background 200ms ease, border-color 200ms ease, color 200ms ease, opacity 200ms ease}
+.btn:active, button:not(.chip):active{transform:translateY(1px) scale(.985)}
+.chip{transition:transform 180ms cubic-bezier(0.22, 1, 0.36, 1), border-color 200ms ease, background 200ms ease, color 200ms ease}
+.chip:active{transform:scale(.96)}
+.option-btn{transition:transform 200ms cubic-bezier(0.22, 1, 0.36, 1), border-color 200ms ease, background 200ms ease, color 200ms ease}
+.option-btn:active{transform:scale(.99)}
+
+.bbb-disclaimer{margin:2rem 0 0;padding:1.25rem 1.5rem;border:1px solid var(--border);border-left:3px solid var(--cream-faint, rgba(232,223,200,.4));border-radius:6px;background:var(--bg-card);font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:.95rem;line-height:1.65;color:rgba(232,223,200,.6)}
+.bbb-disclaimer strong{font-weight:600;font-style:italic;color:rgba(232,223,200,.78)}
+.bbb-disclaimer a{color:var(--gold, #F5A623);text-decoration:none;border-bottom:1px dotted rgba(245,166,35,.35);transition:border-color .2s}
+.bbb-disclaimer a:hover{border-bottom-color:var(--gold, #F5A623)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand nav-brand-inner">
+    <div class="nav-monogram">B&#179;</div>
+    <span>Bit by Bit Pedagogy</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/cfactor/">MCAT</a></li>
+    <li><a href="/">Step 1</a></li>
+    <li><a href="/triage/">Find your pattern</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="page-header">
+    <h1>Find your stack.</h1>
+    <p>Six questions. One recommendation. A seven-day plan to get started.</p>
+  </div>
+
+  <div id="question-area">
+    <div class="progress-container">
+      <div class="progress-label" id="progress-label">Question 1 of 6</div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progress-bar"></div>
+      </div>
+    </div>
+    <div class="question-card" id="question-card">
+      <div class="question-text" id="question-text"></div>
+      <div class="options-list" id="options-list"></div>
+      <button class="next-btn" id="next-btn">Next question</button>
+    </div>
+  </div>
+
+  <div class="result-screen" id="result-screen">
+    <div class="result-stack-label">Your recommended stack</div>
+    <div class="result-stack-name" id="result-name"></div>
+    <div class="result-why" id="result-why"></div>
+    <div class="plan-heading">7-Day Starter Plan</div>
+    <div class="plan-grid" id="plan-grid"></div>
+    <div class="result-actions">
+      <button class="btn-restart" id="restart-btn">Start over</button>
+    </div>
+    <div class="result-links">
+      <a href="/triage/" class="result-link">Find your study pattern &rarr;</a>
+      <a href="/" class="result-link">Return to home &rarr;</a>
+    </div>
+  </div>
+<aside class="bbb-disclaimer"><strong>This is one suggestion, not a verdict.</strong> The right resource stack depends on factors only you and your advisor can see together: school cutoffs, your specific clerkship gaps, your historical pattern of success. Use this as a starting point for that conversation, not a replacement for it.</aside>
+</main>
+
+<script>
+(function(){
+var questions=[
+  {text:"How much time do you have before your exam?",options:[
+    {key:"A",label:"6 months or more"},
+    {key:"B",label:"3 to 6 months"},
+    {key:"C",label:"6 to 12 weeks"},
+    {key:"D",label:"Under 6 weeks"}
+  ]},
+  {text:"How far through UWorld are you?",options:[
+    {key:"A",label:"Not started"},
+    {key:"B",label:"Under 25%"},
+    {key:"C",label:"25 to 60%"},
+    {key:"D",label:"Over 60%"}
+  ]},
+  {text:"Which type of resource tends to click for you?",options:[
+    {key:"A",label:"Text-heavy (First Aid, Pathoma)"},
+    {key:"B",label:"Visual or sketch-based (Sketchy, Pixorize)"},
+    {key:"C",label:"Video lecture (B&B, Ninja)"},
+    {key:"D",label:"Question-led (UWorld, AMBOSS)"}
+  ]},
+  {text:"What is your current NBME or UWorld percent correct?",options:[
+    {key:"A",label:"Under 40%"},
+    {key:"B",label:"40 to 55%"},
+    {key:"C",label:"55 to 65%"},
+    {key:"D",label:"Over 65%"}
+  ]},
+  {text:"Which system gives you the most trouble?",options:[
+    {key:"A",label:"Cardio and Pulm"},
+    {key:"B",label:"Neuro and Psych"},
+    {key:"C",label:"Micro and Immuno"},
+    {key:"D",label:"Path and Pharm generally"}
+  ]},
+  {text:"How would you describe your retention style?",options:[
+    {key:"A",label:"I need to see it to remember it"},
+    {key:"B",label:"I need to write it to remember it"},
+    {key:"C",label:"I need to say it aloud"},
+    {key:"D",label:"I need to apply it in a question"}
+  ]}
+];
+
+// scoring[qIndex][optionKey] = {stackId: points}
+var scoring=[
+  {A:{D:3,E:2},B:{A:3,B:2,C:2},C:{F:3,C:1},D:{E:3,F:1}},
+  {A:{D:3,B:2},B:{B:2,C:2,D:1},C:{A:3,C:2,F:2},D:{E:3,F:2}},
+  {A:{A:3,C:3},B:{B:3},C:{D:3},D:{E:3,F:2}},
+  {A:{C:2,D:3},B:{B:3,C:2,D:1},C:{A:3,F:2},D:{E:3,F:1}},
+  {A:{C:3,F:2},B:{D:3,F:2},C:{B:3,E:1},D:{A:2,C:3}},
+  {A:{B:3},B:{A:3,C:2},C:{D:3},D:{E:3,F:3}}
+];
+
+var stackData={
+  A:{
+    name:"UWorld + First Aid",
+    days:[
+      {label:"Day 1-2",phase:"Orientation",content:"Set up First Aid as your anchor document. Flag every section you have not yet reviewed. Run a 10-question UWorld tutor block on your weakest system, and for each question you miss, find the corresponding First Aid page and write a margin note in your own words."},
+      {label:"Day 3-4",phase:"First pass",content:"Move through First Aid one organ system at a time. Read actively: cover the page, recite key facts, then verify. Follow each section with a 10-question UWorld block on the same material. Read the explanations for questions you got right, not just the ones you missed."},
+      {label:"Day 5-6",phase:"Integration",content:"Pull your UWorld wrong answers from days 3 and 4. For each one, locate the concept in First Aid and annotate the gap. Focus on the discriminating feature: not what the answer was, but why the wrong answers were wrong."},
+      {label:"Day 7",phase:"Calibration",content:"40-question timed UWorld block. Review by topic afterward, not by question order. Note which First Aid sections need a second pass before you move to the next system."}
+    ]
+  },
+  B:{
+    name:"UWorld + Sketchy",
+    days:[
+      {label:"Day 1-2",phase:"Orientation",content:"Set up Sketchy and identify the systems where your UWorld performance is weakest. Run a 10-question UWorld tutor block on Micro or Immuno. For every disease you missed, locate the Sketchy video and watch it before moving on."},
+      {label:"Day 3-4",phase:"First pass",content:"Two Sketchy diseases per session, watched in full. Immediately after each video, run 5 UWorld questions on that exact organism or concept. The link between image and question is what makes this pairing work, not the video alone."},
+      {label:"Day 5-6",phase:"Integration",content:"Without opening Sketchy, reconstruct each scene on paper from memory. Then return to your UWorld wrong answers and note where a visual cue would have helped. Mark those diseases for a second Sketchy viewing."},
+      {label:"Day 7",phase:"Calibration",content:"40-question timed UWorld block, mixed topics. After the block, go through wrong answers and ask: is there a Sketchy scene I should have been able to retrieve here? Adjust next week's viewing schedule accordingly."}
+    ]
+  },
+  C:{
+    name:"UWorld + Pathoma",
+    days:[
+      {label:"Day 1-2",phase:"Orientation",content:"Open Pathoma. Identify the 2 to 3 systems where your UWorld percent correct is lowest. Run a 10-question UWorld tutor block on one of those systems and note the foundational pathology you could not recall."},
+      {label:"Day 3-4",phase:"First pass",content:"Watch Pathoma for your weakest system, one chapter per session. Take condensed handwritten notes. Follow each chapter with a UWorld block on the same material. Pathoma provides the mechanism; UWorld tests whether you can use it."},
+      {label:"Day 5-6",phase:"Integration",content:"Review your UWorld wrong answers from earlier in the week. For each missed question, identify the Pathoma concept that was the gap. Rewatch only that chapter segment, not the full chapter."},
+      {label:"Day 7",phase:"Calibration",content:"40-question timed UWorld block. Review by pathophysiology category. Build a short list of mechanisms you are still reconstructing from scratch rather than retrieving directly."}
+    ]
+  },
+  D:{
+    name:"UWorld + B&B Videos",
+    days:[
+      {label:"Day 1-2",phase:"Orientation",content:"Browse the B&B library and map it to systems you have not yet started. Run a 10-question UWorld tutor block on your weakest system. Write down every concept you could not explain aloud if asked directly."},
+      {label:"Day 3-4",phase:"First pass",content:"One B&B lecture per session, watched with the goal of explaining every mechanism aloud before the video ends. After each video, run a 10-question UWorld block on the same topic and say your reasoning out loud before selecting each answer."},
+      {label:"Day 5-6",phase:"Integration",content:"Without any resource open, talk through the key concepts from each lecture you have covered. Record yourself if that helps. Then check UWorld wrong answers: where did your spoken reasoning break down?"},
+      {label:"Day 7",phase:"Calibration",content:"40-question timed UWorld block. For each wrong answer, determine whether you failed to retrieve the fact or retrieved the wrong fact. Those require different fixes."}
+    ]
+  },
+  E:{
+    name:"AMBOSS + AnKing",
+    days:[
+      {label:"Day 1-2",phase:"Orientation",content:"Set up AMBOSS and the AnKing Overhaul deck. Unsuspend cards only for the systems you are actively working on. Run a 10-question AMBOSS block and read the full library article for every question, not just the explanation panel."},
+      {label:"Day 3-4",phase:"First pass",content:"Daily Anki target: 100 to 150 new cards from your active system, plus all due reviews. Every card you fail, open the corresponding AMBOSS article and read the relevant section. The question is not whether you knew it; it is whether you understand why you did not."},
+      {label:"Day 5-6",phase:"Integration",content:"Review your AMBOSS wrong answers as a batch. Look for clusters: are the misses scattered or concentrated in one mechanism? Adjust your AnKing unsuspend order to front-load the gaps you are identifying."},
+      {label:"Day 7",phase:"Calibration",content:"40-question timed AMBOSS block at your target difficulty level. After the block, run your Anki due cards. Notice whether time pressure changes your retrieval pattern. That gap is what simulated exam conditions are designed to reveal."}
+    ]
+  },
+  F:{
+    name:"UWorld + Mehlman",
+    days:[
+      {label:"Day 1-2",phase:"Orientation",content:"Download and read Mehlman for your weakest system. Run a 10-question UWorld tutor block on the same system. Mehlman is dense with discriminating logic; read it slowly. Your goal by the end of the week is to be able to separate things that look similar at first."},
+      {label:"Day 3-4",phase:"First pass",content:"One Mehlman topic per session, read actively. Stop at every table and ask which column you would select given a one-line vignette. Immediately follow with a 15-question UWorld block on that topic. Study wrong answers harder than right ones."},
+      {label:"Day 5-6",phase:"Integration",content:"Review your UWorld wrong answers and find the discriminating feature in each explanation. Find the equivalent table or rule in Mehlman. The skill you are training is: two diagnoses look alike, what one feature separates them?"},
+      {label:"Day 7",phase:"Calibration",content:"40-question timed UWorld block. Review by topic, not by question order. After the review, write from memory the main discriminating pairs from this week. Any you cannot reconstruct are your targets for next week."}
+    ]
+  }
+};
+
+var answers=[];
+var currentQ=0;
+var selectedOpt=null;
+
+function computeStack(){
+  var scores={A:0,B:0,C:0,D:0,E:0,F:0};
+  for(var i=0;i<answers.length;i++){
+    var qScore=scoring[i][answers[i]];
+    if(qScore){for(var s in qScore){scores[s]+=qScore[s];}}
+  }
+  var best='A',bestScore=-1;
+  for(var k in scores){if(scores[k]>bestScore){bestScore=scores[k];best=k;}}
+  return best;
+}
+
+function buildWhy(id){
+  var keys=['A','B','C','D'];
+  var timeLabels=["six or more months out","three to six months out","six to twelve weeks out","under six weeks out"];
+  var pctLabels=["under 40%","40 to 55%","55 to 65%","over 65%"];
+  var sysLabels=["Cardio and Pulm","Neuro and Psych","Micro and Immuno","Path and Pharm"];
+  var retLabels=["visual","written","spoken","applied in questions"];
+  var t=timeLabels[keys.indexOf(answers[0])];
+  var p=pctLabels[keys.indexOf(answers[3])];
+  var sys=sysLabels[keys.indexOf(answers[4])];
+  var ret=retLabels[keys.indexOf(answers[5])];
+  var map={
+    A:"You are "+t+", sitting at "+p+" correct, and your retention is strongest when you write things down. First Aid gives you a single annotatable document; UWorld tests whether what you annotated is actually retrievable under pressure. Your difficulty with "+sys+" is well-covered by both resources, which share the same organizational logic.",
+    B:"You are "+t+", sitting at "+p+" correct, and you retain material best through visual association. Sketchy builds a retrievable scene around each disease; UWorld then forces you to apply that scene to a clinical vignette. With "+sys+" as your weak area, this pairing targets exactly the right territory.",
+    C:"You are "+t+" with "+p+" correct, and your difficulty is concentrated in "+sys+". Pathoma builds mechanism from first principles, so you understand why diseases behave as they do rather than memorizing isolated facts. UWorld rewards that understanding with better discrimination on vignettes. Your "+ret+" retention style fits the dense, structured format of Pathoma.",
+    D:"You are "+t+" with "+p+" correct, and you consolidate material best by saying it aloud. B&B teaches by thinking through mechanisms out loud, which matches how you encode. UWorld moves you from understanding to applying. With "+sys+" as your weak area, B&B has strong coverage to work through systematically.",
+    E:"You are "+t+" with "+p+" correct, and you learn by applying knowledge in questions. AMBOSS rewards deep reading through its library integration rather than pure pattern matching. AnKing maintains your retrieval schedule so you are not relearning covered material. Your current performance suggests the infrastructure for a high-end qbank is in place; this stack builds precision on top of it.",
+    F:"You are "+t+" with "+p+" correct, and your weak area is "+sys+". Mehlman is built around discriminating logic: every page teaches you how to separate things that look alike, which is what Step 1 actually tests. UWorld gives you the volume of practice to make that logic automatic. Given your timeline, this is a high-leverage pairing that rewards focused, targeted work."
+  };
+  return map[id]||"";
+}
+
+function renderQuestion(){
+  var q=questions[currentQ];
+  document.getElementById('progress-label').textContent='Question '+(currentQ+1)+' of 6';
+  document.getElementById('progress-bar').style.width=((currentQ/6)*100)+'%';
+  var card=document.getElementById('question-card');
+  card.style.animation='none';
+  void card.offsetWidth;
+  card.style.animation='';
+  document.getElementById('question-text').textContent=q.text;
+  var ol=document.getElementById('options-list');
+  ol.innerHTML='';
+  q.options.forEach(function(opt){
+    var btn=document.createElement('button');
+    btn.className='option-btn';
+    btn.innerHTML='<span class="option-key">'+opt.key+'</span><span>'+opt.label+'</span>';
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.option-btn').forEach(function(b){b.classList.remove('selected');});
+      btn.classList.add('selected');
+      selectedOpt=opt.key;
+      var nb=document.getElementById('next-btn');
+      nb.classList.add('visible');
+      nb.textContent=currentQ===5?'See my recommendation':'Next question';
+    });
+    ol.appendChild(btn);
+  });
+  selectedOpt=null;
+  var nb=document.getElementById('next-btn');
+  nb.classList.remove('visible');
+  nb.textContent=currentQ===5?'See my recommendation':'Next question';
+}
+
+function showResult(){
+  document.getElementById('question-area').classList.add('hidden');
+  document.getElementById('progress-bar').style.width='100%';
+  var id=computeStack();
+  var stack=stackData[id];
+  document.getElementById('result-name').textContent=stack.name;
+  document.getElementById('result-why').textContent=buildWhy(id);
+  var grid=document.getElementById('plan-grid');
+  grid.innerHTML='';
+  stack.days.forEach(function(day){
+    var row=document.createElement('div');
+    row.className='plan-day';
+    row.innerHTML='<div class="plan-day-label">'+day.label+'<span class="plan-day-phase">'+day.phase+'</span></div><div class="plan-day-content">'+day.content+'</div>';
+    grid.appendChild(row);
+  });
+  var rs=document.getElementById('result-screen');
+  rs.classList.add('visible');
+  rs.style.animation='none';
+  void rs.offsetWidth;
+  rs.style.animation='';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function init(){
+  currentQ=0;answers=[];selectedOpt=null;
+  document.getElementById('question-area').classList.remove('hidden');
+  document.getElementById('result-screen').classList.remove('visible');
+  renderQuestion();
+}
+
+document.getElementById('next-btn').addEventListener('click',function(){
+  if(!selectedOpt)return;
+  answers.push(selectedOpt);
+  if(currentQ<5){currentQ++;renderQuestion();}
+  else{showResult();}
+});
+document.getElementById('restart-btn').addEventListener('click',function(){init();});
+init();
+})();
+</script>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-brand">Bit by Bit Pedagogy</span>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cfactor/">MCAT</a></li>
+      <li><a href="/">Step 1</a></li>
+      <li><a href="/triage/">Find your pattern</a></li>
+      <li><a href="/archetypes/">Study profiles</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

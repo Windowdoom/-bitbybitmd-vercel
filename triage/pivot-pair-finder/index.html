@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pivot Pair Finder | Bit by Bit Pedagogy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0D1B2E;
+  --gold:#F5A623;
+  --teal:#00E5A0;
+  --cream:#e8dfc8;
+  --border:rgba(248,245,235,.1);
+  --bg-card:rgba(255,255,255,.04);
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cream);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;line-height:1.6}
+
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 2rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(13,27,46,.96);backdrop-filter:blur(12px);z-index:100}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.1rem;color:var(--cream);text-decoration:none;letter-spacing:.02em}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:.72rem;color:rgba(232,223,200,.55);text-decoration:none;letter-spacing:.12em;text-transform:uppercase;transition:color .2s ease}
+.nav-links a:hover{color:var(--gold)}
+
+/* STATS BAR */
+.stats-bar{display:flex;align-items:center;gap:2rem;padding:.7rem 2.5rem;border-bottom:1px solid var(--border);background:rgba(255,255,255,.02)}
+.stats-item{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:400;color:rgba(232,223,200,.35);letter-spacing:.1em;text-transform:uppercase}
+.stats-item span{color:rgba(232,223,200,.6)}
+.stats-link{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:400;color:rgba(232,223,200,.35);letter-spacing:.08em;text-decoration:none;margin-left:auto;transition:color .2s ease}
+.stats-link:hover{color:var(--teal)}
+
+/* MAIN */
+main{max-width:900px;margin:0 auto;padding:2.5rem 2rem 6rem}
+
+/* MODE TOGGLE */
+.mode-toggle-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.mode-toggle{display:flex;background:var(--bg-card);border:1px solid var(--border);border-radius:3px;overflow:hidden}
+.mode-btn{background:transparent;border:none;padding:.55rem 1.1rem;font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:rgba(232,223,200,.4);cursor:pointer;transition:background .2s ease,color .2s ease}
+.mode-btn.active{background:rgba(245,166,35,.12);color:var(--gold)}
+.session-score{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:400;color:rgba(232,223,200,.5);letter-spacing:.08em;display:none}
+.session-score.visible{display:block}
+.session-score span{color:var(--teal)}
+
+/* SEARCH */
+.search-section{margin-bottom:2rem}
+.recent-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:400;color:rgba(232,223,200,.3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem}
+.recent-chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.recent-chip{background:transparent;border:1px solid var(--border);border-radius:20px;padding:.25rem .75rem;font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:300;color:rgba(232,223,200,.45);cursor:pointer;transition:border-color .2s ease,color .2s ease}
+.recent-chip:hover{border-color:var(--gold);color:var(--gold)}
+.search-input-wrap{position:relative}
+.search-input{width:100%;background:var(--bg-card);border:1px solid var(--border);border-radius:3px;padding:1rem 1rem 1rem 3rem;font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:300;color:var(--cream);outline:none;transition:border-color .2s ease;-webkit-appearance:none}
+.search-input::placeholder{color:rgba(232,223,200,.25)}
+.search-input:focus{border-color:rgba(245,166,35,.5)}
+.search-icon{position:absolute;left:1rem;top:50%;transform:translateY(-50%);opacity:.3;pointer-events:none;font-size:.85rem}
+.result-count{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:300;color:rgba(232,223,200,.3);letter-spacing:.08em;margin-top:.6rem}
+
+/* GROUPS */
+.group-section{margin-bottom:2.5rem}
+.group-heading{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:500;color:rgba(232,223,200,.3);letter-spacing:.15em;text-transform:uppercase;padding:.4rem 0;margin-bottom:.75rem;border-bottom:1px solid var(--border)}
+
+/* PAIR CARDS */
+.pairs-grid{display:flex;flex-direction:column;gap:.6rem}
+.pair-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:border-color .2s ease}
+.pair-card:hover{border-color:rgba(245,166,35,.3)}
+.pair-header{padding:.85rem 1.25rem .6rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
+.pair-title{font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:500;color:var(--gold);letter-spacing:.03em;line-height:1.3}
+.pair-tag{font-family:'JetBrains Mono',monospace;font-size:.58rem;font-weight:400;color:rgba(232,223,200,.3);letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(248,245,235,.08);border-radius:2px;padding:.18rem .45rem;white-space:nowrap;flex-shrink:0;margin-top:.1rem}
+.pair-body{padding:.1rem 1.25rem 1rem}
+.pair-discriminator{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:300;color:rgba(232,223,200,.72);line-height:1.55}
+.pair-discriminator.hidden{display:none}
+
+/* TEST MODE UI */
+.test-input-wrap{padding:.1rem 1.25rem .75rem;display:none}
+.test-input-wrap.visible{display:block}
+.test-input{width:100%;background:transparent;border:none;border-bottom:1px solid var(--border);padding:.4rem 0;font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:300;color:var(--cream);outline:none;transition:border-color .2s ease}
+.test-input:focus{border-color:rgba(245,166,35,.5)}
+.test-input::placeholder{color:rgba(232,223,200,.2);font-style:italic}
+.test-actions{padding:.25rem 1.25rem .9rem;display:none;gap:.6rem;flex-wrap:wrap;align-items:center}
+.test-actions.visible{display:flex}
+.test-reveal-btn{background:transparent;border:1px solid var(--border);border-radius:2px;padding:.4rem .9rem;font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:rgba(232,223,200,.55);cursor:pointer;transition:border-color .2s ease,color .2s ease}
+.test-reveal-btn:hover{border-color:var(--gold);color:var(--gold)}
+.test-reveal-btn:disabled{opacity:.3;cursor:default;pointer-events:none}
+.grade-btn{background:transparent;border:1px solid var(--border);border-radius:2px;padding:.4rem .9rem;font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:border-color .2s ease,color .2s ease;display:none}
+.grade-btn.visible{display:inline-block}
+.grade-got{color:rgba(0,229,160,.7);border-color:rgba(0,229,160,.25)}
+.grade-got:hover{color:var(--teal);border-color:var(--teal)}
+.grade-missed{color:rgba(232,223,200,.4);border-color:rgba(248,245,235,.1)}
+.grade-missed:hover{color:rgba(232,223,200,.7);border-color:rgba(248,245,235,.25)}
+.pair-card.graded-got{border-color:rgba(0,229,160,.25)}
+.pair-card.graded-missed{border-color:rgba(248,245,235,.06)}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:4rem 2rem;color:rgba(232,223,200,.3)}
+.empty-state p{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.08em}
+
+@media(max-width:600px){
+  nav{padding:1rem 1.25rem}
+  .stats-bar{padding:.6rem 1.25rem;gap:1rem}
+  main{padding:2rem 1rem 5rem}
+  .nav-links{gap:1rem}
+  .search-input{font-size:.9rem}
+  .pair-title{font-size:.75rem}
+}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:4rem}
+.footer-inner{max-width:760px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:.95rem;color:rgba(232,223,200,.4)}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+.footer-links a{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:300;letter-spacing:.09em;text-transform:uppercase;color:rgba(232,223,200,.35);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--gold)}
+
+.nav-brand-inner { display: flex; align-items: center; gap: 0.625rem; text-decoration: none; }
+.nav-monogram { width: 28px; height: 28px; border: 1.5px solid var(--gold); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; color: var(--gold); flex-shrink: 0; }
+
+/* unified animations */
+@keyframes bbbFadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.btn, button:not(.chip){will-change:transform;transition:transform 200ms cubic-bezier(0.22, 1, 0.36, 1), background 200ms ease, border-color 200ms ease, color 200ms ease, opacity 200ms ease}
+.btn:active, button:not(.chip):active{transform:translateY(1px) scale(.985)}
+.chip{transition:transform 180ms cubic-bezier(0.22, 1, 0.36, 1), border-color 200ms ease, background 200ms ease, color 200ms ease}
+.chip:active{transform:scale(.96)}
+.option-btn{transition:transform 200ms cubic-bezier(0.22, 1, 0.36, 1), border-color 200ms ease, background 200ms ease, color 200ms ease}
+.option-btn:active{transform:scale(.99)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand nav-brand-inner">
+    <div class="nav-monogram">B&#179;</div>
+    <span>Bit by Bit Pedagogy</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/cfactor/">MCAT</a></li>
+    <li><a href="/">Step 1</a></li>
+    <li><a href="/triage/">Find your pattern</a></li>
+  </ul>
+</nav>
+
+<div class="stats-bar">
+  <div class="stats-item"><span>60</span> pairs</div>
+  <div class="stats-item"><span>14</span> systems covered</div>
+  <a href="/triage/" class="stats-link">Find your study pattern &rarr;</a>
+</div>
+
+<main>
+
+  <div class="mode-toggle-row">
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="browse-btn" onclick="setMode('browse')">Browse mode</button>
+      <button class="mode-btn" id="test-btn" onclick="setMode('test')">Test mode</button>
+    </div>
+    <div class="session-score" id="session-score">
+      Score: <span id="score-display">0 / 0</span> revealed correctly
+    </div>
+  </div>
+
+  <div class="search-section">
+    <div id="recent-section" style="display:none">
+      <div class="recent-label">Recent searches</div>
+      <div class="recent-chips" id="recent-chips"></div>
+    </div>
+    <div class="search-input-wrap">
+      <span class="search-icon">&#9906;</span>
+      <input
+        class="search-input"
+        id="search-input"
+        type="text"
+        placeholder="Type a diagnosis, e.g. 'HCM' or 'thyroid'"
+        autocomplete="off"
+        spellcheck="false"
+      >
+    </div>
+    <div class="result-count" id="result-count"></div>
+  </div>
+
+  <div id="pairs-container"></div>
+
+</main>
+
+<script>
+(function(){
+
+var PAIRS=[
+  {id:1,a:"HCM",b:"HTN-heart disease",discriminator:"HCM has asymmetric septal hypertrophy plus outflow obstruction plus young athlete presentation. HTN-related disease shows concentric hypertrophy in an older patient with no obstruction.",system:"Cardio"},
+  {id:2,a:"HOCM",b:"Aortic Stenosis",discriminator:"Murmur behavior is the key: HOCM decreases with increased preload (squatting, lying down); AS is unchanged or increases with the same maneuvers.",system:"Cardio"},
+  {id:3,a:"Mitral regurgitation",b:"Mitral stenosis",discriminator:"MR: holosystolic murmur radiating to the axilla. MS: opening snap followed by diastolic rumble, associated with dysphagia from left atrial enlargement.",system:"Cardio"},
+  {id:4,a:"Right heart failure",b:"Left heart failure",discriminator:"RHF: JVD, peripheral edema, hepatojugular reflux. LHF: pulmonary edema, orthopnea, S3 gallop.",system:"Cardio"},
+  {id:5,a:"PE",b:"Pneumothorax",discriminator:"PE: pleuritic chest pain plus hemoptysis plus risk factors with often normal CXR. PTX: sudden dyspnea plus decreased breath sounds plus possible tracheal deviation.",system:"Pulm"},
+  {id:6,a:"ARDS",b:"Cardiogenic pulmonary edema",discriminator:"ARDS: wedge pressure under 18 plus bilateral infiltrates with no identified cardiac cause. CPE: wedge pressure over 18 plus elevated BNP.",system:"Pulm"},
+  {id:7,a:"Asthma",b:"COPD",discriminator:"Asthma: younger patient, atopic, fully reversible, eosinophil-driven. COPD: smoker, older, partially reversible, neutrophil-driven.",system:"Pulm"},
+  {id:8,a:"Sarcoidosis",b:"TB",discriminator:"Sarcoid: bilateral hilar adenopathy plus non-caseating granulomas plus elevated ACE plus hypercalcemia. TB: caseating granulomas plus positive PPD.",system:"Pulm"},
+  {id:9,a:"Goodpasture syndrome",b:"Granulomatosis with polyangiitis (GPA)",discriminator:"Goodpasture: anti-GBM antibodies affecting lung and kidney, no upper respiratory tract involvement. GPA: c-ANCA positive with upper and lower respiratory tract plus kidney.",system:"Pulm"},
+  {id:10,a:"Nephrotic syndrome",b:"Nephritic syndrome",discriminator:"Nephrotic: massive proteinuria plus edema plus hypoalbuminemia plus hyperlipidemia. Nephritic: hematuria plus RBC casts plus oliguria plus hypertension.",system:"Renal"},
+  {id:11,a:"FSGS",b:"Minimal Change Disease",discriminator:"FSGS: older patient or HIV/heroin use, no remission with steroids. MCD: child, selective proteinuria, steroid-responsive.",system:"Renal"},
+  {id:12,a:"ADPKD",b:"Simple renal cysts",discriminator:"ADPKD: bilateral, multiple, associated with berry aneurysms and liver cysts and family history. Simple cysts: unilateral, benign, no systemic features.",system:"Renal"},
+  {id:13,a:"SIADH",b:"Diabetes insipidus",discriminator:"SIADH: hyponatremia plus concentrated urine plus euvolemic state. DI: hypernatremia plus dilute urine. Central DI: ADH low; Nephrogenic DI: ADH high but non-responsive.",system:"Endo"},
+  {id:14,a:"Addison disease",b:"SIADH",discriminator:"Addison: hyponatremia plus hyperkalemia plus hyperpigmentation plus low cortisol. SIADH: hyponatremia plus normal potassium plus euvolemic state.",system:"Endo"},
+  {id:15,a:"Cushing syndrome",b:"Cushing disease",discriminator:"Cushing syndrome is any cause of elevated cortisol. Cushing disease refers specifically to a pituitary ACTH-secreting adenoma.",system:"Endo"},
+  {id:16,a:"Primary hyperaldosteronism",b:"Secondary hyperaldosteronism",discriminator:"Primary (Conn): hypokalemia plus HTN plus low renin. Secondary: hypokalemia plus HTN plus HIGH renin, often from renal artery stenosis.",system:"Endo"},
+  {id:17,a:"Type 1 DM",b:"Type 2 DM",discriminator:"T1: autoimmune, thin, young, DKA-prone, anti-GAD and anti-islet antibodies. T2: insulin-resistant, obese, acanthosis nigricans.",system:"Endo"},
+  {id:18,a:"DKA",b:"HHS",discriminator:"DKA: anion gap acidosis plus ketones plus pH under 7.3, usually Type 1. HHS: hyperosmolar state plus no significant ketones plus very high glucose, usually Type 2.",system:"Endo"},
+  {id:19,a:"Graves disease",b:"Hashimoto thyroiditis",discriminator:"Graves: hyperthyroid plus TSI antibodies plus exophthalmos plus pretibial myxedema. Hashimoto: hypothyroid or transient hyperthyroid phase plus anti-TPO and anti-TG.",system:"Endo"},
+  {id:20,a:"Benign thyroid nodule",b:"Malignant thyroid nodule",discriminator:"Benign: warm on scan, soft, movable. Malignant: cold on scan, hard, fixed, associated lymphadenopathy.",system:"Endo"},
+  {id:21,a:"Papillary thyroid cancer",b:"Follicular thyroid cancer",discriminator:"Papillary: most common, orphan Annie nuclei, psammoma bodies, spreads via lymphatics. Follicular: vascular invasion, hematogenous spread.",system:"Endo"},
+  {id:22,a:"MEN1",b:"MEN2a vs MEN2b",discriminator:"MEN1: parathyroid plus pituitary plus pancreas. MEN2a: medullary thyroid cancer plus pheochromocytoma plus parathyroid. MEN2b: medullary thyroid cancer plus pheochromocytoma plus mucosal neuromas plus Marfanoid body.",system:"Endo"},
+  {id:23,a:"Iron deficiency anemia",b:"Anemia of chronic disease",discriminator:"IDA: low ferritin plus low TIBC saturation plus high TIBC. ACD: high ferritin plus low TIBC saturation plus low or normal TIBC.",system:"Heme"},
+  {id:24,a:"Iron deficiency anemia",b:"Thalassemia minor",discriminator:"IDA: low MCV plus low ferritin plus high RDW. Thalassemia minor: low MCV plus normal or high ferritin plus normal RDW plus elevated HbA2.",system:"Heme"},
+  {id:25,a:"B12 deficiency",b:"Folate deficiency",discriminator:"Both cause macrocytic megaloblastic anemia. B12 only: neurological findings (subacute combined degeneration) plus elevated homocysteine plus elevated MMA.",system:"Heme"},
+  {id:26,a:"Intrinsic hemolytic anemia",b:"Extrinsic hemolytic anemia",discriminator:"Intrinsic (G6PD, sickle cell, hereditary spherocytosis): inherited RBC defect. Extrinsic (AIHA, TTP, HUS): immune-mediated or mechanical destruction.",system:"Heme"},
+  {id:27,a:"TTP",b:"HUS",discriminator:"TTP: FAT RN pentad (Fever, Anemia, Thrombocytopenia, Renal, Neuro), neurological findings prominent. HUS: children plus E. coli O157:H7 plus renal failure prominent, minimal neuro.",system:"Heme"},
+  {id:28,a:"TTP",b:"DIC",discriminator:"TTP: normal PT/PTT plus thrombocytopenia plus schistocytes. DIC: elevated PT/PTT plus thrombocytopenia plus low fibrinogen plus elevated D-dimer.",system:"Heme"},
+  {id:29,a:"CML",b:"Leukemoid reaction",discriminator:"CML: Philadelphia chromosome plus basophilia plus low LAP score. Leukemoid reaction: no Philadelphia chromosome, no basophilia, HIGH LAP score.",system:"Heme"},
+  {id:30,a:"ALL",b:"AML",discriminator:"ALL: children, lymphoblasts, TdT positive, CD10 (CALLA) positive. AML: adults, Auer rods, myeloperoxidase positive.",system:"Heme"},
+  {id:31,a:"Hodgkin lymphoma",b:"Non-Hodgkin lymphoma",discriminator:"Hodgkin: Reed-Sternberg cells, contiguous spread, bimodal age distribution, B symptoms. NHL: non-contiguous spread, older adults, more common overall.",system:"Heme"},
+  {id:32,a:"Wilson disease",b:"Hemochromatosis",discriminator:"Wilson: copper accumulation, young patient, Kayser-Fleischer rings, neuropsychiatric symptoms, liver disease. Hemochromatosis: iron, middle-aged, 'bronze diabetes', HFE gene mutation.",system:"GI"},
+  {id:33,a:"Crohn disease",b:"Ulcerative colitis",discriminator:"Crohn: skip lesions, transmural inflammation, any part of GI tract, cobblestone mucosa, fistulas. UC: continuous lesions, mucosal only, colon only, lead pipe appearance, higher colorectal cancer risk.",system:"GI"},
+  {id:34,a:"IBS",b:"IBD",discriminator:"IBS: normal labs, no blood, no weight loss, stress-related, normal colonoscopy. IBD: elevated CRP and ESR, possible blood, abnormal colonoscopy.",system:"GI"},
+  {id:35,a:"Celiac disease",b:"Whipple disease",discriminator:"Celiac: anti-tTG and anti-endomysial antibodies, villous atrophy, HLA-DQ2/DQ8, gluten-triggered. Whipple: Tropheryma whipplei, PAS-positive macrophages, arthralgias, neurological findings.",system:"GI"},
+  {id:36,a:"Bacterial meningitis",b:"Viral meningitis",discriminator:"Bacterial: cloudy CSF, high WBC with PMN predominance, low glucose, high protein. Viral: clear CSF, lymphocyte predominance, normal or mildly low glucose.",system:"Neuro"},
+  {id:37,a:"Multiple sclerosis",b:"Neuromyelitis optica (NMO)",discriminator:"MS: periventricular plaques, Dawson fingers, oligoclonal bands in CSF. NMO: anti-AQP4 antibodies, longitudinally extensive spinal cord lesion, bilateral optic neuritis.",system:"Neuro"},
+  {id:38,a:"Parkinson disease",b:"Essential tremor",discriminator:"PD: resting tremor, rigidity, bradykinesia, micrographia. Essential tremor: intention or postural tremor, improves with alcohol, no rigidity.",system:"Neuro"},
+  {id:39,a:"Alzheimer disease",b:"Lewy body dementia",discriminator:"AD: gradual onset, no fluctuation, APOE4 association, acetylcholine deficit. LBD: fluctuating cognition, visual hallucinations, parkinsonism, REM sleep behavior disorder.",system:"Neuro"},
+  {id:40,a:"Delirium",b:"Dementia",discriminator:"Delirium: acute onset, fluctuating course, reversible, inattention prominent. Dementia: gradual onset, stable course, irreversible, memory loss prominent.",system:"Neuro"},
+  {id:41,a:"Schizophrenia",b:"Schizoaffective disorder",discriminator:"Schizophrenia: psychosis without concurrent mood episodes being prominent. Schizoaffective: psychosis WITH a concurrent mood episode meeting full criteria simultaneously.",system:"Psych"},
+  {id:42,a:"Bipolar I",b:"Bipolar II",discriminator:"Bipolar I: full manic episode (requires hospitalization or includes psychosis). Bipolar II: hypomania (no hospitalization or psychosis) plus major depressive episodes.",system:"Psych"},
+  {id:43,a:"MDD",b:"Adjustment disorder",discriminator:"MDD: meets full criteria regardless of precipitating trigger. Adjustment disorder: stressor-linked, does not meet full MDD criteria, resolves within 6 months of stressor ending.",system:"Psych"},
+  {id:44,a:"GAD",b:"Panic disorder",discriminator:"GAD: persistent worry across multiple domains plus chronic physical symptoms. Panic disorder: discrete panic attacks plus anticipatory anxiety plus avoidance behavior.",system:"Psych"},
+  {id:45,a:"OCD",b:"OCPD",discriminator:"OCD: ego-dystonic obsessions and compulsions causing distress. OCPD: ego-syntonic perfectionism, rigidity, and control-seeking that the patient views as acceptable.",system:"Psych"},
+  {id:46,a:"Anorexia nervosa",b:"Bulimia nervosa",discriminator:"Anorexia: low BMI, restriction, may include purging. Bulimia: normal or high BMI, binge-purge cycles, prominent shame, dental erosion.",system:"Psych"},
+  {id:47,a:"SLE",b:"Drug-induced lupus",discriminator:"SLE: anti-dsDNA plus anti-Smith antibodies, any organ involvement. Drug-induced: anti-histone antibodies, reversible on stopping the drug, typically spares CNS and kidney.",system:"MSK/Rheum"},
+  {id:48,a:"Rheumatoid arthritis",b:"Osteoarthritis",discriminator:"RA: symmetric, MCP and PIP joints, morning stiffness over 1 hour, RF and anti-CCP positive, systemic features. OA: asymmetric, DIP and PIP joints, stiffness under 30 minutes, no systemic findings.",system:"MSK/Rheum"},
+  {id:49,a:"Gout",b:"Pseudogout",discriminator:"Gout: negatively birefringent needle-shaped MSU crystals, first MTP joint. Pseudogout: positively birefringent rhomboid CPPD crystals, knee or wrist.",system:"MSK/Rheum"},
+  {id:50,a:"Diffuse SSc",b:"CREST syndrome",discriminator:"Diffuse SSc: anti-Scl-70 antibodies, widespread skin involvement, renal crisis risk. CREST/Limited SSc: anti-centromere antibodies, calcinosis, Raynaud, esophageal dysmotility, sclerodactyly, telangiectasia.",system:"MSK/Rheum"},
+  {id:51,a:"Placenta previa",b:"Placental abruption",discriminator:"Previa: painless bright red bleeding, placenta overlying the os, no uterine tenderness. Abruption: painful, dark blood, woody uterus, fetal distress.",system:"OB/GYN"},
+  {id:52,a:"Preeclampsia",b:"Gestational hypertension",discriminator:"Preeclampsia: HTN plus proteinuria after 20 weeks. Gestational HTN: HTN without proteinuria, resolves after delivery.",system:"OB/GYN"},
+  {id:53,a:"Eclampsia",b:"HELLP syndrome",discriminator:"Eclampsia: seizures in the setting of preeclampsia. HELLP: hemolysis plus elevated LFTs plus low platelets, can occur without meeting full preeclampsia criteria.",system:"OB/GYN"},
+  {id:54,a:"Hypothyroidism in pregnancy",b:"Hyperthyroidism in pregnancy",discriminator:"Hypothyroidism: associated with cretinism if untreated. Hyperthyroidism: usually Graves disease; neonatal Graves is possible from TSI crossing the placenta.",system:"OB/GYN"},
+  {id:55,a:"Testicular torsion",b:"Epididymitis",discriminator:"Torsion: sudden severe pain, absent cremasteric reflex, adolescent. Epididymitis: gradual onset, tenderness posterior to the testicle, positive cremasteric reflex, STI risk.",system:"Urology"},
+  {id:56,a:"BPH",b:"Prostate cancer",discriminator:"BPH: symmetric enlargement, obstructive urinary symptoms, normal or mildly elevated PSA. Prostate cancer: asymmetric, hard nodule on DRE, elevated PSA, Gleason score.",system:"Urology"},
+  {id:57,a:"Osteosarcoma",b:"Ewing sarcoma",discriminator:"Osteosarcoma: older teens, metaphysis location, sunburst pattern on imaging, Codman triangle. Ewing: younger patients, diaphysis, onion-skin periosteal reaction, t(11;22) translocation.",system:"MSK/Rheum"},
+  {id:58,a:"Osteoporosis",b:"Osteomalacia vs Paget disease",discriminator:"Osteoporosis: low bone density, normal labs, fragility fractures. Osteomalacia: low Ca plus low phosphate plus elevated ALP, soft bones. Paget: normal Ca plus very high ALP plus mixed lytic/sclerotic pattern plus increasing hat size.",system:"MSK/Rheum"},
+  {id:59,a:"ACL tear",b:"PCL tear",discriminator:"ACL: positive anterior drawer test, pivot shift, typically from deceleration injury. PCL: positive posterior drawer test, typically from dashboard injury.",system:"MSK/Rheum"},
+  {id:60,a:"Carpal tunnel syndrome",b:"Cubital tunnel syndrome",discriminator:"CTS: median nerve, thenar atrophy, positive Tinel and Phalen at the wrist, affects first 3.5 digits. Cubital tunnel: ulnar nerve, hypothenar and interosseous atrophy, affects 4th and 5th digits.",system:"Neuro"}
+];
+
+var SYSTEM_ORDER=["Cardio","Pulm","Renal","Endo","Heme","GI","Neuro","Psych","MSK/Rheum","OB/GYN","Urology"];
+
+var mode='browse'; // 'browse' or 'test'
+var sessionCorrect=0;
+var sessionTotal=0;
+var STORAGE_KEY='bbb_pivot_recent';
+
+// Per-card state in test mode
+var cardStates={}; // id -> {revealed:bool, graded:'got'|'missed'|null}
+
+function getRecent(){
+  try{var r=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');return Array.isArray(r)?r:[];}
+  catch(e){return[];}
+}
+function addRecent(term){
+  if(!term||term.trim()==='')return;
+  var r=getRecent().filter(function(x){return x.toLowerCase()!==term.toLowerCase();});
+  r.unshift(term.trim());
+  if(r.length>10)r=r.slice(0,10);
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(r));}catch(e){}
+}
+function renderRecent(){
+  var r=getRecent();
+  var sec=document.getElementById('recent-section');
+  var chips=document.getElementById('recent-chips');
+  if(r.length===0){sec.style.display='none';return;}
+  sec.style.display='block';
+  chips.innerHTML='';
+  r.forEach(function(term){
+    var chip=document.createElement('button');
+    chip.className='recent-chip';
+    chip.textContent=term;
+    chip.addEventListener('click',function(){
+      document.getElementById('search-input').value=term;
+      doSearch(term);
+    });
+    chips.appendChild(chip);
+  });
+}
+
+function setMode(m){
+  mode=m;
+  document.getElementById('browse-btn').classList.toggle('active',m==='browse');
+  document.getElementById('test-btn').classList.toggle('active',m==='test');
+  var ss=document.getElementById('session-score');
+  if(m==='test'){
+    sessionCorrect=0;sessionTotal=0;cardStates={};
+    ss.classList.add('visible');
+    updateScore();
+  } else {
+    ss.classList.remove('visible');
+    cardStates={};
+  }
+  var query=document.getElementById('search-input').value;
+  doSearch(query);
+}
+
+function updateScore(){
+  document.getElementById('score-display').textContent=sessionCorrect+' / '+sessionTotal;
+}
+
+function fuzzyMatch(query,pair){
+  var q=query.toLowerCase().trim();
+  if(!q)return true;
+  var hay=(pair.a+' '+pair.b+' '+pair.discriminator+' '+pair.system).toLowerCase();
+  // Try all words
+  var words=q.split(/\s+/);
+  return words.every(function(w){return hay.indexOf(w)>-1;});
+}
+
+function groupBySystem(pairs){
+  var groups={};
+  pairs.forEach(function(p){
+    if(!groups[p.system])groups[p.system]=[];
+    groups[p.system].push(p);
+  });
+  return groups;
+}
+
+function doSearch(query){
+  var q=query.trim();
+  var filtered=PAIRS.filter(function(p){return fuzzyMatch(q,p);});
+  document.getElementById('result-count').textContent=
+    q===''?'Showing all 60 pairs':'Showing '+filtered.length+' of 60';
+  renderPairs(filtered,q==='');
+  if(q!==''){addRecent(q);renderRecent();}
+}
+
+function renderPairs(pairs,grouped){
+  var container=document.getElementById('pairs-container');
+  container.innerHTML='';
+  if(pairs.length===0){
+    container.innerHTML='<div class="empty-state"><p>No pairs match that search.</p></div>';
+    return;
+  }
+  if(grouped){
+    var groups=groupBySystem(pairs);
+    SYSTEM_ORDER.forEach(function(sys){
+      if(!groups[sys])return;
+      var sec=document.createElement('div');
+      sec.className='group-section';
+      var h=document.createElement('div');
+      h.className='group-heading';
+      h.textContent=sys;
+      sec.appendChild(h);
+      var grid=document.createElement('div');
+      grid.className='pairs-grid';
+      groups[sys].forEach(function(p){grid.appendChild(buildCard(p));});
+      sec.appendChild(grid);
+      container.appendChild(sec);
+    });
+  } else {
+    var grid=document.createElement('div');
+    grid.className='pairs-grid';
+    pairs.forEach(function(p){grid.appendChild(buildCard(p));});
+    container.appendChild(grid);
+  }
+}
+
+function buildCard(pair){
+  var state=cardStates[pair.id]||(cardStates[pair.id]={revealed:false,graded:null});
+  var card=document.createElement('div');
+  card.className='pair-card';
+  if(state.graded==='got')card.classList.add('graded-got');
+  if(state.graded==='missed')card.classList.add('graded-missed');
+  card.dataset.id=pair.id;
+
+  // Header
+  var header=document.createElement('div');
+  header.className='pair-header';
+  var title=document.createElement('div');
+  title.className='pair-title';
+  title.textContent=pair.a+' vs '+pair.b;
+  var tag=document.createElement('div');
+  tag.className='pair-tag';
+  tag.textContent=pair.system;
+  header.appendChild(title);
+  header.appendChild(tag);
+  card.appendChild(header);
+
+  // Discriminator body
+  var body=document.createElement('div');
+  body.className='pair-body';
+  var disc=document.createElement('div');
+  disc.className='pair-discriminator';
+  if(mode==='test'&&!state.revealed)disc.classList.add('hidden');
+  disc.textContent=pair.discriminator;
+  body.appendChild(disc);
+  card.appendChild(body);
+
+  if(mode==='test'){
+    // Test input
+    var inputWrap=document.createElement('div');
+    inputWrap.className='test-input-wrap'+(state.revealed?'':' visible');
+    if(state.revealed)inputWrap.className='test-input-wrap';
+    var inp=document.createElement('input');
+    inp.className='test-input';
+    inp.type='text';
+    inp.placeholder='What separates them?';
+    inp.disabled=state.revealed;
+    inputWrap.appendChild(inp);
+    card.appendChild(inputWrap);
+
+    // Actions row
+    var acts=document.createElement('div');
+    acts.className='test-actions visible';
+    var revBtn=document.createElement('button');
+    revBtn.className='test-reveal-btn';
+    revBtn.textContent='Reveal';
+    revBtn.disabled=state.revealed;
+
+    var gotBtn=document.createElement('button');
+    gotBtn.className='grade-btn grade-got'+(state.revealed?' visible':'');
+    gotBtn.textContent='Got it';
+    gotBtn.disabled=state.graded!==null;
+    if(state.graded==='got')gotBtn.style.opacity='1';
+
+    var missBtn=document.createElement('button');
+    missBtn.className='grade-btn grade-missed'+(state.revealed?' visible':'');
+    missBtn.textContent='Missed it';
+    missBtn.disabled=state.graded!==null;
+    if(state.graded==='missed')missBtn.style.opacity='1';
+
+    revBtn.addEventListener('click',function(){
+      if(state.revealed)return;
+      state.revealed=true;
+      disc.classList.remove('hidden');
+      revBtn.disabled=true;
+      inp.disabled=true;
+      gotBtn.classList.add('visible');
+      missBtn.classList.add('visible');
+      sessionTotal++;
+      updateScore();
+    });
+
+    gotBtn.addEventListener('click',function(){
+      if(state.graded)return;
+      state.graded='got';
+      sessionCorrect++;
+      gotBtn.disabled=true;missBtn.disabled=true;
+      card.classList.add('graded-got');
+      updateScore();
+    });
+
+    missBtn.addEventListener('click',function(){
+      if(state.graded)return;
+      state.graded='missed';
+      missBtn.disabled=true;gotBtn.disabled=true;
+      card.classList.add('graded-missed');
+      updateScore();
+    });
+
+    acts.appendChild(revBtn);
+    acts.appendChild(gotBtn);
+    acts.appendChild(missBtn);
+    card.appendChild(acts);
+  }
+
+  return card;
+}
+
+// Init
+var searchInput=document.getElementById('search-input');
+var debounceTimer;
+searchInput.addEventListener('input',function(){
+  clearTimeout(debounceTimer);
+  debounceTimer=setTimeout(function(){
+    doSearch(searchInput.value);
+  },120);
+});
+
+renderRecent();
+doSearch('');
+
+})();
+</script>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-brand">Bit by Bit Pedagogy</span>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/cfactor/">MCAT</a></li>
+      <li><a href="/">Step 1</a></li>
+      <li><a href="/triage/">Find your pattern</a></li>
+      <li><a href="/archetypes/">Study profiles</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>
