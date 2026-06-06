@@ -4544,7 +4544,7 @@ function filterNav(q){
 function renderBlock(b){
  if(b.t==='p')   return '<p>'+esc(b.x).replace(/\n\n/g,'</p><p>')+'</p>';
  if(b.t==='ul')  return '<ul>'+(b.items||[]).map(function(i){return '<li>'+esc(i)+'</li>';}).join('')+'</ul>';
- if(b.t==='formula') return '<div class="formula">'+esc(b.x)+(b.note?'<span class="fnote">'+esc(b.note)+'</span>':'')+'</div>';
+ if(b.t==='formula') return '<div class="formula">'+(window.fmtFormula?window.fmtFormula(b.x):esc(b.x))+(b.note?'<span class="fnote">'+esc(b.note)+'</span>':'')+'</div>';
  if(b.t==='vbox') return '<div class="vbox"><div class="vhead">'+esc(b.head||'')+'</div>'+(b.html||'')+'</div>';
  if(b.t==='scaffold') return '<div class="scaffold"><div class="scl">▸ COURSE SCAFFOLD · IN PROGRESS</div><p>'+esc(b.x)+'</p></div>';
  if(b.t==='box'){

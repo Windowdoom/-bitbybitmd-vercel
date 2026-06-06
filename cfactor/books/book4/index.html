@@ -210,8 +210,11 @@
 @media(max-width:600px){.compare{grid-template-columns:1fr;}}
 
 /* formula display */
-.formula{background:var(--bg-mid);border:1px solid var(--border);border-radius:8px;padding:1rem 1.2rem;margin:1rem 0 1.4rem;font-family:var(--mono);font-size:15px;color:var(--text);text-align:center;line-height:1.7;}
-.formula .fnote{display:block;font-size:11px;color:var(--text-dim);margin-top:6px;font-style:italic;}
+.formula{background:linear-gradient(180deg,rgba(0,229,160,.04),var(--bg-mid));border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:8px;padding:1.1rem 1.4rem;margin:1.2rem 0 1.4rem;font-family:'JetBrains Mono','SF Mono',Consolas,'Courier New',monospace;font-size:16.5px;color:var(--text);text-align:center;line-height:1.8;letter-spacing:.01em;overflow-x:auto;}
+.formula sub{font-size:.72em;line-height:0;position:relative;vertical-align:baseline;bottom:-0.4em;color:var(--text-muted);font-weight:500;margin-left:.5px;}
+.formula sup{font-size:.72em;line-height:0;position:relative;vertical-align:baseline;top:-0.55em;color:var(--text-muted);font-weight:500;margin-left:.5px;}
+.formula .fnote{display:block;font-size:11.5px;color:var(--text-dim);margin-top:.6rem;font-style:italic;font-family:Georgia,serif;letter-spacing:0;line-height:1.55;}
+@media(max-width:560px){.formula{font-size:14.5px;padding:.95rem 1rem;text-align:left;}}
 
 /* coming-soon scaffold marker */
 .scaffold{background:linear-gradient(135deg,rgba(168,85,247,.06),transparent 70%);border:1px dashed var(--purple);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem 0;}
@@ -285,6 +288,7 @@
 </footer>
 <div class="disclaimer">Bit by Bit Pedagogy is an independent educational platform. The C-Factor Series is a pre-med and MCAT review resource built on mechanism-first pedagogy. Not affiliated with, endorsed by, or connected to the AAMC, NBME, USMLE, or any exam body. Materials are for educational use only and do not guarantee score outcomes. © 2026 Bit by Bit Pedagogy. All rights reserved. <a href="/terms/" style="color:var(--text-dim)">Terms &amp; Copyright</a></div>
 
+<script defer src="/cfactor/formula.js"></script>
 <script defer src="book4-course.js"></script>
 <script defer src="book4-practice.js"></script>
 <script>
