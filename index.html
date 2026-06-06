@@ -231,14 +231,26 @@ body.nav-lock{overflow:hidden;}
 .btn-buy-lg:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(245, 166, 35, .3);}
 
 /* TOOLKIT TABS */
-.toolkit{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
-.tk-tabs{display:flex;flex-wrap:wrap;background:var(--bg-mid);border-bottom:1px solid var(--border);overflow-x:auto;}
-.tk-tab{flex:1;min-width:130px;padding:14px 18px;background:transparent;border:none;color:var(--text-muted);font-family:var(--mono);font-size:11.5px;font-weight:bold;letter-spacing:.6px;border-right:1px solid var(--border);transition:all .2s;text-align:center;white-space:nowrap;}
+.toolkit{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35);position:relative;}
+.toolkit::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(245,166,35,.4),transparent);pointer-events:none;}
+.tk-tabs{display:grid;grid-template-columns:repeat(3,1fr);background:rgba(0,0,0,.18);border-bottom:1px solid var(--border);overflow-x:auto;position:relative;}
+.tk-tab{position:relative;padding:1.25rem 1.1rem 1.15rem;background:transparent;border:none;color:var(--text-dim);font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:color .25s cubic-bezier(.22,1,.36,1),background .25s,transform .25s;text-align:center;white-space:nowrap;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;line-height:1.3;border-right:1px solid var(--border);}
 .tk-tab:last-child{border-right:none;}
-.tk-tab:hover{color:var(--text);background:rgba(255, 255, 255, .02);}
-.tk-tab.on{background:var(--bg);color:var(--teal);box-shadow:inset 0 -2px 0 var(--teal);}
-.tk-pane{display:none;padding:0;}
+.tk-tab::before{content:attr(data-num);font-family:var(--serif),Georgia,serif;font-style:italic;font-weight:400;font-size:13px;color:var(--text-dimmer);letter-spacing:.02em;text-transform:none;opacity:.7;display:block;margin-bottom:.05rem;}
+.tk-tab:hover{color:var(--text);background:rgba(255,255,255,.025);}
+.tk-tab:hover::before{color:var(--gold);opacity:1;}
+.tk-tab.on{color:var(--cream);background:linear-gradient(180deg,rgba(245,166,35,.06),transparent);box-shadow:inset 0 -2px 0 var(--gold);}
+.tk-tab.on::before{color:var(--gold);opacity:1;}
+.tk-tab:active{transform:translateY(1px);}
+.tk-pane{display:none;padding:0;animation:tkFadeUp .35s cubic-bezier(.22,1,.36,1);}
 .tk-pane.on{display:block;}
+@keyframes tkFadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:560px){
+  .tk-tabs{grid-template-columns:1fr;}
+  .tk-tab{border-right:none;border-bottom:1px solid var(--border);padding:.95rem 1rem;flex-direction:row;justify-content:flex-start;text-align:left;}
+  .tk-tab::before{margin-bottom:0;}
+  .tk-tab.on{box-shadow:inset 3px 0 0 var(--gold);}
+}
 
 /* INTAKE */
 .intake-wrap{padding:2.5rem 2rem;max-width:740px;margin:0 auto;}
@@ -308,16 +320,28 @@ body.nav-lock{overflow:hidden;}
 .exam-score-n{font-family:var(--mono);font-size:48px;color:var(--teal);font-weight:bold;line-height:1;}
 
 /* TIDBITS */
-.tid-wrap{padding:1.8rem 2rem;}
-.tid-ctrls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:1.5rem;}
-.tid-ctrls input{flex:1;min-width:200px;padding:10px 14px;border-radius:var(--r);background:var(--bg);border:1px solid var(--border);color:var(--text);font-size:13px;}
-.tid-ctrls input:focus{outline:none;border-color:var(--teal);}
-.tid-ctrls select{padding:10px 14px;border-radius:var(--r);background:var(--bg);border:1px solid var(--border);color:var(--text);font-size:13px;font-family:var(--sans);}
-.tid-count{font-family:var(--mono);font-size:11px;color:var(--text-muted);margin-left:auto;}
-.tid-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(290px, 1fr));gap:10px;}
-.tid-card{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;transition:all .2s;}
-.tid-card:hover{border-color:var(--border-bright);}
-.tid-badge{font-family:var(--mono);font-size:9px;font-weight:bold;padding:3px 7px;border-radius:99px;white-space:nowrap;flex-shrink:0;letter-spacing:.4px;}
+.tid-wrap{padding:2.25rem 2rem 2.5rem;}
+.tid-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.75rem;flex-wrap:wrap;gap:1.25rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);}
+.tid-mode-row{display:flex;gap:.4rem;flex-wrap:wrap;}
+.tid-mode-btn{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:.55rem 1rem;border:1px solid var(--border);background:transparent;color:var(--text-dim);border-radius:99px;cursor:pointer;transition:color .2s,border-color .2s,background .2s,transform .2s cubic-bezier(.22,1,.36,1);}
+.tid-mode-btn:hover{color:var(--cream);border-color:rgba(245,166,35,.4);}
+.tid-mode-btn:active{transform:translateY(1px) scale(.985);}
+.tid-mode-btn.on{color:var(--gold);border-color:var(--gold);background:rgba(245,166,35,.06);}
+.tid-ctrls{display:flex;gap:.65rem;flex-wrap:wrap;align-items:center;margin-bottom:1.5rem;}
+.tid-ctrls input{flex:1;min-width:220px;padding:.7rem 1rem;border-radius:8px;background:rgba(0,0,0,.2);border:1px solid var(--border);color:var(--text);font-size:13px;font-family:var(--sans);transition:border-color .2s,background .2s;}
+.tid-ctrls input::placeholder{color:var(--text-dim);font-style:italic;}
+.tid-ctrls input:focus{outline:none;border-color:var(--gold);background:rgba(245,166,35,.04);}
+.tid-ctrls select{padding:.7rem 1rem;border-radius:8px;background:rgba(0,0,0,.2);border:1px solid var(--border);color:var(--text);font-size:13px;font-family:var(--sans);cursor:pointer;transition:border-color .2s;}
+.tid-ctrls select:hover{border-color:rgba(245,166,35,.4);}
+.tid-ctrls select:focus{outline:none;border-color:var(--gold);}
+.tid-count{font-family:var(--mono);font-size:10.5px;color:var(--text-dim);margin-left:auto;letter-spacing:.05em;font-style:italic;}
+.tid-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:.7rem;}
+.tid-card{position:relative;background:rgba(0,0,0,.18);border:1px solid var(--border);border-radius:8px;padding:1rem 1.1rem .95rem;display:flex;gap:.85rem;align-items:flex-start;transition:transform .25s cubic-bezier(.22,1,.36,1),border-color .2s,background .2s,box-shadow .25s;overflow:hidden;}
+.tid-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);opacity:0;transition:opacity .25s;}
+.tid-card:hover{transform:translateY(-2px);border-color:rgba(245,166,35,.3);background:rgba(245,166,35,.03);box-shadow:0 8px 22px rgba(0,0,0,.25);}
+.tid-card:hover::before{opacity:.6;}
+.tid-card-body{font-size:13.5px;line-height:1.55;color:var(--text);letter-spacing:.002em;}
+.tid-badge{font-family:var(--mono);font-size:9px;font-weight:500;padding:.3rem .6rem;border-radius:99px;white-space:nowrap;flex-shrink:0;letter-spacing:.12em;text-transform:uppercase;line-height:1.3;}
 .tb-PATH{background:rgba(255, 71, 87, .1);color:var(--red);}
 .tb-GENE{background:rgba(46, 213, 115, .1);color:var(--green);}
 .tb-CANCER{background:rgba(168, 85, 247, .1);color:var(--purple);}
@@ -336,8 +360,8 @@ body.nav-lock{overflow:hidden;}
 .tb-REPRO{background:rgba(168, 85, 247, .1);color:var(--purple);}
 .tb-PSYCH{background:rgba(168, 85, 247, .1);color:var(--purple);}
 .tb-PHARM{background:rgba(0, 229, 160, .1);color:var(--teal);}
-.tid-fact{font-size:13px;color:var(--text-muted);line-height:1.55;}
-.tid-fact b{color:var(--text);}
+.tid-fact{font-size:13.5px;color:var(--text);line-height:1.6;letter-spacing:.002em;}
+.tid-fact b{color:var(--cream);font-weight:600;}
 
 
 /* COACHING + PRICING */
@@ -1112,19 +1136,19 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
 
  <div class="toolkit">
  <div class="tk-tabs">
- <button class="tk-tab on" data-pane="intake" onclick="setTab('intake')">🎯 FIND MY GAP</button>
- <button class="tk-tab" data-pane="exam" onclick="setTab('exam')">📝 BIT 150 EXAM</button>
- <button class="tk-tab" data-pane="tidbits" onclick="setTab('tidbits')">⚡ TIDBITS DATABASE</button>
+ <button class="tk-tab on" data-pane="intake" data-num="i" onclick="setTab('intake')">Find my gap</button>
+ <button class="tk-tab" data-pane="exam" data-num="ii" onclick="setTab('exam')">Bit 150 exam</button>
+ <button class="tk-tab" data-pane="tidbits" data-num="iii" onclick="setTab('tidbits')">Tidbits database</button>
  </div>
 
  <!-- INTAKE PANE -->
  <div class="tk-pane on" id="pane-intake">
  <div class="intake-wrap" id="intakeWrap">
  <div id="intakeStart">
- <div class="intake-qcount">DIAGNOSTIC. 10 QUESTIONS. 60 SECONDS.</div>
- <h3 style="font-family:var(--mono);font-size:24px;color:var(--text);margin-bottom:.6rem;">Where are you actually stuck?</h3>
- <p style="color:var(--text-muted);font-size:14.5px;margin-bottom:1.5rem;">Most students do not need more questions. They need the right diagnosis of what is broken in their prep. This intake routes you to the one tool that will help most.</p>
- <button class="btn-p" onclick="startIntake()">START DIAGNOSTIC →</button>
+ <div class="intake-qcount">Diagnostic &middot; 10 questions &middot; 60 seconds</div>
+ <h3 style="font-family:var(--serif),Georgia,serif;font-style:italic;font-weight:300;font-size:clamp(1.9rem,4vw,2.6rem);color:var(--cream);margin-bottom:1rem;letter-spacing:-.01em;line-height:1.15;">Where are you <em style="color:var(--gold);font-style:italic;">actually</em> stuck?</h3>
+ <p style="color:var(--text-muted);font-size:15px;line-height:1.75;margin-bottom:1.75rem;max-width:560px;">Most students do not need more questions. They need the right diagnosis of what is broken in their prep. This intake routes you to the one tool that will help most.</p>
+ <button class="btn-p" onclick="startIntake()">Start diagnostic <span style="margin-left:.35rem">→</span></button>
  </div>
  <div id="intakeRunning" style="display:none;">
  <div class="intake-qcount" id="intakeCount"></div>
@@ -1139,16 +1163,16 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <!-- EXAM PANE -->
  <div class="tk-pane" id="pane-exam">
  <div class="exam-intro" id="examIntro">
- <div style="font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:1.5px;margin-bottom:1rem;">◈ INTERNAL PROVING GROUND</div>
- <h3><span class="tc">BIT</span> 150</h3>
- <p>The full mechanism-first practice exam. 150 NBME-style questions across 8 blocks. Choose <b>Timed mode</b> for a 30-minute NBME simulation per block, or <b>Tutor mode</b> for instant Master Pivot explanations after every question.</p>
+ <div style="font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;">Internal proving ground</div>
+ <h3 style="font-family:var(--serif),Georgia,serif;font-style:italic;font-weight:300;font-size:clamp(2.4rem,6vw,3.6rem);color:var(--cream);margin-bottom:.6rem;letter-spacing:-.02em;line-height:1;">The <em style="color:var(--gold);font-style:italic;">Bit 150</em></h3>
+ <p style="color:var(--text-muted);font-size:15px;line-height:1.75;max-width:520px;margin:0 auto 1.75rem;">The full mechanism-first practice exam. 150 NBME-style questions across 8 blocks. <b style="color:var(--cream);">Timed mode</b> for a 30-minute simulation per block, or <b style="color:var(--cream);">Tutor mode</b> for instant Master Pivot explanations after every question.</p>
  <div class="exam-meta">
  <div><div class="em-n">150</div><div class="em-l">Questions</div></div>
  <div><div class="em-n">8</div><div class="em-l">Blocks</div></div>
  <div><div class="em-n">2</div><div class="em-l">Modes</div></div>
  </div>
- <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:1rem;">
- <a class="btn-p" href="/bit-150/" style="display:inline-block;text-decoration:none;">LAUNCH THE EXAM →</a>
+ <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:1.25rem;">
+ <a class="btn-p" href="/bit-150/" style="display:inline-block;text-decoration:none;">Launch the exam <span style="margin-left:.35rem">→</span></a>
  </div>
  </div>
  <div class="exam-running" id="examRun">
@@ -1185,14 +1209,14 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:2.5r
  <!-- TIDBITS PANE -->
  <div class="tk-pane" id="pane-tidbits">
  <div class="tid-wrap">
- <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1rem;flex-wrap:wrap;gap:1rem;">
+ <div class="tid-header">
  <div>
- <div style="font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:1.5px;">⚡ RAPID DATABASE</div>
- <h3 style="font-family:var(--mono);font-size:18px;color:var(--text);margin-top:6px;">High-yield Tidbits</h3>
+ <div style="font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem;">Rapid database</div>
+ <h3 style="font-family:var(--serif),Georgia,serif;font-style:italic;font-weight:300;font-size:clamp(1.6rem,3.5vw,2.2rem);color:var(--cream);letter-spacing:-.01em;line-height:1.1;">High-yield <em style="color:var(--gold);font-style:italic;">tidbits</em></h3>
  </div>
- <div style="display:flex;gap:8px;">
- <button class="tk-tab" id="tidModeMaster" style="border:1px solid var(--teal);color:var(--teal);background:var(--teal-soft);border-radius:99px;padding:6px 14px;font-size:10.5px;" onclick="tidSwitch('master')">CORE 280+</button>
- <button class="tk-tab" id="tidModePharma" style="border:1px solid var(--border);color:var(--text-muted);background:transparent;border-radius:99px;padding:6px 14px;font-size:10.5px;" onclick="tidSwitch('pharma')">PHARM / MICRO / BIOCHEM</button>
+ <div class="tid-mode-row">
+ <button class="tid-mode-btn on" id="tidModeMaster" onclick="tidSwitch('master')">Core 280+</button>
+ <button class="tid-mode-btn" id="tidModePharma" onclick="tidSwitch('pharma')">Pharm &middot; Micro &middot; Biochem</button>
  </div>
  </div>
  <div class="tid-ctrls">
@@ -2401,12 +2425,8 @@ function initTidbits(){
 }
 function tidSwitch(mode){
  tidMode = mode;
- document.getElementById('tidModeMaster').style.background = mode==='master'?'var(--teal-soft)':'transparent';
- document.getElementById('tidModeMaster').style.color = mode==='master'?'var(--teal)':'var(--text-muted)';
- document.getElementById('tidModeMaster').style.borderColor = mode==='master'?'var(--teal)':'var(--border)';
- document.getElementById('tidModePharma').style.background = mode==='pharma'?'var(--teal-soft)':'transparent';
- document.getElementById('tidModePharma').style.color = mode==='pharma'?'var(--teal)':'var(--text-muted)';
- document.getElementById('tidModePharma').style.borderColor = mode==='pharma'?'var(--teal)':'var(--border)';
+ document.getElementById('tidModeMaster').classList.toggle('on', mode==='master');
+ document.getElementById('tidModePharma').classList.toggle('on', mode==='pharma');
  populateCats();
  renderTidbits();
 }
