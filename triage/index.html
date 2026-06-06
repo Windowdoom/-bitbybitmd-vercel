@@ -881,13 +881,72 @@
     .progress-bar { padding: 0.5rem 1.25rem; }
   }
 
-  /* fade transition helper */
+  /* ---- SCENE TRANSITIONS ---- */
   .scene { position: relative; }
-  .scene-fade-enter { animation: fadeIn 320ms ease forwards; }
+  .scene-enter { animation: sceneEnter 520ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .scene-leave { animation: sceneLeave 220ms cubic-bezier(0.4, 0, 0.6, 1) both; pointer-events: none; }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
+  @keyframes sceneEnter {
+    0%   { opacity: 0; transform: translateY(14px) scale(0.992); filter: blur(2px); }
+    60%  { filter: blur(0); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+
+  @keyframes sceneLeave {
+    0%   { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-8px); }
+  }
+
+  /* stagger reveals inside scenes */
+  .stagger-item {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: staggerIn 480ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes staggerIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* trigger stagger when scene is entering */
+  .scene-enter .stagger-item:nth-child(1)  { animation-delay: 80ms; }
+  .scene-enter .stagger-item:nth-child(2)  { animation-delay: 140ms; }
+  .scene-enter .stagger-item:nth-child(3)  { animation-delay: 200ms; }
+  .scene-enter .stagger-item:nth-child(4)  { animation-delay: 260ms; }
+  .scene-enter .stagger-item:nth-child(5)  { animation-delay: 320ms; }
+  .scene-enter .stagger-item:nth-child(6)  { animation-delay: 380ms; }
+
+  /* button press feedback */
+  .btn-primary, .btn-secondary, .btn-ghost {
+    will-change: transform;
+  }
+  .btn-primary:active, .btn-secondary:active { transform: translateY(1px) scale(0.985); }
+
+  /* archetype card subtle hover lift */
+  .archetype-card { will-change: transform; }
+  .archetype-card:active { transform: translateY(0) scale(0.99); }
+
+  /* chip click feedback */
+  .chip { will-change: transform; }
+  .chip:active { transform: scale(0.96); }
+
+  /* chart section reveal — already uses .revealed, refine timing */
+  .chart-section {
+    transition: opacity 540ms cubic-bezier(0.22, 1, 0.36, 1),
+                transform 540ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* tool card reveal — already uses .revealed, refine timing */
+  .tool-card {
+    transition: opacity 480ms cubic-bezier(0.22, 1, 0.36, 1),
+                transform 480ms cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 200ms ease,
+                background 200ms ease;
+  }
+
+  /* respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .scene-enter, .scene-leave, .stagger-item { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
   }
 
   /* FOOTER */
@@ -1296,25 +1355,50 @@
     vow: { label: 'saved', step: 5 }
   };
 
+  let isTransitioning = false;
+  const PREFERS_REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   function setScene(name) {
-    document.body.dataset.scene = name;
-    updateProgress(name);
-    updateBreadcrumb(name);
+    if (isTransitioning) return;
+    const currentName = document.body.dataset.scene;
+    if (currentName === name) return;
 
-    const activeScene = document.querySelector('.scene-' + name);
-    if (activeScene) {
-      activeScene.scrollTop = 0;
-      activeScene.classList.add('scene-fade-enter');
-      setTimeout(() => activeScene.classList.remove('scene-fade-enter'), 350);
+    const currentScene = document.querySelector('.scene-' + currentName);
+    const nextScene = document.querySelector('.scene-' + name);
+
+    const swap = () => {
+      document.body.dataset.scene = name;
+      updateProgress(name);
+      updateBreadcrumb(name);
+
+      if (nextScene) {
+        nextScene.scrollTop = 0;
+        nextScene.classList.remove('scene-leave');
+        nextScene.classList.add('scene-enter');
+        setTimeout(() => nextScene.classList.remove('scene-enter'), 600);
+      }
+
+      if (name === 'chart') {
+        setTimeout(triggerChartReveals, 180);
+      }
+      if (name === 'path') {
+        setTimeout(triggerPathReveals, 180);
+      }
+
+      isTransitioning = false;
+    };
+
+    if (PREFERS_REDUCED || !currentScene) {
+      swap();
+      return;
     }
 
-    /* trigger reveals for chart and path scenes */
-    if (name === 'chart') {
-      setTimeout(triggerChartReveals, 80);
-    }
-    if (name === 'path') {
-      setTimeout(triggerPathReveals, 80);
-    }
+    isTransitioning = true;
+    currentScene.classList.add('scene-leave');
+    setTimeout(() => {
+      currentScene.classList.remove('scene-leave');
+      swap();
+    }, 200);
   }
 
   function updateProgress(sceneName) {
