@@ -342,9 +342,11 @@ function fmtFormula(raw){
   .replace(/</g,'&lt;')
   .replace(/>/g,'&gt;');
  // delta- prefix -> uppercase Delta (changes / differences)
- s = s.replace(/\bdelta-/gi,'Δ');
+ s = s.replace(/\bdelta(?:-|\s(?=[A-Z]))/gi,'Δ');
  // Standard-state suffixes
  s = s.replace(/-naught\b/g,'°').replace(/-standard\b/g,'°');
+ s = s.replace(/\s*\bdegrees'(?!\w)/g,"°'");
+ s = s.replace(/\s*\bdegrees(?!'|\w)/g,'°');
  // Greek letters (standalone words only)
  s = s.replace(/\btheta\b/gi,'θ');
  s = s.replace(/\bomega\b/gi,'ω');
